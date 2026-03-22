@@ -1,0 +1,693 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-03-22T19:36:12.045207+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 17,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 33,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2603.18743v1",
+      "title": "Memento-Skills: Let Agents Design Agents",
+      "abstract": "We introduce \\emph{Memento-Skills}, a generalist, continually-learnable LLM agent system that functions as an \\emph{agent-designing agent}: it autonomously constructs, adapts, and improves task-specific agents through experience. The system is built on a memory-based reinforcement learning framework with \\emph{stateful prompts}, where reusable skills (stored as structured markdown files) serve as persistent, evolving memory. These skills encode both behaviour and context, enabling the agent to carry forward knowledge across interactions.   Starting from simple elementary skills (like Web search and terminal operations), the agent continually improves via the \\emph{Read--Write Reflective Learning} mechanism introduced in \\emph{Memento~2}~\\cite{wang2025memento2}. In the \\emph{read} phase, a behaviour-trainable skill router selects the most relevant skill conditioned on the current stateful prompt; in the \\emph{write} phase, the agent updates and expands its skill library based on new experience. This closed-loop design enables \\emph{continual learning without updating LLM parameters}, as all adaptation is realised through the evolution of externalised skills and prompts.   Unlike prior approaches that rely on human-designed agents, Memento-Skills enables a generalist agent to \\emph{design agents end-to-end} for new tasks. Through iterative skill generation and refinement, the system progressively improves its own capabilities. Experiments on the \\emph{General AI Assistants} benchmark and \\emph{Humanity's Last Exam} demonstrate sustained gains, achieving 26.2\\% and 116.2\\% relative improvements in overall accuracy, respectively. Code is available at https://github.com/Memento-Teams/Memento-Skills.",
+      "authors": [
+        "Huichi Zhou",
+        "Siyuan Guo",
+        "Anjie Liu",
+        "Zhongwei Yu",
+        "Ziqin Gong",
+        "Bowen Zhao",
+        "Zhixun Chen",
+        "Menglong Zhang",
+        "Yihang Chen",
+        "Jinsong Li",
+        "Runyu Yang",
+        "Qiangbin Liu",
+        "Xinlei Yu",
+        "Jianmin Zhou",
+        "Na Wang",
+        "Chunyang Sun",
+        "Jun Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-03-19T10:45:22+00:00",
+      "link": "https://arxiv.org/pdf/2603.18743v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Memory-based RL framework for agent-designing agents",
+      "llm_evidence_cn": "用于设计代理的代理的记忆强化学习框架",
+      "llm_evidence": "用于设计代理的代理的记忆强化学习框架",
+      "canonical_evidence": "用于设计代理的代理的记忆强化学习框架",
+      "llm_tldr_en": "Introduces Memento-Skills, an LLM agent system that uses RL to autonomously design and improve task agents.",
+      "llm_tldr_cn": "引入Memento-Skills，一个利用强化学习自主设计和改进任务代理的LLM系统。",
+      "llm_tldr": "引入Memento-Skills，一个利用强化学习自主设计和改进任务代理的LLM系统。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "frameworks for building agentic RL systems",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.13853v1",
+      "title": "APEX-Searcher: Augmenting LLMs' Search Capabilities through Agentic Planning and Execution",
+      "abstract": "Retrieval-augmented generation (RAG), based on large language models (LLMs), serves as a vital approach to retrieving and leveraging external knowledge in various domain applications. When confronted with complex multi-hop questions, single-round retrieval is often insufficient for accurate reasoning and problem solving. To enhance search capabilities for complex tasks, most existing works integrate multi-round iterative retrieval with reasoning processes via end-to-end training. While these approaches significantly improve problem-solving performance, they are still faced with challenges in task reasoning and model training, especially ambiguous retrieval execution paths and sparse rewards in end-to-end reinforcement learning (RL) process, leading to inaccurate retrieval results and performance degradation. To address these issues, in this paper, we proposes APEX-Searcher, a novel Agentic Planning and Execution framework to augment LLM search capabilities. Specifically, we introduce a two-stage agentic framework that decouples the retrieval process into planning and execution: It first employs RL with decomposition-specific rewards to optimize strategic planning; Built on the sub-task decomposition, it then applies supervised fine-tuning on high-quality multi-hop trajectories to equip the model with robust iterative sub-task execution capabilities. Extensive experiments demonstrate that our proposed framework achieves significant improvements in both multi-hop RAG and task planning performances across multiple benchmarks.",
+      "authors": [
+        "Kun Chen",
+        "Qingchao Kong",
+        "Zhao Feifei",
+        "Wenji Mao"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-03-14T09:17:12+00:00",
+      "link": "https://arxiv.org/pdf/2603.13853v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLM search capabilities through agentic planning and RL",
+      "llm_evidence_cn": "通过智能体规划和强化学习增强LLM搜索能力",
+      "llm_evidence": "通过智能体规划和强化学习增强LLM搜索能力",
+      "canonical_evidence": "通过智能体规划和强化学习增强LLM搜索能力",
+      "llm_tldr_en": "Augments LLM search via agentic planning and execution using reinforcement learning to solve complex questions.",
+      "llm_tldr_cn": "通过智能体规划、执行和强化学习增强了LLM解决复杂问题的搜索能力。",
+      "llm_tldr": "通过智能体规划、执行和强化学习增强了LLM解决复杂问题的搜索能力。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "integration of LLM agents and reinforcement learning",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.15432v1",
+      "title": "Gym-V: A Unified Vision Environment System for Agentic Vision Research",
+      "abstract": "As agentic systems increasingly rely on reinforcement learning from verifiable rewards, standardized ``gym'' infrastructure has become essential for rapid iteration, reproducibility, and fair comparison. Vision agents lack such infrastructure, limiting systematic study of what drives their learning and where current models fall short. We introduce \\textbf{Gym-V}, a unified platform of 179 procedurally generated visual environments across 10 domains with controllable difficulty, enabling controlled experiments that were previously infeasible across fragmented toolkits. Using it, we find that observation scaffolding is more decisive for training success than the choice of RL algorithm, with captions and game rules determining whether learning succeeds at all. Cross-domain transfer experiments further show that training on diverse task categories generalizes broadly while narrow training can cause negative transfer, with multi-turn interaction amplifying all of these effects. Gym-V is released as a convenient foundation for training environments and evaluation toolkits, aiming to accelerate future research on agentic VLMs.",
+      "authors": [
+        "Fanqing Meng Lingxiao Du Jiawei Gu Jiaqi Liao Linjie Li Zijian Wu Xiangyan Liu Ziqi Zhao Mengkang Hu Yue Zhang Zichen Liu Jiaheng Zhang Michael Qizhe Shieh"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-16T15:37:07+00:00",
+      "link": "https://arxiv.org/pdf/2603.15432v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Unified environment system for agentic vision research",
+      "llm_evidence_cn": "用于智能体视觉研究的统一环境系统",
+      "llm_evidence": "用于智能体视觉研究的统一环境系统",
+      "canonical_evidence": "用于智能体视觉研究的统一环境系统",
+      "llm_tldr_en": "Introduces Gym-V, a standardized infrastructure for training and evaluating vision-based RL agents.",
+      "llm_tldr_cn": "推出Gym-V，一个为视觉强化学习智能体提供标准化训练和评估的基础设施平台。",
+      "llm_tldr": "推出Gym-V，一个为视觉强化学习智能体提供标准化训练和评估的基础设施平台。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "frameworks for building agentic RL systems",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.15432v2",
+      "title": "Gym-V: A Unified Vision Environment System for Agentic Vision Research",
+      "abstract": "As agentic systems increasingly rely on reinforcement learning from verifiable rewards, standardized ``gym'' infrastructure has become essential for rapid iteration, reproducibility, and fair comparison. Vision agents lack such infrastructure, limiting systematic study of what drives their learning and where current models fall short. We introduce \\textbf{Gym-V}, a unified platform of 179 procedurally generated visual environments across 10 domains with controllable difficulty, enabling controlled experiments that were previously infeasible across fragmented toolkits. Using it, we find that observation scaffolding is more decisive for training success than the choice of RL algorithm, with captions and game rules determining whether learning succeeds at all. Cross-domain transfer experiments further show that training on diverse task categories generalizes broadly while narrow training can cause negative transfer, with multi-turn interaction amplifying all of these effects. Gym-V is released as a convenient foundation for training environments and evaluation toolkits, aiming to accelerate future research on agentic VLMs.",
+      "authors": [
+        "Fanqing Meng",
+        "Lingxiao Du",
+        "Jiawei Gu",
+        "Jiaqi Liao",
+        "Linjie Li",
+        "Zijian Wu",
+        "Xiangyan Liu",
+        "Ziqi Zhao",
+        "Mengkang Hu",
+        "Yue Zhang",
+        "Zichen Liu",
+        "Jiaheng Zhang",
+        "Michael Qizhe Shieh"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-16T15:37:07+00:00",
+      "link": "https://arxiv.org/pdf/2603.15432v2",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "unified vision environment system for agentic vision research using RL from verifiable rewards",
+      "llm_evidence_cn": "用于智能体视觉研究的统一视觉环境系统，利用可验证奖励进行强化学习",
+      "llm_evidence": "用于智能体视觉研究的统一视觉环境系统，利用可验证奖励进行强化学习",
+      "canonical_evidence": "用于智能体视觉研究的统一视觉环境系统，利用可验证奖励进行强化学习",
+      "llm_tldr_en": "Gym-V provides a standardized infrastructure for training and evaluating vision-based RL agents.",
+      "llm_tldr_cn": "Gym-V为训练和评估基于视觉的强化学习智能体提供了标准化的基础设施。",
+      "llm_tldr": "Gym-V为训练和评估基于视觉的强化学习智能体提供了标准化的基础设施。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "frameworks for building agentic RL systems",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.16843v1",
+      "title": "Internalizing Agency from Reflective Experience",
+      "abstract": "Large language models are increasingly deployed as autonomous agents that must plan, act, and recover from mistakes through long-horizon interaction with environments that provide rich feedback. However, prevailing outcome-driven post-training methods (e.g., RL with verifiable rewards) primarily optimize final success signals, leaving rich environment feedback underutilized. Consequently, they often lead to distribution sharpening: the policy becomes better at reproducing a narrow set of already-successful behaviors, while failing to improve the feedback-grounded agency needed to expand problem-solving capacity (e.g., Pass@k) in long-horizon settings.   To address this, we propose LEAFE (Learning Feedback-Grounded Agency from Reflective Experience), a framework that internalizes recovery agency from reflective experience. Specifically, during exploration, the agent summarizes environment feedback into actionable experience, backtracks to earlier decision points, and explores alternative branches with revised actions. We then distill these experience-guided corrections into the model through supervised fine-tuning, enabling the policy to recover more effectively in future interactions. Across a diverse set of interactive coding and agentic tasks under fixed interaction budgets, LEAFE consistently improves Pass@1 over the base model and achieves higher Pass@k than outcome-driven baselines (GRPO) and experience-based methods such as Early Experience, with gains of up to 14% on Pass@128.",
+      "authors": [
+        "Rui Ge",
+        "Yichao Fu",
+        "Yuyang Qian",
+        "Junda Su",
+        "Yiming Zhao",
+        "Peng Zhao",
+        "Hao Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-17T17:50:47+00:00",
+      "link": "https://arxiv.org/pdf/2603.16843v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Framework for learning feedback-grounded agency in LLMs",
+      "llm_evidence_cn": "在LLM中学习基于反馈的代理能力的框架",
+      "llm_evidence": "在LLM中学习基于反馈的代理能力的框架",
+      "canonical_evidence": "在LLM中学习基于反馈的代理能力的框架",
+      "llm_tldr_en": "Proposes LEAFE to improve LLM agency in long-horizon tasks by internalizing reflective environment feedback.",
+      "llm_tldr_cn": "提出LEAFE框架，通过内化环境反馈来提升LLM在长程任务中的自主代理能力。",
+      "llm_tldr": "提出LEAFE框架，通过内化环境反馈来提升LLM在长程任务中的自主代理能力。",
+      "llm_tags": [
+        "query:ag-rl:composite"
+      ],
+      "matched_query_tag": "query:ag-rl:composite",
+      "matched_query_text": "Papers central to 查找有关agentic RL相关的论文, especially work that connects or combines: agentic reinforcement learning research papers; large language model based agents in reinforcement learning; state of the art in agentic reinforcement learning; integration of LLM agents and reinforcement learning; frameworks for building agentic RL systems.",
+      "matched_requirement_id": "req-composite-ag-rl",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.17829v1",
+      "title": "CodeScout: An Effective Recipe for Reinforcement Learning of Code Search Agents",
+      "abstract": "A prerequisite for coding agents to perform tasks on large repositories is code localization - the identification of relevant files, classes, and functions to work on. While repository-level code localization has been performed using embedding-based retrieval approaches such as vector search, recent work has focused on developing agents to localize relevant code either as a standalone precursor to or interleaved with performing actual work. Most prior methods on agentic code search equip the agent with complex, specialized tools, such as repository graphs derived from static analysis. In this paper, we demonstrate that, with an effective reinforcement learning recipe, a coding agent equipped with nothing more than a standard Unix terminal can be trained to achieve strong results. Our experiments on three benchmarks (SWE-Bench Verified, Pro, and Lite) reveal that our models consistently achieve superior or competitive performance over 2-18x larger base and post-trained LLMs and sometimes approach performance provided by closed models like Claude Sonnet, even when using specialized scaffolds. Our work particularly focuses on techniques for re-purposing existing coding agent environments for code search, reward design, and RL optimization. We release the resulting model family, CodeScout, along with all our code and data for the community to build upon.",
+      "authors": [
+        "Lintang Sutawika",
+        "Aditya Bharat Soni",
+        "Bharath Sriraam R R",
+        "Apurva Gandhi",
+        "Taha Yassine",
+        "Sanidhya Vijayvargiya",
+        "Yuchen Li",
+        "Xuhui Zhou",
+        "Yilin Zhang",
+        "Leander Melroy Maben",
+        "Graham Neubig"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-03-18T15:25:42+00:00",
+      "link": "https://arxiv.org/pdf/2603.17829v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reinforcement learning of code search agents",
+      "llm_evidence_cn": "代码搜索智能体的强化学习",
+      "llm_evidence": "代码搜索智能体的强化学习",
+      "canonical_evidence": "代码搜索智能体的强化学习",
+      "llm_tldr_en": "Proposes a reinforcement learning recipe for coding agents to perform code localization using a standard terminal.",
+      "llm_tldr_cn": "提出了一种强化学习方案，使代码智能体仅需标准终端即可进行代码定位。",
+      "llm_tldr": "提出了一种强化学习方案，使代码智能体仅需标准终端即可进行代码定位。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "agentic reinforcement learning research papers",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2603.13605v1",
+      "title": "Orla: A Library for Serving LLM-Based Multi-Agent Systems",
+      "abstract": "We introduce Orla, a library for constructing and running LLM-based agentic systems. Modern agentic applications consist of workflows that combine multiple LLM inference steps, tool calls, and heterogeneous infrastructure. Today, developers typically build these systems by manually composing orchestration code with LLM serving engines and tool execution logic. Orla provides a general abstraction that separates request execution from workflow-level policy. It acts as a serving layer above existing LLM inference engines: developers define workflows composed of stages, while Orla manages how those stages are mapped, executed, and coordinated across models and backends. It provides agent-level control through three mechanisms: a stage mapper, which assigns each stage to an appropriate model and backend; a workflow orchestrator, which schedules stages and manages their resources and context; and a memory manager, which manages inference state such as the KV cache across workflow boundaries. We demonstrate Orla with a customer support workflow that exercises many of its capabilities. We evaluate Orla on two datasets, showing that stage mapping improves latency and cost compared to a single-model vLLM baseline, while workflow-level cache management reduces time-to-first-token.",
+      "authors": [
+        "Rana Shahout",
+        "Hayder Tirmazi",
+        "Minlan Yu",
+        "Michael Mitzenmacher"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-13T21:25:29+00:00",
+      "link": "https://arxiv.org/pdf/2603.13605v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "library for constructing and running LLM-based agentic systems with workflow-level policy",
+      "llm_evidence_cn": "用于构建和运行基于LLM的智能体系统及工作流策略的库",
+      "llm_evidence": "用于构建和运行基于LLM的智能体系统及工作流策略的库",
+      "canonical_evidence": "用于构建和运行基于LLM的智能体系统及工作流策略的库",
+      "llm_tldr_en": "Orla is a serving library that simplifies the orchestration and execution of LLM-based multi-agent workflows.",
+      "llm_tldr_cn": "Orla是一个服务库，简化了基于LLM的多智能体工作流的编排与执行。",
+      "llm_tldr": "Orla是一个服务库，简化了基于LLM的多智能体工作流的编排与执行。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "frameworks for building agentic RL systems",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.13890v1",
+      "title": "Beyond Self-Interest: Modeling Social-Oriented Motivation for Human-like Multi-Agent Interactions",
+      "abstract": "Large Language Models (LLMs) demonstrate significant potential for generating complex behaviors, yet most approaches lack mechanisms for modeling social motivation in human-like multi-agent interaction. We introduce Autonomous Social Value-Oriented agents (ASVO), where LLM-based agents integrate desire-driven autonomy with Social Value Orientation (SVO) theory. At each step, agents first update their beliefs by perceiving environmental changes and others' actions. These observations inform the value update process, where each agent updates multi-dimensional desire values through reflective reasoning and infers others' motivational states. By contrasting self-satisfaction derived from fulfilled desires against estimated others' satisfaction, agents dynamically compute their SVO along a spectrum from altruistic to competitive, which in turn guides activity selection to balance desire fulfillment with social alignment. Experiments across School, Workplace, and Family contexts demonstrate substantial improvements over baselines in behavioral naturalness and human-likeness. These findings show that structured desire systems and adaptive SVO drift enable realistic multi-agent social simulations.",
+      "authors": [
+        "Jingzhe Lin",
+        "Ceyao Zhang",
+        "Yaodong Yang",
+        "Yizhou Wang",
+        "Song-Chun Zhu",
+        "Fangwei Zhong"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-03-14T10:57:59+00:00",
+      "link": "https://arxiv.org/pdf/2603.13890v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "LLM-based agents integrating reflective reasoning and value updates",
+      "llm_evidence_cn": "集成反思推理和价值更新的基于LLM的智能体",
+      "llm_evidence": "集成反思推理和价值更新的基于LLM的智能体",
+      "canonical_evidence": "集成反思推理和价值更新的基于LLM的智能体",
+      "llm_tldr_en": "Models social-oriented motivation in LLM agents to improve multi-agent interactions.",
+      "llm_tldr_cn": "在LLM智能体中建模社会导向动机，以改善多智能体交互。",
+      "llm_tldr": "在LLM智能体中建模社会导向动机，以改善多智能体交互。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "large language model based agents in reinforcement learning",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.15371v1",
+      "title": "Brain-Inspired Graph Multi-Agent Systems for LLM Reasoning",
+      "abstract": "Large Language Models (LLMs) have demonstrated remarkable capabilities across a wide range of language tasks, yet complex multi-step reasoning remains a fundamental challenge. While Large Reasoning Models (LRMs) equipped with extended chain-of-thought mechanisms demonstrate improved performance over standard LLMs, both model types still suffer from accuracy collapse on sufficiently complex tasks, suggesting that scaling model-level reasoning alone is insufficient. Inspired by the global workspace theory of human cognition, we propose Brain-Inspired Graph Multi-Agent Systems (BIGMAS), in which specialized LLM agents are organized as nodes in a dynamically constructed directed graph and coordinate exclusively through a centralized shared workspace. A problem-adaptive GraphDesigner constructs task-specific agent topologies, while a global Orchestrator leverages the complete shared state for routing decisions, overcoming the local-view bottleneck of reactive approaches. Experiments on Game24, Six Fives, and Tower of London across six frontier LLMs demonstrate that BIGMAS consistently improves reasoning performance for both standard LLMs and LRMs, outperforming existing multi-agent baselines including ReAct and Tree of Thoughts, showing that multi-agent architectural design provides complementary gains orthogonal to model-level reasoning enhancements.",
+      "authors": [
+        "Guangfu Hao",
+        "Yuming Dai",
+        "Xianzhe Qin",
+        "Shan Yu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.NI"
+      ],
+      "published": "2026-03-16T14:48:06+00:00",
+      "link": "https://arxiv.org/pdf/2603.15371v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Multi-agent systems for LLM reasoning",
+      "llm_evidence_cn": "用于LLM推理的多智能体系统",
+      "llm_evidence": "用于LLM推理的多智能体系统",
+      "canonical_evidence": "用于LLM推理的多智能体系统",
+      "llm_tldr_en": "Proposes BIGMAS, a brain-inspired graph multi-agent system to enhance complex multi-step reasoning in LLMs.",
+      "llm_tldr_cn": "提出BIGMAS，一种受大脑启发的图多智能体系统，旨在提升LLM的复杂多步推理能力。",
+      "llm_tldr": "提出BIGMAS，一种受大脑启发的图多智能体系统，旨在提升LLM的复杂多步推理能力。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "large language model based agents in reinforcement learning",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.13853v2",
+      "title": "APEX-Searcher: Augmenting LLMs' Search Capabilities through Agentic Planning and Execution",
+      "abstract": "Retrieval-augmented generation (RAG), based on large language models (LLMs), serves as a vital approach to retrieving and leveraging external knowledge in various domain applications. When confronted with complex multi-hop questions, single-round retrieval is often insufficient for accurate reasoning and problem solving. To enhance search capabilities for complex tasks, most existing works integrate multi-round iterative retrieval with reasoning processes via end-to-end training. While these approaches significantly improve problem-solving performance, they are still faced with challenges in task reasoning and model training, especially ambiguous retrieval execution paths and sparse rewards in end-to-end reinforcement learning (RL) process, leading to inaccurate retrieval results and performance degradation. To address these issues, in this paper, we proposes APEX-Searcher, a novel Agentic Planning and Execution framework to augment LLM search capabilities. Specifically, we introduce a two-stage agentic framework that decouples the retrieval process into planning and execution: It first employs RL with decomposition-specific rewards to optimize strategic planning; Built on the sub-task decomposition, it then applies supervised fine-tuning on high-quality multi-hop trajectories to equip the model with robust iterative sub-task execution capabilities. Extensive experiments demonstrate that our proposed framework achieves significant improvements in both multi-hop RAG and task planning performances across multiple benchmarks.",
+      "authors": [
+        "Kun Chen",
+        "Qingchao Kong",
+        "Zhao Feifei",
+        "Wenji Mao"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-03-14T09:17:12+00:00",
+      "link": "https://arxiv.org/pdf/2603.13853v2",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "integrates multi-round retrieval with end-to-end reinforcement learning for LLM agents",
+      "llm_evidence_cn": "将多轮检索与LLM智能体的端到端强化学习相结合",
+      "llm_evidence": "将多轮检索与LLM智能体的端到端强化学习相结合",
+      "canonical_evidence": "将多轮检索与LLM智能体的端到端强化学习相结合",
+      "llm_tldr_en": "Augments LLM search capabilities using agentic planning and end-to-end reinforcement learning.",
+      "llm_tldr_cn": "通过智能体规划和端到端强化学习增强大语言模型的搜索能力。",
+      "llm_tldr": "通过智能体规划和端到端强化学习增强大语言模型的搜索能力。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "integration of LLM agents and reinforcement learning",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.14625v1",
+      "title": "EcoFair-CH-MARL: Scalable Constrained Hierarchical Multi-Agent RL with Real-Time Emission Budgets and Fairness Guarantees",
+      "abstract": "Global decarbonisation targets and tightening market pressures demand maritime logistics solutions that are simultaneously efficient, sustainable, and equitable. We introduce EcoFair-CH-MARL, a constrained hierarchical multi-agent reinforcement learning framework that unifies three innovations: (i) a primal-dual budget layer that provably bounds cumulative emissions under stochastic weather and demand; (ii) a fairness-aware reward transformer with dynamically scheduled penalties that enforces max-min cost equity across heterogeneous fleets; and (iii) a two-tier policy architecture that decouples strategic routing from real-time vessel control, enabling linear scaling in agent count. New theoretical results establish O(\\sqrt{T}) regret for both constraint violations and fairness loss. Experiments on a high-fidelity maritime digital twin (16 ports, 50 vessels) driven by automatic identification system traces, plus an energy-grid case study, show up to 15% lower emissions, 12% higher through-put, and a 45% fair-cost improvement over state-of-the-art hierarchical and constrained MARL baselines. In addition, EcoFair-CH-MARL achieves stronger equity (lower Gini and higher min-max welfare) than fairness-specific MARL baselines (e.g., SOTO, FEN), and its modular design is compatible with both policy- and value-based learners. EcoFair-CH-MARL therefore advances the feasibility of large-scale, regulation-compliant, and socially responsible multi-agent coordination in safety-critical domains.",
+      "authors": [
+        "Saad Alqithami"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.LG",
+        "eess.SY"
+      ],
+      "published": "2026-03-15T21:40:40+00:00",
+      "link": "https://arxiv.org/pdf/2603.14625v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "constrained hierarchical multi-agent reinforcement learning framework for maritime logistics",
+      "llm_evidence_cn": "用于海运物流的受约束分层多智能体强化学习框架",
+      "llm_evidence": "用于海运物流的受约束分层多智能体强化学习框架",
+      "canonical_evidence": "用于海运物流的受约束分层多智能体强化学习框架",
+      "llm_tldr_en": "EcoFair-CH-MARL provides a scalable hierarchical RL framework for sustainable multi-agent logistics.",
+      "llm_tldr_cn": "EcoFair-CH-MARL为可持续多智能体物流提供了一个可扩展的分层强化学习框架。",
+      "llm_tldr": "EcoFair-CH-MARL为可持续多智能体物流提供了一个可扩展的分层强化学习框架。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "agentic reinforcement learning research papers",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.15952v1",
+      "title": "Protein Design with Agent Rosetta: A Case Study for Specialized Scientific Agents",
+      "abstract": "Large language models (LLMs) are capable of emulating reasoning and using tools, creating opportunities for autonomous agents that execute complex scientific tasks. Protein design provides a natural testbed: although machine learning (ML) methods achieve strong results, these are largely restricted to canonical amino acids and narrow objectives, leaving unfilled need for a generalist tool for broad design pipelines. We introduce Agent Rosetta, an LLM agent paired with a structured environment for operating Rosetta, the leading physics-based heteropolymer design software, capable of modeling non-canonical building blocks and geometries. Agent Rosetta iteratively refines designs to achieve user-defined objectives, combining LLM reasoning with Rosetta's generality. We evaluate Agent Rosetta on design with canonical amino acids, matching specialized models and expert baselines, and with non-canonical residues -- where ML approaches fail -- achieving comparable performance. Critically, prompt engineering alone often fails to generate Rosetta actions, demonstrating that environment design is essential for integrating LLM agents with specialized software. Our results show that properly designed environments enable LLM agents to make scientific software accessible while matching specialized tools and human experts.",
+      "authors": [
+        "Jacopo Teneggi",
+        "S. M. Bargeen A. Turzo",
+        "Tanya Marwah",
+        "Alberto Bietti",
+        "P. Douglas Renfrew",
+        "Vikram Khipple Mulligan",
+        "Siavash Golkar"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-16T22:06:03+00:00",
+      "link": "https://arxiv.org/pdf/2603.15952v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "LLM agent paired with structured environment for iterative refinement",
+      "llm_evidence_cn": "LLM智能体配合结构化环境进行迭代优化",
+      "llm_evidence": "LLM智能体配合结构化环境进行迭代优化",
+      "canonical_evidence": "LLM智能体配合结构化环境进行迭代优化",
+      "llm_tldr_en": "Presents Agent Rosetta, an LLM agent that iteratively refines protein designs within a specialized environment.",
+      "llm_tldr_cn": "介绍了Agent Rosetta，一个在专门环境中迭代优化蛋白质设计的LLM智能体。",
+      "llm_tldr": "介绍了Agent Rosetta，一个在专门环境中迭代优化蛋白质设计的LLM智能体。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "large language model based agents in reinforcement learning",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.14597v1",
+      "title": "D-MEM: Dopamine-Gated Agentic Memory via Reward Prediction Error Routing",
+      "abstract": "Autonomous LLM agents require structured long-term memory, yet current \"append-and-evolve\" systems like A-MEM face O(N^2) write-latency and excessive token costs. We introduce D-MEM (Dopamine-Gated Agentic Memory), a biologically inspired architecture that decouples short-term interaction from cognitive restructuring via a Fast/Slow routing system based on Reward Prediction Error (RPE). A lightweight Critic Router evaluates stimuli for Surprise and Utility. Routine, low-RPE inputs are bypassed or cached in an O(1) fast-access buffer. Conversely, high-RPE inputs, such as factual contradictions or preference shifts, trigger a \"dopamine\" signal, activating the O(N) memory evolution pipeline to reshape the agent's knowledge graph. To evaluate performance under realistic conditions, we introduce the LoCoMo-Noise benchmark, which injects controlled conversational noise into long-term sessions. Evaluations demonstrate that D-MEM reduces token consumption by over 80%, eliminates O(N^2) bottlenecks, and outperforms baselines in multi-hop reasoning and adversarial resilience. By selectively gating cognitive restructuring, D-MEM provides a scalable, cost-efficient foundation for lifelong agentic memory.",
+      "authors": [
+        "Yuru Song",
+        "Qi Xin"
+      ],
+      "primary_category": "q-bio.NC",
+      "categories": [
+        "q-bio.NC",
+        "cs.AI"
+      ],
+      "published": "2026-03-15T20:44:43+00:00",
+      "link": "https://arxiv.org/pdf/2603.14597v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agentic memory via reward prediction error routing",
+      "llm_evidence_cn": "通过奖励预测误差路由的智能体记忆",
+      "llm_evidence": "通过奖励预测误差路由的智能体记忆",
+      "canonical_evidence": "通过奖励预测误差路由的智能体记忆",
+      "llm_tldr_en": "Presents D-MEM, a biologically inspired agentic memory system for LLMs using RL-based reward prediction errors.",
+      "llm_tldr_cn": "提出了D-MEM，一种利用基于强化学习的奖励预测误差的LLM智能体记忆系统。",
+      "llm_tldr": "提出了D-MEM，一种利用基于强化学习的奖励预测误差的LLM智能体记忆系统。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "integration of LLM agents and reinforcement learning",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.15054v1",
+      "title": "Interference-Aware K-Step Reachable Communication in Multi-Agent Reinforcement Learning",
+      "abstract": "Effective communication is pivotal for addressing complex collaborative tasks in multi-agent reinforcement learning (MARL). Yet, limited communication bandwidth and dynamic, intricate environmental topologies present significant challenges in identifying high-value communication partners. Agents must consequently select collaborators under uncertainty, lacking a priori knowledge of which partners can deliver task-critical information. To this end, we propose Interference-Aware K-Step Reachable Communication (IA-KRC), a novel framework that enhances cooperation via two core components: (1) a K-Step reachability protocol that confines message passing to physically accessible neighbors, and (2) an interference-prediction module that optimizes partner choice by minimizing interference while maximizing utility. Compared to existing methods, IA-KRC enables substantially more persistent and efficient cooperation despite environmental interference. Comprehensive evaluations confirm that IA-KRC achieves superior performance compared to state-of-the-art baselines, while demonstrating enhanced robustness and scalability in complex topological and highly dynamic multi-agent scenarios.",
+      "authors": [
+        "Ziyu Cheng",
+        "Jinsheng Ren",
+        "Zhouxian Jiang",
+        "Chenzhihang Li",
+        "Rongye Shi",
+        "Bin Liang",
+        "Jun Yang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-16T10:07:33+00:00",
+      "link": "https://arxiv.org/pdf/2603.15054v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multi-agent reinforcement learning communication framework",
+      "llm_evidence_cn": "多智能体强化学习通信框架",
+      "llm_evidence": "多智能体强化学习通信框架",
+      "canonical_evidence": "多智能体强化学习通信框架",
+      "llm_tldr_en": "Enhances multi-agent reinforcement learning through an interference-aware k-step reachable communication protocol.",
+      "llm_tldr_cn": "通过干扰感知的k步可达通信协议增强了多智能体强化学习的协作能力。",
+      "llm_tldr": "通过干扰感知的k步可达通信协议增强了多智能体强化学习的协作能力。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "agentic reinforcement learning research papers",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.16011v1",
+      "title": "Evaluating Agentic Optimization on Large Codebases",
+      "abstract": "Large language model (LLM) coding agents increasingly operate at the repository level, motivating benchmarks that evaluate their ability to optimize entire codebases under realistic constraints. Existing code benchmarks largely rely on synthetic tasks, binary correctness signals, or single-objective evaluation, limiting their ability to assess holistic optimization behavior. We introduce FormulaCode, a benchmark for evaluating agentic optimization on large, real-world codebases with fine-grained, multi-objective performance metrics. FormulaCode comprises 957 performance bottlenecks mined from scientific Python repositories on GitHub, each paired with expert-authored patches and, on average, 264.6 community-maintained performance workloads per task, enabling the holistic ability of LLM agents to optimize codebases under realistic correctness and performance constraints. Our evaluations reveal that repository-scale, multi-objective optimization remains a major challenge for frontier LLM agents. Project website at: https://formula-code.github.io",
+      "authors": [
+        "Atharva Sehgal",
+        "James Hou",
+        "Akanksha Sarkar",
+        "Ishaan Mantripragada",
+        "Swarat Chaudhuri",
+        "Jennifer J. Sun",
+        "Yisong Yue"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-03-16T23:40:19+00:00",
+      "link": "https://arxiv.org/pdf/2603.16011v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "benchmark for evaluating agentic optimization behavior on large real-world codebases",
+      "llm_evidence_cn": "评估大型真实代码库上智能体优化行为的基准",
+      "llm_evidence": "评估大型真实代码库上智能体优化行为的基准",
+      "canonical_evidence": "评估大型真实代码库上智能体优化行为的基准",
+      "llm_tldr_en": "FormulaCode evaluates LLM coding agents on their ability to optimize real-world performance bottlenecks.",
+      "llm_tldr_cn": "FormulaCode评估LLM编程智能体在优化真实世界性能瓶颈方面的能力。",
+      "llm_tldr": "FormulaCode评估LLM编程智能体在优化真实世界性能瓶颈方面的能力。",
+      "llm_tags": [
+        "query:ag-rl:composite"
+      ],
+      "matched_query_tag": "query:ag-rl:composite",
+      "matched_query_text": "Papers central to 查找有关agentic RL相关的论文, especially work that connects or combines: agentic reinforcement learning research papers; large language model based agents in reinforcement learning; state of the art in agentic reinforcement learning; integration of LLM agents and reinforcement learning; frameworks for building agentic RL systems.",
+      "matched_requirement_id": "req-composite-ag-rl",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.15418v1",
+      "title": "MA-VLCM: A Vision Language Critic Model for Value Estimation of Policies in Multi-Agent Team Settings",
+      "abstract": "Multi-agent reinforcement learning (MARL) commonly relies on a centralized critic to estimate the value function. However, learning such a critic from scratch is highly sample-inefficient and often lacks generalization across environments. At the same time, large vision-language-action models (VLAs) trained on internet-scale data exhibit strong multimodal reasoning and zero-shot generalization capabilities, yet directly deploying them for robotic execution remains computationally prohibitive, particularly in heterogeneous multi-robot systems with diverse embodiments and resource constraints. To address these challenges, we propose Multi-Agent Vision-Language-Critic Models (MA-VLCM), a framework that replaces the learned centralized critic in MARL with a pretrained vision-language model fine-tuned to evaluate multi-agent behavior. MA-VLCM acts as a centralized critic conditioned on natural language task descriptions, visual trajectory observations, and structured multi-agent state information. By eliminating critic learning during policy optimization, our approach significantly improves sample efficiency while producing compact execution policies suitable for deployment on resource-constrained robots. Results show good zero-shot return estimation on models with differing VLM backbones on in-distribution and out-of-distribution scenarios in multi-agent team settings",
+      "authors": [
+        "Shahil Shaik",
+        "Aditya Parameshwaran",
+        "Anshul Nayak",
+        "Jonathon M. Smereka",
+        "Yue Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-16T15:29:41+00:00",
+      "link": "https://arxiv.org/pdf/2603.15418v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "replaces learned critics in MARL with vision-language-action models for zero-shot generalization",
+      "llm_evidence_cn": "在多智能体强化学习中用视觉语言动作模型替换学习型评论家以实现零样本泛化",
+      "llm_evidence": "在多智能体强化学习中用视觉语言动作模型替换学习型评论家以实现零样本泛化",
+      "canonical_evidence": "在多智能体强化学习中用视觉语言动作模型替换学习型评论家以实现零样本泛化",
+      "llm_tldr_en": "MA-VLCM uses large vision-language models as critics to improve sample efficiency in multi-agent RL.",
+      "llm_tldr_cn": "MA-VLCM利用大型视觉语言模型作为评论家，提升多智能体强化学习的样本效率。",
+      "llm_tldr": "MA-VLCM利用大型视觉语言模型作为评论家，提升多智能体强化学习的样本效率。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "large language model based agents in reinforcement learning",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.15771v1",
+      "title": "CorrectionPlanner: Self-Correction Planner with Reinforcement Learning in Autonomous Driving",
+      "abstract": "Autonomous driving requires safe planning, but most learning-based planners lack explicit self-correction ability: once an unsafe action is proposed, there is no mechanism to correct it. Thus, we propose CorrectionPlanner, an autoregressive planner with self-correction that models planning as motion-token generation within a propose, evaluate, and correct loop. At each planning step, the policy proposes an action, namely a motion token, and a learned collision critic predicts whether it will induce a collision within a short horizon. If the critic predicts a collision, we retain the sequence of historical unsafe motion tokens as a self-correction trace, generate the next motion token conditioned on it, and repeat this process until a safe motion token is proposed or the safety criterion is met. This self-correction trace, consisting of all unsafe motion tokens, represents the planner's correction process in motion-token space, analogous to a reasoning trace in language models. We train the planner with imitation learning followed by model-based reinforcement learning using rollouts from a pretrained world model that realistically models agents' reactive behaviors. Closed-loop evaluations show that CorrectionPlanner reduces collision rate by over 20% on Waymax and achieves state-of-the-art planning scores on nuPlan.",
+      "authors": [
+        "Yihong Guo",
+        "Dongqiangzi Ye",
+        "Sijia Chen",
+        "Anqi Liu",
+        "Xianming Liu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-16T18:03:21+00:00",
+      "link": "https://arxiv.org/pdf/2603.15771v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "RL-based self-correction for autonomous driving agents",
+      "llm_evidence_cn": "基于强化学习的自动驾驶代理自纠正机制",
+      "llm_evidence": "基于强化学习的自动驾驶代理自纠正机制",
+      "canonical_evidence": "基于强化学习的自动驾驶代理自纠正机制",
+      "llm_tldr_en": "Introduces CorrectionPlanner, an RL-based autoregressive planner with self-correction for autonomous driving.",
+      "llm_tldr_cn": "引入CorrectionPlanner，一种具有自纠正能力的强化学习自动驾驶规划器。",
+      "llm_tldr": "引入CorrectionPlanner，一种具有自纠正能力的强化学习自动驾驶规划器。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "agentic reinforcement learning research papers",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
