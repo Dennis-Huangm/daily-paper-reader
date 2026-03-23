@@ -1,252 +1,8 @@
 {
-  "generated_at": "2026-03-22T19:36:12.046392+00:00",
-  "updated_date": "20260322",
+  "generated_at": "2026-03-23T19:54:11.091002+00:00",
+  "updated_date": "20260323",
   "carryover_days": 9,
   "items": [
-    {
-      "id": "2603.17187v1",
-      "title": "MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild",
-      "abstract": "Large language model (LLM) agents are increasingly used for complex tasks, yet deployed agents often remain static, failing to adapt as user needs evolve. This creates a tension between the need for continuous service and the necessity of updating capabilities to match shifting task distributions. On platforms like OpenClaw, which handle diverse workloads across 20+ channels, existing methods either store raw trajectories without distilling knowledge, maintain static skill libraries, or require disruptive downtime for retraining. We present MetaClaw, a continual meta-learning framework that jointly evolves a base LLM policy and a library of reusable behavioral skills. MetaClaw employs two complementary mechanisms. Skill-driven fast adaptation analyzes failure trajectories via an LLM evolver to synthesize new skills, enabling immediate improvement with zero downtime. Opportunistic policy optimization performs gradient-based updates via cloud LoRA fine-tuning and Reinforcement Learning with a Process Reward Model (RL-PRM). This is triggered during user-inactive windows by the Opportunistic Meta-Learning Scheduler (OMLS), which monitors system inactivity and calendar data. These mechanisms are mutually reinforcing: a refined policy generates better trajectories for skill synthesis, while richer skills provide higher-quality data for policy optimization. To prevent data contamination, a versioning mechanism separates support and query data. Built on a proxy-based architecture, MetaClaw scales to production-size LLMs without local GPUs. Experiments on MetaClaw-Bench and AutoResearchClaw show that skill-driven adaptation improves accuracy by up to 32% relative. The full pipeline advances Kimi-K2.5 accuracy from 21.4% to 40.6% and increases composite robustness by 18.3%. Code is available at https://github.com/aiming-lab/MetaClaw.",
-      "authors": [
-        "Peng Xia",
-        "Jianwen Chen",
-        "Xinyu Yang",
-        "Haoqin Tu",
-        "Jiaqi Liu",
-        "Kaiwen Xiong",
-        "Siwei Han",
-        "Shi Qiu",
-        "Haonian Ji",
-        "Yuyin Zhou",
-        "Zeyu Zheng",
-        "Cihang Xie",
-        "Huaxiu Yao"
-      ],
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "published": "2026-03-17T22:30:30+00:00",
-      "link": "https://arxiv.org/pdf/2603.17187v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "LLM agents that meta-learn and evolve behavioral skills",
-      "llm_evidence_cn": "元学习和进化行为技能的LLM智能体",
-      "llm_evidence": "元学习和进化行为技能的LLM智能体",
-      "canonical_evidence": "元学习和进化行为技能的LLM智能体",
-      "llm_tldr_en": "Introduces MetaClaw, a framework for LLM agents to continually evolve policies and skills in dynamic environments.",
-      "llm_tldr_cn": "介绍了MetaClaw框架，使LLM智能体能够在动态环境中持续进化策略和技能。",
-      "llm_tldr": "介绍了MetaClaw框架，使LLM智能体能够在动态环境中持续进化策略和技能。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "large language model based agents in reinforcement learning",
-      "matched_requirement_id": "req-2",
-      "selection_source": "carryover_cache",
-      "paper_id": "2603.17187v1",
-      "carry_days": 1
-    },
-    {
-      "id": "2603.18464v1",
-      "title": "AcceRL: A Distributed Asynchronous Reinforcement Learning and World Model Framework for Vision-Language-Action Models",
-      "abstract": "Reinforcement learning (RL) for large-scale Vision-Language-Action (VLA) models faces significant challenges in computational efficiency and data acquisition. We propose AcceRL, a fully asynchronous and decoupled RL framework designed to eliminate synchronization barriers by physically isolating training, inference, and rollouts. Crucially, AcceRL is the first to integrate a plug-and-play, trainable world model into a distributed asynchronous RL pipeline to generate virtual experiences. Experiments on the LIBERO benchmark demonstrate that AcceRL achieves state-of-the-art (SOTA) performance. Systematically, it exhibits super-linear scaling in throughput and highly efficient hardware utilization. Algorithmically, the world-model-augmented variant delivers unprecedented sample efficiency and robust training stability in complex control tasks.",
-      "authors": [
-        "Chengxuan Lu",
-        "Shukuan Wang",
-        "Yanjie Li",
-        "Wei Liu",
-        "Shiji Jin",
-        "Fuyuan Qian",
-        "Peiming Li",
-        "Baigui Sun",
-        "Yang Liu"
-      ],
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "published": "2026-03-19T03:50:45+00:00",
-      "link": "https://arxiv.org/pdf/2603.18464v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "distributed asynchronous RL framework for VLA models",
-      "llm_evidence_cn": "用于VLA模型的分布式异步强化学习框架",
-      "llm_evidence": "用于VLA模型的分布式异步强化学习框架",
-      "canonical_evidence": "用于VLA模型的分布式异步强化学习框架",
-      "llm_tldr_en": "Introduces AcceRL, a distributed asynchronous RL framework for large-scale Vision-Language-Action models.",
-      "llm_tldr_cn": "介绍了AcceRL，一种用于大规模视觉-语言-动作模型的分布式异步强化学习框架。",
-      "llm_tldr": "介绍了AcceRL，一种用于大规模视觉-语言-动作模型的分布式异步强化学习框架。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "frameworks for building agentic RL systems",
-      "matched_requirement_id": "req-5",
-      "selection_source": "carryover_cache",
-      "paper_id": "2603.18464v1",
-      "carry_days": 1
-    },
-    {
-      "id": "2603.17343v1",
-      "title": "EvoGuard: An Extensible Agentic RL-based Framework for Practical and Evolving AI-Generated Image Detection",
-      "abstract": "The rapid proliferation of AI-Generated Images (AIGIs) has introduced severe risks of misinformation, making AIGI detection a critical yet challenging task. While traditional detection paradigms mainly rely on low-level features, recent research increasingly focuses on leveraging the general understanding ability of Multimodal Large Language Models (MLLMs) to achieve better generalization, but still suffer from limited extensibility and expensive training data annotations. To better address complex and dynamic real-world environments, we propose EvoGuard, a novel agentic framework for AIGI detection. It encapsulates various state-of-the-art (SOTA) off-the-shelf MLLM and non-MLLM detectors as callable tools, and coordinates them through a capability-aware dynamic orchestration mechanism. Empowered by the agent's capacities for autonomous planning and reflection, it intelligently selects suitable tools for given samples, reflects intermediate results, and decides the next action, reaching a final conclusion through multi-turn invocation and reasoning. This design effectively exploits the complementary strengths among heterogeneous detectors, transcending the limits of any single model. Furthermore, optimized by a GRPO-based Agentic Reinforcement Learning algorithm using only low-cost binary labels, it eliminates the reliance on fine-grained annotations. Extensive experiments demonstrate that EvoGuard achieves SOTA accuracy while mitigating the bias between positive and negative samples. More importantly, it allows the plug-and-play integration of new detectors to boost overall performance in a train-free manner, offering a highly practical, long-term solution to ever-evolving AIGI threats. Source code will be publicly available upon acceptance.",
-      "authors": [
-        "Chenyang Zhu",
-        "Maorong Wang",
-        "Jun Liu",
-        "Ching-Chun Chang",
-        "Isao Echizen"
-      ],
-      "primary_category": "cs.CV",
-      "categories": [
-        "cs.CV"
-      ],
-      "published": "2026-03-18T04:14:40+00:00",
-      "link": "https://arxiv.org/pdf/2603.17343v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "agentic RL-based framework for AI-generated image detection using MLLM tools",
-      "llm_evidence_cn": "基于智能体强化学习的AI生成图像检测框架，使用多模态大模型工具",
-      "llm_evidence": "基于智能体强化学习的AI生成图像检测框架，使用多模态大模型工具",
-      "canonical_evidence": "基于智能体强化学习的AI生成图像检测框架，使用多模态大模型工具",
-      "llm_tldr_en": "EvoGuard uses an agentic RL framework to coordinate MLLM detectors for evolving image detection tasks.",
-      "llm_tldr_cn": "EvoGuard利用智能体强化学习框架协调多模态大模型检测器，应对演进的图像检测任务。",
-      "llm_tldr": "EvoGuard利用智能体强化学习框架协调多模态大模型检测器，应对演进的图像检测任务。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "frameworks for building agentic RL systems",
-      "matched_requirement_id": "req-5",
-      "selection_source": "carryover_cache",
-      "paper_id": "2603.17343v1",
-      "carry_days": 1
-    },
-    {
-      "id": "2603.17831v1",
-      "title": "RPMS: Enhancing LLM-Based Embodied Planning through Rule-Augmented Memory Synergy",
-      "abstract": "LLM agents often fail in closed-world embodied environments because actions must satisfy strict preconditions -- such as location, inventory, and container states -- and failure feedback is sparse. We identify two structurally coupled failure modes: (P1) invalid action generation and (P2) state drift, each amplifying the other in a degenerative cycle. We present RPMS, a conflict-managed architecture that enforces action feasibility via structured rule retrieval, gates memory applicability via a lightweight belief state, and resolves conflicts between the two sources via rules-first arbitration. On ALFWorld (134 unseen tasks), RPMS achieves 59.7% single-trial success with Llama 3.1 8B (+23.9 pp over baseline) and 98.5% with Claude Sonnet 4.5 (+11.9 pp); of the 8B gain, rule retrieval alone contributes +14.9 pp (statistically significant), making it the dominant factor. A key finding is that episodic memory is conditionally useful: it harms performance on some task types when used without grounding, but becomes a stable net positive once filtered by current state and constrained by explicit action rules. Adapting RPMS to ScienceWorld with GPT-4 yields consistent gains across all ablation conditions (avg. score 54.0 vs. 44.9 for the ReAct baseline), providing transfer evidence that the core mechanisms hold across structurally distinct environments.",
-      "authors": [
-        "Zhenhang Yuan",
-        "Shenghai Yuan",
-        "Lihua Xie"
-      ],
-      "primary_category": "cs.AI",
-      "categories": [
-        "cs.AI"
-      ],
-      "published": "2026-03-18T15:26:00+00:00",
-      "link": "https://arxiv.org/pdf/2603.17831v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "enhancing LLM-based embodied planning and action feasibility",
-      "llm_evidence_cn": "增强基于LLM的具身规划与动作可行性",
-      "llm_evidence": "增强基于LLM的具身规划与动作可行性",
-      "canonical_evidence": "增强基于LLM的具身规划与动作可行性",
-      "llm_tldr_en": "Develops RPMS to improve LLM agent planning in embodied environments using rule-augmented memory.",
-      "llm_tldr_cn": "开发了RPMS架构，利用规则增强记忆提升LLM智能体在具身环境中的规划能力。",
-      "llm_tldr": "开发了RPMS架构，利用规则增强记忆提升LLM智能体在具身环境中的规划能力。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "integration of LLM agents and reinforcement learning",
-      "matched_requirement_id": "req-4",
-      "selection_source": "carryover_cache",
-      "paper_id": "2603.17831v1",
-      "carry_days": 1
-    },
-    {
-      "id": "2603.18363v1",
-      "title": "PowerFlow: Unlocking the Dual Nature of LLMs via Principled Distribution Matching",
-      "abstract": "Unsupervised Reinforcement Learning from Internal Feedback (RLIF) has emerged as a promising paradigm for eliciting the latent capabilities of Large Language Models (LLMs) without external supervision. However, current methods rely on heuristic intrinsic rewards, which often lack a well-defined theoretical optimization target and are prone to degenerative biases. In this work, we introduce PowerFlow, a principled framework that reformulates unsupervised fine-tuning as a distribution matching problem. By casting GFlowNet as an amortized variational sampler for unnormalized densities, we propose a length-aware Trajectory-Balance objective that explicitly neutralizes the structural length biases inherent in autoregressive generation. By targeting $α$-power distributions, PowerFlow enables the directional elicitation of the dual nature of LLMs: sharpening the distribution ($α> 1$) to intensify logical reasoning, or flattening it ($α< 1$) to unlock expressive creativity. Extensive experiments demonstrate that PowerFlow consistently outperforms existing RLIF methods, matching or even exceeding supervised GRPO. Furthermore, by mitigating over-sharpening in aligned models, our approach achieves simultaneous gains in diversity and quality, shifting the Pareto frontier in creative tasks.",
-      "authors": [
-        "Ruishuo Chen",
-        "Yu Chen",
-        "Zhuoran Li",
-        "Longbo Huang"
-      ],
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL",
-        "cs.AI",
-        "cs.LG"
-      ],
-      "published": "2026-03-19T00:00:36+00:00",
-      "link": "https://arxiv.org/pdf/2603.18363v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "Unsupervised RL from internal feedback for LLMs",
-      "llm_evidence_cn": "针对LLM的内部反馈无监督强化学习",
-      "llm_evidence": "针对LLM的内部反馈无监督强化学习",
-      "canonical_evidence": "针对LLM的内部反馈无监督强化学习",
-      "llm_tldr_en": "Introduces PowerFlow, a principled framework for unsupervised fine-tuning of LLMs using RL concepts.",
-      "llm_tldr_cn": "引入PowerFlow框架，利用强化学习概念对LLM进行原则性的无监督微调。",
-      "llm_tldr": "引入PowerFlow框架，利用强化学习概念对LLM进行原则性的无监督微调。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "integration of LLM agents and reinforcement learning",
-      "matched_requirement_id": "req-4",
-      "selection_source": "carryover_cache",
-      "paper_id": "2603.18363v1",
-      "carry_days": 1
-    },
-    {
-      "id": "2603.18096v1",
-      "title": "A Trace-Based Assurance Framework for Agentic AI Orchestration: Contracts, Testing, and Governance",
-      "abstract": "In Agentic AI, Large Language Models (LLMs) are increasingly used in the orchestration layer to coordinate multiple agents and to interact with external services, retrieval components, and shared memory. In this setting, failures are not limited to incorrect final outputs. They also arise from long-horizon interaction, stochastic decisions, and external side effects (such as API calls, database writes, and message sends). Common failures include non-termination, role drift, propagation of unsupported claims, and attacks via untrusted context or external channels.   This paper presents an assurance framework for such Agentic AI systems. Executions are instrumented as Message-Action Traces (MAT) with explicit step and trace contracts. Contracts provide machine-checkable verdicts, localize the first violating step, and support deterministic replay. The framework includes stress testing, formulated as a budgeted counterexample search over bounded perturbations. It also supports structured fault injection at service, retrieval, and memory boundaries to assess containment under realistic operational faults and degraded conditions. Finally, governance is treated as a runtime component, enforcing per-agent capability limits and action mediation (allow, rewrite, block) at the language-to-action boundary.   To support comparative evaluations across stochastic seeds, models, and orchestration configurations, the paper defines trace-based metrics for task success, termination reliability, contract compliance, factuality indicators, containment rate, and governance outcome distributions. More broadly, the framework is intended as a common abstraction to support testing and evaluation of multi-agent LLM systems, and to facilitate reproducible comparison across orchestration designs and configurations.",
-      "authors": [
-        "Ciprian Paduraru",
-        "Petru-Liviu Bouruc",
-        "Alin Stefanescu"
-      ],
-      "primary_category": "cs.MA",
-      "categories": [
-        "cs.MA",
-        "cs.AI"
-      ],
-      "published": "2026-03-18T10:23:48+00:00",
-      "link": "https://arxiv.org/pdf/2603.18096v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "Assurance framework for agentic AI orchestration",
-      "llm_evidence_cn": "代理AI编排的保障框架",
-      "llm_evidence": "代理AI编排的保障框架",
-      "canonical_evidence": "代理AI编排的保障框架",
-      "llm_tldr_en": "Presents a trace-based assurance framework for governing and testing complex agentic AI systems.",
-      "llm_tldr_cn": "提出一种基于追踪的保障框架，用于治理和测试复杂的代理AI系统。",
-      "llm_tldr": "提出一种基于追踪的保障框架，用于治理和测试复杂的代理AI系统。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "frameworks for building agentic RL systems",
-      "matched_requirement_id": "req-5",
-      "selection_source": "carryover_cache",
-      "paper_id": "2603.18096v1",
-      "carry_days": 1
-    },
     {
       "id": "2603.19191v1",
       "title": "OS-Themis: A Scalable Critic Framework for Generalist GUI Rewards",
@@ -278,21 +34,98 @@
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "Multi-agent critic framework for GUI agents using RL",
-      "llm_evidence_cn": "用于GUI智能体强化学习的多智能体评论家框架",
-      "llm_evidence": "用于GUI智能体强化学习的多智能体评论家框架",
-      "canonical_evidence": "用于GUI智能体强化学习的多智能体评论家框架",
-      "llm_tldr_en": "Introduces OS-Themis, a multi-agent critic framework to provide accurate rewards for GUI-based RL agents.",
-      "llm_tldr_cn": "提出OS-Themis框架，通过多智能体协作为GUI自动化智能体提供精确的强化学习奖励。",
-      "llm_tldr": "提出OS-Themis框架，通过多智能体协作为GUI自动化智能体提供精确的强化学习奖励。",
+      "llm_evidence_en": "multi-agent critic framework for GUI agent rewards in RL",
+      "llm_evidence_cn": "用于强化学习中GUI智能体奖励的多智能体评论家框架",
+      "llm_evidence": "用于强化学习中GUI智能体奖励的多智能体评论家框架",
+      "canonical_evidence": "用于强化学习中GUI智能体奖励的多智能体评论家框架",
+      "llm_tldr_en": "Proposes a scalable multi-agent critic framework to provide accurate rewards for training GUI agents via RL.",
+      "llm_tldr_cn": "提出了一种可扩展的多智能体评论家框架，为通过强化学习训练GUI智能体提供准确奖励。",
+      "llm_tldr": "提出了一种可扩展的多智能体评论家框架，为通过强化学习训练GUI智能体提供准确奖励。",
       "llm_tags": [
         "query:ag-rl"
       ],
       "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "large language model based agents in reinforcement learning",
-      "matched_requirement_id": "req-2",
+      "matched_query_text": "frameworks for building agentic RL systems",
+      "matched_requirement_id": "req-5",
       "selection_source": "carryover_cache",
       "paper_id": "2603.19191v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.19880v1",
+      "title": "What If Consensus Lies? Selective-Complementary Reinforcement Learning at Test Time",
+      "abstract": "Test-Time Reinforcement Learning (TTRL) enables Large Language Models (LLMs) to enhance reasoning capabilities on unlabeled test streams by deriving pseudo-rewards from majority voting consensus. However, existing TTRL methods rely exclusively on positive pseudo-labeling strategies. Such reliance becomes vulnerable under challenging scenarios where answer distributions are highly dispersed, resulting in weak consensus that inadvertently reinforces incorrect trajectories as supervision signals. In this paper, we propose SCRL (Selective-Complementary Reinforcement Learning), a robust test-time reinforcement learning framework that effectively mitigates label noise amplification. SCRL develops Selective Positive Pseudo-Labeling, which enforces strict consensus criteria to filter unreliable majorities. Complementarily, SCRL introduces Entropy-Gated Negative Pseudo-Labeling, the first negative supervision mechanism in TTRL, to reliably prune incorrect trajectories based on generation uncertainty. Extensive experiments on multiple reasoning benchmarks demonstrate that SCRL achieves substantial improvements over baselines, while maintaining robust generalization and training stability under constrained rollout budgets. Our code is available at https://github.com/Jasper-Yan/SCRL.",
+      "authors": [
+        "Dong Yan",
+        "Jian Liang",
+        "Yanbo Wang",
+        "Shuo Lu",
+        "Ran He",
+        "Tieniu Tan"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-20T11:47:12+00:00",
+      "link": "https://arxiv.org/pdf/2603.19880v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Test-time reinforcement learning for LLM reasoning",
+      "llm_evidence_cn": "LLM推理的测试时强化学习",
+      "llm_evidence": "LLM推理的测试时强化学习",
+      "canonical_evidence": "LLM推理的测试时强化学习",
+      "llm_tldr_en": "Proposes SCRL to improve LLM reasoning through robust test-time reinforcement learning and pseudo-labeling.",
+      "llm_tldr_cn": "提出SCRL，通过鲁棒的测试时强化学习和伪标签改进LLM的推理能力。",
+      "llm_tldr": "提出SCRL，通过鲁棒的测试时强化学习和伪标签改进LLM的推理能力。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "integration of LLM agents and reinforcement learning",
+      "matched_requirement_id": "req-4",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.19880v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.19453v1",
+      "title": "Cooperation and Exploitation in LLM Policy Synthesis for Sequential Social Dilemmas",
+      "abstract": "We study LLM policy synthesis: using a large language model to iteratively generate programmatic agent policies for multi-agent environments. Rather than training neural policies via reinforcement learning, our framework prompts an LLM to produce Python policy functions, evaluates them in self-play, and refines them using performance feedback across iterations. We investigate feedback engineering (the design of what evaluation information is shown to the LLM during refinement) comparing sparse feedback (scalar reward only) against dense feedback (reward plus social metrics: efficiency, equality, sustainability, peace). Across two canonical Sequential Social Dilemmas (Gathering and Cleanup) and two frontier LLMs (Claude Sonnet 4.6, Gemini 3.1 Pro), dense feedback consistently matches or exceeds sparse feedback on all metrics. The advantage is largest in the Cleanup public goods game, where providing social metrics helps the LLM calibrate the costly cleaning-harvesting tradeoff. Rather than triggering over-optimization of fairness, social metrics serve as a coordination signal that guides the LLM toward more effective cooperative strategies, including territory partitioning, adaptive role assignment, and the avoidance of wasteful aggression. We further perform an adversarial experiment to determine whether LLMs can reward hack these environments. We characterize five attack classes and discuss mitigations, highlighting an inherent tension in LLM policy synthesis between expressiveness and safety.   Code at https://github.com/vicgalle/llm-policies-social-dilemmas.",
+      "authors": [
+        "Víctor Gallego"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.GT"
+      ],
+      "published": "2026-03-19T20:27:48+00:00",
+      "link": "https://arxiv.org/pdf/2603.19453v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "LLM policy synthesis for multi-agent environments using performance feedback",
+      "llm_evidence_cn": "利用性能反馈在多智能体环境中进行LLM策略合成",
+      "llm_evidence": "利用性能反馈在多智能体环境中进行LLM策略合成",
+      "canonical_evidence": "利用性能反馈在多智能体环境中进行LLM策略合成",
+      "llm_tldr_en": "This work explores using LLMs to synthesize and refine programmatic policies for multi-agent social dilemmas.",
+      "llm_tldr_cn": "该研究探讨了利用LLM合成程序化策略，并通过反馈在多智能体社会困境中进行迭代优化。",
+      "llm_tldr": "该研究探讨了利用LLM合成程序化策略，并通过反馈在多智能体社会困境中进行迭代优化。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "integration of LLM agents and reinforcement learning",
+      "matched_requirement_id": "req-4",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.19453v1",
       "carry_days": 1
     }
   ]

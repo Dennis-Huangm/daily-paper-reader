@@ -6,71 +6,73 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-03-22
-- 运行时间：2026-03-22 19:39:15 UTC
+- 最新运行日期：2026-03-23
+- 运行时间：2026-03-23 19:56:23 UTC
 - 运行状态：成功
 - 本次总论文数：17
 - 精读区：6
 - 速读区：11
 
 ### 今日简报（AI）
-今日精选 17 篇论文聚焦智能体进化，重点关注 Memento-Skills 提出的“智能体设计智能体”新范
-- 详情：[/202603/22/README](/202603/22/README)
+今日精选 17 篇论文，深度解析分布式强化学习框架 AcceRL 与长程 LLM 智能体的子目标驱动优化。
+核心突破在于 AcceRL 对 VLA 模型训练效率的异步加速，以及子目标框架在复杂任务逻辑一致性上的显著提升。
+建议优先研读具身智能的分布式架构设计，并关注 Agent 编排中的合规性治理与隐藏表示对齐技术。
+- 详情：[/202603/23/README](/202603/23/README)
 
 ### 精读区论文标签
-1. [Memento-Skills: Let Agents Design Agents](/202603/22/2603.18743v1-memento-skills-let-agents-design-agents)  
-   标签：评分：10.0/10、query:ag-rl
-   evidence：用于设计代理的代理的记忆强化学习框架
-2. [APEX-Searcher: Augmenting LLMs' Search Capabilities through Agentic Planning and Execution](/202603/22/2603.13853v1-apex-searcher-augmenting-llms-search-capabilities-through-agentic-planning-and-execution)  
+1. [AcceRL: A Distributed Asynchronous Reinforcement Learning and World Model Framework for Vision-Language-Action Models](/202603/23/2603.18464v1-accerl-a-distributed-asynchronous-reinforcement-learning-and-world-model-framework-for-vision-language-action-models)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：通过智能体规划和强化学习增强LLM搜索能力
-3. [Gym-V: A Unified Vision Environment System for Agentic Vision Research](/202603/22/2603.15432v1-gym-v-a-unified-vision-environment-system-for-agentic-vision-research)  
+   evidence：视觉-语言-动作模型的分布式强化学习框架
+2. [A Subgoal-driven Framework for Improving Long-Horizon LLM Agents](/202603/23/2603.19685v1-a-subgoal-driven-framework-for-improving-long-horizon-llm-agents)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：用于智能体视觉研究的统一环境系统
-4. [Gym-V: A Unified Vision Environment System for Agentic Vision Research](/202603/22/2603.15432v2-gym-v-a-unified-vision-environment-system-for-agentic-vision-research)  
+   evidence：LLM代理强化学习微调
+3. [Breaking the Capability Ceiling of LLM Post-Training by Reintroducing Markov States](/202603/23/2603.19987v1-breaking-the-capability-ceiling-of-llm-post-training-by-reintroducing-markov-states)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：用于智能体视觉研究的统一视觉环境系统，利用可验证奖励进行强化学习
-5. [Internalizing Agency from Reflective Experience](/202603/22/2603.16843v1-internalizing-agency-from-reflective-experience)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：在LLM中学习基于反馈的代理能力的框架
-6. [CodeScout: An Effective Recipe for Reinforcement Learning of Code Search Agents](/202603/22/2603.17829v1-codescout-an-effective-recipe-for-reinforcement-learning-of-code-search-agents)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：代码搜索智能体的强化学习
+   evidence：在LLM后训练强化学习中重新引入马尔可夫状态
+4. [RetailBench: Evaluating Long-Horizon Autonomous Decision-Making and Strategy Stability of LLM Agents in Realistic Retail Environments](/202603/23/2603.16453v1-retailbench-evaluating-long-horizon-autonomous-decision-making-and-strategy-stability-of-llm-agents-in-realistic-retail-environments)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：评估LLM智能体的长程自主决策能力
+5. [MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild](/202603/23/2603.17187v1-metaclaw-just-talk----an-agent-that-meta-learns-and-evolves-in-the-wild)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：演进的大语言模型策略与行为技能
+6. [EvoGuard: An Extensible Agentic RL-based Framework for Practical and Evolving AI-Generated Image Detection](/202603/23/2603.17343v1-evoguard-an-extensible-agentic-rl-based-framework-for-practical-and-evolving-ai-generated-image-detection)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：基于智能体强化学习的AI生成图像检测框架，使用多模态大模型工具
 
 ### 速读区论文标签
-1. [Orla: A Library for Serving LLM-Based Multi-Agent Systems](/202603/22/2603.13605v1-orla-a-library-for-serving-llm-based-multi-agent-systems)  
+1. [Contrastive Reasoning Alignment: Reinforcement Learning from Hidden Representations](/202603/23/2603.17305v1-contrastive-reasoning-alignment-reinforcement-learning-from-hidden-representations)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：用于构建和运行基于LLM的智能体系统及工作流策略的库
-2. [APEX-Searcher: Augmenting LLMs' Search Capabilities through Agentic Planning and Execution](/202603/22/2603.13853v2-apex-searcher-augmenting-llms-search-capabilities-through-agentic-planning-and-execution)  
+   evidence：将强化学习与隐藏表示结合用于LLM对齐
+2. [A Trace-Based Assurance Framework for Agentic AI Orchestration: Contracts, Testing, and Governance](/202603/23/2603.18096v1-a-trace-based-assurance-framework-for-agentic-ai-orchestration-contracts-testing-and-governance)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：将多轮检索与LLM智能体的端到端强化学习相结合
-3. [D-MEM: Dopamine-Gated Agentic Memory via Reward Prediction Error Routing](/202603/22/2603.14597v1-d-mem-dopamine-gated-agentic-memory-via-reward-prediction-error-routing)  
+   evidence：使用LLM进行智能体AI编排的保障框架
+3. [PowerFlow: Unlocking the Dual Nature of LLMs via Principled Distribution Matching](/202603/23/2603.18363v1-powerflow-unlocking-the-dual-nature-of-llms-via-principled-distribution-matching)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：通过奖励预测误差路由的智能体记忆
-4. [MA-VLCM: A Vision Language Critic Model for Value Estimation of Policies in Multi-Agent Team Settings](/202603/22/2603.15418v1-ma-vlcm-a-vision-language-critic-model-for-value-estimation-of-policies-in-multi-agent-team-settings)  
+   evidence：LLM的无监督内部反馈强化学习
+4. [AcceRL: A Distributed Asynchronous Reinforcement Learning and World Model Framework for Vision-Language-Action Models](/202603/23/2603.18464v2-accerl-a-distributed-asynchronous-reinforcement-learning-and-world-model-framework-for-vision-language-action-models)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：在多智能体强化学习中用视觉语言动作模型替换学习型评论家以实现零样本泛化
-5. [Beyond Self-Interest: Modeling Social-Oriented Motivation for Human-like Multi-Agent Interactions](/202603/22/2603.13890v1-beyond-self-interest-modeling-social-oriented-motivation-for-human-like-multi-agent-interactions)  
+   evidence：VLA模型分布式强化学习的SOTA性能
+5. [Beyond Benchmark Islands: Toward Representative Trustworthiness Evaluation for Agentic AI](/202603/23/2603.14987v1-beyond-benchmark-islands-toward-representative-trustworthiness-evaluation-for-agentic-ai)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：集成反思推理和价值更新的基于LLM的智能体
-6. [EcoFair-CH-MARL: Scalable Constrained Hierarchical Multi-Agent RL with Real-Time Emission Budgets and Fairness Guarantees](/202603/22/2603.14625v1-ecofair-ch-marl-scalable-constrained-hierarchical-multi-agent-rl-with-real-time-emission-budgets-and-fairness-guarantees)  
+   evidence：多步工作流中智能体AI系统的评估
+6. [Counteractive RL: Rethinking Core Principles for Efficient and Scalable Deep Reinforcement Learning](/202603/23/2603.15871v1-counteractive-rl-rethinking-core-principles-for-efficient-and-scalable-deep-reinforcement-learning)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：用于海运物流的受约束分层多智能体强化学习框架
-7. [Interference-Aware K-Step Reachable Communication in Multi-Agent Reinforcement Learning](/202603/22/2603.15054v1-interference-aware-k-step-reachable-communication-in-multi-agent-reinforcement-learning)  
+   evidence：高效且可扩展的深度强化学习新范式
+7. [Efficient LLM Serving for Agentic Workflows: A Data Systems Perspective](/202603/23/2603.16104v1-efficient-llm-serving-for-agentic-workflows-a-data-systems-perspective)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：多智能体强化学习通信框架
-8. [CorrectionPlanner: Self-Correction Planner with Reinforcement Learning in Autonomous Driving](/202603/22/2603.15771v1-correctionplanner-self-correction-planner-with-reinforcement-learning-in-autonomous-driving)  
+   evidence：代理工作流的服务框架
+8. [REAL: Regression-Aware Reinforcement Learning for LLM-as-a-Judge](/202603/23/2603.17145v1-real-regression-aware-reinforcement-learning-for-llm-as-a-judge)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：基于强化学习的自动驾驶代理自纠正机制
-9. [Brain-Inspired Graph Multi-Agent Systems for LLM Reasoning](/202603/22/2603.15371v1-brain-inspired-graph-multi-agent-systems-for-llm-reasoning)  
+   evidence：针对LLM裁判的回归感知强化学习
+9. [Compute Allocation for Reasoning-Intensive Retrieval Agents](/202603/23/2603.14635v1-compute-allocation-for-reasoning-intensive-retrieval-agents)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：用于LLM推理的多智能体系统
-10. [Protein Design with Agent Rosetta: A Case Study for Specialized Scientific Agents](/202603/22/2603.15952v1-protein-design-with-agent-rosetta-a-case-study-for-specialized-scientific-agents)  
+   evidence：使用大语言模型的推理密集型检索智能体
+10. [Token Coherence: Adapting MESI Cache Protocols to Minimize Synchronization Overhead in Multi-Agent LLM Systems](/202603/23/2603.15183v1-token-coherence-adapting-mesi-cache-protocols-to-minimize-synchronization-overhead-in-multi-agent-llm-systems)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：LLM智能体配合结构化环境进行迭代优化
-11. [Evaluating Agentic Optimization on Large Codebases](/202603/22/2603.16011v1-evaluating-agentic-optimization-on-large-codebases)  
+   evidence：多智能体LLM编排同步
+11. [IEMAS: An Incentive-Efficiency Routing Framework for Open Agentic Web Ecosystems](/202603/23/2603.17302v1-iemas-an-incentive-efficiency-routing-framework-for-open-agentic-web-ecosystems)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：评估大型真实代码库上智能体优化行为的基准
+   evidence：开放智能体网络生态系统的路由框架
 
 
 <div class="dpr-home-promo-card">
