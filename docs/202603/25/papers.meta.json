@@ -1,0 +1,37 @@
+{
+  "label": "2026-03-25",
+  "date": "2026-03-25",
+  "generated_at": "2026-03-25T19:36:20",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202603/25/2603.23355v1-off-policy-value-based-reinforcement-learning-for-large-language-models",
+      "section": "deep",
+      "title_en": "Off-Policy Value-Based Reinforcement Learning for Large Language Models",
+      "authors": "Peng-Yuan Wang, Ziniu Li, Tian Xu, Bohan Yang, Tian-Shuo Liu, ChenYang Wang, Xiong-Hui Chen, Yi-Chen Li, Tianyun Yang, Congliang Chen, Yang Yu",
+      "date": "2026-03-24",
+      "pdf": "https://arxiv.org/pdf/2603.23355v1",
+      "score": "9.0",
+      "evidence": "针对LLM的离策价值强化学习框架",
+      "tldr": "针对大语言模型强化学习中策略梯度方法采样效率低的问题，本文提出了一种基于价值的离线策略强化学习框架 ReVal。该方法通过贝尔曼更新结合了步骤级的一致性信号与轨迹级的验证信号，并利用经验回放机制实现数据的高效复用。实验证明，ReVal 在数学推理任务上比 GRPO 收敛更快且性能更优，在 AIME24 和 GPQA 等基准上取得了显著提升，为 LLM 训练提供了一种高效的替代方案。",
+      "tags": "query:ag-rl",
+      "abstract_en": "Improving data utilization efficiency is critical for scaling reinforcement learning (RL) for long-horizon tasks where generating trajectories is expensive. However, the dominant RL methods for LLMs are largely on-policy: they update each batch of data only once, discard it, and then collect fresh samples, resulting in poor sample efficiency. In this work, we explore an alternative value-based RL framework for LLMs that naturally enables off-policy learning. We propose ReVal, a Bellman-update-based method that combines stepwise signals capturing internal consistency with trajectory-level signals derived from outcome verification. ReVal naturally supports replay-buffer-based training, allowing efficient reuse of past trajectories. Experiments on standard mathematical reasoning benchmarks show that ReVal not only converges faster but also outperforms GRPO in final performance. On DeepSeek-R1-Distill-1.5B, ReVal improves training efficiency and achieves improvement of 2.7% in AIME24 and 4.5% in out-of-domain benchmark GPQA over GRPO. These results suggest that value-based RL is a practical alternative to policy-based methods for LLM training.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202603/25/2603.19714v1-looprpt-reinforcement-pre-training-for-looped-language-models",
+      "section": "quick",
+      "title_en": "LoopRPT: Reinforcement Pre-Training for Looped Language Models",
+      "authors": "Guo Tang, Shixin Jiang, Heng Chang, Nuo Chen, Yuhan Li, Huiming Fan, Jia Li, Ming Liu, Bing Qin",
+      "date": "2026-03-20",
+      "pdf": "https://arxiv.org/pdf/2603.19714v1",
+      "score": "7.0",
+      "evidence": "语言模型推理的强化预训练",
+      "tldr": "针对循环语言模型（LoopLMs）隐式推理与传统强化学习目标不匹配的问题，本文提出LoopRPT强化预训练框架。该框架将下个词预测重构为下个词推理任务，通过EMA教师参考和噪声潜空间回退，直接将强化信号作用于中间迭代步骤。在Ouro架构上的实验表明，LoopRPT显著提升了每步表示质量，实现了精度与计算量的帕累托最优，有效增强了模型的早期推理能力。",
+      "tags": "query:ag-rl",
+      "abstract_en": "Looped language models (LoopLMs) perform iterative latent computation to refine internal representations, offering a promising alternative to explicit chain-of-thought (CoT) reasoning. However, existing reinforcement learning (RL) paradigms primarily target output tokens, creating a structural mismatch with looped architectures whose reasoning unfolds implicitly. In this work, we propose LoopRPT, a reinforcement pre-training framework tailored for LoopLMs. By reframing next-token prediction as a next-token reasoning task, LoopRPT assigns reinforcement signals directly to latent steps using an EMA teacher reference and noisy latent rollouts. This formulation enables RL to directly shape intermediate representations, compressing effective reasoning into fewer iterations. We instantiate LoopRPT on the Ouro architecture across multiple model scales. Results demonstrate that LoopRPT consistently improves per-step representation quality, achieving Pareto dominance in accuracy-computation trade-offs. Notably, significant gains on hard tokens indicate that LoopRPT enhances early-stage reasoning rather than merely encouraging premature exits. Our findings highlight reinforcement pre-training as a principled paradigm for learning efficient latent reasoning in LoopLMs.",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,104 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-03-25T19:35:13.758938+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2603.23355v1",
+      "title": "Off-Policy Value-Based Reinforcement Learning for Large Language Models",
+      "abstract": "Improving data utilization efficiency is critical for scaling reinforcement learning (RL) for long-horizon tasks where generating trajectories is expensive. However, the dominant RL methods for LLMs are largely on-policy: they update each batch of data only once, discard it, and then collect fresh samples, resulting in poor sample efficiency. In this work, we explore an alternative value-based RL framework for LLMs that naturally enables off-policy learning. We propose ReVal, a Bellman-update-based method that combines stepwise signals capturing internal consistency with trajectory-level signals derived from outcome verification. ReVal naturally supports replay-buffer-based training, allowing efficient reuse of past trajectories. Experiments on standard mathematical reasoning benchmarks show that ReVal not only converges faster but also outperforms GRPO in final performance. On DeepSeek-R1-Distill-1.5B, ReVal improves training efficiency and achieves improvement of 2.7% in AIME24 and 4.5% in out-of-domain benchmark GPQA over GRPO. These results suggest that value-based RL is a practical alternative to policy-based methods for LLM training.",
+      "authors": [
+        "Peng-Yuan Wang",
+        "Ziniu Li",
+        "Tian Xu",
+        "Bohan Yang",
+        "Tian-Shuo Liu",
+        "ChenYang Wang",
+        "Xiong-Hui Chen",
+        "Yi-Chen Li",
+        "Tianyun Yang",
+        "Congliang Chen",
+        "Yang Yu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-03-24T15:55:02+00:00",
+      "link": "https://arxiv.org/pdf/2603.23355v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Off-policy value-based RL framework for LLMs",
+      "llm_evidence_cn": "针对LLM的离策价值强化学习框架",
+      "llm_evidence": "针对LLM的离策价值强化学习框架",
+      "canonical_evidence": "针对LLM的离策价值强化学习框架",
+      "llm_tldr_en": "Explores off-policy value-based RL to improve data efficiency for long-horizon LLM agent tasks.",
+      "llm_tldr_cn": "探索离策价值强化学习，以提高长程LLM智能体任务中的数据利用效率。",
+      "llm_tldr": "探索离策价值强化学习，以提高长程LLM智能体任务中的数据利用效率。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "large language model based agents in reinforcement learning",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2603.19714v1",
+      "title": "LoopRPT: Reinforcement Pre-Training for Looped Language Models",
+      "abstract": "Looped language models (LoopLMs) perform iterative latent computation to refine internal representations, offering a promising alternative to explicit chain-of-thought (CoT) reasoning. However, existing reinforcement learning (RL) paradigms primarily target output tokens, creating a structural mismatch with looped architectures whose reasoning unfolds implicitly. In this work, we propose LoopRPT, a reinforcement pre-training framework tailored for LoopLMs. By reframing next-token prediction as a next-token reasoning task, LoopRPT assigns reinforcement signals directly to latent steps using an EMA teacher reference and noisy latent rollouts. This formulation enables RL to directly shape intermediate representations, compressing effective reasoning into fewer iterations. We instantiate LoopRPT on the Ouro architecture across multiple model scales. Results demonstrate that LoopRPT consistently improves per-step representation quality, achieving Pareto dominance in accuracy-computation trade-offs. Notably, significant gains on hard tokens indicate that LoopRPT enhances early-stage reasoning rather than merely encouraging premature exits. Our findings highlight reinforcement pre-training as a principled paradigm for learning efficient latent reasoning in LoopLMs.",
+      "authors": [
+        "Guo Tang",
+        "Shixin Jiang",
+        "Heng Chang",
+        "Nuo Chen",
+        "Yuhan Li",
+        "Huiming Fan",
+        "Jia Li",
+        "Ming Liu",
+        "Bing Qin"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-03-20T07:35:38+00:00",
+      "link": "https://arxiv.org/pdf/2603.19714v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Reinforcement pre-training for reasoning in language models",
+      "llm_evidence_cn": "语言模型推理的强化预训练",
+      "llm_evidence": "语言模型推理的强化预训练",
+      "canonical_evidence": "语言模型推理的强化预训练",
+      "llm_tldr_en": "Proposes a framework to apply reinforcement signals to latent reasoning steps in looped language models.",
+      "llm_tldr_cn": "提出一种框架，将强化信号直接应用于循环语言模型的隐式推理步骤。",
+      "llm_tldr": "提出一种框架，将强化信号直接应用于循环语言模型的隐式推理步骤。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "integration of LLM agents and reinforcement learning",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
