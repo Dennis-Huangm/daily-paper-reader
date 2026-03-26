@@ -1,0 +1,595 @@
+Title: ProcureGym: A Multi-Agent Markov Game Framework for Modeling National Volume-based Drug Procurement
+
+URL Source: https://arxiv.org/pdf/2603.23880v1
+
+Published Time: Thu, 26 Mar 2026 00:46:22 GMT
+
+Number of Pages: 26
+
+Markdown Content:
+# ProcureGym: A Multi-Agent Markov Game Framework for Modeling National Volume-based Drug Procurement 
+
+Jia Wang 2,3 †, Qian Xu 1†, Xuanwen Ding 1,2 , Zhuangqi Li 1,
+
+Chao He 3* , Bao Liu 1* , Zhongyu Wei 1,2* 1Fudan University, 2Shanghai Innovation Institute, 3Tongji University 
+
+{zywei, liub}@fudan.edu.cn, {hec_tjjt}@tongji.edu.cn, 
+
+Abstract 
+
+In this paper, we introduce ProcureGym, an data-driven multi-agent simulation platform that models China’s National Volume-Based drug Procurement (NVBP) as a Markov Game. Based on real-world data from 7 rounds of NVBP (covering 325 drugs and 2,267 firms), the platform establishes a high-fidelity simulation environment. Within this framework, we evaluate diverse agent models, including Reinforcement Learning (RL), Large Language Model (LLM), and Rule-based algorithms. Experimental results demonstrate that RL agents achieve superior winner alignment and profits. Further analyses show that maximum valid bidding price and procurement volume dominate strategic outcomes. ProcureGym thus serves as a rigorous instrument for assessing policy impacts and formulating future procurement strategies. 
+
+# 1 Introduction 
+
+Initiated in 2018, China’s National Volume-Based drug Procurement (NVBP) represents a landmark reform in pharmaceutical pricing, achieving substantial cost reductions through centralized competitive bidding [ 1– 3 ]. Reports indicated that it has saved approximately 500 billion CNY in pharmaceutical expenses to date [ 4 ]. As the program expands to encompass more than 490 drugs and thousands of participating firms, the procurement process has evolved into a highly complex decision-making environment [ 5 ]. Within this system, pharmaceutical firms act as self-interested rational agents operating under incomplete information. They must meticulously strategize their bidding prices to balance expected profit against the risk of losing market share, all while navigating strict regulatory constraints such as guaranteed government procurement volumes, strict price ceilings, and inherent production capacity cost limits. Because traditional analytical models often fall short in capturing these non-linear, multi-agent interactions, developing accurate computational simulations has become imperative for understanding strategic interdependencies, predicting policy ripple effects, and refining procurement rule designs. In recent years, diverse computational approaches has been developed to model complex economic systems. However, existing paradigms exhibit notable limitations. Analytical game-theoretic frame-works rely on stylized equilibrium abstractions, which struggle to accommodate high-dimensional agent diversity [ 6, 7 ]. Furthermore, econometric methods are constrained by the Lucas critique: estimated relationships become unreliable when agents adapt their expectations to anticipated policy changes [ 8 – 10 ]. Similarly, traditional Agent-Based Models (ABM) typically employ static heuristic rules, intrinsically limiting their capacity for strategic adaptation and learning [ 11 , 12 ]. With the rapid 1
+
+> arXiv:2603.23880v1 [cs.SI] 25 Mar 2026
+
+advancement of artificial intelligence (AI), an increasing body of research is exploring the computa-tional modeling of economic systems by leveraging advanced methodologies such as Reinforcement Learning (RL) and Large Language Models (LLMs); however, existing studies predominantly focus on generic or macroeconomic scenarios. As summarized in Table 1, the current landscape primarily centers on fiscal and taxation policy optimization, exemplified by platforms such as AI Economist [ 6], RBC model [ 13 ], TaxAI [ 14 ], EconAgent [ 10 ], and EconoJax [ 15 ]. Furthermore, the research scope has subsequently broadened to encompass complex market economic dynamics, specifically involving market competition [ 16 ], labor markets [ 17 ], as well as macroeconomic policy and governance [ 12 ], etc. However, research on simulation platforms dedicated to specific domains, particularly centralized pharmaceutical procurement, currently remains in a nascent stage of exploration. In contrast to macroeconomic simulators designed to capture system-level equilibria, model-ing micro-level bidding games within centralized procurement contexts imposes strict demands on individual modeling granularity and environmental dynamics. Consequently, a robust simulation platform need possess the following capabilities: (1) capturing fine-grained, firm-level attributes, such as firm size, categorization (originator vs. generic pharmaceutical manufacturers), raw material self-sufficiency, and cost structures; (2) constructing dynamic interactions within the procurement environment to simulate the decision-making evolution of multi-round bidding games among firms under fierce competition; and (3) facilitating counterfactual inference of policy rules to evaluate intervention effects within the public healthcare sector under regulatory shifts, as well as to observe the emergent behaviors exhibited by the participating agents. To bridge this gap, we present ProcureGym ,a Markov Game-based multi-agent simulation framework specifically designed for economic scenarios, such as multi-firm bidding games in pharmaceutical procurement, as illustrated in Figure 1. Pmax Q 0 Q e ρ ω           
+
+> China's National Volume-Based Procurement
+> Multiple Routes of Administration Diverse Therapeutic Areas Multi-round Procurement Tasks
+> Oral Injectables Organ System Pharmacological B2: Amoxicillin... …… …… B5: Rivaroxaban... B7: Omeprazole... B8: Ornidazole... B9: Atomoxetine... Batch 2-9
+> Phenomenon Revelation Agent Modeling Algorithms
+> RL Agents LLM Agents Rule-based Agents
+> Batch-specific Params
+> Simulation
+> • IPPO, MAPPO • Dynamic strategy learning
+> Algorithm Evaluation • Evaluation of Bid Prediction Accuracy Across Multiple Algorithms
+> Policy Analysis • Impact of Policy Parameter Variations on Simulation Outcomes
+> Scenario Extensibility • Supports applications in enterprise bidding and game-theoretic simulation contexts • Real policy driven • Qwen3-235B-A22B • Cognitive architecture • (perception,reflection, decision)
+> Multi-Agent MDP Framework
+> ……
+> Action decision Originator Bidding Game Large Generic Small/Medium Generic ……
+> Action
+> • Bid price
+> Reward
+> • Enterprise profit
+> State
+> • Policy/Firm Params • Market History
+
+Figure 1: Overview of the ProcureGym Framework. 2Platform Year Domain Algorithms Scenarios LLM Support Real Data                                                             
+
+> AI Economist [6] 2022 Tax policy RL 2–3 ✗✗
+> RBC model [13] 2022 Tax policy RL 2✗✗
+> TaxAI [14] 2024 Tax policy RL 4✗✓
+> EconAgent [10] 2024 Macro-economy LLM 1✓✓
+> R-MABM [16] 2024 Market competition RL 4✗✗
+> ABIDES-Economist [17] 2024 Macro-economy RL, Rule 4+ ✗✓
+> AgentSociety [18] 2025 Macro-economy LLM, Rule 4✓✗
+> EconoJax [15] 2025 Tax policy RL 4+ ✗✗
+> EconGym [12] 2025 Macro-economy RL, LLM, Rule 25+ ✓✓
+> ProcureGym 2026 Drug procurement RL, LLM, Rule 325+ ✓✓
+
+Table 1: Comparison with Related Economic Simulation Platforms. Our contributions are summarized as follows: • We propose a Markov Game-based multi-agent system for NVBP with a unified interface that supports diverse agents, including RL-, LLM-, and Rule-based policies. • The platform accurately reproduces historical NVBP outcomes, with RL-based agents achieving 74.81% prediction accuracy, outperforming heuristic rule-based baselines by 10.80%. • We conduct systematic analyses of key market parameters to enable counterfactual reasoning, providing quantitative evidence to support informed policy adjustments. 
+
+# 2 The Structure of ProcureGym 
+
+2.1 Procurement Workflow 
+
+The real-world NVBP operates through a complex tripartite interaction among the Government, Pharmaceutical Firms, and Medical Institutions. In practice, the government establishes the bidding rules, price ceilings, and consolidates national demand; the firms formulate competitive bidding strategies based on their production costs and market shares; and the medical institutions execute the procurement by purchasing guaranteed volumes from the winning bidders and allocating residual demands. As illustrated in Figure 1, the ProcureGym framework establishes a multi-agent simulation en-vironment grounded in real-world data from China’s NVBP. To facilitate mathematical modeling, our framework simplifies this tripartite system by retaining pharmaceutical firms as the core active decision-making agents. Conversely, the settings of government (e.g., procurement rules, price ceilings) and medical institutions (e.g., agreed and actual procurement volumes) are abstracted and embedded into the environmental dynamics and Markov Decision Process (MDP) elements. ProcureGym organizes the NVBP simulation into a systematic workflow that spans multiple NVBP batches, drug instances, modeling algorithms, and sensitivity settings of procurement rules, as illustrated in Table 2. For each task, the framework first loads the task specification and algorithm configuration, initializes the procurement parameters, samples firm-specific costs, constructs the environment, instantiates the participating firms, and initializes their state variables. The workflow then advances through repeated episodes and timesteps of the bidding game, during which the agents iteratively update their states and optimize their bidding policies with respect to the reward objective. Finally, the framework conducts post-training evaluation and exports the resulting outputs, thereby 3Table 2: Simulation Workflow of ProcureGym. This table summarizes the comprehensive simulation process, from task configuration and simulation initialization to episode-wise bidding, post-training evaluation, and final result export. 
+
+Algorithm 1: ProcureGym workflow Input: Task set T (constructed from NVBP batch, Drug instance, Algorithm, Sensitivity setting, Episode 
+
+N , and Timestep T ), Procurement scenario data, and Firm agents configuration .
+
+Output: Training statistics and Final strategy files .1: For each task in T do 
+
+2: Load the task-specific procurement data and algorithm configuration. 3: Initialize the scenario parameters (Pmax , ρ, x, ω i, Q 0, Q e) and sample the firm cost Ci.4: Initialize the procurement environment and instantiate the firm agents. 5: Initialize the starting state Si 
+
+> 0
+
+= ( Pmax , ρ, x, ω i, Q 0, Q e, C i, P i 
+
+> 0
+
+, Πi
+
+> 0
+
+, tT ).6: for episode e = 1 , . . . , N do 
+
+7: Reset the environment and the state history for all agents. 8: for timestep t = 1 , . . . , T do 
+
+9: Observe Sit and generate the bidding action ait.10: Rank all bids, and determine the Top-x winners. 11: Update Pwin , Iit , Πit, Rit, and the next state Sit+1 .12: end for 
+
+13: Update the agent strategy after the episode. 14: end for 
+
+15: Run 5 evaluation episodes to aggregate the final strategy. 16: Export the training statistics and final strategy files. 17: end for 
+
+> Note: Detailed descriptions of the corresponding variables are provided in Table 3.
+
+enabling a comprehensive analysis of winner prediction, firm profitability, and the sensitivity of procurement outcomes to policy interventions and market shocks. 
+
+2.2 Agent Modeling 
+
+Bidding behavior of firms under the NVBP can be fundamentally characterized as a sealed-bid auction with explicit volume constraints[ 5 ]. ProcureGym formulates the strategic interactions among firm agents within the context of the NVBP as a Markov game. Constructed to simulate real-world procurement dynamics, this framework systematically incorporates policy and market regulations, bidding mechanisms, and firm attributes. The specific configurations of the Markov game are detailed in the following description and Table 3. The modular Markov Game design readily extends to other game-theoretic settings by reconfiguring its components. • State Space ( St): We define the state space St for the firm i at time t as a 10-dimensional vector. Detailed examples of the variables within this state space are provided in Appendix B: 
+
+St =
+
+
+
+Pmax , ρ, x, ω i, Q 0, Q e, C i, P it−1, Πit−1, tT
+
+
+
+(1) The state space is decomposed into four categories: (1) Policy & market parameters Θt =(Pmax , ρ, x, ω i, Q 0, Q e), encompassing the maximum valid bidding price, agreed procurement 4ratio, number of winning bidders, firm-specific price linkage coefficient, and the agreed and actual procurement volume; (2) Firm parameters (Ci), representing the firm’s production cost; (3) 
+
+Historical information (P it−1, Πit−1), comprising the firm’s previous bidding price and profit; (4) 
+
+Time information ( tT ), representing the time. • Action Space ( At): The action space is defined as a bounded continuous scalar at ∈ [−1, 1] ,representing a normalized bidding decision that is subsequently transformed to the actual bidding price through an mapping: 
+
+P it = Ci + at + 1 2 · (Pmax − Ci) (2) where bidding prices are strictly constrained to the economically feasible range [Ci, P max ], with Ci
+
+denoting the unit production cost and Pmax the maximum valid bidding price. • Transition Function ( P (st+1 |st, a t)): State transition dynamics are governed by a deterministic rank-based selection mechanism that employs a top-k winning rule based on ascending price order. Given the bidding prices submitted by all firms at time t, the allocation indicator for firm i is defined as: 
+
+Iit =
+
+(
+
+1, if rank (P it ) ≤ x, 
+
+0, otherwise (3) where rank (P it ) denotes the ascending price rank of firm i among all N competing firms, and x is the number of winning slots specified by the procurement policy. The allocation indicator Iit directly determines the profit structure for each firm. For winning firms ( Iit = 1 ), the profit π0 comprises both procurement and price-linkage components: 
+
+π0 = ( P it − Ci) ρx Q0 + ( P it (1 + ωi) − Ci)( Qe − ρQ 0)βi (4) For non-winning firms ( Iit = 0 ), the profit π1 consists solely of the price-linkage component: 
+
+π1 = ( P it (1 + ωi) − Ci)( Qe − ρQ 0)βi (5)                                                                              
+
+> Markov Game Element Notation Formula / Definition Meaning State Space StSt={Pmax , ρ, x, ω i, Q 0, Q e,Ci, P it−1,Πit−1, t/T }
+> A 10-dimensional vector encoding: policy parameters, firm param-eters, market history, and time encoding.
+> Action Space AtPit=Ci+at+1 2·(Pmax −Ci)Normalized decision at∈[−1,1] mapped to bidding price Pit∈
+> [Ci, P max ].
+> Transition Probability P(s′|s, a )sit+1 = Pit,Πit(Iit),
+> where Iit=I(rank (Pit)≤x)
+> A binary indicator Iit(1for winning) determines the realized profit
+> Πit, thereby updating the historical state (Pit,Πit).
+> Reward Function RtRt=Iit·π0+ (1 −Iit)·π1Profit conditioned on the winning status Iit, comprising the procure-ment profit π0(winning) and the linkage profit π1(non-winning).
+> Discount Factor γγ= [0 .9,1] Weighting factor for future rewards in the cumulative return.
+
+Table 3: Markov Game Elements for Firm Agents in ProcureGym. For each agent, we summarize the State Space St, encompassing maximum valid bidding price Pmax , agreed procurement ratio ρ,number of winning bidders x, firm-specific price linkage coefficient ωi, agreed procurement volume 
+
+Q0, actual procurement volume Qe, unit production cost Ci, previous bidding price P it−1, previous profit Πit−1, and time information t/T ; Action Space At, mapping the normalized bidding decision at
+
+to the actual bidding price P it ; Transition Probability P (s′|s, a ), governed by the binary indicator of winning status Iit , winning profit π0, non-winning profit π1.5The instantaneous profit can thus be expressed as: 
+
+Πit = Iit · π0 + (1 − Iit ) · π1 (6) The state transition updates historical information (P it−1, Πit−1) based on the realized profits, while policy parameters Θt and market parameters (Q0, Q e) remain fixed throughout the episode. • Reward Function ( Rt): The reward is defined as the instantaneous profit: 
+
+Rit = Π it (7) This formulation creates a strategic trade-off: lowering bid prices secures winning status ( Iit = 1 )and access to the higher profit π0, but reduces per-unit margins; while raising prices improves margins but risks exclusion from procurement profits, limiting returns to π1.
+
+# 3 Dataset Description 
+
+3.1 Data Sources and Key Variables 
+
+To construct realistic NVBP simulation scenarios, this study aggregated real-world data from multiple authoritative sources. Procurement documents and bidding results were obtained from the Shanghai Sunshine Medical Procurement All-In-One (SMPA), which provide detailed information on procure-ment rules, winning firms and bid prices. Information on potential competitors was collected from the Center for Drug Evaluation (CDE). Based on these data sources, several key variables were constructed for the simulation environment, including the number of potential bidders per drug, market share at the drug-firm level , the number of winning firms, enterprise type, and active pharmaceutical ingredient production capability, etc. These variables were used to parameterize the competitive structure and firm diversity in the pooled procurement market, thereby providing an empirical basis for modeling firm bidding behavior and procurement outcomes. 
+
+3.2 Characteristics of the Dataset 
+
+The dataset comprises 7 rounds of the NVBP (Rounds 2-9, excluding the insulin-specific round). In total, 325 drugs were included. The number of drugs across rounds, with the highest number in Round 5 and the lowest in Round 2 (Figure 2C). Most products were oral formulations (61%), and anti-infectives (23%) medicines accounted for the largest therapeutic category (Figure 2A, 2B). All included drugs had expired patent protection and market exclusivity, and had multiple generic competitors. In the pooled procurement setting, 48% of drugs faced 3–5 potential bidders, resulting in 2–5 winning firms for the majority (70%) of products and a winning rate concentrated in the 50–80% range (Figure 2D-2F). At the firm level, the study involves 2,267 drug–firm pairs, dominated by generics (89%) (Figure 2H)—especially small and medium-sized firms (67%) (Figure 2G)—with only 25% possessing in-house active pharmaceutical ingredient capabilities (Figure 2I) and distinct bid price distributions across enterprise types (Figure 2J). 6Figure 2: Characteristics of the research dataset. (A-C) Drug characteristics: dosage forms, Anatomical Therapeutic Chemical (ATC) categories, and drugs by procurement round. (D-F) Competition: poten-tial bidders, winners per drug, and winning rates. (G–J) Enterprise attributes:enterprise type, originator versus generic status, in-house active pharmaceutical ingredient production, and the distribution of log-transformed bid prices by enterprise type. 
+
+# 4 Experiment 
+
+4.1 Settings 
+
+Modeling the NVBP scenario within a Markov Game framework, we incorporate three diverse agent types: (1) RL-based agents comprise IPPO and MAPPO; (2) LLM-based agents are powered by the 
+
+Qwen3-235B-A22B-Instruct and employ a cognitive architecture characterized by Perception-Memory-Decision-Reflection ; (3) Rule-based agents employ heuristic strategies formulated based on real-world government regulations and firm attributes. See Appendix C for details. The experiments are conducted in a single-round setting. Evaluation metrics span three dimensions: 
+
+(1) Price Prediction Accuracy : spearman correlation and coefficient of determination ( R2) between predicted and actual prices; (2) Selection Prediction Accuracy (%): alignment rates between predicted and actual winners under Top-K selection; (3) Firm Profit (CNY thousand): profit distribution analysis validating learned bidding strategies. 
+
+4.2 Overall Experiment Results 
+
+Figure 3A illustrates the log-scaled actual vs. predicted bidding prices for four algorithms, all of which exhibit strong positive Spearman correlations ( ρ = 0.85–0.88, all p < 0.001 ). The R2 range from 0.76 to 0.79, with MAPPO demonstrating the highest explanatory power ( R2 = 0.79) and the Rule-Based method the lowest ( R2 = 0.76). Figure 3B presents RL algorithms achieve substantially higher accuracy rates (both 75%) compared to the LLM (66%) and Rule-Based (64%) methods. Finally, Figure 3C demonstrates that the RL algorithms learn profit-maximizing bidding strategies. Although real-world bids are not always optimal, RL maintains high predictive accuracy for selection and refines strategies to yield higher profits, underscoring practical advantages in strategy enhancement rather than mere replication. 7bb b3210
+
+> (CNY) (CNY)
+> (CNY, thousand) (CNY, thousand)
+
+Figure 3: Evaluation of NVBP Simulation across 7 Rounds (Rounds 2-9, excluding Round 6(insulin-focused)). (A) Price Prediction Accuracy: Log-log scatter plot of predicted vs. actual bid prices (unit: CNY, China Yuan); bubble size = number of firms per drug. Lowess smoothing curves with 95% confidence bands visualize trends; the black diagonal line ( y = x) represents perfect prediction. (B) Selection Prediction Accuracy: Batch-wise winner alignment rate; Top-K lowest-price ranking predictions vs. actual outcomes. (C) Firm Profit (unit: CNY thousand): Log-scale profit distribution. 
+
+4.3 Sensitivity Analysis 
+
+Sensitivity analysis show clear effects of both policy and market factors. A higher procurement ratio and larger contractual volume suppress bidding prices and reduce profits (Figure 4A, 4B; Figure 4E, 4F), whereas a higher maximum valid bidding price and stronger market demand raise both bids and profits (Figure 4C, 4D; Figure 4G, 4H). Demand is the most influential market driver of profitability, followed by contractual volume and then production costs (Figure 4I, 4J). RL methods maintain relatively stable bid-to-ceiling ratios and consistently outperform LLM and rule-based baselines across all settings, with profitability more sensitive to the ceiling price than to procurement-ratio changes. b
+
+> (CNY) (CNY, thousand)
+
+Figure 4: Sensitivity Analysis Results . Predicted bidding price and firm profit under varying: (A,B) argeed procurement ratios ( ρ); (C,D) maximum valid bidding prices ( Pmax ) (unit: CNY); (E,F) agreed procurement volume ( Q0) (unit: 10 3 dosage units); (G,H) actual procurement volume ( Qe) (unit: 10 3
+
+dosage units); (I,J) unit production costs ( Ci) (unit: CNY). Colored lines: four algorithms; shaded areas: 95% confidence intervals. 84.4 Unveiling the Logic of Bidding Strategies 
+
+While RL agents demonstrate superior performance, LLM agents enhance the interpretability of the platform by providing natural language rationales that explicate the underlying strategic logic and intermediate decision-making steps. Agents exhibit distinct pricing dynamics stemming from cost variance. As for Batch 2, low-cost firms prioritized market share through aggressive low pricing (59.8% of bids < 30.0% Pmax ), whereas high-cost firms pursued higher profitability, maintaining higher average prices (56.7% vs. 36.2% Pmax ) and profit margins (60.6% vs. 34.0%). For detailed examples of LLM responses, please see Appendix D. 
+
+4.5 Validation of LLM-based Agent Reliability 
+
+To further validate the reliability of the LLM-based agent, we introduced human evaluation and supplementary analyses focusing on instruction following and reasoning capabilities. 
+
+Instruction Following Capability. We evaluated whether the bidding prices generated by the LLM adhered to the numerical constraints specified in the instructions, which limit the price P to the bounds 
+
+Ci ≤ P ≤ Pmax . As detailed in Table 4, our analysis across 7 batches—encompassing 325 drugs and 112,150 Dialogue Records (DR)—revealed that bids fell below the cost threshold in 1,470 instances (1.31%). This marginal 1.31% violation of the lower bound stems from high-precision boundary approximations as the LLM progressively compresses bids toward the cost baseline during multi-round game. Conversely, zero violations of the upper bound ( Pmax ) were observed. Overall, these results substantiate the LLM’s robust capability in adhering to complex prompt constraints. 
+
+Reasoning Capability. We evaluated the reasoning capabilities of the agent using both LLM-as-a-Judge and Human Evaluation methodologies, both of which consistently corroborated the reliability of the LLM regarding logical capability and contextual alignment. The detailed evaluation results are as follows: • LLM-as-a-Judge: We utilized the Gemini-3.1-pro-preview API to assess Logical Reasoning (LR) and Contextual Consistency (CC) on a 5-point Likert scale, calculating an Average Score (Avg.) to summarize the overall performance. The specific evaluation prompt is detailed in Appendix E. To ensure a representative sample, we selected one drug from each of the seven experimental batches, resulting in an evaluation set of 2,350 DR. As demonstrated in Table 5, the agent achieved an overall Average of 4.72, with 4.87 for CC and 4.57 for LR. • Human Evaluation: In parallel, a rigorous evaluation was conducted by the group comprising two public health experts and two artificial intelligence experts. To balance time and human resource constraints while preserving statistical significance, we randomly subsampled 10 conversational records for each drug, yielding a subset of 280 DR (70 per evaluator). The results presented in Table 6 indicate an overall Average of 4.49, with 4.48 for CC and 4.49 for LR. 
+
+Performance Comparison across Different Foundation Models. Further experiments were con-ducted on the aforementioned seven drugs to comparatively evaluate the decision-making performance of two LLMs: GPT-5.4 and Qwen3-235B-A22B-Thinking-2507. As illustrated in Figure 5, the re-sults demonstrate that the Qwen model possesses an advantage in both predictive accuracy and firm profitability. Specifically, it achieved an average bid-winning rate of 61.68% (compared to 57.12% for GPT-5.4) and yielded a higher average total profit of 85.04 million CNY (compared to 52.92 9million CNY for GPT-5.4). Overall, Qwen3 demonstrates a more robust superiority in decision-making efficacy and profit optimization capabilities. Although GPT-5.4 generated quoted prices closer to the ground truth in some samples, it exhibited lower stability than Qwen in estimating bid-winning boundaries and competitive ranking sequences. Consequently, GPT-5.4 failed to effectively translate its advantage in price fitting into systemic improvements in overall bid-winning performance and firm profitability. 
+
+Round ID Drugs DR Bid < Ci Bid > Pmax 
+
+2 32 8,000 120 (1.50%) 0 (0.00%) 3 54 13,850 297 (2.14%) 0 (0.00%) 4 44 11,200 80 (0.71%) 0 (0.00%) 5 57 17,550 455 (2.59%) 0 (0.00%) 7 58 24,050 325 (1.35%) 0 (0.00%) 8 39 18,100 72 (0.40%) 0 (0.00%) 9 41 19,400 121 (0.62%) 0 (0.00%) 
+
+Overall 325 112,150 1470 (1.31%) 0 (0.00%) 
+
+Table 4: LLM Response bidding prices distribution Statistics. 
+
+Round ID Drug ID DR LR CC Avg. 
+
+2 Drug 68 150 4.41 4.89 4.65 3 Drug 235 300 4.62 4.88 4.75 4 Drug 371 350 4.63 4.87 4.75 5 Drug 436 200 4.53 4.87 4.70 7 Drug 165 300 4.62 4.84 4.73 8 Drug 60 500 4.63 4.83 4.73 9 Drug 107 550 4.57 4.89 4.73 
+
+Overall — 2,350 4.57 4.87 4.72 
+
+Table 5: LLM-as-a-Judge evaluation results.                                                                                 
+
+> Drug ID Metrics Expert 1 Expert 2 Expert 3 Expert 4 Drug 68 LR 4.30 5.00 4.40 4.50 CC 4.20 4.90 4.50 4.70
+> Drug 235 LR 4.20 4.80 4.10 4.60 CC 3.90 4.50 4.50 4.60
+> Drug 371 LR 4.20 4.60 4.30 4.60 CC 4.40 4.80 4.40 4.30
+> Drug 436 LR 4.00 4.10 4.40 4.60 CC 3.90 4.70 4.40 4.40
+> Drug 165 LR 4.80 4.80 4.40 4.40 CC 4.30 4.80 4.60 4.50
+> Drug 60 LR 4.70 4.80 4.70 4.60 CC 4.20 4.70 4.70 4.60
+> Drug 107 LR 4.10 4.90 4.50 4.40 CC 3.80 5.00 4.40 4.70
+> Average
+> LR 4.33 4.71 4.40 4.53 CC 4.10 4.77 4.50 4.54
+> Avg. 4.21 4.74 4.45 4.54
+
+Table 6: Human evaluation results. 10 (CNY, thousand) Figure 5: Comparative evaluation of decision-making performance between GPT-5.4 and Qwen3-235B-A22B-Thinking-2507. The experimental analysis concurrently evaluates the seven drugs listed in Table 2. The left panel illustrates the predicted selection rate, while the right panel depicts firm profit. 
+
+# 5 Conclusions 
+
+In this study, we introduce ProcureGym, a simulation framework based on a MDP, to simulate NVBP. By experimenting RL, LLMs, and Rule-based algorithms within a unified environment, we systematically evaluate their performance in complex procurement scenarios. The results show that RL outperforms LLM and rule-based algorithms in both profitability and prediction. The analysis identifies maximum bidding price and demand as primary policy and market drivers, respectively. These findings provide actionable insights for firms to optimize bidding strategies and for policymakers to better understand the efforts of policy design. Therefore, this study offers a novel simulation-based approach to analyzing NVBP and contributes to evidence-informed decision making in pharmaceutical procurement. 
+
+# Limitations 
+
+While ProcureGym provides a simulation scenario for drug centralized procurement bidding, and the agents can learn optimal bidding strategies that maximize profits, this study still has several limitations. 
+
+First, the centralized procurement scenario is designed based on China’s NVBP. Although its logic aligns with that of most drug centralized procurement initiatives, caution should be exercised when extrapolating the findings to other drug procurement scenarios. Second , the model only simulates the bidding behavior of firms. As a public policy, however, the aforementioned complex system should also incorporate governments and medical institutions—this would enable the provision of insights for policy optimization. 
+
+# Ethical considerations 
+
+This study does not involve human participants or animals. All data used in this research were used with permission from the data custodians for academic purposes, and the data sources comply with ethics review requirements. The data contain no personally identifiable information and were obtained 11 from public sources. 
+
+# References 
+
+[1] Xinhuanet. Over 400 billion rmb saved: A closer look at the impact of china’s drug procurement program. https://www.gov.cn/yaowen/2023-04/07/content_5750442.htm, 2023. [2] Zheng Hua Zhu, Quan Wang, Qiang Sun, Joel R Lexchin, and Li Yang. Improving access to medicines and beyond: the national volume-based procurement policy in china. BMJ Global Health , 8, 2023. URL https://api.semanticscholar.org/CorpusID:259949546 .[3] Zheng Zhu, Jiawei Zhang, Chao Gong, and Li Yang. Impacts of china’s national volume-based procurement policy on the pharmaceutical industry: A systematic review. Pharmacoeconomics and Policy , 1(2):63–72, 2025. ISSN 2950-2667. doi: https://doi.org/10.1016/j.pharp.2025.06.003. URL https://www.sciencedirect.com/science/article/pii/S2950266725000254 .[4] ChinaDaily. National volume based procurement to effectively reduce the burden of medical care 2023, 2023. https://www.gov.cn/zhengce/202308/content_6896373.htm .[5] Shengmao Cao, Lisa Xuejie Yi, and Chuan Yu. Competitive bidding in drug procurement: Evidence from china. American Economic Journal: Economic Policy , 16(3):481–513, August 2024. doi: 10.1257/pol.20220505. URL https://www.aeaweb.org/articles?id=10.1257/p ol.20220505 .[6] Stephan Zheng, Alexander Trott, Sunil Srinivasa, David C. Parkes, and Richard Socher. The ai economist: Taxation policy design via two-level deep multiagent reinforcement learning. 
+
+Science Advances , 8(18):eabk2607, 2022. doi: 10.1126/sciadv.abk2607. URL https: //www.science.org/doi/abs/10.1126/sciadv.abk2607 .[7] Haiyun Teng. The symbiotic effect and evolutionary game analysis of quantity procurement system and innovation development of pharmaceutical enterprises under government regulation. 
+
+Frontiers in Business, Economics and Management , 11:145–154, 10 2023. doi: 10.54097/fbem. v11i2.12576. [8] Robert E. Lucas. Econometric policy evaluation: A critique. Carnegie-Rochester Conference Series on Public Policy , 1:19–46, 1976. ISSN 0167-2231. doi: https://doi.org/10.1016/S0167-2 231(76)80003-6. URL https://www.sciencedirect.com/science/article/pii/S01672 23176800036 .[9] Yang Gu and Qian Zhuang. Does china’s centralized volume-based drug procurement policy facilitate the transition from imitation to innovation for listed pharmaceutical companies? em-pirical tests based on double difference model. Frontiers in Pharmacology , 14, 05 2023. doi: 10.3389/fphar.2023.1192423. [10] Nian Li, Chen Gao, Mingyu Li, Yong Li, and Qingmin Liao. EconAgent: Large language model-empowered agents for simulating macroeconomic activities. In Lun-Wei Ku, Andre Martins, and Vivek Srikumar, editors, Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 15523–15536, Bangkok, Thailand, 12 August 2024. Association for Computational Linguistics. doi: 10.18653/v1/2024.acl-long.829. URL https://aclanthology.org/2024.acl-long.829/ .[11] Narges Pourghahreman, Ali Rajabzadeh Ghatari, and Asiye Moosivand. Agent based simulation of sale and manufacturing agents acting across a pharmaceutical supply chain. Iranian Journal of Pharmaceutical Research : IJPR , 17:1581 – 1592, 2018. URL https://api.semanticscho lar.org/CorpusID:56481298 .[12] Qirui Mi, Qipeng Yang, Zijun Fan, Wentian Fan, Heyang Ma, Chengdong Ma, Siyu Xia, Bo An, Jun Wang, and Haifeng Zhang. Econgym: A scalable ai testbed with diverse economic tasks, 2025. URL https://arxiv.org/abs/2506.12110 .[13] Michael Curry, Alexander Trott, Soham Phade, Yu Bai, and Stephan Zheng. Analyzing micro-founded general equilibrium models with many agents using deep reinforcement learning, 2022. URL https://arxiv.org/abs/2201.01163 .[14] Qirui Mi, Siyu Xia, Yan Song, Haifeng Zhang, Shenghao Zhu, and Jun Wang. Taxai: A dynamic economic simulator and benchmark for multi-agent reinforcement learning. In Mehdi Dastani, Jaime Simão Sichman, Natasha Alechina, and Virginia Dignum, editors, Proceedings of the 23rd International Conference on Autonomous Agents and Multiagent Systems, AAMAS 2024, Auckland, New Zealand, May 6-10, 2024 , pages 1390–1399. International Foundation for Autonomous Agents and Multiagent Systems / ACM, 2024. doi: 10.5555/3635637.3662998. URL https://dl.acm.org/doi/10.5555/3635637.3662998 .[15] Koen Ponse, Aske Plaat, Niki van Stein, and Thomas M. Moerland. Econojax: A fast & scalable economic simulation in jax. In Proceedings of the 24th International Conference on Autonomous Agents and Multiagent Systems , AAMAS ’25, page 1679–1687, Richland, SC, 2025. International Foundation for Autonomous Agents and Multiagent Systems. ISBN 9798400714269. [16] Simone Brusatin, Tommaso Padoan, Andrea Coletta, Domenico Delli Gatti, and Aldo Glielmo. Simulating the economic impact of rationality through reinforcement learning and agent-based modelling. In Proceedings of the 5th ACM International Conference on AI in Finance , ICAIF ’24, page 159–167. ACM, November 2024. doi: 10.1145/3677052.3698621. URL http: //dx.doi.org/10.1145/3677052.3698621 .[17] Kshama Dwarakanath, Tucker Balch, and Svitlana Vyetrenko. Abides-economist: Agent-based simulator of economic systems with learning agents, 2025. URL https://arxiv.org/abs/24 02.09563 .[18] Jing Piao, Yuwei Yan, Jun Zhang, Nian Li, Junbo Yan, Xiaochong Lan, Zhihong Lu, Zhiheng Zheng, Jing Yi Wang, Di Zhou, Chen Gao, Fengli Xu, Fang Zhang, Ke Rong, Jun Su, and Yong Li. Agentsociety: Large-scale simulation of llm-driven generative agents advances understanding of human behaviors and society. ArXiv , abs/2502.08691, 2025. URL https://api.semantic scholar.org/CorpusID:276317785 .[19] Apostolos Filippas, John J. Horton, and Benjamin S. Manning. Large language models as simulated economic agents: What can we learn from homo silicus? In Proceedings of the 25th ACM Conference on Economics and Computation , EC ’24, page 614–615, New York, NY, USA, 2024. Association for Computing Machinery. ISBN 9798400707049. doi: 10.1145/3670865.36 73513. URL https://doi.org/10.1145/3670865.3673513 .13 [20] Gati Aher, Rosa I. Arriaga, and Adam Tauman Kalai. Using large language models to simulate multiple humans and replicate human subject studies. In Proceedings of the 40th International Conference on Machine Learning , ICML’23. JMLR.org, 2023. [21] Joon Sung Park, Joseph O’Brien, Carrie Jun Cai, Meredith Ringel Morris, Percy Liang, and Michael S. Bernstein. Generative agents: Interactive simulacra of human behavior. In Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology , UIST ’23, New York, NY, USA, 2023. Association for Computing Machinery. ISBN 9798400701320. doi: 10.1145/3586183.3606763. URL https://doi.org/10.1145/3586183.3606763 .[22] Anton Bakhtin, Noam Brown, Emily Dinan, Gabriele Farina, Colin Flaherty, Daniel Fried, Andrew Goff, Jonathan Gray, Hengyuan Hu, Athul Paul Jacob, Mo jtaba Komeili, Karthik Konath, Minae Kwon, Adam Lerer, Mike Lewis, Alexander H. Miller, Sandra Mitts, Adithya Renduchintala, Stephen Roller, Dirk Rowe, Weiyan Shi, Joe Spisak, Alexander Wei, David J. Wu, Hugh Zhang, and M.N. Zijlstra. Human-level play in the game of diplomacy by combining language models with strategic reasoning. Science , 378:1067 – 1074, 2022. URL https: //api.semanticscholar.org/CorpusID:253759631 .[23] Warren Kaplan, Veronika Wirtz, Sabine Vogler, Aurélia Nguyen, and Richard Laing. Policy options for promoting the use of generic medicines in low-and middle-income countries. Health Action Int , 2016. URL https://haiweb.org/wp-content/uploads/2017/02/HAI_Review_ generics_policies_final.pdf .[24] WHO Regional Office for the Western Pacific. Practical guidelines on pharmaceutical procure-ment for countries with small procurement agencies, 2002. URL https://iris.who.int/ser ver/api/core/bitstreams/8e68c743-e386-4498-afe7-b05b40641c42/content .[25] Jing Yuan, Z. Kevin Lu, Xiaomo Xiong, and Bin Jiang. Lowering drug prices and enhancing pharmaceutical affordability: an analysis of the national volume-based procurement (nvbp) effect in china. BMJ Global Health , 6, 2021. URL https://api.semanticscholar.org/CorpusID: 237507595 .[26] Ying Yang, Runhu Hu, Xin Geng, Lining Mao, Xiaotong Wen, Zhaolun Wang, Siyu Hao, Dan Cui, and Zongfu Mao. The impact of national centralised drug procurement policy on the use of policy-related original and generic drugs in china. The International Journal of Health Planning and Management , 37(3):1650–1662, 2022. doi: https://doi.org/10.1002/hpm.3429. URL 
+
+https://onlinelibrary.wiley.com/doi/abs/10.1002/hpm.3429 .[27] Lars Holger Ehlers, Morten Berg Jensen, and Henrik Schack. Competitive tenders on analogue hospital pharmaceuticals in denmark 2017–2020. Journal of Pharmaceutical Policy and Practice ,15, 2022. URL https://api.semanticscholar.org/CorpusID:253064729 .[28] Boya Zhao, Jing Wu, and Xing Lin Feng. Testing the unintended cost effects of health policies for generic substitutions: the case of china’s national volume-based procurement (nvbp) policy. 
+
+Health Policy and Planning , 40:194 – 205, 2024. URL https://api.semanticscholar.org/ CorpusID:273933540 .[29] Natalia Ferreira and Carina Pizzinat. Framework agreements in uruguay: towards an optimal acquisition strategy in public procurement. Documentos de Trabajo (working papers) 0125, 14 Department of Economics - dECON, 2025. URL https://EconPapers.repec.org/RePEc: ude:wpaper:0125 .[30] Jiaming Liu. The study on the supply early warning and guarantee mechanism of generic drugs based on immunity theory and multi-agent modeling. Master’s thesis, Nanjing University of Chinese Medicine, 2025. 15 A Related Works 
+
+A.1 Economic Simulation Modeling 
+
+Economic simulation modeling has evolved significantly, progressing from rule-based ABM to Multi-agent reinforcement learning (MARL) grounded in Markov Game, and more recently, to agents driven by LLM. Early ABM primarily relied on predefined heuristic rules to simulate interactions among diverse entities. Adopting a "bottom-up" social modeling paradigm, these models defined individual-level behavioral rules to observe the emergence of macro-level social phenomena. However, the behavioral rules were typically handcrafted by researchers, resulting in a lack of learnable strategy optimization and an inability to adapt to drastic environmental variations. To incorporate rational decision-making, researchers began formalizing economic problems as Markov processes, enabling behavioral strategies to be learned via data-driven approaches rather than being manually prescribed. MARL frameworks, such as AI-Economist [ 6] and TaxAI [ 14 ], allow economic agents to continuously learn and optimize strategies within dynamic games. These studies have demonstrated the superiority of RL over traditional frameworks (e.g., the Saez tax framework) in tasks such as tax policy formulation. 
+
+A.2 NLP Research on Economic Agents 
+
+The integration of NLP techniques into economic agent modeling represents a paradigm shift in computational economics, enabling more sophisticated and human-like decision-making processes in simulated environments. Recent advances in LLMs have revolutionized economic simulation by introducing "Homo Silicus" agents that can complement or substitute human-subject experiments, with Horton demonstrating that LLM agents replicate classical economic experiments with consistent behaviors [ 19 ], while Aher et al. showed that LLMs can simulate multiple humans across diverse experimental paradigms [ 20 ]. EconAgent exemplifies this advancement by endowing LLM-based agents with "perception-memory-decision" modules, facilitating the emergence of macroeconomic laws such as the Phillips curve within ABM environments [ 10 ], while Park et al. developed generative agents with dynamic memory management and hierarchical planning capabilities for superior long-term behavioral coherence [ 21 ]. Beyond simulation, NLP techniques have enhanced strategic economic decision-making: Bakhtin et al. integrated natural language negotiation with strategic reasoning in Diplomacy, achieving human-level performance through combining language models with game-theoretic planning [ 22 ]. Recent hybrid approaches show particular promise, with EconGym offering a scalable testbed supporting RL, LLM, and hybrid agent modeling that demonstrates enhanced system performance in complex coordination scenarios [12]. While these NLP advances have shown promise in macroeconomic modeling and general market simulations, their application to economic procurement scenarios remains underexplored, a gap that ProcureGym addresses by providing a framework capable of incorporating LLM-based agents alongside traditional RL agents, enabling future research on how natural language capabilities might enhance strategic bidding behaviors in pharmaceutical procurement contexts. 
+
+A.3 National Volume-Based drug Procurement Simulations 
+
+Centralized drug procurement serves as a pivotal policy instrument globally for containing healthcare costs and enhancing medication accessibility [ 23 , 24 ]. China’s NVBP employs a "volume-based procurement" mechanism, mandating that firms secure market shares in specific regions through 16 public bidding. Implemented to address long-standing issues of artificially inflated drug prices and redundancies in circulation channels, this policy has fundamentally reshaped the game-theoretic dynamics of the pharmaceutical supply chain [2, 25]. Previous studies primarily used econometric methods, such as difference-in-differences and interrupted time series analysis, to evaluate the actual effects of the policy [ 26 –28 ]. Research modeling centralized procurement scenarios has evolved from static game analysis to dynamic system simulation. Early studies primarily utilized static game theory and reverse auction models to assess the impact of centralized procurement on social welfare, drug prices, and government expenditure [ 5, 29 ]. In these studies, volume-based procurement is often abstracted as a multi-item sealed-bid or multi-unit reverse auction problem. Researchers derive the optimal bidding prices and equilibrium solutions for firms under complete or incomplete information within Bertrand competition or Stackelberg game frameworks. Subsequently, Liu’s study has used ABM to explain supply shortages after the implementation of centralized procurement [ 30 ], viewing centralized procurement and drug supply as complex, evolving systems over time. In short, existing research primarily focuses on econometric analysis and theoretical game models, with limited exploration of drug pricing simulations under centralized procurement policies. While RL and LLM have shown strong simulation capabilities in broader economic contexts, economic competitive scenarios, particularly in national drug procurement, remain underexplored. This paper fills this gap by designing a multi-agent Markov Game procurement environment aligned with the NVBP mechanism, systematically comparing Rule-based baselines, multi-agent RL algorithms, and LLM agents in simulating the bidding process. 
+
+# B Example of Variable Data in the State Space 
+
+To provide a more intuitive and in-depth understanding of the variables within the firm agent’s state space, we present five data examples of drugs and their associated firm information. These data are directly extracted from our realistic simulation environment, as detailed in Table 7. As defined in Section 2.2, the state space St is formulated as a ten-dimensional vector: St = {Pmax ,ρ, x, ω i, Q 0, Q e, C i, P it−1, Πit−1, t/T }. This vector encapsulates policy and firm parameters, time-varying market history, and time encoding. Additionally, Ci represents the firm’s cost information, which is specifically sampled based on the firm’s category and its capacity for self-producing active pharmaceutical ingredients. All the aforementioned parameters are derived from real-world data sources, with details provided in Section 3.1. Given that a firm’s actual production cost ( Ci) is strictly confidential and therefore not observable from public sources, we adopt a standardized sampling strategy based on two firm-specific attributes: firm type and the possession of in-house active pharmaceutical ingredient manufacturing capabilities. Specifically, the variable Type characterizes the firm by jointly reflecting its classification (e.g., originator versus generic manufacturer) and its operational scale (large, medium, or small), while the variable Raw Material indicates whether the firm possesses in-house active pharmaceutical ingredient manufacturing capabilities. Initially, a baseline cost is sampled from a uniform distribution delineated by the manufacturer’s specific typology (designated as Types A through D): Ci ∼ U (0 .05 Pmax , 0.115 Pmax ) for originator manufacturers (Type A), Ci ∼ U (0 .115 Pmax , 0.20 Pmax ) for large-scale generic manufacturers (Type B), and Ci ∼ U (0 .115 Pmax , 0.30 Pmax ) for medium-scale (Type C) and small-scale (Type D) generic manufacturers. To account for supply-chain efficiencies derived from vertical integration, firms 17 possessing in-house active pharmaceutical ingredient manufacturing capabilities receive a baseline cost reduction of 5% to 10%, formally adjusted as Cf inal i = Ci × U (0 .90 , 0.95) .Table 7: Variable Data for Five Pharmaceutical Products in the State Space. 
+
+Drug Firm ID Firm attributes Policy attributes 
+
+ωi Type Raw material 
+
+Ci
+
+(CNY) 
+
+Pmax 
+
+(CNY) x
+
+(firms) ρQ0
+
+(10 4 units) 
+
+Qe
+
+(10 4 units) Adefovir Dipivoxil Tablets F1 0.5 Type C Yes 0.1890 1.0800 2 0.6 2893.17 3471.80 F2 2.0 Type A Yes 0.0980 F3 0.5 Type B Yes 0.1260 Acarbose Tablets F1 0.5 Type D No 0.1050 0.8353 2 0.6 59346.65 71215.98 F2 0.5 Type A Yes 0.0830 F3 1.0 Type D No 0.2050 F4 1.0 Type C Yes 0.0940 Amoxicillin Capsules F1 1.0 Type C No 0.0270 0.1000 6 0.8 50542.22 60650.66 F2 0.5 Type C No 0.0150 F3 1.0 Type C No 0.0150 F4 0.5 Type C No 0.0150 F5 0.5 Type C No 0.0170 F6 1.0 Type B No 0.0160 F7 0.5 Type C Yes 0.0180 F8 0.5 Type C Yes 0.0210 F9 1.0 Type C No 0.0170 F10 0.5 Type C No 0.0180 F11 1.0 Type B Yes 0.0140 F12 1.0 Type B Yes 0.0140 Azithromycin Capsules F1 2.0 Type A Yes 0.2990 3.7500 4 0.8 13962.14 16754.57 F2 0.5 Type C No 0.8530 F3 0.5 Type C No 0.5500 F4 2.0 Type A Yes 0.1930 F5 0.5 Type C Yes 1.0360 F6 0.5 Type C No 0.6430 Ambrisentan Tablets F1 2.0 Type A No 4.5080 80.0000 2 0.6 3.81 4.58 F2 0.5 Type B Yes 12.7720 F3 0.5 Type C Yes 10.1780 F4 1.0 Type C No 9.7090             
+
+> Notes .Q0and Qeare reported in 10 4dosage units (e.g., 10 4tablets for tablet products and 10 4capsules for capsule products). The variable xdenotes the number of selected firms.
+
+18 C Algorithm Implementation 
+
+IPPO. In the IPPO framework, each firm operates an independent Actor-Critic network equipped with shared feature extraction layers (comprising a 2-layer MLP with 128 hidden units and tanh activation). The Actor generates a Gaussian policy with a learnable mean and standard deviation, while the Critic estimates state values. Critical hyperparameters are configured as follows: learning rate 5 × 10 −5,discount factor γ = 0 .99 , Generalized Advantage Estimation (GAE) parameter λ = 0 .95 , and clip ratio ϵ = 0 .2. To ensure stable training, we implement entropy coefficient annealing (declining from 0.005 to 0.001) and employ KL-based early stopping ( δKL = 0 .01 ). The experimental configuration for this algorithm is set to 1,000 episodes, with 50 timesteps per episode. 
+
+MAPPO. Adhering to CTDE paradigm, MAPPO incorporates decentralized actors paired with a centralized critic. Each actor exclusively observes its local state Sit , while the critic accesses global state information (constructed via the concatenation of all agents’ states). The centralized critic provides per-agent value estimates, enabling coordinated learning while maintaining decentralized execution. Training parameters mirror those of IPPO, including λ = 0 .95 , ϵ = 0 .2, and the activation of value function clipping. To ensure stable training, we implement entropy coefficient annealing (declining from 0.005 to 0.001) and employ KL-based early stopping ( δKL = 0 .01 ). The experimental configuration for this algorithm is set to 1,000 episodes, with 50 timesteps per episode. 
+
+Rule-based. This heuristic baseline utilizes a target profit margin strategy with dynamic adjustments. Base profit margins are assigned based on firm type: 20% for originators (Type A), 14% for medium-scale generics (Type B), and 8.6% for small-scale generics (Types C/D). The experimental configuration for this algorithm is set to 1,000 episodes, with 50 timesteps per episode. 
+
+LLM. Building upon the EconAgent framework [ 10 ], LLM agents leverage structured prompts encompassing: (1) a role definition designating the agent as a firm pricing strategist; (2) firm char-acteristics (such as cost and market position); (3) NVBP mechanism parameters (maximum valid bidding price Pmax , agreed procurement ratio ρ, agreed procurement volume Q0, and number of winning bidders x); (4) a 3-round decision memory annotated with profit change explanations; and (5) the current market state, including price rankings and selection status. The agent is instantiated using Qwen3-235B-A22B-Thinking-2507-FP8 with a temperature of 0.7 and a maximum token limit of 512, supporting both API and LLM inference modes (vLLM). Furthermore, a periodic strategy reflection mechanism (triggered every 5 steps) facilitates adaptive learning from historical outcomes. The experimental configuration for this algorithm is set to 1 episodes, with 50 timesteps per episode. The prompt architecture follows a Perception-Memory-Decision-Reflection cognitive framework: the perception module parses the 10-dimensional state vector into natural language market descriptions; the memory module maintains a sliding window storing the most recent 3 decision-outcome tuples (the bid price, profit and price rank of firm i in round t); the reflection module triggers every 5 steps to analyze cumulative performance metrics and prompt strategic reconsideration. The LLM output is constrained to structured JSON format {"reasoning": "<text>", "bid_price": <float>} .We present an illustrative example of the system prompt and the corresponding model responses in Figures 6 and 7 in Chinese. Note: For the purpose of anonymity, the specific enterprise name in the provided exemplar has been redacted and substituted with the placeholder "xxx". All experiments conducted in this paper were run on 1-4 H200 GPUs. 19 D Cases of LLM Responses from Diverse Firms 
+
+Through a detailed analysis of the LLM-generated responses, we observed that LLM-based agents display diverse bidding behaviors driven by firm-specific costs during NVBP simulations. Please refer to Figures 8 & 9 in Chinese and Figures 10 & 11 in Chinese for specific instances of outputs from low-cost and high-cost firms. 
+
+# E LLM-as-a-Judge Evaluation Prompt 
+
+To systematically evaluate the reasoning capability of the agent, we designed a structured evaluation prompt for the LLM-as-a-judge, focusing on two criteria: Logical Reasoning and Contextual Con-sistency. The prompt utilizes a 5-point Likert scale, accompanied by an explanation justifying the assigned scores. Furthermore, the output is constrained to a strict JSON format to facilitate automated parsing and statistical analysis. The prompt is detailed in Figures 12 and 13 in Chinese. 20 System Prompt You are the Pricing Strategist for xxx, participating in the National Centralized Volume-Based Pro-curement bidding for the drug 'Adefovir Dipivoxil Tablets'. Enterprise Characteristics: Medium cost, leading position. 
+
+[Procurement Mechanism] 
+
+- Ceiling Price (Pmax): 1.08 CNY - Agreed Procurement Ratio (rho): 60% - Agreed Procurement Volume (Q0): 2893 units - Number of Winning Bidders (x): 2 
+
+[Review of Historical Decisions] 
+
+- Round 2: Bid 0.23, Profit 76.7319, Rank 1, Won 100% - Round 3: Bid 0.23, Profit 115.6812, Rank 1, Won 100% (Profit Increased) - Round 4: Bid 0.24, Profit 115.6812, Rank 1, Won 100% 
+
+[Strategic Reflection] 
+
+Analysis of performance in the past 3 rounds: - Average Profit: 102.6981, Average Win Probability: 100% - Price Trend: Rising (0.23 -> 0.24) - Reflection: Is the current strategy effective? Does the bid need adjustment to increase profit or win probability? 
+
+[Profit Variation Analysis] 
+
+Profits are essentially flat; the current strategy is stable. 
+
+[Current Status] (Round 6, Progress 10%) - Previous Round Bid: 0.2450 CNY - Previous Round Profit: 115.68 CNY - Relative to Market Average Price: -73.1% - Price Rank: 1st/3 companies - Selection Status: Selected - Price Trend: Rising 
+
+[Private Information] 
+
+- Cost (C_i): 0.1886 CNY - Market Share (beta_i): 26.50% 
+
+[Bid Range] 
+
+[0.1886, 1.0800] 
+
+Response "reasoning" : "The current bid of 0.2450 CNY remains within the safe margin, exceeding the cost of 0.1886 CNY, and historical data indicates this price level ensures winning while maintaining high profitability. With a 1st place price ranking and low competitive pressure, a minor price increase aids in expanding profit margins. Considering the leading market position and the 60% guaranteed procurement volume, aggressive price reduction is unnecessary. Maintaining a prudent strategy, the bid is slightly raised to enhance profitability.", 
+
+"bid_price" : 0.25 Figure 6: Example of the LLM System Prompt and Response 21 System Prompt 您担任 xxx 公司的定价策略专家，参与 “阿德福韦酯片 ”的“国家组织药品集中带量采购 ”竞标。企业特征 ：中等成本，处于市场领先地位。 
+
+[采购机制 ]
+
+- 最高有效申报价 (Pmax) ：1.08 元
+
+- 约定采购比例 (rho) ：60% - 约定采购量 (Q0) ：2893 单位 
+
+- 拟中选企业数 (x) ：2
+
+[历史决策回顾 ]
+
+- 第2轮：报价 0.23 ，利润 76.7319 ，排名 1，中选概率 100% - 第3轮：报价 0.23 ，利润 115.6812 ，排名 1，中选概率 100% （利润实现增长） 
+
+- 第4轮：报价 0.24 ，利润 115.6812 ，排名 1，中选概率 100% 
+
+[策略反思 ]
+
+过往 3轮表现分析： 
+
+- 平均利润： 102.6981 ，平均中选概率： 100% - 价格趋势：呈上升态势 (0.23 -> 0.24) - 策略反思：当前定价策略是否具备有效性？是否需要调整报价以进一步提升预期利润或中选概率？ 
+
+[利润波动分析 ]
+
+利润水平基本持平；当前策略展现出较高的稳定性。 
+
+[当前状态 ] （第 6轮，进度 10% ）
+
+- 上一轮报价： 0.2450 元
+
+- 上一轮利润： 115.68 元
+
+- 相对于市场均价： -73.1% - 价格排名：第 1名 / 共3家企业 
+
+- 中选状态：已中选 
+
+- 价格趋势：呈上升态势 
+
+[私有信息 ]
+
+- 单位成本 (C_i) ：0.1886 元
+
+- 市场份额 (beta_i) ：26.50% 
+
+[报价区间 ]
+
+[0.1886, 1.0800] 
+
+Response "理由 ": " 当前 0.2450 元的报价仍处于安全边际内，显著高于 0.1886 元的成本线。历史数据表明，该价格水平在确保中选的 同时，维持了较强的盈利能力。鉴于本企业价格排名位列第一且面临的竞争压力较小，小幅上调价格有助于拓宽利润空间 。综合考量企业的市场领先地位以及 60% 的保障性约定采购量，采取激进的降价策略实属非必要。因此，在延续稳健博弈 策略的基础之上，微调并提高报价以进一步优化盈利表现。 ", 
+
+"报价 ": 0.25 Figure 7: Example of the LLM System Prompt and Response in Chinese 22 CASE 1 
+
+Scenario Information Pharmaceutical Product: Drug A 
+
+Firm Name: Firm A. 
+
+Bidding Range [Ci, Pmax]: [0.0167, 0.2600] 
+
+Bidding Headroom (Pmax-Ci): 0.2433 
+
+Bidding Price: 0.0167 
+
+Response "reasoning" : "The current quotation of CNY 0.0168 closely approximates the marginal cost of CNY 0.0167, indicating negligible scope for further price reduction. As a cost leader, the enterprise aims to secure its selection status and dis-place high-cost competitors by maintaining a marginal profit level. Given its top-tier price ranking and stable selection prospects, the strategy focuses on anchoring the bid to the cost floor to defend its market position.", 
+
+"bid_price" : 0.0167 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 2 
+
+Scenario Information Pharmaceutical Product: Amoxicillin Capsules 
+
+Firm Name: Firm B. 
+
+Bidding Range [Ci, Pmax]: [0.0149, 0.1000] 
+
+Bidding Headroom (Pmax-Ci): 0.0851 
+
+Bidding Price: 0.0150 
+
+Response "reasoning" : " The current bid of CNY 0.0150 remains slightly above the cost threshold of CNY 0.0149. Currently ranked 3rd, the enterprise possesses a distinct competitive advantage. In light of improving market conditions and antici-pated margin recovery, the rationale is to maintain a price point near the cost floor. This ensures both bid eligibility and a modest profit surplus, thereby stabilizing long-term returns.", 
+
+"bid_price" : 0.0150 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 3 
+
+Scenario Information Pharmaceutical Product: Isoniazid Tablets 
+
+Firm Name: Firm C. 
+
+Bidding Range [Ci, Pmax]: [0.0300, 0.2300] 
+
+Bidding Headroom (Pmax-Ci): 0.2000 
+
+Bidding Price: 0.0450 
+
+Response "reasoning" : "The previous quotation of CNY 0.0350 fell below the cost line, resulting in unsustainable margins and an adverse profit trend. As a medium-cost enterprise, the priority is to restore financial viability while ensuring bid selection. Benchmarked against the price ceiling of CNY 0.2300 and the prevailing competitive landscape, a strategic upward ad-justment to CNY 0.0450 is proposed. This "price repair" strategy aims to balance selection probability with margin optimi-zation. ", 
+
+"bid_price" : 0.0450 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 4 
+
+Scenario Information Pharmaceutical Product: Indapamide Tablets 
+
+Firm Name: Firm D. 
+
+Bidding Range [Ci, Pmax]: [0.0118, 0.1100] 
+
+Bidding Headroom (Pmax-Ci): 0.0982 
+
+Bidding Price: 0.0250 
+
+Response "reasoning" : "The enterprise failed to secure a bid in the previous round with a quote of CNY 0.0275 (ranked 7th). Given a marginal cost of CNY 0.0118, there is significant latitude for downward price adjustment. To enter the winning bracket (top 5 firms), the bid is revised to CNY 0.0250. This tactical reduction, informed by historical winning benchmarks around CNY 0.03, is designed to enhance the probability of selection in a competitive environment.", 
+
+"bid_price" : 0.0250 Figure 8: Cases of LLM Responses from Low-cost Firms CASE 1 
+
+Scenario Information 
+
+药品名称 ：A药品 企业名称：A企业 报价区间 [Ci, Pmax]：[0.0167, 0.2600] 报价空间 (Pmax-Ci)：0.2433 报价：0.0167 
+
+Response 
+
+> "理由": "当前0.0168元的报价已逼近0.0167元的边际成本线，表明进一步降价的空间已微乎其微。作为成本领先者，本企业的战略意 图在于通过维持边际利润水平，以确保其中选状态并挤出高成本竞争对手。鉴于其第一梯队的价格排名及稳固的中选前景，当前策 略的核心在于将报价锚定于成本底线，从而有效捍卫其市场地位。", "报价": 0.0167
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 2 
+
+Scenario Information 
+
+> 药品名称：阿莫西林胶囊 企业名称：B企业 报价区间 [Ci, Pmax]：[0.0149, 0.1000] 报价空间 (Pmax-Ci)：0.0851 报价：0.0150
+
+Response 
+
+> "理由": " 当前0.0150元的报价仍略高于0.0149元的成本阈值。本企业目前排名第3，具备显著的竞争优势。考虑到市场环境的改善以 及预期利润率的修复，本策略的逻辑在于维持贴近成本底线的价格水平。此举既能保障竞标入围资格，又能获取适度的利润盈余， 进而稳定长期的投资回报。", "报价": 0.0150
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 3 
+
+Scenario Information 
+
+> 药品名称：异烟肼片 企业名称：C企业 报价区间 [Ci, Pmax]：[0.0300, 0.2300] 报价空间 (Pmax-Ci)：0.2000 报价：0.0450
+
+Response 
+
+> "理由": "前期0.0350元的报价已跌破成本线，导致利润率不可持续且呈现负面趋势。作为中等成本企业，当前的首要任务是在确保中 选的前提下恢复财务可行性。以0.2300元的最高有效申报价及当前的竞争格局为基准，拟将报价策略性上调至0.0450元。此项“价格 修复”策略旨在实现中选概率与利润空间最优化之间的平衡。", "报价": 0.0450
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 4 
+
+Scenario Information 
+
+> 药品名称：吲达帕胺片 企业名称：D企业 报价区间 [Ci, Pmax]：[0.0118, 0.1100] 报价空间 (Pmax-Ci)：0.0982 报价：0.0250
+
+Figure 9: Cases of LLM Responses from Low-cost Firms in Chinese CASE 2 
+
+Scenario Information Pharmaceutical Product: Drug B. 
+
+Firm Name: Firm B. 
+
+Bidding Range [Ci, Pmax]: [221.7060, 2400.0000] 
+
+Bidding Headroom (Pmax-Ci): 2178.2940 
+
+Bidding Price: 2320.0000 
+
+Response "reasoning" : "The incumbent quotation of 2,350.00 CNY is positioned at the higher decile of the pricing spectrum; al-though it exceeds the market mean, it remains within the permissible threshold. Given the firm’s significant cost-leader-ship advantage (unit cost at 221.71 CNY) and its current tier-three winning status, a marginal downward adjustment is recommended. This strategy aims to solidify market share and optimize profit margins. By balancing competitive intensity with selection stability, a moderate price reduction will enhance the firm's strategic positioning.", 
+
+"bid_price" : 2320.0 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 2 
+
+Scenario Information Pharmaceutical Product: Abiraterone Acetate Tablets 
+
+Firm Name: Firm F. 
+
+Bidding Range [Ci, Pmax]: [9.0348, 101.6700] 
+
+Bidding Headroom (Pmax-Ci): 92.6352 
+
+Bidding Price: 53.6000 
+
+Response "reasoning" : "As a dominant cost-leader, the firm has achieved successive price increments with its current quotation of 52.80 CNY while maintaining the top ranking, leading to a steady appreciation in profitability. Despite substantial pricing elasticity afforded by the low marginal cost (9.03 CNY), a strategic marginal markup is advised. Considering market price sensitivity and the prevailing competitive landscape, this adjustment will further bolster net margins without compromis-
+
+Figure 10: Cases of LLM Responses from High-cost Firms 23 CASE 2 
+
+Scenario Information 
+
+药品名称 ：B药品 企业名称：B企业 报价区间 [Ci, Pmax]：[221.7060, 2400.0000] 报价空间 (Pmax-Ci)：2178.2940 报价：2320.0000 
+
+Response 
+
+"理由": "当前2,350.00元的报价处于价格区间的较高分位；尽管高于市场均价，但仍处于许可阈值之内。鉴于本企业具备显著的成本 领先优势（单位成本为221.71元）及其当前位于第三梯队的中选状态，建议进行边际向下调整。该策略旨在巩固市场份额并优化利 润空间。通过平衡竞争强度与中选稳定性，适度的降价将提升本企业的战略地位。", "报价": 2320.0 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 2 
+
+Scenario Information 
+
+药品名称：醋酸阿比特龙片 企业名称：F企业 报价区间 [Ci, Pmax]：[9.0348, 101.6700] 报价空间 (Pmax-Ci)：92.6352 报价：53.6000 
+
+Response 
+
+"理由": "作为占据主导地位的成本领先者，本企业在维持52.80元当前报价及排名榜首的同时，已实现连续的价格递增，促使盈利能 力稳步提升。尽管低廉的边际成本（9.03元）赋予了极大的定价弹性，仍建议采取战略性的边际加价。综合考量市场价格敏感度及 当前的竞争格局，此项调整将在不损害竞标成功概率的前提下，进一步增厚净利润率。在当前履约率达到58%的情况下，其核心目 标在于优化盈利表现，同时维持绝对的领先竞争优势。", "报价": 53.6 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 3 
+
+Scenario Information 
+
+药品名称：安立生坦片 企业名称：G企业 报价区间 [Ci, Pmax]：[12.7724, 80.0000] 报价空间 (Pmax-Ci)：67.2276 报价：72.0000 
+
+Response 
+
+"理由": "当前76.80元的报价导致排名降至第四位，已跌出中选阈值。为提升竞争可行性，降价势在必行。鉴于边际成本为12.7724元 ，目前仍存有充足的缓冲空间以实施战术性折价。为确保跻身前两名的中选梯队，现提出适度让利的方案。该策略意在攫取市场份 额，同时缓解利润空间的过度损耗。", "报价": 72.0 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CASE 4 
+
+Scenario Information 
+
+药品名称：他达拉非片 企业名称：H企业 报价区间 [Ci, Pmax]：[17.4441, 90.7500] 报价空间 (Pmax-Ci)：73.3059 报价：65.5000 
+
+Response Figure 11: Cases of LLM Responses from High-cost Firms in Chinese 24 System Prompt You are an expert evaluator assessing AI-generated responses for reasoning quality and contextual consistency.Evaluate the following AI agent response based on 2 criteria. Score each on a 1-5 scale using the rubrics below. 
+
+1. Logical Reasoning (1-5) 
+
+Assess the internal coherence of the reasoning chain: whether the stated rationale is logically structured and the conclu-sion follows from the arguments presented. - **5**: Reasoning is coherent with a clear logical chain; the stated rationale directly supports the conclusion. - **4**: Reasoning is mostly coherent with minor gaps; the rationale generally supports the conclusion. - **3**: Reasoning shows basic strategic thinking but has some logical gaps or imprecise arguments. - **2**: Reasoning has notable logical contradictions or unsupported jumps between arguments and conclusion. - **1**: Reasoning is incoherent or completely disconnected from the stated conclusion. 
+
+2. Contextual Consistency (1-5) 
+
+Assess whether the response accurately references and integrates the factual information (numbers, constraints, states) provided in the input, without fabricating data. - **5**: All referenced facts and constraints from the input are accurately used; no hallucinated information. - **4**: Most contextual information is accurately used with minor omissions or imprecisions. - **3**: Some contextual information is used correctly but with notable omissions or one minor factual error. - **2**: Multiple contextual facts are misused, ignored, or fabricated. - **1**: The response largely ignores or contradicts the provided context. 
+
+Steps 
+
+1. Read the <INPUT_PROMPT> and <OUTPUT_RESPONSE>. 2. For each criterion, write a brief critique explaining the score. 3. Assign an integer score (1-5) for each criterion. ---
+
+<INPUT_PROMPT> 
+
+{input_prompt} 
+
+<OUTPUT_RESPONSE> 
+
+{output_response} ---Output strictly in this JSON format (no markdown, no extra text): {{"evaluation": {{"logical_reasoning": {{ "critique": "<analysis>", "score": <int 1-5>}}, "contextual_consistency": {{ "critique": "<analysis>", "score": <int 1-5>}} }} }} Figure 12: Prompt template for the LLM-as-a-judge evaluation. It outlines the scoring criteria for Logical Reasoning and Contextual Consistency, along with the required JSON output structure. 25 System Prompt 您是一位专家级评估员，负责评估人工智能生成内容的推理质量与上下文一致性。请基于两项评估基准对以 下 AI 智能体（Agent）的回复进行评测。请参照下述量规（Rubrics），按1至5分的量表对每项指标进行打分。 1. 逻辑推理 (1-5分) 评估推理链条的内部连贯性：陈述的理论依据是否具备严密的逻辑结构，且结论是否由所提出的论证自然推导得出。 * **5分**：推理过程连贯且具备清晰的逻辑链条；所陈述的理论依据直接支撑其结论。 * **4分**：推理过程总体连贯，仅存在微小瑕疵；理论依据基本支撑其结论。 * **3分**：推理过程展现出基础的战略性思维，但存在部分逻辑断层或论证不够严谨。 * **2分**：推理过程存在显著的逻辑矛盾，或在论点与结论之间存在缺乏支撑的跳跃性推断。 * **1分**：推理过程毫无连贯性，或与所陈述的结论完全脱节。 2. 上下文一致性 (1-5分) 评估回复是否准确引用并整合了输入中提供的客观事实信息（如数值、约束条件、状态等），且未凭空捏造数据。 * **5分**：输入中的所有参引事实与约束条件均得到准确运用；不存在任何幻觉（伪造）信息。 * **4分**：绝大多数上下文信息得到准确运用，仅存在微小遗漏或不够精确之处。 * **3分**：部分上下文信息被正确运用，但存在显著遗漏或一处微小的事实性错误。 * **2分**：多项上下文事实信息被误用、忽略或捏造。 * **1分**：回复在很大程度上忽略了所提供的上下文，或与其存在矛盾。 评估步骤 1. 审阅 <INPUT_PROMPT> 与 <OUTPUT_RESPONSE>。 2. 针对每项评估基准，撰写简要的评语以阐明评分依据。 3. 为每项评估基准赋予一个整数评分（1-5分）。 ---<INPUT_PROMPT> {input_prompt} <OUTPUT_RESPONSE> {output_response} ---请严格遵照以下 JSON 格式输出（禁止使用 Markdown 格式或附加任何额外文本）： {{"evaluation": {{"logical_reasoning": {{ "critique": "<分析评价>", "score": <1-5的整数>}}, "contextual_consistency": {{ "critique": "<分析评价>", "score": <1-5的整数>}} }} }} Figure 13: Prompt template for the LLM-as-a-judge evaluation in Chinese. It outlines the scoring criteria for Logical Reasoning and Contextual Consistency, along with the required JSON output structure. 26
