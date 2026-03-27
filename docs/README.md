@@ -6,73 +6,70 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-03-26
-- 运行时间：2026-03-26 20:21:43 UTC
+- 最新运行日期：2026-03-27
+- 运行时间：2026-03-27 19:44:07 UTC
 - 运行状态：成功
-- 本次总论文数：17
+- 本次总论文数：16
 - 精读区：6
-- 速读区：11
+- 速读区：10
 
 ### 今日简报（AI）
-今日精选 17 篇论文见证 LLM 智能体从“执行助手”向“自主科学家”的身份跨越。
-重点推荐 AgentHER 的轨迹重标技术与 LLM 自主发现 RL 算法的研究，揭示了智能体自我进化的新范式。
-建议优先研读 LLM 与强化学习结合的精读论文，掌握构建高自主性数字智能体的核心路径。
-- 详情：[/202603/26/README](/202603/26/README)
+今日聚焦 16 篇 AI 论文，深度解析了视觉-语言-动作（VLA）模型与策略-提示词联合优化的最新突破。
+重点推荐 9.0 分佳作，其提出的实用化世界模型为 VLA 强化学习注入新动力，而 P^2O 框架则揭示了 Prompt 与策略协同进化的巨大潜力。
+建议普通读者优先关注具身智能的决策逻辑，并探索如何
+- 详情：[/202603/27/README](/202603/27/README)
 
 ### 精读区论文标签
-1. [AgentHER: Hindsight Experience Replay for LLM Agent Trajectory Relabeling](/202603/26/2603.21357v1-agenther-hindsight-experience-replay-for-llm-agent-trajectory-relabeling)  
+1. [Towards Practical World Model-based Reinforcement Learning for Vision-Language-Action Models](/202603/27/2603.20607v1-towards-practical-world-model-based-reinforcement-learning-for-vision-language-action-models)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：将事后经验重放（HER）应用于大语言模型智能体的自然语言轨迹
-2. [From AI Assistant to AI Scientist: Autonomous Discovery of LLM-RL Algorithms with LLM Agents](/202603/26/2603.23951v1-from-ai-assistant-to-ai-scientist-autonomous-discovery-of-llm-rl-algorithms-with-llm-agents)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：利用LLM智能体自动发现LLM-RL算法
-3. [Large Language Model Guided Incentive Aware Reward Design for Cooperative Multi-Agent Reinforcement Learning](/202603/26/2603.24324v1-large-language-model-guided-incentive-aware-reward-design-for-cooperative-multi-agent-reinforcement-learning)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：LLM引导的多智能体强化学习奖励设计
-4. [LATS: Large Language Model Assisted Teacher-Student Framework for Multi-Agent Reinforcement Learning in Traffic Signal Control](/202603/26/2603.24361v1-lats-large-language-model-assisted-teacher-student-framework-for-multi-agent-reinforcement-learning-in-traffic-signal-control)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：LLM辅助的多智能体强化学习师生框架
-5. [CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation](/202603/26/2603.22435v1-cap-x-a-framework-for-benchmarking-and-improving-coding-agents-for-robot-manipulation)  
+   evidence：使用基于模型的强化学习对视觉-语言-动作模型进行微调
+2. [P^2O: Joint Policy and Prompt Optimization](/202603/27/2603.21877v2-p2o-joint-policy-and-prompt-optimization)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：用于研究机器人操作中代码即策略智能体的框架
-6. [DUPLEX: Agentic Dual-System Planning via LLM-Driven Information Extraction](/202603/26/2603.23909v1-duplex-agentic-dual-system-planning-via-llm-driven-information-extraction)  
+   evidence：在LLM强化学习中协同提示词优化与策略优化
+3. [CoMaTrack: Competitive Multi-Agent Game-Theoretic Tracking with Vision-Language-Action Models](/202603/27/2603.22846v1-comatrack-competitive-multi-agent-game-theoretic-tracking-with-vision-language-action-models)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：结合 LLM 与符号规划的智能体双系统架构
+   evidence：具身视觉跟踪的多智能体强化学习框架
+4. [Polaris: A Gödel Agent Framework for Small Language Models through Experience-Abstracted Policy Repair](/202603/27/2603.23129v1-polaris-a-gdel-agent-framework-for-small-language-models-through-experience-abstracted-policy-repair)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：小语言模型智能体递归自我改进的框架
+5. [Self-Evolving Multi-Agent Framework for Efficient Decision Making in Real-Time Strategy Scenarios](/202603/27/2603.23875v1-self-evolving-multi-agent-framework-for-efficient-decision-making-in-real-time-strategy-scenarios)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：用于RTS场景中LLM决策的多智能体框架
+6. [Experiential Reflective Learning for Self-Improving LLM Agents](/202603/27/2603.24639v1-experiential-reflective-learning-for-self-improving-llm-agents)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：通过经验学习实现自我改进的LLM智能体
 
 ### 速读区论文标签
-1. [From Pixels to Digital Agents: An Empirical Study on the Taxonomy and Technological Trends of Reinforcement Learning Environments](/202603/26/2603.23964v1-from-pixels-to-digital-agents-an-empirical-study-on-the-taxonomy-and-technological-trends-of-reinforcement-learning-environments)  
-   标签：评分：8.0/10、query:ag-rl
-   evidence：强化学习环境向语言驱动智能体演进的实证研究
-2. [Learning When to Act: Interval-Aware Reinforcement Learning with Predictive Temporal Structure](/202603/26/2603.22384v1-learning-when-to-act-interval-aware-reinforcement-learning-with-predictive-temporal-structure)  
+1. [Robust Beam Codebooks for mmWave/THz Systems: Toward a Stochastic RL Approach](/202603/27/2603.19930v1-robust-beam-codebooks-for-mmwavethz-systems-toward-a-stochastic-rl-approach)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：使用强化学习的自主智能体自适应时间控制系统
-3. [A Theory of LLM Information Susceptibility](/202603/26/2603.23626v1-a-theory-of-llm-information-susceptibility)  
+   evidence：用于自适应波束码本设计的多智能体强化学习框架
+2. [Profit is the Red Team: Stress-Testing Agents in Strategic Economic Interactions](/202603/27/2603.20925v1-profit-is-the-red-team-stress-testing-agents-in-strategic-economic-interactions)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：LLM作为智能体系统中的优化模块
-4. [Dual-Gated Epistemic Time-Dilation: Autonomous Compute Modulation in Asynchronous MARL](/202603/26/2603.23722v1-dual-gated-epistemic-time-dilation-autonomous-compute-modulation-in-asynchronous-marl)  
+   evidence：使用通过标量结果反馈训练的学习型对手对智能体系统进行压力测试
+3. [Decoupling Exploration and Policy Optimization: Uncertainty Guided Tree Search for Hard Exploration](/202603/27/2603.22273v1-decoupling-exploration-and-policy-optimization-uncertainty-guided-tree-search-for-hard-exploration)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：多智能体强化学习中的自主计算调节
-5. [ProcureGym: A Multi-Agent Markov Game Framework for Modeling National Volume-based Drug Procurement](/202603/26/2603.23880v1-procuregym-a-multi-agent-markov-game-framework-for-modeling-national-volume-based-drug-procurement)  
+   evidence：将探索与强化学习策略优化分离
+4. [Learning When to Act: Interval-Aware Reinforcement Learning with Predictive Temporal Structure](/202603/27/2603.22384v2-learning-when-to-act-interval-aware-reinforcement-learning-with-predictive-temporal-structure)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：在多智能体模拟平台中评估RL和LLM智能体
-6. [ELITE: Experiential Learning and Intent-Aware Transfer for Self-improving Embodied Agents](/202603/26/2603.24018v1-elite-experiential-learning-and-intent-aware-transfer-for-self-improving-embodied-agents)  
+   evidence：强化学习智能体的自适应时间控制系统
+5. [C-STEP: Continuous Space-Time Empowerment for Physics-informed Safe Reinforcement Learning of Mobile Agents](/202603/27/2603.24241v1-c-step-continuous-space-time-empowerment-for-physics-informed-safe-reinforcement-learning-of-mobile-agents)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：自我改进具身智能体的经验学习
-7. [Decentralized End-to-End Multi-AAV Pursuit Using Predictive Spatio-Temporal Observation via Deep Reinforcement Learning](/202603/26/2603.24238v1-decentralized-end-to-end-multi-aav-pursuit-using-predictive-spatio-temporal-observation-via-deep-reinforcement-learning)  
+   evidence：移动智能体的安全强化学习
+6. [Trace2Skill: Distill Trajectory-Local Lessons into Transferable Agent Skills](/202603/27/2603.25158v1-trace2skill-distill-trajectory-local-lessons-into-transferable-agent-skills)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：用于自主空中集群的分散式多智能体强化学习
-8. [Maximum-Entropy Exploration with Future State-Action Visitation Measures](/202603/26/2603.18965v1-maximum-entropy-exploration-with-future-state-action-visitation-measures)  
+   evidence：利用子智能体为LLM智能体提取可迁移技能
+7. [A Framework for Formalizing LLM Agent Security](/202603/27/2603.19469v1-a-framework-for-formalizing-llm-agent-security)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：用于智能体探索的最大熵强化学习
-9. [MARLIN: Multi-Agent Reinforcement Learning for Incremental DAG Discovery](/202603/26/2603.20295v1-marlin-multi-agent-reinforcement-learning-for-incremental-dag-discovery)  
+   evidence：大语言模型智能体安全框架
+8. [Fault-Tolerant Design and Multi-Objective Model Checking for Real-Time Deep Reinforcement Learning Systems](/202603/27/2603.23113v1-fault-tolerant-design-and-multi-objective-model-checking-for-real-time-deep-reinforcement-learning-systems)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：用于DAG发现的多智能体强化学习
-10. [Partial Attention in Deep Reinforcement Learning for Safe Multi-Agent Control](/202603/26/2603.21810v1-partial-attention-in-deep-reinforcement-learning-for-safe-multi-agent-control)  
+   evidence：实时深度强化学习系统切换的正式框架
+9. [BXRL: Behavior-Explainable Reinforcement Learning](/202603/27/2603.23738v1-bxrl-behavior-explainable-reinforcement-learning)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：深度强化学习中用于多智能体控制的注意力机制
-11. [TREX: Trajectory Explanations for Multi-Objective Reinforcement Learning](/202603/26/2603.21988v1-trex-trajectory-explanations-for-multi-objective-reinforcement-learning)  
+   evidence：针对智能体行为模式的可解释强化学习
+10. [Efficient Benchmarking of AI Agents](/202603/27/2603.23749v1-efficient-benchmarking-of-ai-agents)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：可解释的多目标强化学习
+   evidence：在不同脚手架和模型配置下对AI智能体进行基准测试
 
 
 <div class="dpr-home-promo-card">
