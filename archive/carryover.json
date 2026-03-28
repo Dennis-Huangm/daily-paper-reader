@@ -1,6 +1,206 @@
 {
-  "generated_at": "2026-03-27T19:41:37.537976+00:00",
-  "updated_date": "20260327",
+  "generated_at": "2026-03-28T19:58:07.584384+00:00",
+  "updated_date": "20260328",
   "carryover_days": 9,
-  "items": []
+  "items": [
+    {
+      "id": "2603.24738v1",
+      "title": "Decentralized Task Scheduling in Distributed Systems: A Deep Reinforcement Learning Approach",
+      "abstract": "Efficient task scheduling in large-scale distributed systems presents significant challenges due to dynamic workloads, heterogeneous resources, and competing quality-of-service requirements. Traditional centralized approaches face scalability limitations and single points of failure, while classical heuristics lack adaptability to changing conditions. This paper proposes a decentralized multi-agent deep reinforcement learning (DRL-MADRL) framework for task scheduling in heterogeneous distributed systems. We formulate the problem as a Decentralized Partially Observable Markov Decision Process (Dec-POMDP) and develop a lightweight actor-critic architecture implemented using only NumPy, enabling deployment on resource-constrained edge devices without heavyweight machine learning frameworks. Using workload characteristics derived from the publicly available Google Cluster Trace dataset, we evaluate our approach on a 100-node heterogeneous system processing 1,000 tasks per episode over 30 experimental runs. Experimental results demonstrate 15.6% improvement in average task completion time (30.8s vs 36.5s for random baseline), 15.2% energy efficiency gain (745.2 kWh vs 878.3 kWh), and 82.3% SLA satisfaction compared to 75.5% for baselines, with all improvements statistically significant (p < 0.001). The lightweight implementation requires only NumPy, Matplotlib, and SciPy. Complete source code and experimental data are provided for full reproducibility at https://github.com/danielbenniah/marl-distributed-scheduling.",
+      "authors": [
+        "Daniel Benniah John"
+      ],
+      "primary_category": "cs.DC",
+      "categories": [
+        "cs.DC",
+        "cs.AI",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-03-25T18:59:45+00:00",
+      "link": "https://arxiv.org/pdf/2603.24738v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "decentralized multi-agent deep reinforcement learning framework",
+      "llm_evidence_cn": "去中心化多智能体深度强化学习框架",
+      "llm_evidence": "去中心化多智能体深度强化学习框架",
+      "canonical_evidence": "去中心化多智能体深度强化学习框架",
+      "llm_tldr_en": "Presents a DRL-MADRL framework for decentralized task scheduling in distributed systems.",
+      "llm_tldr_cn": "提出一种用于分布式系统去中心化任务调度的多智能体深度强化学习框架。",
+      "llm_tldr": "提出一种用于分布式系统去中心化任务调度的多智能体深度强化学习框架。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "frameworks for building agentic RL systems",
+      "matched_requirement_id": "req-6",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.24738v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.25241v1",
+      "title": "Offline Decision Transformers for Neural Combinatorial Optimization: Surpassing Heuristics on the Traveling Salesman Problem",
+      "abstract": "Combinatorial optimization problems like the Traveling Salesman Problem are critical in industry yet NP-hard. Neural Combinatorial Optimization has shown promise, but its reliance on online reinforcement learning (RL) hampers deployment and underutilizes decades of algorithmic knowledge. We address these limitations by applying the offline RL framework, Decision Transformer, to learn superior strategies directly from datasets of heuristic solutions; it aims to not only to imitate but to synthesize and outperform them. Concretely, we (i) integrate a Pointer Network to handle the instance-dependent, variable action space of node selection, and (ii) employ expectile regression for optimistic conditioning of Return-to-Go, which is crucial for instances with widely varying optimal values. Experiments show that our method consistently produces higher-quality tours than the four classical heuristics it is trained on, demonstrating the potential of offline RL to unlock and exceed the performance embedded in existing domain knowledge.",
+      "authors": [
+        "Hironori Ohigashi",
+        "Shinichiro Hamada"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-26T09:47:22+00:00",
+      "link": "https://arxiv.org/pdf/2603.25241v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "offline RL framework using Decision Transformers for optimization",
+      "llm_evidence_cn": "使用决策Transformer的离线强化学习框架",
+      "llm_evidence": "使用决策Transformer的离线强化学习框架",
+      "canonical_evidence": "使用决策Transformer的离线强化学习框架",
+      "llm_tldr_en": "Applies Decision Transformers to combinatorial optimization, surpassing heuristics via offline RL.",
+      "llm_tldr_cn": "将决策Transformer应用于组合优化，通过离线强化学习超越启发式算法。",
+      "llm_tldr": "将决策Transformer应用于组合优化，通过离线强化学习超越启发式算法。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "architectures for agentic decision making using RL",
+      "matched_requirement_id": "req-7",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.25241v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.25111v1",
+      "title": "SEVerA: Verified Synthesis of Self-Evolving Agents",
+      "abstract": "Recent advances have shown the effectiveness of self-evolving LLM agents on tasks such as program repair and scientific discovery. In this paradigm, a planner LLM synthesizes an agent program that invokes parametric models, including LLMs, which are then tuned per task to improve performance. However, existing self-evolving agent frameworks provide no formal guarantees of safety or correctness. Because such programs are often executed autonomously on unseen inputs, this lack of guarantees raises reliability and security concerns. We formulate agentic code generation as a constrained learning problem, combining hard formal specifications with soft objectives capturing task utility. We introduce Formally Guarded Generative Models (FGGM), which allow the planner LLM to specify a formal output contract for each generative model call using first-order logic. Each FGGM call wraps the underlying model in a rejection sampler with a verified fallback, ensuring every returned output satisfies the contract for any input and parameter setting. Building on FGGM, we present SEVerA (Self-Evolving Verified Agents), a three-stage framework: Search synthesizes candidate parametric programs containing FGGM calls; Verification proves correctness with respect to hard constraints for all parameter values, reducing the problem to unconstrained learning; and Learning applies scalable gradient-based optimization, including GRPO-style fine-tuning, to improve the soft objective while preserving correctness. We evaluate SEVerA on Dafny program verification, symbolic math synthesis, and policy-compliant agentic tool use ($τ^2$-bench). Across tasks, SEVerA achieves zero constraint violations while improving performance over unconstrained and SOTA baselines, showing that formal behavioral constraints not only guarantee correctness but also steer synthesis toward higher-quality agents.",
+      "authors": [
+        "Debangshu Banerjee",
+        "Changming Xu",
+        "Gagandeep Singh"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.PL",
+        "cs.SE"
+      ],
+      "published": "2026-03-26T07:32:20+00:00",
+      "link": "https://arxiv.org/pdf/2603.25111v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "framework for verified synthesis of self-evolving agents",
+      "llm_evidence_cn": "自进化代理的验证合成框架",
+      "llm_evidence": "自进化代理的验证合成框架",
+      "canonical_evidence": "自进化代理的验证合成框架",
+      "llm_tldr_en": "Proposes SEVerA to provide formal safety and correctness guarantees for self-evolving LLM agent programs.",
+      "llm_tldr_cn": "提出SEVerA框架，为自进化LLM代理程序的安全性和正确性提供形式化保证。",
+      "llm_tldr": "提出SEVerA框架，为自进化LLM代理程序的安全性和正确性提供形式化保证。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "frameworks for building agentic RL systems",
+      "matched_requirement_id": "req-6",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.25111v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.25184v1",
+      "title": "Train at Moving Edge: Online-Verified Prompt Selection for Efficient RL Training of Large Reasoning Model",
+      "abstract": "Reinforcement learning (RL) has become essential for post-training large language models (LLMs) in reasoning tasks. While scaling rollouts can stabilize training and enhance performance, the computational overhead is a critical issue. In algorithms like GRPO, multiple rollouts per prompt incur prohibitive costs, as a large portion of prompts provide negligible gradients and are thus of low utility. To address this problem, we investigate how to select high-utility prompts before the rollout phase. Our experimental analysis reveals that sample utility is non-uniform and evolving: the strongest learning signals concentrate at the ``learning edge\", the intersection of intermediate difficulty and high uncertainty, which shifts as training proceeds. Motivated by this, we propose HIVE (History-Informed and online-VErified prompt selection), a dual-stage framework for data-efficient RL. HIVE utilizes historical reward trajectories for coarse selection and employs prompt entropy as a real-time proxy to prune instances with stale utility. By evaluating HIVE across multiple math reasoning benchmarks and models, we show that HIVE yields significant rollout efficiency without compromising performance.",
+      "authors": [
+        "Jiahao Wu",
+        "Ning Lu",
+        "Shengcai Liu",
+        "Kun Wang",
+        "Yanting Yang",
+        "Li Qing",
+        "Ke Tang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-26T08:52:35+00:00",
+      "link": "https://arxiv.org/pdf/2603.25184v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "efficient RL training of large reasoning models using prompt selection",
+      "llm_evidence_cn": "使用提示词选择对大型推理模型进行高效强化学习训练",
+      "llm_evidence": "使用提示词选择对大型推理模型进行高效强化学习训练",
+      "canonical_evidence": "使用提示词选择对大型推理模型进行高效强化学习训练",
+      "llm_tldr_en": "Optimizes RL training for large reasoning models by selecting high-utility prompts to reduce computational overhead.",
+      "llm_tldr_cn": "通过选择高实用性提示来优化大型推理模型的强化学习训练，减少计算开销。",
+      "llm_tldr": "通过选择高实用性提示来优化大型推理模型的强化学习训练，减少计算开销。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "large language model based agents in reinforcement learning",
+      "matched_requirement_id": "req-2",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.25184v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.24634v1",
+      "title": "Dual-Graph Multi-Agent Reinforcement Learning for Handover Optimization",
+      "abstract": "HandOver (HO) control in cellular networks is governed by a set of HO control parameters that are traditionally configured through rule-based heuristics. A key parameter for HO optimization is the Cell Individual Offset (CIO), defined for each pair of neighboring cells and used to bias HO triggering decisions. At network scale, tuning CIOs becomes a tightly coupled problem: small changes can redirect mobility flows across multiple neighbors, and static rules often degrade under non-stationary traffic and mobility. We exploit the pairwise structure of CIOs by formulating HO optimization as a Decentralized Partially Observable Markov Decision Process (Dec-POMDP) on the network's dual graph. In this representation, each agent controls a neighbor-pair CIO and observes Key Performance Indicators (KPIs) aggregated over its local dual-graph neighborhood, enabling scalable decentralized decisions while preserving graph locality. Building on this formulation, we propose TD3-D-MA, a discrete Multi-Agent Reinforcement Learning (MARL) variant of the TD3 algorithm with a shared-parameter Graph Neural Network (GNN) actor operating on the dual graph and region-wise double critics for training, improving credit assignment in dense deployments. We evaluate TD3-D-MA in an ns-3 system-level simulator configured with real-world network operator parameters across heterogeneous traffic regimes and network topologies. Results show that TD3-D-MA improves network throughput over standard HO heuristics and centralized RL baselines, and generalizes robustly under topology and traffic shifts.",
+      "authors": [
+        "Matteo Salvatori",
+        "Filippo Vannella",
+        "Sebastian Macaluso",
+        "Stylianos E. Trevlakis",
+        "Carlos Segura Perales",
+        "José Suarez-Varela",
+        "Alexandros-Apostolos A. Boulogeorgos",
+        "Ioannis Arapakis"
+      ],
+      "primary_category": "cs.NI",
+      "categories": [
+        "cs.NI",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-03-25T08:48:48+00:00",
+      "link": "https://arxiv.org/pdf/2603.24634v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multi-agent reinforcement learning for network optimization",
+      "llm_evidence_cn": "用于网络优化的多智能体强化学习",
+      "llm_evidence": "用于网络优化的多智能体强化学习",
+      "canonical_evidence": "用于网络优化的多智能体强化学习",
+      "llm_tldr_en": "Applies multi-agent reinforcement learning to optimize handover parameters in cellular networks.",
+      "llm_tldr_cn": "应用多智能体强化学习来优化蜂窝网络中的切换参数。",
+      "llm_tldr": "应用多智能体强化学习来优化蜂窝网络中的切换参数。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "agentic reinforcement learning research papers",
+      "matched_requirement_id": "req-1",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.24634v1",
+      "carry_days": 1
+    }
+  ]
 }

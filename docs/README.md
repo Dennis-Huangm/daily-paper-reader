@@ -6,70 +6,73 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-03-27
-- 运行时间：2026-03-27 19:44:07 UTC
+- 最新运行日期：2026-03-28
+- 运行时间：2026-03-28 20:00:17 UTC
 - 运行状态：成功
-- 本次总论文数：16
+- 本次总论文数：17
 - 精读区：6
-- 速读区：10
+- 速读区：11
 
 ### 今日简报（AI）
-今日聚焦 16 篇 AI 论文，深度解析了视觉-语言-动作（VLA）模型与策略-提示词联合优化的最新突破。
-重点推荐 9.0 分佳作，其提出的实用化世界模型为 VLA 强化学习注入新动力，而 P^2O 框架则揭示了 Prompt 与策略协同进化的巨大潜力。
-建议普通读者优先关注具身智能的决策逻辑，并探索如何
-- 详情：[/202603/27/README](/202603/27/README)
+今日深度解析 17 篇 AI 前沿论文，重点攻克端到端视频智能体与多车协同驾驶的强化学习难题。
+核心突破在于 EVA 框架对视频任务效率的显著提升，以及 COIN 系统在自动驾驶中实现的交互感知协作。
+建议读者关注大模型与多智能体技术在低空网络及智慧物流等复杂实景中的落地潜力。
+- 详情：[/202603/28/README](/202603/28/README)
 
 ### 精读区论文标签
-1. [Towards Practical World Model-based Reinforcement Learning for Vision-Language-Action Models](/202603/27/2603.20607v1-towards-practical-world-model-based-reinforcement-learning-for-vision-language-action-models)  
+1. [EVA: Efficient Reinforcement Learning for End-to-End Video Agent](/202603/28/2603.22918v1-eva-efficient-reinforcement-learning-for-end-to-end-video-agent)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：使用基于模型的强化学习对视觉-语言-动作模型进行微调
-2. [P^2O: Joint Policy and Prompt Optimization](/202603/27/2603.21877v2-p2o-joint-policy-and-prompt-optimization)  
+   evidence：端到端视频代理的高效强化学习框架
+2. [COIN: Collaborative Interaction-Aware Multi-Agent Reinforcement Learning for Self-Driving Systems](/202603/28/2603.24931v1-coin-collaborative-interaction-aware-multi-agent-reinforcement-learning-for-self-driving-systems)  
+   标签：评分：9.0/10、query:ag-rl
+   evidence：用于自动驾驶系统的多智能体强化学习框架
+3. [Hyperagents](/202603/28/2603.19461v1-hyperagents)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：在LLM强化学习中协同提示词优化与策略优化
-3. [CoMaTrack: Competitive Multi-Agent Game-Theoretic Tracking with Vision-Language-Action Models](/202603/27/2603.22846v1-comatrack-competitive-multi-agent-game-theoretic-tracking-with-vision-language-action-models)  
+   evidence：集成任务代理和元代理的自引用代理架构
+4. [Teaching an Agent to Sketch One Part at a Time](/202603/28/2603.19500v1-teaching-an-agent-to-sketch-one-part-at-a-time)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：具身视觉跟踪的多智能体强化学习框架
-4. [Polaris: A Gödel Agent Framework for Small Language Models through Experience-Abstracted Policy Repair](/202603/27/2603.23129v1-polaris-a-gdel-agent-framework-for-small-language-models-through-experience-abstracted-policy-repair)  
+   evidence：使用过程奖励强化学习的多模态语言模型智能体
+5. [Bounded Coupled AI Learning Dynamics in Tri-Hierarchical Drone Swarms](/202603/28/2603.20333v1-bounded-coupled-ai-learning-dynamics-in-tri-hierarchical-drone-swarms)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：小语言模型智能体递归自我改进的框架
-5. [Self-Evolving Multi-Agent Framework for Efficient Decision Making in Real-Time Strategy Scenarios](/202603/27/2603.23875v1-self-evolving-multi-agent-framework-for-efficient-decision-making-in-real-time-strategy-scenarios)  
+   evidence：用于战术小组协调的多智能体强化学习
+6. [WirelessBench: A Tolerance-Aware LLM Agent Benchmark for Wireless Network Intelligence](/202603/28/2603.21251v1-wirelessbench-a-tolerance-aware-llm-agent-benchmark-for-wireless-network-intelligence)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：用于RTS场景中LLM决策的多智能体框架
-6. [Experiential Reflective Learning for Self-Improving LLM Agents](/202603/27/2603.24639v1-experiential-reflective-learning-for-self-improving-llm-agents)  
-   标签：评分：8.0/10、query:ag-rl
-   evidence：通过经验学习实现自我改进的LLM智能体
+   evidence：针对具有多步决策能力的LLM无线智能体基准测试
 
 ### 速读区论文标签
-1. [Robust Beam Codebooks for mmWave/THz Systems: Toward a Stochastic RL Approach](/202603/27/2603.19930v1-robust-beam-codebooks-for-mmwavethz-systems-toward-a-stochastic-rl-approach)  
+1. [Aerial Agentic AI: Synergizing LLM and SLM for Low-Altitude Wireless Networks](/202603/28/2603.22866v1-aerial-agentic-ai-synergizing-llm-and-slm-for-low-altitude-wireless-networks)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：使用 LLM 的空中智能体 AI 分层框架
+2. [A Multimodal Framework for Human-Multi-Agent Interaction](/202603/28/2603.23271v1-a-multimodal-framework-for-human-multi-agent-interaction)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：自主认知智能体的LLM驱动规划
+3. [Learning-guided Prioritized Planning for Lifelong Multi-Agent Path Finding in Warehouse Automation](/202603/28/2603.23838v1-learning-guided-prioritized-planning-for-lifelong-multi-agent-path-finding-in-warehouse-automation)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：将强化学习与搜索规划集成的框架
+4. [HDPO: Hybrid Distillation Policy Optimization via Privileged Self-Distillation](/202603/28/2603.23871v1-hdpo-hybrid-distillation-policy-optimization-via-privileged-self-distillation)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：使用强化学习进行LLM推理任务训练
+5. [The Causal Impact of Tool Affordance on Safety Alignment in LLM Agents](/202603/28/2603.20320v1-the-causal-impact-of-tool-affordance-on-safety-alignment-in-llm-agents)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：用于自适应波束码本设计的多智能体强化学习框架
-2. [Profit is the Red Team: Stress-Testing Agents in Strategic Economic Interactions](/202603/27/2603.20925v1-profit-is-the-red-team-stress-testing-agents-in-strategic-economic-interactions)  
+   evidence：具有可执行工具的 LLM 智能体安全对齐
+6. [A transformer architecture alteration to incentivise externalised reasoning](/202603/28/2603.21376v1-a-transformer-architecture-alteration-to-incentivise-externalised-reasoning)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：使用通过标量结果反馈训练的学习型对手对智能体系统进行压力测试
-3. [Decoupling Exploration and Policy Optimization: Uncertainty Guided Tree Search for Hard Exploration](/202603/27/2603.22273v1-decoupling-exploration-and-policy-optimization-uncertainty-guided-tree-search-for-hard-exploration)  
+   evidence：使用强化学习激励外部化推理
+7. [A transformer architecture alteration to incentivise externalised reasoning](/202603/28/2603.21376v2-a-transformer-architecture-alteration-to-incentivise-externalised-reasoning)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：将探索与强化学习策略优化分离
-4. [Learning When to Act: Interval-Aware Reinforcement Learning with Predictive Temporal Structure](/202603/27/2603.22384v2-learning-when-to-act-interval-aware-reinforcement-learning-with-predictive-temporal-structure)  
+   evidence：使用强化学习激励LLM架构中的推理
+8. [Proximal Policy Optimization in Path Space: A Schrödinger Bridge Perspective](/202603/28/2603.21621v1-proximal-policy-optimization-in-path-space-a-schrdinger-bridge-perspective)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：强化学习智能体的自适应时间控制系统
-5. [C-STEP: Continuous Space-Time Empowerment for Physics-informed Safe Reinforcement Learning of Mobile Agents](/202603/27/2603.24241v1-c-step-continuous-space-time-empowerment-for-physics-informed-safe-reinforcement-learning-of-mobile-agents)  
-   标签：评分：7.0/10、query:ag-rl
-   evidence：移动智能体的安全强化学习
-6. [Trace2Skill: Distill Trajectory-Local Lessons into Transferable Agent Skills](/202603/27/2603.25158v1-trace2skill-distill-trajectory-local-lessons-into-transferable-agent-skills)  
-   标签：评分：7.0/10、query:ag-rl
-   evidence：利用子智能体为LLM智能体提取可迁移技能
-7. [A Framework for Formalizing LLM Agent Security](/202603/27/2603.19469v1-a-framework-for-formalizing-llm-agent-security)  
+   evidence：在线强化学习的路径空间公式化方法
+9. [Memori: A Persistent Memory Layer for Efficient, Context-Aware LLM Agents](/202603/28/2603.19935v1-memori-a-persistent-memory-layer-for-efficient-context-aware-llm-agents)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：大语言模型智能体安全框架
-8. [Fault-Tolerant Design and Multi-Objective Model Checking for Real-Time Deep Reinforcement Learning Systems](/202603/27/2603.23113v1-fault-tolerant-design-and-multi-objective-model-checking-for-real-time-deep-reinforcement-learning-systems)  
+   evidence：自主LLM智能体的持久记忆层
+10. [Solver-Aided Verification of Policy Compliance in Tool-Augmented LLM Agents](/202603/28/2603.20449v1-solver-aided-verification-of-policy-compliance-in-tool-augmented-llm-agents)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：实时深度强化学习系统切换的正式框架
-9. [BXRL: Behavior-Explainable Reinforcement Learning](/202603/27/2603.23738v1-bxrl-behavior-explainable-reinforcement-learning)  
+   evidence：在工具增强型LLM智能体中强制执行策略合规性的框架
+11. [The Library Theorem: How External Organization Governs Agentic Reasoning Capacity](/202603/28/2603.21272v1-the-library-theorem-how-external-organization-governs-agentic-reasoning-capacity)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：针对智能体行为模式的可解释强化学习
-10. [Efficient Benchmarking of AI Agents](/202603/27/2603.23749v1-efficient-benchmarking-of-ai-agents)  
-   标签：评分：6.0/10、query:ag-rl
-   evidence：在不同脚手架和模型配置下对AI智能体进行基准测试
+   evidence：智能体推理与记忆的架构
 
 
 <div class="dpr-home-promo-card">
