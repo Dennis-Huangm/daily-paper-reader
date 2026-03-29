@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-03-28T19:58:07.584384+00:00",
-  "updated_date": "20260328",
+  "generated_at": "2026-03-29T19:53:51.389008+00:00",
+  "updated_date": "20260329",
   "carryover_days": 9,
   "items": [
     {
@@ -24,57 +24,21 @@
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "decentralized multi-agent deep reinforcement learning framework",
-      "llm_evidence_cn": "去中心化多智能体深度强化学习框架",
-      "llm_evidence": "去中心化多智能体深度强化学习框架",
-      "canonical_evidence": "去中心化多智能体深度强化学习框架",
-      "llm_tldr_en": "Presents a DRL-MADRL framework for decentralized task scheduling in distributed systems.",
-      "llm_tldr_cn": "提出一种用于分布式系统去中心化任务调度的多智能体深度强化学习框架。",
-      "llm_tldr": "提出一种用于分布式系统去中心化任务调度的多智能体深度强化学习框架。",
+      "llm_evidence_en": "multi-agent deep reinforcement learning framework",
+      "llm_evidence_cn": "多智能体深度强化学习框架",
+      "llm_evidence": "多智能体深度强化学习框架",
+      "canonical_evidence": "多智能体深度强化学习框架",
+      "llm_tldr_en": "Proposes a decentralized MADRL framework for task scheduling in distributed systems using Dec-POMDP.",
+      "llm_tldr_cn": "提出一种基于Dec-POMDP的去中心化多智能体深度强化学习框架，用于分布式系统任务调度。",
+      "llm_tldr": "提出一种基于Dec-POMDP的去中心化多智能体深度强化学习框架，用于分布式系统任务调度。",
       "llm_tags": [
         "query:ag-rl"
       ],
       "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "frameworks for building agentic RL systems",
-      "matched_requirement_id": "req-6",
+      "matched_query_text": "agentic reinforcement learning research papers",
+      "matched_requirement_id": "req-1",
       "selection_source": "carryover_cache",
       "paper_id": "2603.24738v1",
-      "carry_days": 1
-    },
-    {
-      "id": "2603.25241v1",
-      "title": "Offline Decision Transformers for Neural Combinatorial Optimization: Surpassing Heuristics on the Traveling Salesman Problem",
-      "abstract": "Combinatorial optimization problems like the Traveling Salesman Problem are critical in industry yet NP-hard. Neural Combinatorial Optimization has shown promise, but its reliance on online reinforcement learning (RL) hampers deployment and underutilizes decades of algorithmic knowledge. We address these limitations by applying the offline RL framework, Decision Transformer, to learn superior strategies directly from datasets of heuristic solutions; it aims to not only to imitate but to synthesize and outperform them. Concretely, we (i) integrate a Pointer Network to handle the instance-dependent, variable action space of node selection, and (ii) employ expectile regression for optimistic conditioning of Return-to-Go, which is crucial for instances with widely varying optimal values. Experiments show that our method consistently produces higher-quality tours than the four classical heuristics it is trained on, demonstrating the potential of offline RL to unlock and exceed the performance embedded in existing domain knowledge.",
-      "authors": [
-        "Hironori Ohigashi",
-        "Shinichiro Hamada"
-      ],
-      "primary_category": "cs.LG",
-      "categories": [
-        "cs.LG"
-      ],
-      "published": "2026-03-26T09:47:22+00:00",
-      "link": "https://arxiv.org/pdf/2603.25241v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "offline RL framework using Decision Transformers for optimization",
-      "llm_evidence_cn": "使用决策Transformer的离线强化学习框架",
-      "llm_evidence": "使用决策Transformer的离线强化学习框架",
-      "canonical_evidence": "使用决策Transformer的离线强化学习框架",
-      "llm_tldr_en": "Applies Decision Transformers to combinatorial optimization, surpassing heuristics via offline RL.",
-      "llm_tldr_cn": "将决策Transformer应用于组合优化，通过离线强化学习超越启发式算法。",
-      "llm_tldr": "将决策Transformer应用于组合优化，通过离线强化学习超越启发式算法。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "architectures for agentic decision making using RL",
-      "matched_requirement_id": "req-7",
-      "selection_source": "carryover_cache",
-      "paper_id": "2603.25241v1",
       "carry_days": 1
     },
     {
@@ -99,19 +63,19 @@
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "framework for verified synthesis of self-evolving agents",
-      "llm_evidence_cn": "自进化代理的验证合成框架",
-      "llm_evidence": "自进化代理的验证合成框架",
-      "canonical_evidence": "自进化代理的验证合成框架",
-      "llm_tldr_en": "Proposes SEVerA to provide formal safety and correctness guarantees for self-evolving LLM agent programs.",
-      "llm_tldr_cn": "提出SEVerA框架，为自进化LLM代理程序的安全性和正确性提供形式化保证。",
-      "llm_tldr": "提出SEVerA框架，为自进化LLM代理程序的安全性和正确性提供形式化保证。",
+      "llm_evidence_en": "Framework for verified synthesis and tuning of self-evolving LLM agents",
+      "llm_evidence_cn": "用于自我进化LLM代理的验证合成和调优的框架",
+      "llm_evidence": "用于自我进化LLM代理的验证合成和调优的框架",
+      "canonical_evidence": "用于自我进化LLM代理的验证合成和调优的框架",
+      "llm_tldr_en": "Presents SEVerA, a framework for synthesizing self-evolving agents with formal safety and correctness guarantees.",
+      "llm_tldr_cn": "提出了SEVerA，一个用于合成具有正式安全性和正确性保证的自我进化代理的框架。",
+      "llm_tldr": "提出了SEVerA，一个用于合成具有正式安全性和正确性保证的自我进化代理的框架。",
       "llm_tags": [
         "query:ag-rl"
       ],
       "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "frameworks for building agentic RL systems",
-      "matched_requirement_id": "req-6",
+      "matched_query_text": "agentic reinforcement learning frameworks and methodologies",
+      "matched_requirement_id": "req-3",
       "selection_source": "carryover_cache",
       "paper_id": "2603.25111v1",
       "carry_days": 1
@@ -142,12 +106,12 @@
       ],
       "llm_score": 8.0,
       "llm_evidence_en": "efficient RL training of large reasoning models using prompt selection",
-      "llm_evidence_cn": "使用提示词选择对大型推理模型进行高效强化学习训练",
-      "llm_evidence": "使用提示词选择对大型推理模型进行高效强化学习训练",
-      "canonical_evidence": "使用提示词选择对大型推理模型进行高效强化学习训练",
-      "llm_tldr_en": "Optimizes RL training for large reasoning models by selecting high-utility prompts to reduce computational overhead.",
-      "llm_tldr_cn": "通过选择高实用性提示来优化大型推理模型的强化学习训练，减少计算开销。",
-      "llm_tldr": "通过选择高实用性提示来优化大型推理模型的强化学习训练，减少计算开销。",
+      "llm_evidence_cn": "通过提示词选择实现大型推理模型的高效强化学习训练",
+      "llm_evidence": "通过提示词选择实现大型推理模型的高效强化学习训练",
+      "canonical_evidence": "通过提示词选择实现大型推理模型的高效强化学习训练",
+      "llm_tldr_en": "Investigates prompt selection to optimize the efficiency of reinforcement learning for large reasoning models.",
+      "llm_tldr_cn": "研究提示词选择方法，以优化大型推理模型强化学习训练的效率。",
+      "llm_tldr": "研究提示词选择方法，以优化大型推理模型强化学习训练的效率。",
       "llm_tags": [
         "query:ag-rl"
       ],
@@ -159,47 +123,111 @@
       "carry_days": 1
     },
     {
-      "id": "2603.24634v1",
-      "title": "Dual-Graph Multi-Agent Reinforcement Learning for Handover Optimization",
-      "abstract": "HandOver (HO) control in cellular networks is governed by a set of HO control parameters that are traditionally configured through rule-based heuristics. A key parameter for HO optimization is the Cell Individual Offset (CIO), defined for each pair of neighboring cells and used to bias HO triggering decisions. At network scale, tuning CIOs becomes a tightly coupled problem: small changes can redirect mobility flows across multiple neighbors, and static rules often degrade under non-stationary traffic and mobility. We exploit the pairwise structure of CIOs by formulating HO optimization as a Decentralized Partially Observable Markov Decision Process (Dec-POMDP) on the network's dual graph. In this representation, each agent controls a neighbor-pair CIO and observes Key Performance Indicators (KPIs) aggregated over its local dual-graph neighborhood, enabling scalable decentralized decisions while preserving graph locality. Building on this formulation, we propose TD3-D-MA, a discrete Multi-Agent Reinforcement Learning (MARL) variant of the TD3 algorithm with a shared-parameter Graph Neural Network (GNN) actor operating on the dual graph and region-wise double critics for training, improving credit assignment in dense deployments. We evaluate TD3-D-MA in an ns-3 system-level simulator configured with real-world network operator parameters across heterogeneous traffic regimes and network topologies. Results show that TD3-D-MA improves network throughput over standard HO heuristics and centralized RL baselines, and generalizes robustly under topology and traffic shifts.",
+      "id": "2603.24747v1",
+      "title": "Formal Semantics for Agentic Tool Protocols: A Process Calculus Approach",
+      "abstract": "The emergence of large language model agents capable of invoking external tools has created urgent need for formal verification of agent protocols. Two paradigms dominate this space: Schema-Guided Dialogue (SGD), a research framework for zero-shot API generalization, and the Model Context Protocol (MCP), an industry standard for agent-tool integration. While both enable dynamic service discovery through schema descriptions, their formal relationship remains unexplored. Building on prior work establishing the conceptual convergence of these paradigms, we present the first process calculus formalization of SGD and MCP, proving they are structurally bisimilar under a well-defined mapping Phi. However, we demonstrate that the reverse mapping Phi^{-1} is partial and lossy, revealing critical gaps in MCP's expressivity. Through bidirectional analysis, we identify five principles -- semantic completeness, explicit action boundaries, failure mode documentation, progressive disclosure compatibility, and inter-tool relationship declaration -- as necessary and sufficient conditions for full behavioral equivalence. We formalize these principles as type-system extensions MCP+, proving MCP+ is isomorphic to SGD. Our work provides the first formal foundation for verified agent systems and establishes schema quality as a provable safety property.",
       "authors": [
-        "Matteo Salvatori",
-        "Filippo Vannella",
-        "Sebastian Macaluso",
-        "Stylianos E. Trevlakis",
-        "Carlos Segura Perales",
-        "José Suarez-Varela",
-        "Alexandros-Apostolos A. Boulogeorgos",
-        "Ioannis Arapakis"
+        "Andreas Schlapbach"
       ],
-      "primary_category": "cs.NI",
+      "primary_category": "cs.AI",
       "categories": [
-        "cs.NI",
         "cs.AI",
-        "cs.LG"
+        "cs.MA"
       ],
-      "published": "2026-03-25T08:48:48+00:00",
-      "link": "https://arxiv.org/pdf/2603.24634v1",
+      "published": "2026-03-25T19:18:27+00:00",
+      "link": "https://arxiv.org/pdf/2603.24747v1",
       "tags": [
         "keyword:AG RL",
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "multi-agent reinforcement learning for network optimization",
-      "llm_evidence_cn": "用于网络优化的多智能体强化学习",
-      "llm_evidence": "用于网络优化的多智能体强化学习",
-      "canonical_evidence": "用于网络优化的多智能体强化学习",
-      "llm_tldr_en": "Applies multi-agent reinforcement learning to optimize handover parameters in cellular networks.",
-      "llm_tldr_cn": "应用多智能体强化学习来优化蜂窝网络中的切换参数。",
-      "llm_tldr": "应用多智能体强化学习来优化蜂窝网络中的切换参数。",
+      "llm_evidence_en": "formal semantics for agentic tool protocols",
+      "llm_evidence_cn": "代理工具协议的形式化语义",
+      "llm_evidence": "代理工具协议的形式化语义",
+      "canonical_evidence": "代理工具协议的形式化语义",
+      "llm_tldr_en": "Provides a formal process calculus for agent-tool integration protocols like MCP and SGD.",
+      "llm_tldr_cn": "为MCP和SGD等智能体工具集成协议提供了一种形式化的进程代数分析方法。",
+      "llm_tldr": "为MCP和SGD等智能体工具集成协议提供了一种形式化的进程代数分析方法。",
       "llm_tags": [
         "query:ag-rl"
       ],
       "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "agentic reinforcement learning research papers",
-      "matched_requirement_id": "req-1",
+      "matched_query_text": "frameworks for building agentic RL systems",
+      "matched_requirement_id": "req-6",
       "selection_source": "carryover_cache",
-      "paper_id": "2603.24634v1",
+      "paper_id": "2603.24747v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.24768v1",
+      "title": "Supervising Ralph Wiggum: Exploring a Metacognitive Co-Regulation Agentic AI Loop for Engineering Design",
+      "abstract": "The engineering design research community has studied agentic AI systems that use Large Language Model (LLM) agents to automate the engineering design process. However, these systems are prone to some of the same pathologies that plague humans. Just as human designers, LLM design agents can fixate on existing paradigms and fail to explore alternatives when solving design challenges, potentially leading to suboptimal solutions. In this work, we propose (1) a novel Self-Regulation Loop (SRL), in which the Design Agent self-regulates and explicitly monitors its own metacognition, and (2) a novel Co-Regulation Design Agentic Loop (CRDAL), in which a Metacognitive Co-Regulation Agent assists the Design Agent in metacognition to mitigate design fixation, thereby improving system performance for engineering design tasks. In the battery pack design problem examined here, we found that the novel CRDAL system generates designs with better performance, without significantly increasing the computational cost, compared to a plain Ralph Wiggum Loop (RWL) and the metacognitively self-assessing Self-Regulation Loop (SRL). Also, we found that the CRDAL system navigated through the latent design space more effectively than both SRL and RWL. However, the SRL did not generate designs with significantly better performance than RWL, even though it explored a different region of the design space. The proposed system architectures and findings of this work provide practical implications for future development of agentic AI systems for engineering design.",
+      "authors": [
+        "Zeda Xu",
+        "Nikolas Martelaro",
+        "Christopher McComb"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-25T19:39:42+00:00",
+      "link": "https://arxiv.org/pdf/2603.24768v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Metacognitive co-regulation agentic loop for LLM design agents",
+      "llm_evidence_cn": "LLM设计智能体的元认知协同调节代理循环",
+      "llm_evidence": "LLM设计智能体的元认知协同调节代理循环",
+      "canonical_evidence": "LLM设计智能体的元认知协同调节代理循环",
+      "llm_tldr_en": "Introduces a metacognitive loop to improve the exploration and self-regulation of LLM-based design agents.",
+      "llm_tldr_cn": "引入元认知循环以改进基于LLM的设计智能体的探索和自我调节能力。",
+      "llm_tldr": "引入元认知循环以改进基于LLM的设计智能体的探索和自我调节能力。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "integration of LLM agents and reinforcement learning",
+      "matched_requirement_id": "req-5",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.24768v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.24621v1",
+      "title": "ARC-AGI-3: A New Challenge for Frontier Agentic Intelligence",
+      "abstract": "We introduce ARC-AGI-3, an interactive benchmark for studying agentic intelligence through novel, abstract, turn-based environments in which agents must explore, infer goals, build internal models of environment dynamics, and plan effective action sequences without explicit instructions. Like its predecessors ARC-AGI-1 and 2, ARC-AGI-3 focuses entirely on evaluating fluid adaptive efficiency on novel tasks, while avoiding language and external knowledge. ARC-AGI-3 environments only leverage Core Knowledge priors and are difficulty-calibrated via extensive testing with human test-takers. Our testing shows humans can solve 100% of the environments, in contrast to frontier AI systems which, as of March 2026, score below 1%. In this paper, we present the benchmark design, its efficiency-based scoring framework grounded in human action baselines, and the methodology used to construct, validate, and calibrate the environments.",
+      "authors": [
+        "ARC Prize Foundation"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-24T21:58:16+00:00",
+      "link": "https://arxiv.org/pdf/2603.24621v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Benchmark for evaluating fluid adaptive efficiency in agentic intelligence",
+      "llm_evidence_cn": "评估智能体智力流体适应效率的基准",
+      "llm_evidence": "评估智能体智力流体适应效率的基准",
+      "canonical_evidence": "评估智能体智力流体适应效率的基准",
+      "llm_tldr_en": "Presents ARC-AGI-3, a benchmark for testing planning and model-building in non-linguistic agentic AI.",
+      "llm_tldr_cn": "发布了ARC-AGI-3基准，用于测试非语言类智能体AI的规划和建模能力。",
+      "llm_tldr": "发布了ARC-AGI-3基准，用于测试非语言类智能体AI的规划和建模能力。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "state of the art in agentic reinforcement learning",
+      "matched_requirement_id": "req-4",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.24621v1",
       "carry_days": 1
     }
   ]
