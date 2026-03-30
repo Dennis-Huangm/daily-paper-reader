@@ -1,0 +1,932 @@
+Title: Learning What Matters Now: Dynamic Preference Inference under Contextual Shifts
+
+URL Source: https://arxiv.org/pdf/2603.22813v1
+
+Published Time: Wed, 25 Mar 2026 00:46:15 GMT
+
+Number of Pages: 22
+
+Markdown Content:
+Published as a conference paper at ICLR 2026 
+
+# LEARNING WHAT MATTERS NOW : D YNAMIC PREFER -
+
+# ENCE INFERENCE UNDER CONTEXTUAL SHIFTS 
+
+Xianwei Cao 1,2 Dou Quan 1 Zhenliang Zhang 2∗ Shuang Wang 1∗
+
+> 1
+
+School of Artificial Intelligence, Xidian University, Xi’an, 710071, China 
+
+> 2
+
+State Key Laboratory of General Artificial Intelligence, BIGAI, Beijing, China 
+
+zlzhang@bigai.ai , shwang@mail.xidian.edu.cn 
+
+## ABSTRACT 
+
+Humans often juggle multiple, sometimes conflicting objectives and shift their priorities as circumstances change, rather than following a fixed objective func-tion. In contrast, most computational decision-making and multi-objective RL methods assume static preference weights or a known scalar reward. In this work, we study sequential decision-making problem when these preference weights are unobserved latent variables that drift with context. Specifically, we propose Dy-namic Preference Inference (DPI), a cognitively inspired framework in which an agent maintains a probabilistic belief over preference weights, updates this belief from recent interaction, and conditions its policy on inferred preferences. We in-stantiate DPI as a variational preference inference module trained jointly with a preference-conditioned actor–critic, using vector-valued returns as evidence about latent trade-offs. In queueing, gridworld maze, and multi-objective continuous-control environments with event-driven changes in objectives, DPI adapts its in-ferred preferences to new regimes and achieves higher post-shift performance than fixed-weight and heuristic envelope baselines 1.
+
+## 1 INTRODUCTION 
+
+Human behavior is widely modeled as goal-directed and value-driven, but people typically juggle multiple goals and adjust their priorities as circumstances change, rather than acting on a single fixed priority ordering (Simon, 1955; Payne et al., 1993; Carver & Scheier, 2001; Wrosch et al., 2003). We reweight priorities, abandon infeasible objectives, and reorient toward what remains achievable. For instance, as illustrated in Fig. 1, a person waiting in line may initially value fair-ness and patience, but as hunger escalates and time runs out, they may rationalize cutting ahead. Work on self-regulation, multiple-goal pursuit, and constructed preferences formalizes such behav-ior as feedback-based goal control and context-dependent weighting of attributes (Payne et al., 1993; Slovic, 1995; Lichtenstein & Slovic, 2006). Yet, despite its importance, computational modeling of dynamic value preference adaptation remains underexplored in artificial intelligence and multi-objective decision-making (Roijers et al., 2013; Yang et al., 2019; Agarwal et al., 2022; Basaklar et al., 2023; Liu et al., 2025). A large literature in cognitive psychology and cognitive science has examined how people regu-late goals and reconcile competing motives. Theories of self-regulation and multiple-goal pursuit emphasize feedback-based adjustment of goal importance and effort allocation (Carver & Scheier, 2001; 2004; Wrosch et al., 2003), while multi-attribute and context-dependent choice models show that attribute weights and even preferences themselves can shift with task demands and elicitation formats (Payne et al., 1993; Slovic, 1995; Lichtenstein & Slovic, 2006). Abstracting from these literatures, we conceptually separate two tightly coupled processes: (1) value appraisal —forming an internal judgment about what matters most right now in a given situation; and (2) action selec-tion —choosing behavior conditional on the current value preference. In this paper, we use these 
+
+> ∗
+
+Corresponding authors. 
+
+> 1
+
+Code is available at: https://github.com/XianweiC/DPI 
+
+1
+
+> arXiv:2603.22813v1 [cs.AI] 24 Mar 2026
+
+Published as a conference paper at ICLR 2026 Morality         
+
+> Energy
+> It’s still early, no need to rush.
+> Time step 𝒕 𝟏
+> Hold on, it’s almost my turn.
+> Time step 𝒕 𝟐
+> Time is running out. I need to get ahead in line.
+> Time step 𝒕 𝟑
+> 0.8 0.2 0.5 0.5 0.7 0.3
+> Value weight
+
+Figure 1: Adaptive value preference adjustment in a queueing scenario. At early stages ( t1), the agent prioritizes morality and chooses to wait. As the deadline approaches ( t2), preferences between morality (M) and energy (E) become balanced. When time is nearly exhausted ( t3), energy becomes dominant and the agent rationalizes cutting in line, illustrating dynamic reweighting of values under changing pressures. terms purely as labels for components of our computational framework: the second has been exten-sively studied as policy optimization under a given reward or utility function, whereas the first—how an agent constructs and updates its value function from experience and context—remains compar-atively underexplored in computational models. From a modeling perspective, many psychological and choice-theoretic accounts provide rich descriptions of how humans adjust goals and preferences, but they are not directly formulated as algorithms that can be deployed in high-dimensional, partially observable, and non-stationary control problems. In contrast, artificial agents in safety-critical do-mains must make a stream of sequential decisions from raw observations, under changing resource, time, or risk constraints. This motivates the computational question at the core of our work: given only vector-valued rewards and partial observations in a non-stationary environment, how can an agent infer and adapt its current trade-off over objectives online in a way that is both effective and interpretable? We address this question in the language of multi-objective reinforce-ment learning, using dynamic preference inference as a bridge between cognitive theories of goal regulation and practical control algorithms. Many computational models of sequential decision-making—including Markov decision processes and modern reinforcement learning agents—assume a fixed and externally specified utility or re-ward function (Bellman & Kalaba, 1957; Russell & Norvig, 1995). While this assumption simpli-fies learning and planning, it fails to capture the fluid, context-dependent nature of value trade-offs observed in realistic settings. In multi-objective environments (e.g., efficiency vs. safety, energy vs. morality), agents inevitably face shifting constraints : some goals become infeasible, temporarily irrelevant, or disproportionately important as resources, time, or external conditions change (Roijers et al., 2013; Vamplew et al., 2011). Without the capacity for dynamic value reconfiguration, such agents risk either pursuing unattainable goals or neglecting emergent priorities—leading to subop-timal or even catastrophic outcomes in domains such as autonomous driving or healthcare (Amodei et al., 2016; Dulac-Arnold et al., 2021). To mitigate this limitation, recent work in multi-objective decision-making has developed preference-conditioned policies, where an agent is trained to optimize under different trade-offs specified by a preference vector (Van Moffaert & Now´ e, 2014; Yang et al., 2019; Basaklar et al., 2023; Liu et al., 2025). Such approaches enable generalization across static preferences and com-plement earlier scalarization and envelope methods (Vamplew et al., 2011; Mossalam et al., 2016). However, they typically assume that the preference vector is given. In realistic scenarios, prefer-ences are rarely observed directly: the agent must infer its priorities from incomplete, noisy, and evolving perceptual data. This calls for an online preference inference mechanism that is sensitive to environmental cues yet robust to transient noise—a capability that is both cognitively plausible and computationally underexplored. In this work, we propose a Dynamic Preference Inference (DPI) framework that makes this gap explicit. The key idea is to treat the preference vector encoding the relative importance of multiple objectives as a latent state that must be inferred online rather than fixed a priori. The agent maintains a posterior distribution qϕ(ωt | st−H+1: t) over current preference vector ωt, parameterized by a recurrent encoder over recent history. Sampling from this posterior captures epistemic uncertainty and lets the agent explore alternative value configurations before acting. A preference-conditioned actor–critic then conditions its policy on ωt to adapt behavior as task demands shift. To keep updates stable and interpretable, we regularize qϕ with a Gaussian prior and a directional alignment term 2Published as a conference paper at ICLR 2026 that encourages preference changes consistent with observed return vectors. DPI thus provides a compact variational Bayesian formulation of value appraisal, in which the agent maintains a belief over “what matters now” and revises it only when recent outcomes provide sufficient evidence. The main contributions of this work are: • We formalize a setting where preference weights in environments are unknown and dy-namically varying , and highlight the challenge of enabling agents to infer and adapt their priorities online from experience. • We introduce the Dynamic Preference Inference (DPI) framework, a computational ar-chitecture that jointly learns (i)a probabilistic preference inference model from perceptual history and (ii)a preference-conditioned policy, regularized for stability and interpretability. • We empirically evaluate DPI in a dynamic Queue environment and a dynamic Maze envi-ronment, showing consistent gains over fixed-preference and static-inference baselines in adaptability, robustness, and cumulative performance, and illustrating more interpretable, event-aligned adaptive strategies. 
+
+## 2 RELATED WORK 
+
+2.1 MULTI -O BJECTIVE DECISION -M AKING IN COGNITIVE SCIENCE 
+
+Human decision-making rarely involves optimizing a single objective in isolation. Instead, individ-uals continuously negotiate multiple, sometimes conflicting goals such as efficiency, fairness, en-ergy preservation, and social norms. Classical theories of bounded rationality (Simon, 1955) argue that humans rely on satisficing heuristics rather than globally optimal strategies. Dynamic models such as Decision Field Theory (Busemeyer & Townsend, 1993) and Prospect Theory (Kahneman & Tversky, 2013) emphasize that preferences evolve with time pressure, risk, and context. Research on multi-attribute decision-making (Payne et al., 1993; Zanakis et al., 1998) shows that humans flexibly reweight attributes depending on contextual demands—for example, prioritizing efficiency under time pressure or fairness in cooperative settings. Theories of self-regulation and control fur-ther highlight that goal pursuit is adaptive, context-sensitive, and autonomy-driven (Shenhav et al., 2013; Deci & Ryan, 1985; 2012). These insights motivate computational frameworks that treat preferences not as fixed constants, but as latent variables dynamically inferred from context. 2.2 COMPUTATIONAL APPROACHES TO MULTI -O BJECTIVE DECISION -M AKING 
+
+Multi-objective reinforcement learning (MORL) provides a principled framework for sequential decision-making with vector-valued rewards. Classical approaches rely on scalarization (Vamplew et al., 2011; Roijers et al., 2013; Agarwal et al., 2022), collapsing the reward vector into a scalar us-ing a fixed preference vector. While effective for static settings, these approaches fail under shifting priorities. Pareto-based methods, such as Envelope Q-learning and Pareto-conditioned policy opti-mization (Van Moffaert & Now´ e, 2014; Yang et al., 2019; Basaklar et al., 2023; Liu et al., 2025), approximate the Pareto front of optimal policies, enabling post-hoc preference selection. However, they still assume externally specified preferences and lack online adaptation. Recent work explores nonlinear and dynamic scalarization (Mossalam et al., 2016; Abels et al., 2019), meta-learning for preference adaptation, and learning from human feedback (Christiano et al., 2017; Ibarz et al., 2018; Ramachandran & Amir, 2007; Fu et al., 2018). Nevertheless, few methods explicitly treat pref-erence weights as latent states to be inferred online. Our approach addresses this gap by framing preference adaptation as a variational inference problem, enabling agents to maintain a belief over preferences and dynamically reweight objectives in response to environmental changes, aligning with psychological theories of adaptive goal regulation. 
+
+## 3 METHODOLOGY 
+
+We ground our study on the assumption of a boundedly rational agent, capable of reappraising what matters in response to situational changes (Simon, 1955; Carver & Scheier, 2001; Kruglanski et al., 2018; Zhang et al., 2024). Human decision-making in dynamic, multi-objective settings rarely fol-lows a single, fixed plan. Instead, we continuously reappraise our goals in light of the current 3Published as a conference paper at ICLR 2026 agent   
+
+> Morality
+> Energy
+> Observation 𝑂 !
+> History 𝑂 ":!$"
+> State encoder
+
+Input Perception     
+
+> State embedding
+> 𝑠 !:#
+> Conditioned actor
+> 𝜋 𝑎 #𝑠 #,𝜔 ∗
+> Conditioned critic
+> 𝑉 (𝑠 #,𝜔 ∗)
+
+Action Selection 
+
+> Time is running out. I have to cut in line!
+
+Environment Execution   
+
+> History memory
+> encoder
+> Preference
+> posterior
+> 𝑞 % ω# s!:#)
+> Sample 𝐾
+> candidates 𝜔
+
+Value Appraisal Envelope Operator               
+
+> 𝜔 ∗=arg max
+> &<𝜔 #
+> (&),𝑉 𝑠 #,𝜔 #
+> (&)>
+> 0.8 0.2 𝜔 !:
+> 0.3 0.7 𝜔 ):
+> 𝜔 *:...
+> Pareto frontier selection
+> 𝜔 !:I should keep queuing.
+> 𝜔 ):I'm almost late. I need to cut in line.
+> 𝜔 *:...
+
+Figure 2: Two-stage cognitive-inspired decision framework. History states are transformed into latent preferences via Value Appraisal , which in turn guide the Action Selection . The resulting policy drives environment execution, forming a dynamic decision pipeline analogous to human ap-praisal–action coupling. situation—deciding not just how to act, but also what matters most right now. This dual process is reflected in cognitive models such as appraisal theory in emotion research (Lazarus, 1991; Scherer, 1999; Frijda, 1993) and dual-process frameworks in psychology (Kahneman, 2011; Stanovich et al., 2000; Kahneman, 2012), where value assessment and action selection are distinct yet tightly cou-pled. In this work, we operationalize these principles through a two-module computational agent (Fig. 2): • Value Appraisal Module (history → preferences): From a short history-memory window of states, a recurrent encoder infers a distribution over the latent preference vector ωt ∈
+
+∆d−1 (a point on the simplex), from which a sample ˆωt is drawn for control. • Action Selection Module (state, preferences → action): An actor–critic conditions jointly on the current state and inferred preferences to produce vector value estimates and a policy. At decision time, an on-policy envelope operator evaluates K preference samples and selects the ˆωt that maximizes the predicted scalarized value. • Stability & Alignment: Training is regularized by a variational evidence lower bound (ELBO) with a simple prior, a directional alignment between inferred preferences and vec-tor returns, and a self-consistency term anchoring posterior predictions to the envelope-selected ˆωt. Together, these stabilize preference inference and improve interpretability. This division is consistent with cognitive models of dual-process decision-making: a working mem-ory–based appraisal system that updates value priorities, and a controller that acts accordingly. 3.1 VALUE APPRAISAL AS VARIATIONAL INFERENCE OVER DYNAMIC PREFERENCES 
+
+Cognitive & statistical generative assumption. Let ω∗ 
+
+> t
+
+∈ ∆d−1 denote the (unobserved) prefer-ence weights over d objectives at time t. We assume a non-stationary latent dynamics ω∗ 
+
+> t
+
+∼ p(ωt |
+
+ωt−1, ξ t), driven by unmodeled situational factors ξt (e.g., urgency, risk, energy scarcity). In prac-tice, ξt is not explicitly modeled but absorbed into the stochastic posterior updates. The agent does not observe ω∗ 
+
+> t
+
+but receives a state stream st−H+1: t (which may contain observation ot−H+1: t and self-states such as energy and deadline time) over a finite working-memory horizon H > 1. Follow-ing the Bayesian brain view (Knill & Pouget, 2004; Colombo & Seri` es, 2012; Bottemanne, 2025) , it maintains beliefs p(ωt | st−H+1: t) ∝ p(st | ωt) · p(ωt | st−H+1: t−1) and updates them as new evidence arrives. Note that this generative factorization is an internal perceptual model used by the agent to infer preferences; the actual environment transition kernel penv (st+1 | st, a t) in all our experiments is independent of ωt and follows the standard MDP assumption (see Appendix A). 
+
+Latent Representation and Posterior Approximation. Instead of treating preferences as fixed inputs, we approximate them as distributional latent states that capture both epistemic uncertainty and exploratory variation in preference space. Concretely, we introduce an unconstrained latent vector zt ∈ Rd with qϕ(zt | st−H+1: t) = N (μt, diag( σ2 
+
+> t
+
+)) , and ωt = softmax( zt). This design provides: (i) uncertainty over value preference weight: ambiguous situations produce broader poste-riors, explicitly capturing the agent’s uncertainty. (ii) exploration in value preference space: instead 4Published as a conference paper at ICLR 2026 of committing to a single trade-off, the agent samples zt from the posterior, which slightly perturbs 
+
+ωt and encourages trying nearby preferences before acting. A unit Gaussian prior p0(z) = N (0 , I )
+
+regularizes the posterior, anchoring values unless evidence strongly suggests change. Detailed im-plementations are provided in Appendix C. 
+
+Learning objective. Since the latent preference state zt cannot be directly observed, we resort to variational inference and approximate its posterior by qϕ(zt | et), where et := st−H+1: t denotes the recent state history within a finite working-memory window. We map zt to a preference vector on the simplex via a deterministic function ωt = fθ (zt) (e.g., a linear layer followed by a softmax). This requires specifying how the collected evidence et supports different preference configurations. Following bounded-rational choice models (Luce et al., 1959) and the free-energy formulation of Bayesian brain theories (Friston, 2010), we treat the scalarized return under a preference vector as a Boltzmann-rational likelihood of the evidence: 
+
+p(et | zt) ∝ exp  β U t(ωt; et), β > 0, (1) where Ut(ωt; et) = ⟨ωt,⃗ G t(et)⟩ represents a scalar utility and ⃗ Gt(et) ∈ Rd is the vector return estimated by the actor–critic from the history et.With an isotropic Gaussian prior p0(zt) = N (0, I), Bayes’ rule yields the (unnormalized) target posterior 
+
+p∗(zt | et) ∝ p0(zt) exp  β U t(ωt; et). (2) We approximate p∗ with qϕ(zt | et) and optimize qϕ by minimizing KL( qϕ ∥ p∗), which is equiva-lent to maximizing the following evidence lower bound (ELBO): 
+
+LELBO = β Ezt∼qϕ(·| et)
+
+Ut(ωt; et) − KL  qϕ(zt | et) N (0, I). (3) This objective balances fit to the current evidence (the utility term) against regularization from the prior, yielding stable yet adaptive updates of preference beliefs. A complete derivation is provided in Appendix A. 3.2 ACTION SELECTION BASED ON PREFERENCE WEIGHTS 
+
+Humans rarely commit to a single immutable weighting of goals. When facing trade-offs (e.g., morality vs. survival), we may entertain several plausible configurations and act according to the one that seems most promising at the moment. Inspired by this, our agent does not rely on a fixed preference, but rather evaluates a small set of candidates and selects the one that yields the highest predicted utility. To achieve this goal, we employ a preference-conditional policy method, which can adopt policy based on the given preference weights. Specifically, both policy and value functions are conditioned on preferences: πθ (at | st, ωt),⃗ V θ (st, ωt) ∈ Rd. Given a preference weight vector, the scalarized value is obtained by V scalar (st, ωt) = ⟨ωt,⃗ V θ (st, ωt)⟩.
+
+Envelope Operator. At each step, K preference candidates are sampled from the appraisal posterior 
+
+qϕ(· | st−H+1: t), and the one with the highest predicted scalarized value is selected as ˆωt, e.g., 
+
+ˆωt = arg max 
+
+> i∈{ 1,...,K }
+
+⟨ω(i) 
+
+> t
+
+,⃗ V θ (st, ω(i) 
+
+> t
+
+)⟩. (4) This is exactly the envelope operator (Yang et al., 2019), but executed on-policy during action selec-tion, using a single preference-conditioned actor–critic. In addition, we denote by ωpred  
+
+> t
+
+preference prediction of the encoder. This ωpred  
+
+> t
+
+is used for regularization terms below. 
+
+Vector-valued GAE. Given vector rewards ⃗r t, we compute temporal differences for each dimension: 
+
+δt =⃗r t + γ⃗V θ (st+1 , ˆωt) −⃗ Vθ (st, ˆωt), (5) and accumulate vector advantages ⃗ At using standard GAE recursion. This ensures temporal credit assignment is handled per-dimension. 
+
+Scalarized advantage for PPO. The policy update requires a scalar advantage. We project using the same on-policy ˆωt: At = ⟨ ˆωt,⃗ A t⟩, ˜At = normalize (At), calculating the usual clipped surrogate 
+
+LPPO (θ) = E
+
+h
+
+min  rt(θ) ˜At, clip( rt, 1±ϵ) ˜At
+
+i
+
+, (6) 5Published as a conference paper at ICLR 2026 with rt(θ) = πθ (at|st, ˆωt)  
+
+> πθold (at|st,ˆωt)
+
+, ensuring on-policy consistency in both action and preference space. 
+
+Dual critic loss. To stabilize learning process, we combine vector-level supervision with scalarized supervision: 
+
+Lcritic = ξ · ∥ ⃗ Vθ (st, ˆω) −⃗ G∥22 + (1 − ξ) · (V scalar  
+
+> θ
+
+(st, ˆω) − ⟨ ˆω,⃗ G ⟩)2, (7) where ⃗ G are vectorized returns from vector-GAE. 3.3 STABILITY AND ALIGNMENT OF PREFERENCES 
+
+Preference Alignment. Intuitively, simply maximizing Ut(ωt) = ⟨ωt,⃗ G t⟩ risks degenerate so-lutions: unstable oscillations of ωt or opportunistic “gaming” of temporary fluctuations. Humans avoid this by adjusting preferences smoothly and in line with feasible opportunities. Instead of max-imizing utility directly, we introduce two cognitive-inspired regularizers to stabilize the learning process. In detail, to encourage the predicted preference weights ω aligned with true environment dynamics, we apply a direction alignment loss: 
+
+Ldir = E
+
+"
+
+1 − ⟨ωpred  
+
+> t
+
+,⃗ G t⟩∥ωpred  
+
+> t
+
+∥2 ∥⃗Gt∥2
+
+#
+
+, (8) which is applied only when ∥⃗ Gt∥ > 0. This discourages caring about objectives that are unattainable at the moment. 
+
+Self-consistency. In addition, to ensure the predicted preference matches the envelope-selected one: 
+
+Lstab = ∥ωpred  
+
+> t
+
+− ˆωt∥22. (9) We aim to conduct a posterior instance self-consistency constraint, e.g., if envelope consistently selects a mode, the encoder should directly predict it, reducing policy–preference mismatch. 
+
+Model Optimization. Together with the ELBO term, the overall training objective of DPI is formu-lated as 
+
+L = LPPO + Lcritic − L ELBO + λLdir + γLstab , (10) where λ and γ are coefficient. The complete training procedure is summarized in Algorithm 1. 
+
+## 4 EXPERIMENTS 
+
+In this section, we evaluate our framework along three key aspects: (i) Q1: Effectiveness –Does dynamic preference inference improve task performances? (Sec. 4.4) (ii) Q2: Rationality –Does the agent adapt its preferences to environmental changes? (Sec. 4.5) (iii) Q3: Interpretability –Are the inferred preferences interpretable and semantically aligned? (Sec. 4.6) 4.1 EXPERIMENT ENVIRONMENTS 
+
+(i) Queue. As is illustrated in Fig. 6a, Queue is a simple but illustrative toy problem, where an agent must decide whether to wait in line or cut ahead to obtain food, balancing two conflicting objectives: energy (survival) and morality (fairness). No fixed weighting suffices: always waiting risks starvation, always cutting erodes morality. Success requires dynamically rebalancing prefer-ences according to context. (ii) Maze. We mainly conduct our experiments on Maze environment (as is shown in Fig. 6b), which introduces a 2D navigation task with multiple objectives in pixel space: reaching the goal, meeting deadlines, avoiding hazards, and conserving energy. Random hazard storms and shifting costs introduce non-stationarity, making any static value composition fail. Dynamic value appraisal is essential for progress under varying conditions. (iii) Continuous control. We have modified a multi-objective variants of MuJoCo with widely used baselines. See Appendix D.3 for details. Despite differences in modality, these three environments share a struc-tural property: without dynamic preference adjustment, it is diffucult for the agent to complete the task .6Published as a conference paper at ICLR 2026 4.2 BASELINES 
+
+We compare DPI against a diverse set of representative baselines: (1) Fixed-Preference MORL (FIXED) : a strong baseline where the preference vector ω is fixed to emphasize task-completion objectives (e.g., progress and deadline) (Mossalam et al., 2016), simulating conventional single-objective RL methods that optimize for a scalar reward with secondary penalties treated as regu-larizers. (2) Randomized Switching (RS) : ω is randomly resampled at runtime, testing whether naive stochastic preference variation can mimic adaptivity. (3) Heuristic MORL (HEURISTIC) :hand-crafted preference schedules are applied for different event types and then converted into static 
+
+ω settings, serving as a strong rule-based baseline. (4) Rule-based Envelope Q-learning (ENVE-LOPE) : policies conditioned on externally supplied ω as in a rule-based envelope Q-learning (Yang et al., 2019) with event-dependent preferences (5) Random Policy (RANDOM) : a uniformly ran-dom agent that samples actions independently at each step, providing a lower bound on performance. This serves as a sanity check to confirm that learned policies achieve meaningful improvement over chance-level behavior. (6) Dense Oracle : receives access to the same event signals and addition-ally uses time / energy information to continuously update preference weights at each timestep (see Appendix .D.2), which provide a practical upper bound under our settings. 4.3 EVALUATION METRICS 
+
+We report three complementary metrics to comprehensively evaluate overall performance, success rate and adaptation under distribution shifts, respectively. (i) Mean Episodic Return (MER). We compute the total return across N episode: R = 1
+
+> N
+
+PNi=1 
+
+PTt=1 r(i) 
+
+> t
+
+, where T is the step length and r(i) 
+
+> t
+
+is the scalar reward at step t. (ii) Success Rate (SR). We measure the fraction of episodes achieving task success: SR = 1
+
+> N
+
+PNi=1 1{ψ = 1 }, where ψ ∈ { 0, 1} is a task-specific completion flag (e.g., successfully obtaining food in Queue or reaching the goal in Maze). (iii) Post-Shift Performance (PS@K). For an environment event occurring at the change point t∗, we measure the average return in the first K steps following the change: PS@ K = 1
+
+> N
+
+PNi=1 1
+
+> K
+
+Pt∗+Kt=t∗+1 r(i) 
+
+> t
+
+, which captures adaptation ability after environment contextual shifts. All reported results are averaged over 
+
+N = 200 evaluation episodes for each of 10 random seeds. We report all metrics with the mean and 
+
+95% confidence interval (CI) across N episodes: CI( ·) = 1 .96 · σ(·) 
+
+> √N
+
+.4.4 EFFECTIVENESS — D OES DYNAMIC PREFERENCE INFERENCE IMPROVE TASK PERFORMANCE ?Method Queue Maze MER SR (%) MER SR (%) RANDOM −24 .24 ± 0.58 17 .25 ± 10 .42 −223 .55 ± 10 .61 0.00 ± 0.01                                                                         
+
+> FIXED −4.19 ±2.55 10 .05 ±3.24 16 .15 ±1.62 1.12 ±0.06
+> RS −4.29 ±0.01 11 .43 ±4.01 −23 .66 ±4.42 0.01 ±0.00
+> HEURISTIC −1.60 ±0.01 10 .05 ±8.12 −3.65 ±0.18 0.00 ±0.00
+> ENVELOPE −3.54 ±0.02 25 .10 ±6.01 10 .36 ±0.18 0.01 ±0.00
+> Ours
+> w/ Q-learning 3.74 ±2.30 29 .09 ±5.33 27 .35 ±1.25 42 .94 ±3.72
+> w/ PPO 10 .34 ±0.02 39 .95 ±2.75 30 .16 ±1.22 59 .04 ±0.10
+
+Table 1: Mean episodic return (MER) and Success rate (SR) across all baselines. Figure 3: Post-shift performance (PS@K) on Queue environment. 
+
+Toy Environment Result. We begin with a symbolic Queue environment, a minimal toy setting where the agent must balance survival (energy) against fairness (morality) dynamically. Table 1 shows that our DPI agent substantially improves MER and achieves a 14 .85% higher SR than the strongest baseline (ENVELOPE). This demonstrates that dynamically inferred preferences not only improve cumulative performance but also enable the agent to successfully complete the task, whereas fixed or heuristic preferences frequently fail. We additionally analyze the pre- and post-event Pareto fronts over efficiency and fairness, showing that any fixed scalarization necessarily sacrifices performance in at least one regime, whereas DPI adapts its inferred preferences to remain close to the dynamic front (Appendix D.1). Combined with the MER- and SR-PPO (Appendix D.2), this suggests that DPI’s gains are not simply due to optimizing a particular scalar metric. 7Published as a conference paper at ICLR 2026    
+
+> (a) Deadline shock (b) Hazard surge Moving
+> Hazard
+> !
+> !
+> !
+> !
+> !(c) Energy drought (d) Alignment analysis.
+
+Figure 4: Event-aligned trajectories in Maze environment. After each event, DPI updates its preferences and modifies its behavior in a contextually appropriate way: (a) prioritizes shorter routes under deadline shock . (b) exhibits increased avoidance under hazard surge . (c) prefers waiting and selecting minimal-cost routes under energy drought . Arrows indicate agent mo-tion; shaded regions mark environmental hazards or costs. (d) Alignment between inferred prefer-ences and reward vectors. DPI maintains positive cosine similarity and sharply increases alignment after event onsets, whereas baselines remain near zero or negative, indicating that only DPI learns a value representation that tracks task semantics. 
+
+Main result. Table 1 reports mean episodic return (MER) and success rate (SR) in the Maze envi-ronment. RS fails catastrophically, yielding extremely low and highly variable returns. HEURISTIC also performs poorly in this non-stationary setting, indicating that simple hand-designed preference schedules cannot handle the combinatorial diversity of event configurations. ENVELOPE, which is given event-dependent preferences but does not infer them, achieves substantially higher MER, highlighting the importance of conditioning on ω at deployment. Our Dynamic Preference Inference (DPI) agent achieves the highest overall MER, outperforming ENVELOPE by +191 .1% , confirming that online inference over preferences enables more robust long-term behavior under distributional shifts. Classical baselines such as FIXED, HEURISTIC, and ENVELOPE all achieve near-zero SR, even when FIXED attains relatively high MER, showing that they cannot complete the task reliably under all event configurations. DPI attains the highest SR ( 59 .0% ), significantly outperforming all ablations and demonstrating its ability to consistently adapt and complete the task under dynamically changing conditions. For completeness, Appendix D.2 further compares DPI against scalarized RL baselines that directly optimize MER or SR (MER-PPO and SR-PPO), as well as a Dense Oracle with privileged access to event signals; DPI still yields superior post-shift performance and success rate in these settings. We further confirm these trends in the modified multi-objective continuous-control setting, where DPI again matches or surpasses strong fixed-preference and oracle baselines (see Appendix D.3). 4.5 RATIONALITY –D OES THE AGENT ADAPT ITS PREFERENCES TO ENVIRONMENTAL CHANGES ?To verify that DPI performs meaningful preference adaptation rather than merely exploiting reward structure, we report Post-Shift Performance (PS@K) for K = 1 , . . . , 8 in Fig. 3. When events are triggered, both HEURISTIC and the ENVELOPE baselines exhibit persistently low post-shift performance, indicating their inability to adapt to non-stationary dynamics. Interestingly, FIXED attains moderately good PS@K values by greedily pursuing the highest scalarized reward under a static weighting. However, as confirmed in Table 1, this strategy fails to reliably complete the task, demonstrating that no single fixed preference vector is sufficient to handle all event configurations. In contrast, DPI shows rapid recovery after each change point, maintaining high post-shift reward and significantly outperforming all baselines. Together with its 59 .04% success rate, these results indicate that DPI is not merely memorizing action sequences, but aligns its internal value preferences with changing environmental demands. 4.6 INTERPRETABILITY –A RE THE INFERRED PREFERENCES INTERPRETABLE AND SEMANTICALLY ALIGNED ?
+
+Qualitative evidence: event → preference → behavior. Fig. 4a, 4b, 4c shows three representative Maze episodes with distinct event types: deadline shock , hazard surge , and energy drought . After each change-point, DPI reweights its preferences in a context-consistent manner and correspondingly switches its behavior—accelerating when deadlines shrink, rerouting when 8Published as a conference paper at ICLR 2026   
+
+> (a) PS@K for each ablated variant. (b) Multistep average reward. (c) Different history window size.
+
+Figure 5: Ablation study results. (a) Post-Shift Performance (PS@K) curves over the first K = 8 
+
+steps after each event. (b) Multi-step average PS@K, summarizing short-term recovery into a single metric for each method. (c) Mean episodic return (MER) as a function of history window size H.Across all plots, our full DPI agent consistently outperforms ablations, confirming the necessity of KL regularization, directional alignment, and self-consistency, and showing that performance is robust to H beyond a small temporal context. hazards intensify, and conserving movement under energy scarcity. This event →preference →action chain indicates that DPI is dynamically revising what matters now instead of replaying a fixed plan. 
+
+Quantitative alignment with reward structure. To verify that the inferred preferences track task objectives, we compute the cosine similarity between the inferred preference ˆωt and the instanta-neous reward vector ⃗r t: Align( t) = ⟨ ˆωt,⃗ r t⟩∥ ˆωt∥2∥⃗r t∥2 . As shown in Fig. 4d, DPI maintains consistently positive alignment and exhibits sharp but smooth rises following event onsets, suggesting that its internal value representation reorients toward the most relevant objectives. In contrast, random, heuristic, and envelope baselines remain negative, showing no systematic relation to the reward structure. Together, these results demonstrate that DPI not only adapts its preferences to recover performance, but does so in a semantically interpretable way that reflects the true task demands. 4.7 ABLATION STUDY 
+
+Component-wise Ablation. To isolate the contribution of each design component in DPI, we com-pare against three variants: (i) w/o KL , removing the KL prior term from the ELBO objective; (ii) w/o dir , removing the directional alignment constraint between preferences and return gradi-ents; (iii) w/o sta , removing the self-consistency regularization that anchors posterior predictions to envelope-selected preferences. We also replace the preference-conditioned actor–critic with a simple Q-learning baseline ( w/ Q-learning ) to test whether a purely value-based method suffices. Fig. 5a reports Post-Shift Performance (PS@K) over K = 1 , . . . , 8 steps after each event, showing how quickly each variant recovers reward after distributional shifts. To provide a single-number summary of short-term recovery, we also report the multistep average PS@K (Fig. 5b), which aver-ages performance across K = 1 . . . 8. Removing any of the three components leads to a measurable performance drop, confirming that KL regularization, directional alignment, and posterior anchoring are all critical for stabilizing preference inference and improving adaptation. Moreover, replacing PPO with Q-learning significantly degrades recovery ability, highlighting the importance of using a preference-conditioned actor–critic for fast on-policy adjustment. 
+
+History Window Size. We additionally study the effect of the history encoder’s receptive field size 
+
+H, varying the number of past observations fed into the preference encoder. Fig. 5c reports the mean episodic return (MER) as a function of H (mean ± 95% CI). Performance degrades significantly for very small history sizes (e.g., H = 1 ), indicating that the model needs sufficient temporal context to infer preferences. However, performance plateaus for moderately large windows ( H ≥ 9), suggesting that our approach is robust to the exact choice of H. In all experiments, we choose H = 3 
+
+as a good trade-off between performance and computational cost. 
+
+Hyperparameter ablations and training stability. See Appendix D.4 and Appendix D.6 for ab-lations and learning curves, which show that DPI is robust to the main hyperparameters and trains stably without early collapse. 9Published as a conference paper at ICLR 2026 
+
+## 5 CONCLUSION AND FUTURE DIRECTIONS 
+
+In this work, we introduced a cognitively inspired framework that abstracts value preference adjust-ment in dynamic multi-objective environments. We formalized a setting in which preference weights are latent, context-dependent variables that must be inferred online, and proposed DPI, which com-bines a variational preference inference module with a preference-conditioned policy. Experiments in Queueing, Maze, and multi-objective continuous-control tasks show that DPI enables context-aware preference adaptation and improves performance under event-driven distribution shifts. Akey limitation is that our environments remain controlled and simulated rather than open-ended or real-world. Future work will focus on scaling DPI to more realistic 3D embodied and multi-agent settings, and on developing more expressive inference mechanisms for long-horizon and socially coupled preference dynamics. 
+
+## REFERENCES 
+
+Axel Abels, Diederik Roijers, Tom Lenaerts, Ann Now´ e, and Denis Steckelmacher. Dynamic weights in multi-objective deep reinforcement learning. In International conference on machine learning , pp. 11–20. PMLR, 2019. Mridul Agarwal, Vaneet Aggarwal, and Tian Lan. Multi-objective reinforcement learning with non-linear scalarization. In Proceedings of the 21st International Conference on Autonomous Agents and Multiagent Systems , pp. 9–17, 2022. Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman, and Dan Man´ e. Con-crete problems in ai safety. arXiv preprint arXiv:1606.06565 , 2016. Toygun Basaklar, Suat Gumussoy, and Umit Ogras. Pd-morl: Preference-driven multi-objective reinforcement learning algorithm. In The Eleventh International Conference on Learning Repre-sentations , 2023. Richard Bellman and Robert Kalaba. Dynamic programming and statistical communication theory. 
+
+Proceedings of the National Academy of Sciences , 43(8):749–751, 1957. Hugo Bottemanne. Bayesian brain theory: Computational neuroscience of belief. Neuroscience ,566:198–204, 2025. Jerome R Busemeyer and James T Townsend. Decision field theory: a dynamic-cognitive approach to decision making in an uncertain environment. Psychological review , 100(3):432, 1993. Charles S Carver and Michael F Scheier. On the self-regulation of behavior . cambridge university press, 2001. Charles S Carver and Michael F Scheier. Self-regulation of action and affect. Handbook of self-regulation: Research, theory, and applications , pp. 13–39, 2004. Paul F Christiano, Jan Leike, Tom Brown, Miljan Martic, Shane Legg, and Dario Amodei. Deep reinforcement learning from human preferences. Advances in neural information processing sys-tems , 30, 2017. Matteo Colombo and Peggy Seri` es. Bayes in the brain—on bayesian modelling in neuroscience. 
+
+The British journal for the philosophy of science , 2012. Edward L Deci and Richard M Ryan. The general causality orientations scale: Self-determination in personality. Journal of research in personality , 19(2):109–134, 1985. Edward L Deci and Richard M Ryan. Self-determination theory. Handbook of theories of social psychology , 1(20):416–436, 2012. Gabriel Dulac-Arnold, Nir Levine, Daniel J Mankowitz, Jerry Li, Cosmin Paduraru, Sven Gowal, and Todd Hester. Challenges of real-world reinforcement learning: definitions, benchmarks and analysis. Machine Learning , 110(9):2419–2468, 2021. Nico H Frijda. The place of appraisal in emotion. Cognition & Emotion , 7(3-4):357–387, 1993. 10 Published as a conference paper at ICLR 2026 Karl Friston. The free-energy principle: a unified brain theory? Nature reviews neuroscience , 11 (2):127–138, 2010. Justin Fu, Katie Luo, and Sergey Levine. Learning robust rewards with adversarial inverse rein-forcement learning. In International Conference on Learning Representations , 2018. Borja Ibarz, Jan Leike, Tobias Pohlen, Geoffrey Irving, Shane Legg, and Dario Amodei. Reward learning from human preferences and demonstrations in atari. Advances in neural information processing systems , 31, 2018. Daniel Kahneman. Thinking, fast and slow . macmillan, 2011. Daniel Kahneman. Of 2 minds: How fast and slow thinking shape perception and choice [excerpt]. 
+
+Scientific American , 15, 2012. Daniel Kahneman and Amos Tversky. Prospect theory: An analysis of decision under risk. In 
+
+Handbook of the fundamentals of financial decision making: Part I , pp. 99–127. World Scientific, 2013. David C Knill and Alexandre Pouget. The bayesian brain: the role of uncertainty in neural coding and computation. TRENDS in Neurosciences , 27(12):712–719, 2004. Arie W Kruglanski, James Y Shah, Ayelet Fishbach, Ron Friedman, Woo Young Chun, and David Sleeth-Keppler. A theory of goal systems. In The motivated mind , pp. 207–250. Routledge, 2018. Richard S Lazarus. Emotion and adaptation . Oxford University Press, 1991. Sarah Lichtenstein and Paul Slovic. The construction of preference . Cambridge University Press, 2006. Ruohong Liu, Yuxin Pan, Linjie Xu, Lei Song, Pengcheng You, Yize Chen, and Jiang Bian. Ef-ficient discovery of pareto front for multi-objective reinforcement learning. In The Thirteenth International Conference on Learning Representations , 2025. R Duncan Luce et al. Individual choice behavior , volume 4. Wiley New York, 1959. Hossam Mossalam, Yannis M Assael, Diederik M Roijers, and Shimon Whiteson. Multi-objective deep reinforcement learning. arXiv preprint arXiv:1610.02707 , 2016. John W Payne, James R Bettman, and Eric J Johnson. The adaptive decision maker . Cambridge university press, 1993. Deepak Ramachandran and Eyal Amir. Bayesian inverse reinforcement learning. In IJCAI , vol-ume 7, pp. 2586–2591, 2007. Diederik M Roijers, Peter Vamplew, Shimon Whiteson, and Richard Dazeley. A survey of multi-objective sequential decision-making. Journal of Artificial Intelligence Research , 48:67–113, 2013. Stuart Jonathan Russell and Peter Norvig. Artificial intelligence: A modern approach;[the intelligent agent book] . Prentice hall, 1995. KR Scherer. Appraisal theory. Handbook of cognition and emotion , pp. 637–663, 1999. Amitai Shenhav, Matthew M Botvinick, and Jonathan D Cohen. The expected value of control: an integrative theory of anterior cingulate cortex function. Neuron , 79(2):217–240, 2013. Herbert A Simon. A behavioral model of rational choice. The quarterly journal of economics , pp. 99–118, 1955. Paul Slovic. The construction of preference. American psychologist , 50(5):364, 1995. Keith E Stanovich, Richard F West, and JE Alder. Individual differences in reasoning: Implications for the rationality debate?-open peer commentary-three fallacies. Behavioral and Brain Sciences ,23(5):665–665, 2000. 11 Published as a conference paper at ICLR 2026 Peter Vamplew, Richard Dazeley, Adam Berry, Rustam Issabekov, and Evan Dekker. Empirical evaluation methods for multiobjective reinforcement learning algorithms. Machine learning , 84 (1):51–80, 2011. Kristof Van Moffaert and Ann Now´ e. Multi-objective reinforcement learning using sets of pareto dominating policies. The Journal of Machine Learning Research , 15(1):3483–3512, 2014. Carsten Wrosch, Michael F Scheier, Gregory E Miller, Richard Schulz, and Charles S Carver. Adap-tive self-regulation of unattainable goals: Goal disengagement, goal reengagement, and subjective well-being. Personality and social psychology bulletin , 29(12):1494–1508, 2003. Runzhe Yang, Xingyuan Sun, and Karthik Narasimhan. A generalized algorithm for multi-objective reinforcement learning and policy adaptation. Advances in neural information processing systems ,32, 2019. Stelios H Zanakis, Anthony Solomon, Nicole Wishart, and Sandipa Dublish. Multi-attribute decision making: A simulation comparison of select methods. European journal of operational research ,107(3):507–529, 1998. Zhenliang Zhang, Zeyu Zhang, Ziyuan Jiao, Yao Su, Hangxin Liu, Wei Wang, and Song-Chun Zhu. On the emergence of symmetrical reality. In Proceedings of the IEEE Conference Virtual Reality and 3D User Interfaces (VR) , pp. 639–649. IEEE, 2024. 12 Published as a conference paper at ICLR 2026 
+
+## A DERIVATION OF THE PREFERENCE OPTIMIZATION OBJECTIVE 
+
+Problem definition. At each time step t, the agent maintains a latent preference logit vector zt ∈
+
+Rd, which is mapped to the probability simplex by 
+
+ωt = fθ (zt) := softmax( zt) ∈ ∆d−1. (11) Let the evidence at time t be the recent history et := st−H+1: t. Given a d-dimensional vector return ⃗Gt(et) ∈ Rd (estimated by the actor–critic from et; see Sec. 3.2), we define the scalar utility under preference ωt as 
+
+Ut(ωt; et) = ⟨ωt,⃗ G t(et)⟩. (12) Our goal is to infer zt from the evidence et.
+
+Assumption 1 (prior and Boltzmann-rational evidence). (i) Prior: p0(zt) = N (0, I); (ii) Evi-dence model: following quantal response and free-energy formulations, we posit the unnormalized 
+
+likelihood 
+
+log p(et | zt) = β U t(ωt; et) + C(et), β > 0, (13) where C(et) does not depend on zt (hence its gradient vanishes w.r.t. ϕ). 2 The corresponding (unnormalized) target posterior is 
+
+p∗(zt | et) ∝ p0(zt) exp  βU t(ωt; et). (14) 
+
+1. Objective: maximize marginal evidence. The marginal evidence is 
+
+p(et) = 
+
+Z
+
+p0(zt) p(et | zt) dzt, (15) which is intractable because ωt = fθ (zt) = softmax( zt) is nonlinear. 
+
+2. Variational family. We approximate the posterior by qϕ(zt | et) = N (μt, diag( σ2 
+
+> t
+
+)) , where 
+
+(μt, log σt) are the outputs of the encoder given et.
+
+3. KL expansion. By Bayes’ rule, 
+
+p∗(zt | et) = p0(zt) p(et | zt)
+
+p(et) . (16) Thus 
+
+KL  qϕ(zt | et) ∥ p∗(zt | et) = Eqϕ
+
+h
+
+log qϕ(zt | et) − log p0(zt) − log p(et | zt)
+
+i
+
++ log p(et).
+
+(17) Rearranging yields 
+
+log p(et) = Eqϕ
+
+ log p(et | zt) − KL  qϕ(zt | et) ∥ p0(zt)| {z }
+
+> Lt(ϕ)
+
++KL  qϕ(zt | et) ∥ p∗(zt | et). (18) 
+
+4. ELBO. Therefore, 
+
+log p(et) ≥ L t(ϕ) = Eqϕ(zt|et)
+
+ log p(et | zt) − KL  qϕ(zt | et) ∥ N (0, I). (19) Substituting the evidence model and dropping the C(et) term, we obtain 
+
+Lt(ϕ) = β Eqϕ(zt|et)
+
+⟨fθ (zt),⃗ G t(et)⟩ − KL  qϕ(zt | et) ∥ N (0, I). (20) Maximizing Lt(ϕ) is equivalent to minimizing KL  qϕ ∥ p∗ and tightens the lower bound on 
+
+log p(et). Over a window t = 1 , . . . , T , the overall preference-inference objective is 
+
+max 
+
+> ϕT
+
+X
+
+> t=1
+
+Lt(ϕ) = 
+
+> T
+
+X
+
+> t=1
+
+n
+
+β Eqϕ(zt|et)
+
+⟨fθ (zt),⃗ G t(et)⟩ − KL  qϕ(zt | et) ∥ N (0, I)o
+
+. (21) 13 Published as a conference paper at ICLR 2026 ME 
+
+> (a) Queue environment (b) Maze environment
+
+Figure 6: Two environments used in our experiments. (a) Queue provides a simple but illustrative toy problem. (b) Maze is mainly used in our experiments. 
+
+## B ENVIRONMENT DETAILS 
+
+In this section, we will introduce the detailed information of the designed environment in our exper-iments (as shown in Fig. 6). B.1 QUEUE 
+
+We design a symbolic queueing environment to capture moral–pragmatic trade-offs such as whether to wait patiently or cut in line under time pressure. The agent waits in a queue to be served and must decide between two discrete actions at each step: WAIT (stay in place) or CUT (jump k positions forward, capped at the front). 
+
+State space. The agent’s state at time t is a compact feature vector 
+
+st = [ pos t, queue len t, energy t, deadline t, recent cut t, service rate t],
+
+where pos t is the agent’s current position in the queue (normalized to [0 , 1] ), queue len t is the remaining queue length, energy t is remaining energy, deadline t is remaining time budget, 
+
+recent cut t ∈ { 0, 1} indicates whether the agent just cut the line, and service rate t is the current service rate (normalized). 
+
+Action space. The agent chooses from A = {WAIT , CUT }. Cutting consumes additional energy and may incur a fairness penalty. 
+
+Reward vector. Each step produces a d = 5 -dimensional reward vector: ⃗r t = rprogress  
+
+> t
+
+, r time  
+
+> t
+
+, r fairness  
+
+> t
+
+, r energy  
+
+> t
+
+, r deadline 
+
+> t
+
+, (22) where rprogress  
+
+> t
+
+= +1 when advancing in the queue or being served, rtime  
+
+> t
+
+= −1 per waiting step, 
+
+rfairness  
+
+> t
+
+= −γ when cutting ahead of others, renergy  
+
+> t
+
+= −λ proportional to energy expenditure, and 
+
+rdeadline  
+
+> t
+
+= + β if served before the deadline. 
+
+Dynamic events. To induce contextual shifts, we introduce event triggers such as: (i) Arrival burst: a sudden inflow of new agents increases the queue length; (ii) Service slowdown: the service rate drops, increasing expected waiting time; (iii) Energy shock: the agent’s remaining energy is reduced, raising the urgency of being served soon. These events create moral–pragmatic conflicts: a patient strategy may lead to starvation if energy runs out, while aggressive cutting risks collapsing the morality score. Thus, no fixed trade-off between fairness and survival can succeed universally, making this environment ideal for testing dynamic preference reweighting.          
+
+> 2Equivalently, p(et|zt)∝exp  βU t(ωt;et)with a partition term that is independent of zt.
+
+14 Published as a conference paper at ICLR 2026 Table 2: Detailed specifications of environments. Each domain introduces dynamic events that invalidate fixed preferences, requiring agents to adapt their value weights. 
+
+Environment State Space Action Space Reward Vector Dynamic Events 
+
+Queue Symbolic: 
+
+pos, queue len, energy, deadline Wait / Cut progress , time penalty ,
+
+fairness penalty , energy penalty ,
+
+deadline penalty Arrival burst ;
+
+Service slowdown ;
+
+Energy shock 
+
+Maze Pixel: 
+
+observation, time, energy Up / Down /
+
+Left /
+
+Right progress , time penalty , hazard penalty , energy penalty ,
+
+deadline penalty Deadline shock ;
+
+Hazard surge ;
+
+Energy drought 
+
+B.2 MAZE 
+
+We design a Maze navigation environment with multiple interacting objectives to evaluate adaptive preference inference under dynamic constraints. The agent starts in the bottom-left corner and must reach a goal location in the top-right corner. Each episode terminates upon reaching the goal or exceeding a maximum step budget T = 200 . At each step the agent observes its current (x, y )
+
+position, a global timer normalized to [0 , 1] , remaining energy, and a binary hazard map indicating nearby dangerous cells. The state is encoded as an image st ∈ RH×W ×3, where the three channels are [observation, time ratio, energy ratio] , respectively. 
+
+Action space. The agent chooses from A = {UP, DOWN, LEFT, RIGHT }, moving one cell per step unless blocked by a wall. 
+
+Reward vector. Each transition produces a d = 5 -dimensional reward vector: ⃗r t = rprog  
+
+> t
+
+, r time  
+
+> t
+
+, r hazard  
+
+> t
+
+, r energy  
+
+> t
+
+, r deadline 
+
+> t
+
+, (23) where rprog  
+
+> t
+
+= +1 for moving closer to the goal, rtime  
+
+> t
+
+= −1 as a per-step time penalty, 
+
+rhazard  
+
+> t
+
+= −κ if stepping into a hazardous cell, and renergy  
+
+> t
+
+= −λ proportional to energy con-sumption, rdeadline  
+
+> t
+
+= + β if reached before the deadline. No fixed scalarization is applied; the agent must learn to reweight these objectives. 
+
+Dynamic events. To induce non-stationarity, we introduce three event types at random steps: (i) Deadline shock: remaining time budget is suddenly shortened by 30% , increasing the ur-gency of reaching the goal. (ii) Hazard surge: a new region of static hazards appears, increasing collision risk along the shortest path. (iii) Energy drought: the agent’s energy consumption per step doubles, requiring more con-servative movement. Each episode may contain multiple events in sequence, forcing the agent to continuously reappraise what matters most (e.g., prioritize speed when the deadline is tight, or safety when hazards dominate). Despite their surface differences (as in Table 2), both domains share the same structural property: 
+
+without dynamic preference adjustment, the agent rarely succeeds. In our implementations, we empirically observe that no single fixed preference vector over the exposed reward compo-nents achieves high MER and SR across all event configurations. This unified design highlights the necessity of our proposed framework, which equips agents with cognitive-like value reappraisal to remain effective under shifting constraints. 15 Published as a conference paper at ICLR 2026 
+
+## C IMPLEMENTATION DETAILS 
+
+C.1 NETWORK ARCHITECTURE Conv 
+
+> 32x8x8
+> 64x4x4
+> 64x3x 3
+
+GRU 
+
+> 12 8
+
+𝝁 
+
+𝝈 
+
+FC 
+
+> 128x128
+
+FC 
+
+> 128x128
+> 128x5
+
+FC    
+
+> 128x128
+> 128x5 Observation history
+> 𝑂 !:#∈ℝ$×&×'×(
+
+State Encoder Value Appraisal Module 
+
+Figure 7: The architecture of our Value Appraisal Module, where the numbers represent channel numbers and kernel size 
+
+Value Appraisal Module. The network structure of the proposed value appraisal module used in Maze experiments is illustrated in Fig. 7. In detail, the state encoder consists of two convolutional layers and a fully connected layer for encoding observations. Then a GRU network is employed to aggregate historical information, which is connected with two two-layer fully connected network to model the mean and the standard deviation. Each convolutional layer is activated by ReLU, and each fully connected layer is activated by leaky ReLU. In particular, we use two fully connected layers as state encoder for Queue. Conv 
+
+> 32x8x8
+> 64x4x4
+> 64x3x 3
+
+## FC 
+
+> 128x128
+
+## Actor  
+
+> 𝜋 (𝑎 !|𝑠 !,𝜔 ∗)
+
+## Criti c   
+
+> 𝑣 (𝑠 !,𝜔 ∗)Observation
+> 𝑂 !∈ℝ"×$×%
+
+## State Encoder Action Selection Module 
+
+v1 v" v# v$
+
+Figure 8: The architecture of our Action Selection Module, where the numbers represent channel numbers and kernel size. 
+
+Action Selection Module. We employ a value preference conditional actor-critic as our action selection module, as shown in Fig. 8. Specifically, the state encoder is the same as the value appraisal module. The actor and critic are both consists of two fully connected layers activated by leaky ReLU. C.2 OPTIMIZATION 
+
+The algorithm process for the DPI is shown in Algorithm 1. The encoder fϕ outputs (μt, log σt) for a diagonal Gaussian qϕ(zt | st−H+1: t) = N (μt, diag( σ2 
+
+> t
+
+)) 
+
+over the unconstrained latent zt, and preferences are obtained via ω(zt) = softmax( zt). We esti-mate the expectation in equation 20 by the reparameterization trick zt = μt + σt ⊙ ε, ε ∼ N (0 , I ),using 1– K Monte Carlo samples per update. The temperature β controls evidence sensitivity (larger 
+
+β gives sharper posteriors. Without loss of generality, we set β = 1 ); we keep β fixed unless stated otherwise. Vector targets ⃗ Gt are computed per dimension from the critic (see Sec. 3.2), and are treated as constants w.r.t. ϕ during preference updates. 16 Published as a conference paper at ICLR 2026 
+
+Algorithm 1 Dynamic Preference Inference (DPI) with On-Policy Envelope Actor–Critic 
+
+Input: Policy parameters θ, preference encoder ϕ
+
+Repeat for each training iteration: 
+
+Collect trajectories: 
+
+For t = 1 , . . . , T :Encode recent history st−H+1: t via GRU fϕ to obtain mean μt, log-variance log σt:
+
+qϕ(zt | st−H+1: t) = N (μt, diag( σ2 
+
+> t
+
+)) , ω(k) 
+
+> t
+
+= softmax( z(k) 
+
+> t
+
+).
+
+Sample K candidates z(k) 
+
+> t
+
+and select ˆωt = arg max k⟨ω(k) 
+
+> t
+
+,⃗ V θ (st, ω(k) 
+
+> t
+
+)⟩
+
+Sample action at ∼ πθ (· | st, ˆωt) and step the environment. 
+
+Optimize: 
+
+Compute vector returns: ⃗ Gt by multi-objective GAE. Compute scalar advantage: At = ⟨ ˆωt,⃗ A t⟩.Compute actor-critic loss: Lπ = Lppo + Lcritic .Update θ by minimizing Lπ .Compute elbo LELBO :
+
+LELBO = −Ezt∼qϕ
+
+⟨softmax( zt),⃗ G t⟩ + KL  qϕ(zt | st−H+1: t)∥N (0, I)
+
+Directional alignment regularization: Ldir = 1 − λ ⟨ωpred     
+
+> t,⃗G t⟩∥ωpred
+> t∥2∥⃗Gt∥2
+
+Self-consistency regularization: Lstab = ∥ωpred  
+
+> t
+
+− ˆωt∥22.
+
+Update ϕ by minimizing Lprefer = LELBO + λLdir + γLsta .C.3 COMPUTE RESOURCES AND REPRODUCIBILITY 
+
+Compute Resources. All experiments were conducted on a single workstation equipped with an NVIDIA RTX 4090 GPU (24GB VRAM) and an Intel Core i9-14900K CPU (32 cores, 64GB RAM). This setup allows 6–8 experiments to be run in parallel without resource contention. Train-ing a single DPI agent on Maze for 1.5×10 5 environment steps takes approximately 15 minutes, and completing all reported experiments across 10 random seeds requires 6 hours in total. Our imple-mentation is based on PyTorch 2.4.1 with CUDA 11.8, and uses Gymnasium 1.0.0 for environment simulation. All code is optimized to run on a single GPU; no distributed training is required. 
+
+Reproducibility. We fix all random seeds for NumPy, PyTorch, and Gymnasium to ensure repro-ducibility. Hyperparameters are summarized in Table 3. We report results averaged over 10 inde-pendent seeds and present 95% confidence intervals (CI) to account for stochasticity. For ablation studies and sensitivity analyses (e.g., history window size H), we sweep parameters in a controlled range and report mean ± CI to ensure robustness. 
+
+## D EXTRA EXPERIMENTS 
+
+D.1 PARETO ANALYSIS OF PRE - AND POST -E VENT REGIMES IN QUEUE 
+
+To illustrate that the Pareto-optimal trade-offs before and after an event are structurally different, we approximate Pareto fronts in the Queue environment under the pre-event (normal arrival and service rates) and post-event (arrival burst + service slowdown + energy shock) regimes. For this analysis, we fix a family of linear scalarizations over the vector reward, 
+
+U (ω, e ) = ⟨ω,⃗ G (e)⟩, (24) and sweep ω over a grid on the simplex. For each ω, we train a policy in the pre-event regime and in the post-event regime, and estimate the corresponding vector returns ⃗ Gpre (ω) and ⃗ Gpost (ω) from rollouts. In Fig. 9 we project these vectors onto a 2D objective space: (i) progress (higher is better) 17 Published as a conference paper at ICLR 2026 Table 3: Hyperparameters used in all experiments. Values are shared across Maze and Queue unless otherwise noted.                          
+
+> Hyperparameter Value
+> Learning rate 2.5×10 −4
+> Batch size 1024 transitions per update Discount factor 0.99
+> GAE parameter 0.95
+> PPO clip ratio ( ϵ)0.2
+> Entropy coefficient 0.01
+> Value loss coefficient ( ξ)0.5
+> KL regularization weight ( αkl )0.1
+> Direction alignment weight ( λ)0.1
+> Self-consistency weight ( γ)0.01
+> Optimizer Adam Number of epochs per update 1
+> History window size ( H)3(unless otherwise varied in ablation) Preference samples per step ( K)8
+> Training steps per run 1.5×10 5environment steps Number of seeds 10 (results reported as mean ± 95% CI)
+
+Figure 9: Queue environment: Pareto fronts before and after the event. We approximate Pareto fronts in a 2D objective space (progress vs. deadline-related penalty) by training policies with fixed linear scalarizations ω over the vector reward. Each point is a policy; circles and triangles denote pre- and post-event regimes, respectively, and colors encode the dominant component of ω. The blue curve shows the pre-event Pareto front, which lies predominantly in the upper-left region (smaller deadline penalty with moderate progress), while the orange curve shows the post-event Pareto front, which shifts towards the lower-right (higher progress at the cost of larger deadline penalties). The scalarizations that are near-optimal in the pre-event regime induce strongly suboptimal trade-offs in the post-event regime, and vice versa, indicating that the Pareto-optimal preference configurations before and after the event are largely disjoint. This supports our claim that no single fixed ω over the exposed reward vector is robust across all event configurations. on the x-axis, and (ii) a deadline-related penalty on the y-axis (higher on the plot corresponds to smaller penalty / more deadline slack). Each marker in Fig. 9 corresponds to a policy trained with a fixed scalarization ω: circles denote pre-event policies, triangles denote post-event policies. From these samples we extract the non-dominated points in each regime, which we plot as the pre-event and post-event Pareto fronts. 18 Published as a conference paper at ICLR 2026 D.2 RL BASELINES OPTIMIZING STATIC METRICS AND DENSE ORACLE BASELINE RESULTS 
+
+We add three extra baselines in which we tune the scalarization weights separately for MER and SR (MER-PPO and SR-PPO). which are: • MER-PPO: PPO with a metric-specific scalar reward rMER  
+
+> t
+
+= ⟨ωeval ,⃗ r t⟩, where the evalu-ation weight ωeval is given to the agent (oracle static scalarization). • SR-PPO: PPO with a sparse success reward (1 on success, 0 otherwise). • Dense Oracle: based on PPO that receives access to the same event signals and additionally uses time / energy information to continuously update preference weights at each timestep (e.g., gradually increasing deadline weight as the deadline approaches, increasing hazard weight in proportion to hazard intensity). We tuned two baselines carefully, and report their performance: Table 4: Comparison results on Queue and Maze. Method Queue Maze MER SR ( %) MER SR ( %)MER-PPO 15.01 ±0.46 0.98 ± 0.05 85.55 ±0.12 0.05 ± 0.01 
+
+SR-PPO −5.64 ± 5.22 46 .91 ± 0.00 −15 .28 ± 0.96 61 .13 ± 0.05 
+
+Dense Oracle 14 .41 ± 5.18 49 .27 ± 15 .40 40 .33 ± 3.73 62 .92 ± 0.02 
+
+DPI-PPO 10 .34 ± 0.02 39 .95 ± 2.75 30 .16 ± 1.22 59 .04 ± 0.01 
+
+Note that, for MER-PPO and SR-PPO, while these baselines can do well on individual metrics in stationary settings, they struggle to maintain high performance across all metrics under non-stationary event sequences, whereas DPI maintains consistently good MER and SR. In addition, Dense-Oracle baseline can serve as a strong upper bound. Empirically, PPO-MER achieves competitive mean episodic return, but still suffers from low success rate, confirming that single fixed scalarization can hardly cope with all event configurations. Our DPI agent maintains comparable MER while substantially improving SR, and additionally provides interpretable, event-aligned preference trajectories (as shown in Fig. 4). This supports our claim that explicit dynamic preference inference offers benefits beyond standard single-objective RL. In addition, designing a Markovian reward that directly optimizes PS@K would require explicit access to change points and the evaluation horizon K, which we intentionally do not assume. We therefore treat PS@K as an evaluation-only metric and focus on MER/SR for single-objective RL baselines. D.3 CONTINUOUS CONTROL ENVIRONMENT EXPERIMENTS 
+
+To demonstrate the scalability of the proposed method, we modified and implemented a continuous environment based on multi-objective mujoco. The experiment result is reported in Table 5. We further construct a continuous-control benchmark by extending the multi-objective HalfCheetah environment from mo-gymnasium (mo-halfcheetah-v5 ) with dynamic events and resource constraints. The agent controls a planar cheetah to run forward while trading off forward progress, control effort, and energy consumption under a stochastic schedule of events. Compared to the grid-based Maze in the main text, this environment probes preference inference in a higher-dimensional, continuous state–action space. 
+
+State and observation. Let ot ∈ Rdo denote the standard MuJoCo observation of HalfCheetah at time t (joint positions/velocities, torso state, etc.). To provide short-term temporal context, we expose to the agent a stacked history of length H:
+
+st = ot−H+1 , . . . , o t
+
+ ∈ RH×do , (25) 19 Published as a conference paper at ICLR 2026 with H = 8 in all experiments. Internally, the environment also maintains a remaining deadline 
+
+Dt ∈ N and an energy budget Et ∈ R+, which govern termination but are not directly observed by the agent (making the task partially observable with respect to constraints). We set a maximum horizon Tmax = 200 , an initial deadline D0 = 200 , and an initial energy budget E0 = 100 .
+
+Action space. The action at ∈ Rda is a continuous torque vector applied to the actuated joints, identical to the standard HalfCheetah control interface. We use the same box-constrained action space as mo-halfcheetah-v5 .
+
+Reward vector and constraints. At each step the underlying mo-halfcheetah-v5 environ-ment returns a vector reward 
+
+˜rt = [˜ rspeed  
+
+> t
+
+, ˜rctrl  
+
+> t
+
+], (26) where ˜rspeed  
+
+> t
+
+is the forward speed reward (proportional to the x-velocity of the torso) and ˜rctrl 
+
+> t
+
+encodes a control-cost penalty. We construct a d = 3 dimensional reward vector ⃗r t = rspeed  
+
+> t
+
+, r ctrl  
+
+> t
+
+, r energy 
+
+> t
+
+, (27) with 
+
+rspeed  
+
+> t
+
+= αspeed  
+
+> t
+
+˜rspeed  
+
+> t
+
+,rctrl  
+
+> t
+
+= −αctrl  
+
+> t
+
+˜rctrl  
+
+> t
+
+,renergy  
+
+> t
+
+= −ηt ∥at∥2 + rdeadline  
+
+> t
+
+.
+
+(28) Here αspeed  
+
+> t
+
+, α ctrl  
+
+> t
+
+, η t > 0 are time-varying scales that may change when events occur (see below). The energy budget is updated as 
+
+Et+1 = Et − ηt ∥at∥2, (29) and the deadline counts down as Dt+1 = Dt − 1.The deadline component rdeadline  
+
+> t
+
+is only non-zero at termination. If the episode terminates due to reaching a goal state before exhausting the deadline or energy budget, we grant a positive bonus +β;if it terminates due to deadline expiration, we assign a penalty −β; and if it terminates due to energy exhaustion, we add an extra negative penalty on renergy  
+
+> t
+
+. In our implementation we use β = 10 .The environment terminates when either (i) the underlying MuJoCo simulator signals failure, (ii) 
+
+Dt ≤ 0 (deadline reached), (iii) Et ≤ 0 (energy exhausted), or (iv) the maximum horizon Tmax is reached (in which case we treat the episode as truncated). No fixed scalarization is hard-coded into the environment; as in Maze, the agent must adaptively reweight the components of ⃗r t.
+
+Dynamic events. To induce non-stationary trade-offs, we introduce three types of exogenous events that modify constraints and reward scales: 
+
+Deadline shock: the remaining time budget is suddenly shortened by a fraction. Concretely, at event time t, we sample a shrink ratio ρ ∈ (0 , 1) (default ρ = 0 .5) and update 
+
+Dt ← max {1, D t − ⌈ ρD t⌉} , (30) increasing the urgency of progress. 
+
+Speed surge: the importance of forward speed is increased by multiplying its scale: 
+
+αspeed  
+
+> t
+
+← cspeed αspeed  
+
+> t
+
+, (31) with default multiplier cspeed = 1 .5. This models scenarios where performance pressure (e.g., a tighter external requirement on forward velocity) suddenly rises. 
+
+Energy drought: the per-step energy cost increases, making actions more expensive: 
+
+ηt ← cenergy ηt, (32) with default multiplier cenergy = 2 .0. This mimics a sudden reduction in available power or effi-ciency, pushing the agent to adopt more conservative control. 20 Published as a conference paper at ICLR 2026 Table 5: Comparison results on the modified continuous control environment. To handle a continu-ous action space, we adapt the rule-based ENVELOPE Q-learning baseline to a PPO actor–critic im-plementation (ENVELOPE-PPO). Dense Oracle is given privileged access to dynamic event signals and hand-crafted rules for updating the preference weights, whereas DPI-PPO (ours) only observes the standard environment state and must infer preferences purely from interaction. Method MER SR(%) ENVELOPE-PPO 13 .52 ± 9.89 53 .28 ± 12 .00 
+
+Dense Oracle 66 .95 ± 5.78 99 .98 ± 0.01 
+
+DPI-PPO (Ours) 42 .10 ± 6.25 81 .00 ± 1.00 
+
+D.4 HYPERPARAMETER SENSITIVITY ANALYSIS 
+
+To evaluate how sensitive DPI is to the auxiliary loss coefficients, we conduct a experiment on the Q UEUE environment, varying the stability weight γ and the directional-alignment weight λ in Eq. (10) while keeping all other hyperparameters fixed. For each setting, we train the agent with 10 random seeds and report the mean episodic return (MER) and success rate (SR) over 200 evaluation episodes in Table 6. Overall, DPI is fairly robust to moderate changes of γ and λ: performance under all tested configurations stays within one standard deviation of the default setting, and only very small or very large coefficients lead to a mild degradation in SR. Table 6: Hyperparameter sensitivity analysis. Here γ and λ are reported as relative multipliers around the default (γ0, λ 0) used in the main experiments (i.e., 0.5 means 0.5γ0). 
+
+γ λ MER SR(%) 0.5 1.0 10 .84 ± 1.33 38 .57 ± 2.10 
+
+1.0 1.0 10 .34 ± 0.02 39 .95 ± 2.75 
+
+2.0 1.0 9.55 ± 0.62 35 .85 ± 1.02 
+
+1.0 0.5 9.70 ± 0.78 30 .43 ± 3.27 
+
+1.0 2.0 8.85 ± 1.62 36 .93 ± 0.46 
+
+D.5 DISCUSSION ON COLD -START DYNAMICS 
+
+In our implementation, early training is stabilized by two mechanisms. 
+
+(i) Gaussian prior and KL regularization. Because qϕ(zt | · ) is regularized toward N (0 , I ), the induced preference weights ωt = softmax( zt) are initially close to a high-entropy, nearly uniform distribution over objectives. This prevents the appraisal module from committing to extreme trade-offs when the critic is still inaccurate. 
+
+(ii) Envelope selection with on-policy actor–critic. Even when the multi-objective returns ⃗ Gt are noisy, the envelope operator is applied over multiple ωt samples drawn from a broad posterior, and the PPO update is on-policy with respect to the selected ωt. In practice, this behaves similarly to a standard multi-objective actor–critic with stochastic exploration in preference space, rather than a brittle deterministic scheduler. Empirically, we do not observe systematic early mode collapse of preferences. Instead, the entropy of ωt gradually decreases as the critic becomes more informative, consistent with a smooth transition from exploratory to more specialized preference configurations. D.6 LEARNING CURVES 
+
+To assess the training stability of DPI, we run 10 independent training runs on the Queue environ-ment with different random seeds, using the default hyperparameters reported in Table 3. For each run, we log performance throughout training as follows: 21 Published as a conference paper at ICLR 2026 
+
+Figure 10: Mean episodic return (MER, left) and success rate (SR, right) as a function of environ-ment steps. Solid lines show the mean over 10 random seeds and shaded regions denote the 95% confidence interval. DPI-PPO exhibits smooth and monotone improvement without divergence or collapse. • After every 5,000 environment interaction steps, we fix the current policy and derive a greedy evaluation policy (breaking action ties uniformly at random). • We then evaluate this policy on 200 episodes without exploration noise and compute the mean episodic return (MER) and success rate (SR) for that evaluation point. For each evaluation step, we aggregate MER and SR across seeds and report the mean and the 95% confidence interval, which are plotted in Fig. 10. As shown in the figure, both MER and SR improve smoothly over time and eventually saturate, without divergence, collapse, or large oscilla-tions. These observations indicate that the combined ELBO-based preference inference and PPO optimization yield stable training dynamics. 22

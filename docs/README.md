@@ -6,73 +6,73 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-03-29
-- 运行时间：2026-03-29 19:56:04 UTC
+- 最新运行日期：2026-03-30
+- 运行时间：2026-03-30 19:39:08 UTC
 - 运行状态：成功
 - 本次总论文数：17
 - 精读区：6
 - 速读区：11
 
 ### 今日简报（AI）
-今日深度探索智能体在推荐系统与多工具协同中的演进，涵盖 AgenticRec 等 17 篇前沿成果。
-核心结论指出大模型正从单工具调用转向复杂编排，且端到端工具集成策略能显著优化排序推荐效果。
-建议关注智能体的主动交互与投机感知技术，把握推荐系统向 Agent 化转型的技术红利。
-- 详情：[/202603/29/README](/202603/29/README)
+今日聚焦高效视频智能体与 LLM 驱动的低碳控制，深度解析 17 篇强化学习与推理模型前沿进展。
+重点关注 EVA 框架实现的端到端视频任务效率突破，以及大模型在 HVAC 节能与 ARC-AGI 逻辑推理中的创新应用。
+建议优先研读 EVA 论文以掌握视频智能体新范式，并关注 R1 风格推理模型在交通仿真等垂直领域的落地。
+- 详情：[/202603/30/README](/202603/30/README)
 
 ### 精读区论文标签
-1. [AgenticRec: End-to-End Tool-Integrated Policy Optimization for Ranking-Oriented Recommender Agents](/202603/29/2603.21613v1-agenticrec-end-to-end-tool-integrated-policy-optimization-for-ranking-oriented-recommender-agents)  
+1. [EVA: Efficient Reinforcement Learning for End-to-End Video Agent](/202603/30/2603.22918v2-eva-efficient-reinforcement-learning-for-end-to-end-video-agent)  
    标签：评分：10.0/10、query:ag-rl
-   evidence：集成工具策略优化的智能体推荐框架
-2. [The Evolution of Tool Use in LLM Agents: From Single-Tool Call to Multi-Tool Orchestration](/202603/29/2603.22862v1-the-evolution-of-tool-use-in-llm-agents-from-single-tool-call-to-multi-tool-orchestration)  
+   evidence：使用多模态大模型的端到端视频智能体高效强化学习框架
+2. [Hierarchical Control Framework Integrating LLMs with RL for Decarbonized HVAC Operation](/202603/30/2603.26050v1-hierarchical-control-framework-integrating-llms-with-rl-for-decarbonized-hvac-operation)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：LLM智能体在数字环境中行动的综述
-3. [Towards Effective Experiential Learning: Dual Guidance for Utilization and Internalization](/202603/29/2603.24093v1-towards-effective-experiential-learning-dual-guidance-for-utilization-and-internalization)  
+   evidence：集成LLM与强化学习的分层控制框架
+3. [Beyond Where to Look: Trajectory-Guided Reinforcement Learning for Multimodal RLVR](/202603/30/2603.26126v1-beyond-where-to-look-trajectory-guided-reinforcement-learning-for-multimodal-rlvr)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：利用强化学习提升大语言模型能力
-4. [Bridging Perception and Reasoning: Token Reweighting for RLVR in Multimodal LLMs](/202603/29/2603.25077v1-bridging-perception-and-reasoning-token-reweighting-for-rlvr-in-multimodal-llms)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：多模态大模型的带可验证奖励强化学习
-5. [LSAI: A Large Small AI Model Codesign Framework for Agentic Robot Scenarios](/202603/29/2603.21726v1-lsai-a-large-small-ai-model-codesign-framework-for-agentic-robot-scenarios)  
+   evidence：多模态大语言模型的轨迹引导强化学习
+4. [Model Predictive Control with Differentiable World Models for Offline Reinforcement Learning](/202603/30/2603.22430v1-model-predictive-control-with-differentiable-world-models-for-offline-reinforcement-learning)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：智能机器人场景框架
-6. [Agentic Personas for Adaptive Scientific Explanations with Knowledge Graphs](/202603/29/2603.21846v1-agentic-personas-for-adaptive-scientific-explanations-with-knowledge-graphs)  
+   evidence：离线强化学习的推理时自适应
+5. [MARCH: Multi-Agent Reinforced Self-Check for LLM Hallucination](/202603/30/2603.24579v1-march-multi-agent-reinforced-self-check-for-llm-hallucination)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：带有智能体人格的科学解释强化学习方法
+   evidence：用于LLM事实对齐的多智能体强化框架
+6. [Supervising Ralph Wiggum: Exploring a Metacognitive Co-Regulation Agentic AI Loop for Engineering Design](/202603/30/2603.24768v1-supervising-ralph-wiggum-exploring-a-metacognitive-co-regulation-agentic-ai-loop-for-engineering-design)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：用于设计自动化的元认知协同调节智能体AI环路
 
 ### 速读区论文标签
-1. [On the Direction of RLVR Updates for LLM Reasoning: Identification and Exploitation](/202603/29/2603.22117v1-on-the-direction-of-rlvr-updates-for-llm-reasoning-identification-and-exploitation)  
+1. [ARC-AGI-3: A New Challenge for Frontier Agentic Intelligence](/202603/30/2603.24621v1-arc-agi-3-a-new-challenge-for-frontier-agentic-intelligence)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：具有可验证奖励的 LLM 推理强化学习
-2. [SpecEyes: Accelerating Agentic Multimodal LLMs via Speculative Perception and Planning](/202603/29/2603.23483v1-speceyes-accelerating-agentic-multimodal-llms-via-speculative-perception-and-planning)  
+   evidence：研究新环境中智能体智能与规划能力的基准测试
+2. [Learning Rollout from Sampling:An R1-Style Tokenized Traffic Simulation Model](/202603/30/2603.24989v1-learning-rollout-from-samplingan-r1-style-tokenized-traffic-simulation-model)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：通过投机规划加速智能体多模态大语言模型
-3. [Implicit Turn-Wise Policy Optimization for Proactive User-LLM Interaction](/202603/29/2603.23550v1-implicit-turn-wise-policy-optimization-for-proactive-user-llm-interaction)  
+   evidence：在大语言模型风格的模拟中基于动作令牌的强化学习
+3. [Train at Moving Edge: Online-Verified Prompt Selection for Efficient RL Training of Large Reasoning Model](/202603/30/2603.25184v1-train-at-moving-edge-online-verified-prompt-selection-for-efficient-rl-training-of-large-reasoning-model)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：通过强化学习优化大语言模型交互
-4. [Policy-Guided Threat Hunting: An LLM enabled Framework with Splunk SOC Triage](/202603/29/2603.23966v1-policy-guided-threat-hunting-an-llm-enabled-framework-with-splunk-soc-triage)  
+   evidence：通过提示词选择实现大型推理模型的高效强化学习训练
+4. [Offline Decision Transformers for Neural Combinatorial Optimization: Surpassing Heuristics on the Traveling Salesman Problem](/202603/30/2603.25241v1-offline-decision-transformers-for-neural-combinatorial-optimization-surpassing-heuristics-on-the-traveling-salesman-problem)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：将智能体AI与Splunk集成用于威胁狩猎
-5. [Bayesian Learning in Episodic Zero-Sum Games](/202603/29/2603.20604v1-bayesian-learning-in-episodic-zero-sum-games)  
+   evidence：用于神经组合优化的离线强化学习框架
+5. [Decoupling Exploration and Policy Optimization: Uncertainty Guided Tree Search for Hard Exploration](/202603/30/2603.22273v2-decoupling-exploration-and-policy-optimization-uncertainty-guided-tree-search-for-hard-exploration)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：情节性马尔可夫博弈中的贝叶斯学习与均衡策略
-6. [Unified-MAS: Universally Generating Domain-Specific Nodes for Empowering Automatic Multi-Agent Systems](/202603/29/2603.21475v1-unified-mas-universally-generating-domain-specific-nodes-for-empowering-automatic-multi-agent-systems)  
+   evidence：用于自主探索和策略优化的强化学习
+6. [STEM Agent: A Self-Adapting, Tool-Enabled, Extensible Architecture for Multi-Protocol AI Agent Systems](/202603/30/2603.22359v1-stem-agent-a-self-adapting-tool-enabled-extensible-architecture-for-multi-protocol-ai-agent-systems)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：自动多智能体系统生成的框架
-7. [Agentic Automation of BT-RADS Scoring: End-to-End Multi-Agent System for Standardized Brain Tumor Follow-up Assessment](/202603/29/2603.21494v1-agentic-automation-of-bt-rads-scoring-end-to-end-multi-agent-system-for-standardized-brain-tumor-follow-up-assessment)  
+   evidence：多协议AI智能体系统的模块化架构
+7. [From Static Templates to Dynamic Runtime Graphs: A Survey of Workflow Optimization for LLM Agents](/202603/30/2603.22386v1-from-static-templates-to-dynamic-runtime-graphs-a-survey-of-workflow-optimization-for-llm-agents)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：用于自动化医学评分和评估的多智能体LLM系统
-8. [T-MAP: Red-Teaming LLM Agents with Trajectory-aware Evolutionary Search](/202603/29/2603.22341v1-t-map-red-teaming-llm-agents-with-trajectory-aware-evolutionary-search)  
+   evidence：LLM智能体计算图与工作流优化的综述
+8. [Learning What Matters Now: Dynamic Preference Inference under Contextual Shifts](/202603/30/2603.22813v1-learning-what-matters-now-dynamic-preference-inference-under-contextual-shifts)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：通过轨迹搜索对 LLM 智能体进行红队测试
-9. [Delightful Distributed Policy Gradient](/202603/29/2603.20521v1-delightful-distributed-policy-gradient)  
+   evidence：用于序列决策和强化学习的动态偏好推理
+9. [The Intelligent Disobedience Game: Formulating Disobedience in Stackelberg Games and Markov Decision Processes](/202603/30/2603.20994v1-the-intelligent-disobedience-game-formulating-disobedience-in-stackelberg-games-and-markov-decision-processes)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：分布式强化学习策略梯度方法论
-10. [Agentic Automation of BT-RADS Scoring: End-to-End Multi-Agent System for Standardized Brain Tumor Follow-up Assessment](/202603/29/2603.21494v2-agentic-automation-of-bt-rads-scoring-end-to-end-multi-agent-system-for-standardized-brain-tumor-follow-up-assessment)  
+   evidence：在马尔可夫决策过程中为辅助智能体制定不服从机制
+10. [ABSTRAL: Automatic Design of Multi-Agent Systems Through Iterative Refinement and Topology Optimization](/202603/30/2603.22791v1-abstral-automatic-design-of-multi-agent-systems-through-iterative-refinement-and-topology-optimization)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：用于自动化临床决策评估的多智能体系统
-11. [Toward a Theory of Hierarchical Memory for Language Agents](/202603/29/2603.21564v1-toward-a-theory-of-hierarchical-memory-for-language-agents)  
+   evidence：通过迭代优化自动设计多智能体系统的框架
+11. [SoK: The Attack Surface of Agentic AI -- Tools, and Autonomy](/202603/30/2603.22928v1-sok-the-attack-surface-of-agentic-ai----tools-and-autonomy)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：智能体系统的分层记忆理论
+   evidence：代理式AI系统安全风险的系统化研究
 
 
 <div class="dpr-home-promo-card">
