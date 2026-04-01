@@ -1,39 +1,158 @@
 {
-  "generated_at": "2026-03-31T20:23:21.768187+00:00",
-  "updated_date": "20260331",
+  "generated_at": "2026-04-01T20:11:11.134757+00:00",
+  "updated_date": "20260401",
   "carryover_days": 9,
   "items": [
     {
-      "id": "2603.26100v1",
-      "title": "Rethinking Recommendation Paradigms: From Pipelines to Agentic Recommender Systems",
-      "abstract": "Large-scale industrial recommenders typically use a fixed multi-stage pipeline (recall, ranking, re-ranking) and have progressed from collaborative filtering to deep and large pre-trained models. However, both multi-stage and so-called One Model designs remain essentially static: models are black boxes, and system improvement relies on manual hypotheses and engineering, which is hard to scale under heterogeneous data and multi-objective business constraints. We propose an Agentic Recommender System (AgenticRS) that reorganizes key modules as agents. Modules are promoted to agents only when they form a functionally closed loop, can be independently evaluated, and possess an evolvable decision space. For model agents, we outline two self-evolution mechanisms: reinforcement learning style optimization in well-defined action spaces, and large language model based generation and selection of new architectures and training schemes in open-ended design spaces. We further distinguish individual evolution of single agents from compositional evolution over how multiple agents are selected and connected, and use a layered inner and outer reward design to couple local optimization with global objectives. This provides a concise blueprint for turning static pipelines into self-evolving agentic recommender systems.",
+      "id": "2603.28990v1",
+      "title": "Drop the Hierarchy and Roles: How Self-Organizing LLM Agents Outperform Designed Structures",
+      "abstract": "How much autonomy can multi-agent LLM systems sustain -- and what enables it? We present a 25,000-task computational experiment spanning 8 models, 4--256 agents, and 8 coordination protocols ranging from externally imposed hierarchy to emergent self-organization. We observe that autonomous behavior already emerges in current LLM agents: given minimal structural scaffolding (fixed ordering), agents spontaneously invent specialized roles, voluntarily abstain from tasks outside their competence, and form shallow hierarchies -- without any pre-assigned roles or external design. A hybrid protocol (Sequential) that enables this autonomy outperforms centralized coordination by 14% (p<0.001), with a 44% quality spread between protocols (Cohen's d=1.86, p<0.0001). The degree of emergent autonomy scales with model capability: strong models self-organize effectively, while models below a capability threshold still benefit from rigid structure -- suggesting that as foundation models improve, the scope for autonomous coordination will expand. The system scales sub-linearly to 256 agents without quality degradation (p=0.61), producing 5,006 unique roles from just 8 agents. Results replicate across closed- and open-source models, with open-source achieving 95% of closed-source quality at 24x lower cost. The practical implication: give agents a mission, a protocol, and a capable model -- not a pre-assigned role.",
       "authors": [
-        "Jinxin Hu",
-        "Hao Deng",
-        "Lingyu Mu",
-        "Hao Zhang",
-        "Shizhun Wang",
-        "Yu Zhang",
-        "Xiaoyi Zeng"
+        "Victoria Dochkina"
       ],
-      "primary_category": "cs.IR",
+      "primary_category": "cs.AI",
       "categories": [
-        "cs.IR"
+        "cs.AI"
       ],
-      "published": "2026-03-27T06:14:18+00:00",
-      "link": "https://arxiv.org/pdf/2603.26100v1",
+      "published": "2026-03-30T20:44:53+00:00",
+      "link": "https://arxiv.org/pdf/2603.28990v1",
       "tags": [
         "keyword:AG RL",
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "agentic recommender system architecture",
-      "llm_evidence_cn": "智能体推荐系统架构",
-      "llm_evidence": "智能体推荐系统架构",
-      "canonical_evidence": "智能体推荐系统架构",
-      "llm_tldr_en": "Proposes AgenticRS, reorganizing recommendation modules into evolvable agents for better scalability.",
-      "llm_tldr_cn": "提出AgenticRS，将推荐系统模块重组为可进化的智能体，以提升系统的可扩展性。",
-      "llm_tldr": "提出AgenticRS，将推荐系统模块重组为可进化的智能体，以提升系统的可扩展性。",
+      "llm_evidence_en": "self-organizing LLM agents and coordination protocols",
+      "llm_evidence_cn": "自组织LLM智能体与协作协议",
+      "llm_evidence": "自组织LLM智能体与协作协议",
+      "canonical_evidence": "自组织LLM智能体与协作协议",
+      "llm_tldr_en": "Explores how self-organizing LLM agents can outperform pre-designed hierarchical structures in multi-agent systems.",
+      "llm_tldr_cn": "探讨了自组织大语言模型智能体在多智能体系统中如何超越预设的层级结构。",
+      "llm_tldr": "探讨了自组织大语言模型智能体在多智能体系统中如何超越预设的层级结构。",
+      "llm_tags": [
+        "query:ag-rl:composite"
+      ],
+      "matched_query_tag": "query:ag-rl:composite",
+      "matched_query_text": "Papers central to 查找有关agentic RL相关的论文, especially work that connects or combines: agentic reinforcement learning research papers; large language model based agents in reinforcement learning; agentic reinforcement learning frameworks and methodologies; state of the art in agentic reinforcement learning; integration of LLM agents and reinforcement learning; frameworks for building agentic RL systems; architectures for agentic decision making using RL.",
+      "matched_requirement_id": "req-composite-ag-rl",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.28990v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.29871v1",
+      "title": "ShapE-GRPO: Shapley-Enhanced Reward Allocation for Multi-Candidate LLM Training",
+      "abstract": "In user-agent interaction scenarios such as recommendation, brainstorming, and code suggestion, Large Language Models (LLMs) often generate sets of candidate recommendations where the objective is to maximize the collective utility of the entire set rather than individual candidates independently. However, existing reinforcement learning post-training paradigms, such as Group Relative Policy Optimization (GRPO), typically assign the same set-level scalar reward to every candidate in the set. This leads to noisy training signals where poor candidates free-ride on the high reward produced by a single strong peer, resulting in suboptimal exploration. To address this, we propose Shapley-Enhanced GRPO (ShapE-GRPO). By leveraging the permutation-invariant nature of set-level utility, we derive a Shapley-enhanced formulation from cooperative game theory to decompose set-level rewards into granular, candidate-specific signals. We show that our formulation preserves the fundamental axioms of the Shapley value while remaining computationally efficient with polynomial-time complexity. Empirically, ShapE-GRPO consistently outperforms standard GRPO across diverse datasets with accelerated convergence during training.",
+      "authors": [
+        "Rui Ai",
+        "Yu Pan",
+        "David Simchi-Levi",
+        "Chonghuan Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-31T15:24:15+00:00",
+      "link": "https://arxiv.org/pdf/2603.29871v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Shapley-enhanced reward allocation for RL post-training of LLMs",
+      "llm_evidence_cn": "大模型强化学习后训练中的夏普利增强奖励分配",
+      "llm_evidence": "大模型强化学习后训练中的夏普利增强奖励分配",
+      "canonical_evidence": "大模型强化学习后训练中的夏普利增强奖励分配",
+      "llm_tldr_en": "Improves LLM training signals in multi-candidate scenarios using Shapley values for better reward allocation.",
+      "llm_tldr_cn": "在多候选场景中利用夏普利值优化奖励分配，从而改善大模型的强化学习训练信号。",
+      "llm_tldr": "在多候选场景中利用夏普利值优化奖励分配，从而改善大模型的强化学习训练信号。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "large language model based agents in reinforcement learning",
+      "matched_requirement_id": "req-2",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.29871v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.29093v1",
+      "title": "APEX-EM: Non-Parametric Online Learning for Autonomous Agents via Structured Procedural-Episodic Experience Replay",
+      "abstract": "LLM-based autonomous agents lack persistent procedural memory: they re-derive solutions from scratch even when structurally identical tasks have been solved before. We present \\textbf{APEX-EM}, a non-parametric online learning framework that accumulates, retrieves, and reuses structured procedural plans without modifying model weights. APEX-EM introduces: (1) a \\emph{structured experience representation} encoding the full procedural-episodic trace of each execution -- planning steps, artifacts, iteration history with error analysis, and quality scores; (2) a \\emph{Plan-Retrieve-Generate-Iterate-Ingest} (PRGII) workflow with Task Verifiers providing multi-dimensional reward signals; and (3) a \\emph{dual-outcome Experience Memory} with hybrid retrieval combining semantic search, structural signature matching, and plan DAG traversal -- enabling cross-domain transfer between tasks sharing no lexical overlap but analogous operational structure. Successful experiences serve as positive in-context examples; failures as negative examples with structured error annotations.   We evaluate on BigCodeBench~\\cite{zhuo2025bigcodebench}, KGQAGen-10k~\\cite{zhang2025kgqagen}, and Humanity's Last Exam~\\cite{phan2025hle} using Claude Sonnet 4.5 and Opus 4.5. On KGQAGen-10k, APEX-EM achieves 89.6\\% accuracy versus 41.3\\% without memory (+48.3pp), surpassing the oracle-retrieval upper bound (84.9\\%). On BigCodeBench, it reaches 83.3\\% SR from a 53.9\\% baseline (+29.4pp), exceeding MemRL's~\\cite{memrl2025} +11.0pp gain under comparable frozen-backbone conditions (noting backbone differences controlled for in our analysis). On HLE, entity graph retrieval reaches 48.0\\% from 25.2\\% (+22.8pp). Ablations show component value is task-dependent: rich judge feedback is negligible for code generation but critical for structured queries (+10.3pp), while binary-signal iteration partially compensates for weaker feedback.",
+      "authors": [
+        "Pratyay Banerjee",
+        "Masud Moshtaghi",
+        "Ankit Chadha"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR"
+      ],
+      "published": "2026-03-31T00:24:56+00:00",
+      "link": "https://arxiv.org/pdf/2603.29093v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "online learning framework for autonomous agents with reward signals",
+      "llm_evidence_cn": "带有奖励信号的自主智能体在线学习框架",
+      "llm_evidence": "带有奖励信号的自主智能体在线学习框架",
+      "canonical_evidence": "带有奖励信号的自主智能体在线学习框架",
+      "llm_tldr_en": "APEX-EM is a non-parametric online learning framework for LLM agents using structured experience replay.",
+      "llm_tldr_cn": "APEX-EM是一个非参数在线学习框架，通过结构化经验回放提升LLM智能体的任务解决能力。",
+      "llm_tldr": "APEX-EM是一个非参数在线学习框架，通过结构化经验回放提升LLM智能体的任务解决能力。",
+      "llm_tags": [
+        "query:ag-rl"
+      ],
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "agentic reinforcement learning frameworks and methodologies",
+      "matched_requirement_id": "req-3",
+      "selection_source": "carryover_cache",
+      "paper_id": "2603.29093v1",
+      "carry_days": 1
+    },
+    {
+      "id": "2603.27813v1",
+      "title": "MuSEAgent: A Multimodal Reasoning Agent with Stateful Experiences",
+      "abstract": "Research agents have recently achieved significant progress in information seeking and synthesis across heterogeneous textual and visual sources. In this paper, we introduce MuSEAgent, a multimodal reasoning agent that enhances decision-making by extending the capabilities of research agents to discover and leverage stateful experiences. Rather than relying on trajectory-level retrieval, we propose a stateful experience learning paradigm that abstracts interaction data into atomic decision experiences through hindsight reasoning. These experiences are organized into a quality-filtered experience bank that supports policy-driven experience retrieval at inference time. Specifically, MuSEAgent enables adaptive experience exploitation through complementary wide- and deep-search strategies, allowing the agent to dynamically retrieve multimodal guidance across diverse compositional semantic viewpoints. Extensive experiments demonstrate that MuSEAgent consistently outperforms strong trajectory-level experience retrieval baselines on both fine-grained visual perception and complex multimodal reasoning tasks. These results validate the effectiveness of stateful experience modeling in improving multimodal agent reasoning.",
+      "authors": [
+        "Shijian Wang",
+        "Jiarui Jin",
+        "Runhao Fu",
+        "Zexuan Yan",
+        "Xingjian Wang",
+        "Mengkang Hu",
+        "Eric Wang",
+        "Xiaoxi Li",
+        "Kangning Zhang",
+        "Li Yao",
+        "Wenxiang Jiao",
+        "Xuelian Cheng",
+        "Yuan Lu",
+        "Zongyuan Ge"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-29T18:54:31+00:00",
+      "link": "https://arxiv.org/pdf/2603.27813v1",
+      "tags": [
+        "keyword:AG RL",
+        "query:AG RL"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multimodal reasoning agent with stateful experience learning",
+      "llm_evidence_cn": "具有状态经验学习的多模态推理智能体",
+      "llm_evidence": "具有状态经验学习的多模态推理智能体",
+      "canonical_evidence": "具有状态经验学习的多模态推理智能体",
+      "llm_tldr_en": "MuSEAgent uses hindsight reasoning to abstract interaction data into atomic decision experiences for agents.",
+      "llm_tldr_cn": "MuSEAgent通过事后推理将交互数据抽象为原子决策经验，增强智能体的决策能力。",
+      "llm_tldr": "MuSEAgent通过事后推理将交互数据抽象为原子决策经验，增强智能体的决策能力。",
       "llm_tags": [
         "query:ag-rl"
       ],
@@ -41,37 +160,37 @@
       "matched_query_text": "architectures for agentic decision making using RL",
       "matched_requirement_id": "req-7",
       "selection_source": "carryover_cache",
-      "paper_id": "2603.26100v1",
+      "paper_id": "2603.27813v1",
       "carry_days": 1
     },
     {
-      "id": "2603.28416v1",
-      "title": "Evolutionary Discovery of Reinforcement Learning Algorithms via Large Language Models",
-      "abstract": "Reinforcement learning algorithms are defined by their learning update rules, which are typically hand-designed and fixed. We present an evolutionary framework for discovering reinforcement learning algorithms by searching directly over executable update rules that implement complete training procedures. The approach builds on REvolve, an evolutionary system that uses large language models as generative variation operators, and extends it from reward-function discovery to algorithm discovery. To promote the emergence of nonstandard learning rules, the search excludes canonical mechanisms such as actor--critic structures, temporal-difference losses, and value bootstrapping. Because reinforcement learning algorithms are highly sensitive to internal scalar parameters, we introduce a post-evolution refinement stage in which a large language model proposes feasible hyperparameter ranges for each evolved update rule. Evaluated end-to-end by full training runs on multiple Gymnasium benchmarks, the discovered algorithms achieve competitive performance relative to established baselines, including SAC, PPO, DQN, and A2C.",
+      "id": "2603.28959v1",
+      "title": "Multi-Agent LLMs for Adaptive Acquisition in Bayesian Optimization",
+      "abstract": "The exploration-exploitation trade-off is central to sequential decision-making and black-box optimization, yet how Large Language Models (LLMs) reason about and manage this trade-off remains poorly understood. Unlike Bayesian Optimization, where exploration and exploitation are explicitly encoded through acquisition functions, LLM-based optimization relies on implicit, prompt-based reasoning over historical evaluations, making search behavior difficult to analyze or control. In this work, we present a metric-level study of LLM-mediated search policy learning, studying how LLMs construct and adapt exploration-exploitation strategies under multiple operational definitions of exploration, including informativeness, diversity, and representativeness. We show that single-agent LLM approaches, which jointly perform strategy selection and candidate generation within a single prompt, suffer from cognitive overload, leading to unstable search dynamics and premature convergence. To address this limitation, we propose a multi-agent framework that decomposes exploration-exploitation control into strategic policy mediation and tactical candidate generation. A strategy agent assigns interpretable weights to multiple search criteria, while a generation agent produces candidates conditioned on the resulting search policy defined as weights. This decomposition renders exploration-exploitation decisions explicit, observable, and adjustable. Empirical results across various continuous optimization benchmarks indicate that separating strategic control from candidate generation substantially improves the effectiveness of LLM-mediated search.",
       "authors": [
-        "Alkis Sygkounas",
-        "Amy Loutfi",
-        "Andreas Persson"
+        "Andrea Carbonati",
+        "Mohammadsina Almasi",
+        "Hadis Anahideh"
       ],
       "primary_category": "cs.LG",
       "categories": [
         "cs.LG",
         "cs.AI"
       ],
-      "published": "2026-03-30T13:28:01+00:00",
-      "link": "https://arxiv.org/pdf/2603.28416v1",
+      "published": "2026-03-30T20:05:30+00:00",
+      "link": "https://arxiv.org/pdf/2603.28959v1",
       "tags": [
         "keyword:AG RL",
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "using LLMs to discover RL algorithms",
-      "llm_evidence_cn": "使用大语言模型发现强化学习算法",
-      "llm_evidence": "使用大语言模型发现强化学习算法",
-      "canonical_evidence": "使用大语言模型发现强化学习算法",
-      "llm_tldr_en": "An evolutionary framework using LLMs to automatically discover novel reinforcement learning update rules.",
-      "llm_tldr_cn": "一个利用大语言模型作为进化算子来自动发现新型强化学习更新规则的框架。",
-      "llm_tldr": "一个利用大语言模型作为进化算子来自动发现新型强化学习更新规则的框架。",
+      "llm_evidence_en": "LLM-mediated search policy learning in sequential decision-making",
+      "llm_evidence_cn": "大语言模型在序列决策中的搜索策略学习",
+      "llm_evidence": "大语言模型在序列决策中的搜索策略学习",
+      "canonical_evidence": "大语言模型在序列决策中的搜索策略学习",
+      "llm_tldr_en": "Studies how multi-agent LLMs manage exploration-exploitation trade-offs in optimization tasks.",
+      "llm_tldr_cn": "研究了多智能体大语言模型在优化任务中如何平衡探索与利用。",
+      "llm_tldr": "研究了多智能体大语言模型在优化任务中如何平衡探索与利用。",
       "llm_tags": [
         "query:ag-rl"
       ],
@@ -79,128 +198,80 @@
       "matched_query_text": "large language model based agents in reinforcement learning",
       "matched_requirement_id": "req-2",
       "selection_source": "carryover_cache",
-      "paper_id": "2603.28416v1",
+      "paper_id": "2603.28959v1",
       "carry_days": 1
     },
     {
-      "id": "2603.28533v1",
-      "title": "GraphWalker: Agentic Knowledge Graph Question Answering via Synthetic Trajectory Curriculum",
-      "abstract": "Agentic knowledge graph question answering (KGQA) requires an agent to iteratively interact with knowledge graphs (KGs), posing challenges in both training data scarcity and reasoning generalization. Specifically, existing approaches often restrict agent exploration: prompting-based methods lack autonomous navigation training, while current training pipelines usually confine reasoning to predefined trajectories. To this end, this paper proposes \\textit{GraphWalker}, a novel agentic KGQA framework that addresses these challenges through \\textit{Automated Trajectory Synthesis} and \\textit{Stage-wise Fine-tuning}. GraphWalker adopts a two-stage SFT training paradigm: First, the agent is trained on structurally diverse trajectories synthesized from constrained random-walk paths, establishing a broad exploration prior over the KG; Second, the agent is further fine-tuned on a small set of expert trajectories to develop reflection and error recovery capabilities. Extensive experiments demonstrate that our stage-wise SFT paradigm unlocks a higher performance ceiling for a lightweight reinforcement learning (RL) stage, enabling GraphWalker to achieve state-of-the-art performance on CWQ and WebQSP. Additional results on GrailQA and our constructed GraphWalkerBench confirm that GraphWalker enhances generalization to out-of-distribution reasoning paths. The code is publicly available at https://github.com/XuShuwenn/GraphWalker",
+      "id": "2603.28200v1",
+      "title": "A Deep Reinforcement Learning Framework for Closed-loop Guidance of Fish Schools via Virtual Agents",
+      "abstract": "Guiding collective motion in biological groups is a fundamental challenge in understanding social interaction rules and developing automated systems for animal management. In this study, we propose a deep reinforcement learning (RL) framework for the closed-loop guidance of fish schools using virtual agents. These agents are controlled by policies trained via Proximal Policy Optimization (PPO) in simulation and deployed in physical experiments with rummy-nose tetras (Petitella bleheri), enabling real-time interaction between artificial agents and live individuals. To cope with the stochastic behavior of live individuals, we design a composite reward function to balance directional guidance with social cohesion. Our systematic evaluation of visual parameters shows that a white background and larger stimulus sizes maximize guidance efficacy in physical trials. Furthermore, evaluation across group sizes revealed that while the system demonstrates effective guidance for groups of five individuals, this capability markedly degrades as group size increases to eight. This study highlights the potential of deep RL for automated guidance of biological collectives and identifies challenges in maintaining artificial influence in larger groups.",
       "authors": [
-        "Shuwen Xu",
-        "Yao Xu",
-        "Jiaxiang Liu",
-        "Chenhao Yuan",
-        "Wenshuo Peng",
-        "Jun Zhao",
-        "Kang Liu"
+        "Takato Shibayama",
+        "Hiroaki Kawashima"
       ],
-      "primary_category": "cs.CL",
+      "primary_category": "cs.RO",
       "categories": [
-        "cs.CL"
-      ],
-      "published": "2026-03-30T14:56:59+00:00",
-      "link": "https://arxiv.org/pdf/2603.28533v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "agentic knowledge graph question answering framework",
-      "llm_evidence_cn": "智能体知识图谱问答框架",
-      "llm_evidence": "智能体知识图谱问答框架",
-      "canonical_evidence": "智能体知识图谱问答框架",
-      "llm_tldr_en": "A framework for agentic KGQA using automated trajectory synthesis and stage-wise fine-tuning.",
-      "llm_tldr_cn": "一种通过自动轨迹合成和分阶段微调实现的智能体知识图谱问答框架。",
-      "llm_tldr": "一种通过自动轨迹合成和分阶段微调实现的智能体知识图谱问答框架。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "agentic reinforcement learning frameworks and methodologies",
-      "matched_requirement_id": "req-3",
-      "selection_source": "carryover_cache",
-      "paper_id": "2603.28533v1",
-      "carry_days": 1
-    },
-    {
-      "id": "2603.26993v1",
-      "title": "On the Reliability Limits of LLM-Based Multi-Agent Planning",
-      "abstract": "This technical note studies the reliability limits of LLM-based multi-agent planning as a delegated decision problem. We model the LLM-based multi-agent architecture as a finite acyclic decision network in which multiple stages process shared model-context information, communicate through language interfaces with limited capacity, and may invoke human review. We show that, without new exogenous signals, any delegated network is decision-theoretically dominated by a centralized Bayes decision maker with access to the same information. In the common-evidence regime, this implies that optimizing over multi-agent directed acyclic graphs under a finite communication budget can be recast as choosing a budget-constrained stochastic experiment on the shared signal. We also characterize the loss induced by communication and information compression. Under proper scoring rules, the gap between the centralized Bayes value and the value after communication admits an expected posterior divergence representation, which reduces to conditional mutual information under logarithmic loss and to expected squared posterior error under the Brier score. These results characterize the fundamental reliability limits of delegated LLM planning. Experiments with LLMs on a controlled problem set further demonstrate these characterizations.",
-      "authors": [
-        "Ruicheng Ao",
-        "Siyang Gao",
-        "David Simchi-Levi"
-      ],
-      "primary_category": "cs.MA",
-      "categories": [
-        "cs.MA",
+        "cs.RO",
         "cs.LG",
-        "math.OC",
-        "stat.ML"
+        "q-bio.PE"
       ],
-      "published": "2026-03-27T21:07:42+00:00",
-      "link": "https://arxiv.org/pdf/2603.26993v1",
+      "published": "2026-03-30T09:10:02+00:00",
+      "link": "https://arxiv.org/pdf/2603.28200v1",
       "tags": [
         "keyword:AG RL",
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "reliability limits of LLM-based multi-agent planning",
-      "llm_evidence_cn": "基于大语言模型的多智能体规划可靠性限制",
-      "llm_evidence": "基于大语言模型的多智能体规划可靠性限制",
-      "canonical_evidence": "基于大语言模型的多智能体规划可靠性限制",
-      "llm_tldr_en": "Analyzes the decision-theoretic limits and reliability of multi-agent architectures using LLMs.",
-      "llm_tldr_cn": "分析了基于大语言模型的多智能体架构在决策理论下的可靠性界限。",
-      "llm_tldr": "分析了基于大语言模型的多智能体架构在决策理论下的可靠性界限。",
+      "llm_evidence_en": "RL framework for closed-loop guidance via virtual agents",
+      "llm_evidence_cn": "通过虚拟智能体进行闭环引导的强化学习框架",
+      "llm_evidence": "通过虚拟智能体进行闭环引导的强化学习框架",
+      "canonical_evidence": "通过虚拟智能体进行闭环引导的强化学习框架",
+      "llm_tldr_en": "Proposes a deep RL framework using virtual agents to guide biological fish schools in real-time.",
+      "llm_tldr_cn": "提出一种深度强化学习框架，利用虚拟智能体实时引导生物鱼群的集体运动。",
+      "llm_tldr": "提出一种深度强化学习框架，利用虚拟智能体实时引导生物鱼群的集体运动。",
       "llm_tags": [
         "query:ag-rl"
       ],
       "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "large language model based agents in reinforcement learning",
-      "matched_requirement_id": "req-2",
+      "matched_query_text": "architectures for agentic decision making using RL",
+      "matched_requirement_id": "req-7",
       "selection_source": "carryover_cache",
-      "paper_id": "2603.26993v1",
+      "paper_id": "2603.28200v1",
       "carry_days": 1
     },
     {
-      "id": "2603.27977v1",
-      "title": "SARL: Label-Free Reinforcement Learning by Rewarding Reasoning Topology",
-      "abstract": "Reinforcement learning has become central to improving large reasoning models, but its success still relies heavily on verifiable rewards or labeled supervision. This limits its applicability to open ended domains where correctness is ambiguous and cannot be verified. Moreover, reasoning trajectories remain largely unconstrained, and optimization towards final answer can favor early exploitation over generalization. In this work, we ask whether general reasoning ability can be improved by teaching models how to think (the structure of reasoning) rather than what to produce (the outcome of reasoning) and extend traditional RLVR to open ended settings. We introduce structure aware reinforcement learning (SARL), a label free framework that constructs a per response Reasoning Map from intermediate thinking steps and rewards its small world topology, inspired by complex networks and the functional organization of the human brain. SARL encourages reasoning trajectories that are both locally coherent and globally efficient, shifting supervision from destination to path. Our experiments on Qwen3-4B show SARL surpasses ground truth based RL and prior label free RL baselines, achieving the best average gain of 9.1% under PPO and 11.6% under GRPO on math tasks and 34.6% under PPO and 30.4% under GRPO on open ended tasks. Beyond good performance, SARL also exhibits lower KL divergence, higher policy entropy, indicating a more stable and exploratory training and generalized reasoning ability.",
+      "id": "2603.30031v1",
+      "title": "The Triadic Cognitive Architecture: Bounding Autonomous Action via Spatio-Temporal and Epistemic Friction",
+      "abstract": "Current autonomous AI agents, driven primarily by Large Language Models (LLMs), operate in a state of cognitive weightlessness: they process information without an intrinsic sense of network topology, temporal pacing, or epistemic limits. Consequently, heuristic agentic loops (e.g., ReAct) can exhibit failure modes in interactive environments, including excessive tool use under congestion, prolonged deliberation under time decay, and brittle behavior under ambiguous evidence. In this paper, we propose the Triadic Cognitive Architecture (TCA), a unified mathematical framework that grounds machine reasoning in continuous-time physics. By synthesizing nonlinear filtering theory, Riemannian routing geometry, and optimal control, we formally define the concept of Cognitive Friction. We map the agent's deliberation process to a coupled stochastic control problem where information acquisition is path-dependent and physically constrained. Rather than relying on arbitrary heuristic stop-tokens, the TCA uses an HJB-motivated stopping boundary and instantiates a rollout-based approximation of belief-dependent value-of-information with a net-utility halting condition. Through empirical validation in a simulated Emergency Medical Diagnostic Grid (EMDG), we demonstrate that while greedy baselines over-deliberate under latency and congestion costs, the triadic policy reduces time-to-action while improving patient viability without degrading diagnostic accuracy in this environment.",
       "authors": [
-        "Yifan Wang",
-        "Bolian Li",
-        "David Cho",
-        "Ruqi Zhang",
-        "Fanping Sui",
-        "Ananth Grama"
+        "Davide Di Gioia"
       ],
       "primary_category": "cs.AI",
       "categories": [
         "cs.AI"
       ],
-      "published": "2026-03-30T02:54:48+00:00",
-      "link": "https://arxiv.org/pdf/2603.27977v1",
+      "published": "2026-03-31T17:30:25+00:00",
+      "link": "https://arxiv.org/pdf/2603.30031v1",
       "tags": [
         "keyword:AG RL",
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "label-free reinforcement learning framework for reasoning",
-      "llm_evidence_cn": "用于推理的无标签强化学习框架",
-      "llm_evidence": "用于推理的无标签强化学习框架",
-      "canonical_evidence": "用于推理的无标签强化学习框架",
-      "llm_tldr_en": "Introduces SARL, a framework that uses RL to improve LLM reasoning by rewarding reasoning topology.",
-      "llm_tldr_cn": "引入SARL框架，通过奖励推理拓扑结构利用强化学习提升LLM的推理能力。",
-      "llm_tldr": "引入SARL框架，通过奖励推理拓扑结构利用强化学习提升LLM的推理能力。",
+      "llm_evidence_en": "Mathematical framework for grounding LLM agentic loops in continuous-time physics",
+      "llm_evidence_cn": "将LLM代理循环植根于连续时间物理学的数学框架",
+      "llm_evidence": "将LLM代理循环植根于连续时间物理学的数学框架",
+      "canonical_evidence": "将LLM代理循环植根于连续时间物理学的数学框架",
+      "llm_tldr_en": "Proposes TCA to address failure modes in LLM agentic loops through spatio-temporal and epistemic grounding.",
+      "llm_tldr_cn": "提出TCA架构，通过时空和认识论约束解决LLM代理循环中的失效模式。",
+      "llm_tldr": "提出TCA架构，通过时空和认识论约束解决LLM代理循环中的失效模式。",
       "llm_tags": [
         "query:ag-rl"
       ],
       "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "agentic reinforcement learning frameworks and methodologies",
-      "matched_requirement_id": "req-3",
+      "matched_query_text": "frameworks for building agentic RL systems",
+      "matched_requirement_id": "req-6",
       "selection_source": "carryover_cache",
-      "paper_id": "2603.27977v1",
+      "paper_id": "2603.30031v1",
       "carry_days": 1
     }
   ]
