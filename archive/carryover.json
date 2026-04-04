@@ -1,43 +1,8 @@
 {
-  "generated_at": "2026-04-03T20:04:01.422383+00:00",
-  "updated_date": "20260403",
+  "generated_at": "2026-04-04T19:31:05.626672+00:00",
+  "updated_date": "20260404",
   "carryover_days": 9,
   "items": [
-    {
-      "id": "2603.30031v1",
-      "title": "The Triadic Cognitive Architecture: Bounding Autonomous Action via Spatio-Temporal and Epistemic Friction",
-      "abstract": "Current autonomous AI agents, driven primarily by Large Language Models (LLMs), operate in a state of cognitive weightlessness: they process information without an intrinsic sense of network topology, temporal pacing, or epistemic limits. Consequently, heuristic agentic loops (e.g., ReAct) can exhibit failure modes in interactive environments, including excessive tool use under congestion, prolonged deliberation under time decay, and brittle behavior under ambiguous evidence. In this paper, we propose the Triadic Cognitive Architecture (TCA), a unified mathematical framework that grounds machine reasoning in continuous-time physics. By synthesizing nonlinear filtering theory, Riemannian routing geometry, and optimal control, we formally define the concept of Cognitive Friction. We map the agent's deliberation process to a coupled stochastic control problem where information acquisition is path-dependent and physically constrained. Rather than relying on arbitrary heuristic stop-tokens, the TCA uses an HJB-motivated stopping boundary and instantiates a rollout-based approximation of belief-dependent value-of-information with a net-utility halting condition. Through empirical validation in a simulated Emergency Medical Diagnostic Grid (EMDG), we demonstrate that while greedy baselines over-deliberate under latency and congestion costs, the triadic policy reduces time-to-action while improving patient viability without degrading diagnostic accuracy in this environment.",
-      "authors": [
-        "Davide Di Gioia"
-      ],
-      "primary_category": "cs.AI",
-      "categories": [
-        "cs.AI"
-      ],
-      "published": "2026-03-31T17:30:25+00:00",
-      "link": "https://arxiv.org/pdf/2603.30031v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "mathematical framework for grounding LLM agent reasoning in physics",
-      "llm_evidence_cn": "将大模型代理推理植根于物理学的数学框架",
-      "llm_evidence": "将大模型代理推理植根于物理学的数学框架",
-      "canonical_evidence": "将大模型代理推理植根于物理学的数学框架",
-      "llm_tldr_en": "Proposes the Triadic Cognitive Architecture to bound autonomous LLM agent actions via physical constraints.",
-      "llm_tldr_cn": "提出了三元认知架构，通过物理约束来限制自主大模型代理的动作。",
-      "llm_tldr": "提出了三元认知架构，通过物理约束来限制自主大模型代理的动作。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "architectures for agentic decision making using RL",
-      "matched_requirement_id": "req-7",
-      "selection_source": "carryover_cache",
-      "paper_id": "2603.30031v1",
-      "carry_days": 1
-    },
     {
       "id": "2604.01477v1",
       "title": "Soft MPCritic: Amortized Model Predictive Value Iteration",
@@ -74,47 +39,7 @@
       "matched_requirement_id": "req-3",
       "selection_source": "carryover_cache",
       "paper_id": "2604.01477v1",
-      "carry_days": 1
-    },
-    {
-      "id": "2604.00131v1",
-      "title": "Oblivion: Self-Adaptive Agentic Memory Control through Decay-Driven Activation",
-      "abstract": "Human memory adapts through selective forgetting: experiences become less accessible over time but can be reactivated by reinforcement or contextual cues. In contrast, memory-augmented LLM agents rely on \"always-on\" retrieval and \"flat\" memory storage, causing high interference and latency as histories grow. We introduce Oblivion, a memory control framework that casts forgetting as decay-driven reductions in accessibility, not explicit deletion. Oblivion decouples memory control into read and write paths. The read path decides when to consult memory, based on agent uncertainty and memory buffer sufficiency, avoiding redundant always-on access. The write path decides what to strengthen, by reinforcing memories contributing to forming the response. Together, this enables hierarchical memory organization that maintains persistent high-level strategies while dynamically loading details as needed. We evaluate on both static and dynamic long-horizon interaction benchmarks. Results show that Oblivion dynamically adapts memory access and reinforcement, balancing learning and forgetting under shifting contexts, highlighting that memory control is essential for effective LLM-agentic reasoning. The source code is available at https://github.com/nec-research/oblivion.",
-      "authors": [
-        "Ashish Rana",
-        "Chia-Chien Hung",
-        "Qumeng Sun",
-        "Julian Martin Kunkel",
-        "Carolin Lawrence"
-      ],
-      "primary_category": "cs.CL",
-      "categories": [
-        "cs.CL",
-        "cs.AI"
-      ],
-      "published": "2026-03-31T18:37:35+00:00",
-      "link": "https://arxiv.org/pdf/2604.00131v1",
-      "tags": [
-        "keyword:AG RL",
-        "query:AG RL"
-      ],
-      "llm_score": 8.0,
-      "llm_evidence_en": "memory control framework for LLM agents using reinforcement cues",
-      "llm_evidence_cn": "使用强化线索的LLM智能体内存控制框架",
-      "llm_evidence": "使用强化线索的LLM智能体内存控制框架",
-      "canonical_evidence": "使用强化线索的LLM智能体内存控制框架",
-      "llm_tldr_en": "Introduces Oblivion, a framework for adaptive memory management in LLM agents using reinforcement principles.",
-      "llm_tldr_cn": "引入Oblivion框架，利用强化原则实现LLM智能体的自适应内存管理。",
-      "llm_tldr": "引入Oblivion框架，利用强化原则实现LLM智能体的自适应内存管理。",
-      "llm_tags": [
-        "query:ag-rl"
-      ],
-      "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "large language model based agents in reinforcement learning",
-      "matched_requirement_id": "req-2",
-      "selection_source": "carryover_cache",
-      "paper_id": "2604.00131v1",
-      "carry_days": 1
+      "carry_days": 2
     },
     {
       "id": "2604.01658v1",
@@ -150,19 +75,19 @@
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "autonomous multi-agent evolution framework using LLM agents",
+      "llm_evidence_en": "Framework for autonomous multi-agent evolution using LLM agents",
       "llm_evidence_cn": "基于LLM智能体的自主多智能体演化框架",
       "llm_evidence": "基于LLM智能体的自主多智能体演化框架",
       "canonical_evidence": "基于LLM智能体的自主多智能体演化框架",
-      "llm_tldr_en": "CORAL is a framework for autonomous multi-agent evolution using shared memory and asynchronous execution.",
-      "llm_tldr_cn": "CORAL是一个通过共享内存和异步执行实现自主多智能体演化的框架。",
-      "llm_tldr": "CORAL是一个通过共享内存和异步执行实现自主多智能体演化的框架。",
+      "llm_tldr_en": "CORAL is a framework for autonomous multi-agent evolution in open-ended discovery using shared memory.",
+      "llm_tldr_cn": "CORAL是一个用于开放式探索的自主多智能体演化框架，通过共享内存实现协作。",
+      "llm_tldr": "CORAL是一个用于开放式探索的自主多智能体演化框架，通过共享内存实现协作。",
       "llm_tags": [
-        "query:ag-rl:composite"
+        "query:ag-rl"
       ],
-      "matched_query_tag": "query:ag-rl:composite",
-      "matched_query_text": "Papers central to 查找有关agentic RL相关的论文, especially work that connects or combines: agentic reinforcement learning research papers; large language model based agents in reinforcement learning; agentic reinforcement learning frameworks and methodologies; state of the art in agentic reinforcement learning; integration of LLM agents and reinforcement learning; frameworks for building agentic RL systems; architectures for agentic decision making using RL.",
-      "matched_requirement_id": "req-composite-ag-rl",
+      "matched_query_tag": "query:ag-rl",
+      "matched_query_text": "agentic reinforcement learning frameworks and methodologies",
+      "matched_requirement_id": "req-3",
       "selection_source": "carryover_cache",
       "paper_id": "2604.01658v1",
       "carry_days": 1
@@ -211,56 +136,57 @@
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "training framework for agentic LLMs using high-quality trajectories",
-      "llm_evidence_cn": "使用高质量轨迹的智能体大语言模型训练框架",
-      "llm_evidence": "使用高质量轨迹的智能体大语言模型训练框架",
-      "canonical_evidence": "使用高质量轨迹的智能体大语言模型训练框架",
-      "llm_tldr_en": "Introduces a framework to improve agentic capabilities of LLMs using a coarse-to-fine trajectory filtering mechanism.",
-      "llm_tldr_cn": "引入了一个通过粗到细的轨迹过滤机制来提升大语言模型智能体能力的框架。",
-      "llm_tldr": "引入了一个通过粗到细的轨迹过滤机制来提升大语言模型智能体能力的框架。",
+      "llm_evidence_en": "training framework for agentic and reasoning LLMs",
+      "llm_evidence_cn": "智能体化和推理LLM的训练框架",
+      "llm_evidence": "智能体化和推理LLM的训练框架",
+      "canonical_evidence": "智能体化和推理LLM的训练框架",
+      "llm_tldr_en": "Introduces STITCH, a framework to improve agentic capabilities of LLMs using high-quality trajectories.",
+      "llm_tldr_cn": "引入STITCH框架，通过高质量轨迹提升LLM的智能体化能力。",
+      "llm_tldr": "引入STITCH框架，通过高质量轨迹提升LLM的智能体化能力。",
       "llm_tags": [
         "query:ag-rl"
       ],
       "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "frameworks for building agentic RL systems",
-      "matched_requirement_id": "req-6",
+      "matched_query_text": "agentic reinforcement learning frameworks and methodologies",
+      "matched_requirement_id": "req-3",
       "selection_source": "carryover_cache",
       "paper_id": "2604.00824v2",
       "carry_days": 1
     },
     {
-      "id": "2603.30031v3",
-      "title": "Cognitive Friction: A Decision-Theoretic Framework for Bounded Deliberation in Tool-Using Agents",
-      "abstract": "Autonomous tool-using agents in networked environments must decide which information source to query and when to stop querying and act. Without principled bounds on information-acquisition costs, unconstrained agents exhibit systematic failure modes: excessive tool use under congestion, prolonged deliberation under time decay, and brittle behavior under ambiguous evidence. We propose the Triadic Cognitive Architecture (TCA), a decision-theoretic framework that formalizes these failure modes via cognitive friction. By combining nonlinear filtering, congestion-dependent cost dynamics, and HJB optimal stopping, TCA models deliberation as stochastic control over a joint belief-congestion state, explicitly pricing information by tool signal quality and live network load. TCA yields an HJB-inspired stopping boundary and a computable rollout-based approximation of belief-dependent value-of-information with a net-utility halting condition. We validate TCA in two controlled environments (EMDG and NSTG) designed to isolate stopping quality, action selection under congestion, and temporal urgency. TCA improves resource outcomes while reducing time-to-action without degrading accuracy, gaining 36 viability points in EMDG and 33 integrity points in NSTG over greedy baselines. Ablations show that selection and stopping must be optimized jointly, as stopping rules alone recover at most 4 viability points. Sensitivity sweeps over alpha, beta, and lambda_S yield stable accuracy and interpretable trade-offs, and a continuation-value sweep over eta values 0, 0.1, 0.3, and 0.5 finds eta equal to zero is optimal under high temporal urgency. Finally, we demonstrate an illustrative instantiation around a black-box LLM on a memorisation-free corpus, where the same stopping principle executes using empirically computable uncertainty and value-of-information proxies.",
+      "id": "2604.02151v1",
+      "title": "Auction-Based Online Policy Adaptation for Evolving Objectives",
+      "abstract": "We consider multi-objective reinforcement learning problems where objectives come from an identical family -- such as the class of reachability objectives -- and may appear or disappear at runtime. Our goal is to design adaptive policies that can efficiently adjust their behaviors as the set of active objectives changes. To solve this problem, we propose a modular framework where each objective is supported by a selfish local policy, and coordination is achieved through a novel auction-based mechanism: policies bid for the right to execute their actions, with bids reflecting the urgency of the current state. The highest bidder selects the action, enabling a dynamic and interpretable trade-off among objectives. Going back to the original adaptation problem, when objectives change, the system adapts by simply adding or removing the corresponding policies. Moreover, as objectives arise from the same family, identical copies of a parameterized policy can be deployed, facilitating immediate adaptation at runtime. We show how the selfish local policies can be computed by turning the problem into a general-sum game, where the policies compete against each other to fulfill their own objectives. To succeed, each policy must not only optimize its own objective, but also reason about the presence of other goals and learn to produce calibrated bids that reflect relative priority. In our implementation, the policies are trained concurrently using proximal policy optimization (PPO). We evaluate on Atari Assault and a gridworld-based path-planning task with dynamic targets. Our method achieves substantially better performance than monolithic policies trained with PPO.",
       "authors": [
-        "Davide Di Gioia"
+        "Guruprerana Shabadi",
+        "Kaushik Mallik"
       ],
-      "primary_category": "cs.AI",
+      "primary_category": "cs.LG",
       "categories": [
-        "cs.AI"
+        "cs.LG"
       ],
-      "published": "2026-03-31T17:30:25+00:00",
-      "link": "https://arxiv.org/pdf/2603.30031v3",
+      "published": "2026-04-02T15:17:20+00:00",
+      "link": "https://arxiv.org/pdf/2604.02151v1",
       "tags": [
         "keyword:AG RL",
         "query:AG RL"
       ],
       "llm_score": 8.0,
-      "llm_evidence_en": "Decision-theoretic framework for tool-using agents using stochastic control",
-      "llm_evidence_cn": "使用随机控制的工具使用智能体决策论框架",
-      "llm_evidence": "使用随机控制的工具使用智能体决策论框架",
-      "canonical_evidence": "使用随机控制的工具使用智能体决策论框架",
-      "llm_tldr_en": "Proposes the Triadic Cognitive Architecture for bounded deliberation in autonomous tool-using agents.",
-      "llm_tldr_cn": "提出了三元认知架构，用于解决自主工具使用智能体在决策过程中的认知摩擦问题。",
-      "llm_tldr": "提出了三元认知架构，用于解决自主工具使用智能体在决策过程中的认知摩擦问题。",
+      "llm_evidence_en": "modular framework for multi-objective reinforcement learning",
+      "llm_evidence_cn": "多目标强化学习的模块化框架",
+      "llm_evidence": "多目标强化学习的模块化框架",
+      "canonical_evidence": "多目标强化学习的模块化框架",
+      "llm_tldr_en": "Proposes an auction-based mechanism for online policy adaptation in multi-objective RL environments.",
+      "llm_tldr_cn": "提出一种基于拍卖机制的框架，用于多目标强化学习中的在线策略自适应。",
+      "llm_tldr": "提出一种基于拍卖机制的框架，用于多目标强化学习中的在线策略自适应。",
       "llm_tags": [
         "query:ag-rl"
       ],
       "matched_query_tag": "query:ag-rl",
-      "matched_query_text": "architectures for agentic decision making using RL",
-      "matched_requirement_id": "req-7",
+      "matched_query_text": "agentic reinforcement learning frameworks and methodologies",
+      "matched_requirement_id": "req-3",
       "selection_source": "carryover_cache",
-      "paper_id": "2603.30031v3",
+      "paper_id": "2604.02151v1",
       "carry_days": 1
     }
   ]

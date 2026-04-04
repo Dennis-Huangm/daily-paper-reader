@@ -6,88 +6,73 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-04-03
-- 运行时间：2026-04-03 20:06:39 UTC
+- 最新运行日期：2026-04-04
+- 运行时间：2026-04-04 19:32:54 UTC
 - 运行状态：成功
-- 本次总论文数：22
-- 精读区：11
+- 本次总论文数：17
+- 精读区：6
 - 速读区：11
 
 ### 今日简报（AI）
-今日精选 22 篇前沿论文，深度聚焦 LLM 智能体推理优化与强化学习的技能内化。
-重点推荐 ProCeedRL 与 SKILL0，揭示了通过过程评价与上下文学习提升模型复杂推理能力的全新路径。
-建议优先研读智能体如何实现从“指令跟随”到“自主技能内化”的技术跨越。
-- 详情：[/202604/03/README](/202604/03/README)
+今日深挖 17 篇 AI 前沿，重点突破机器人强化学习探索效率与多模态大模型的精准视觉感知。
+推荐关注解析策略梯度引导的机器人训练新法，以及通过强化学习解决 MLLM 裁剪信息差的定位框架。
+建议开发者深入探索多智能体博弈与多偏好约束下的 RLHF 优化路径。
+- 详情：[/202604/04/README](/202604/04/README)
 
 ### 精读区论文标签
-1. [ProCeedRL: Process Critic with Exploratory Demonstration Reinforcement Learning for LLM Agentic Reasoning](/202604/03/2604.02006v1-proceedrl-process-critic-with-exploratory-demonstration-reinforcement-learning-for-llm-agentic-reasoning)  
-   标签：评分：10.0/10、query:ag-rl
-   evidence：用于多轮任务中大语言模型智能体推理的强化学习
-2. [SKILL0: In-Context Agentic Reinforcement Learning for Skill Internalization](/202604/03/2604.02268v1-skill0-in-context-agentic-reinforcement-learning-for-skill-internalization)  
-   标签：评分：10.0/10、query:ag-rl
-   evidence：用于智能体技能内化的上下文强化学习框架
-3. [APEX-EM: Non-Parametric Online Learning for Autonomous Agents via Structured Procedural-Episodic Experience Replay](/202604/03/2603.29093v1-apex-em-non-parametric-online-learning-for-autonomous-agents-via-structured-procedural-episodic-experience-replay)  
+1. [Where-to-Learn: Analytical Policy Gradient Directed Exploration for On-Policy Robotic Reinforcement Learning](/202604/04/2603.27317v2-where-to-learn-analytical-policy-gradient-directed-exploration-for-on-policy-robotic-reinforcement-learning)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：带有奖励信号的 LLM 智能体非参数在线学习
-4. [MemFactory: Unified Inference & Training Framework for Agent Memory](/202604/03/2603.29493v3-memfactory-unified-inference--training-framework-for-agent-memory)  
+   evidence：在线机器人强化学习的有向探索
+2. [Learning to Focus and Precise Cropping: A Reinforcement Learning Framework with Information Gaps and Grounding Loss for MLLMs](/202604/04/2603.27494v1-learning-to-focus-and-precise-cropping-a-reinforcement-learning-framework-with-information-gaps-and-grounding-loss-for-mllms)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：应用强化学习优化智能体框架中的内存操作
-5. [Learning to Play Blackjack: A Curriculum Learning Perspective](/202604/03/2604.00076v2-learning-to-play-blackjack-a-curriculum-learning-perspective)  
+   evidence：基于智能体工作流的多模态大模型强化学习框架
+3. [MemRerank: Preference Memory for Personalized Product Reranking](/202604/04/2603.29247v2-memrerank-preference-memory-for-personalized-product-reranking)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：基于LLM的强化学习智能体课程生成
-6. [Learning to Learn-at-Test-Time: Language Agents with Learnable Adaptation Policies](/202604/03/2604.00830v1-learning-to-learn-at-test-time-language-agents-with-learnable-adaptation-policies)  
+   evidence：使用强化学习训练LLM智能体的记忆提取器
+4. [The Triadic Cognitive Architecture: Bounding Autonomous Action via Spatio-Temporal and Epistemic Friction](/202604/04/2603.30031v1-the-triadic-cognitive-architecture-bounding-autonomous-action-via-spatio-temporal-and-epistemic-friction)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：具有可学习自适应策略的语言智能体，用于测试时学习
-7. [Policy Improvement Reinforcement Learning](/202604/03/2604.00860v1-policy-improvement-reinforcement-learning)  
+   evidence：自主AI智能体的认知架构
+5. [TR-ICRL: Test-Time Rethinking for In-Context Reinforcement Learning](/202604/04/2604.00438v1-tr-icrl-test-time-rethinking-for-in-context-reinforcement-learning)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：改进LLM推理的强化学习方法论
-8. [DeltaMem: Towards Agentic Memory Management via Reinforcement Learning](/202604/03/2604.01560v1-deltamem-towards-agentic-memory-management-via-reinforcement-learning)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：通过强化学习实现的智能体记忆管理系统
-9. [ContextBudget: Budget-Aware Context Management for Long-Horizon Search Agents](/202604/03/2604.01664v1-contextbudget-budget-aware-context-management-for-long-horizon-search-agents)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：LLM智能体与强化学习在上下文管理中的集成
-10. [Bridging Large-Model Reasoning and Real-Time Control via Agentic Fast-Slow Planning](/202604/03/2604.01681v1-bridging-large-model-reasoning-and-real-time-control-via-agentic-fast-slow-planning)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：用于实时控制和推理的智能体快慢规划
-11. [When to ASK: Uncertainty-Gated Language Assistance for Reinforcement Learning](/202604/03/2604.02226v1-when-to-ask-uncertainty-gated-language-assistance-for-reinforcement-learning)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：结合语言模型与强化学习策略以增强泛化性
+   evidence：LLM的上下文强化学习框架
+6. [Drop the Hierarchy and Roles: How Self-Organizing LLM Agents Outperform Designed Structures](/202604/04/2603.28990v1-drop-the-hierarchy-and-roles-how-self-organizing-llm-agents-outperform-designed-structures)  
+   标签：评分：8.0/10、query:ag-rl
+   evidence：自组织LLM智能体与协调协议
 
 ### 速读区论文标签
-1. [Multi-Agent LLMs for Adaptive Acquisition in Bayesian Optimization](/202604/03/2603.28959v1-multi-agent-llms-for-adaptive-acquisition-in-bayesian-optimization)  
+1. [Offline Constrained RLHF with Multiple Preference Oracles](/202604/04/2604.00200v1-offline-constrained-rlhf-with-multiple-preference-oracles)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：LLM介导的搜索策略学习
-2. [MemRerank: Preference Memory for Personalized Product Reranking](/202604/03/2603.29247v1-memrerank-preference-memory-for-personalized-product-reranking)  
+   evidence：基于人类反馈的离线受限强化学习
+2. [Signals: Trajectory Sampling and Triage for Agentic Interactions](/202604/04/2604.00356v1-signals-trajectory-sampling-and-triage-for-agentic-interactions)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：使用强化学习为LLM智能体训练记忆提取器
-3. [Multi-AUV Cooperative Target Tracking Based on Supervised Diffusion-Aided Multi-Agent Reinforcement Learning](/202604/03/2603.29426v1-multi-auv-cooperative-target-tracking-based-on-supervised-diffusion-aided-multi-agent-reinforcement-learning)  
+   evidence：用于分流智能体交互轨迹的框架
+3. [Competition and Cooperation of LLM Agents in Games](/202604/04/2604.00487v1-competition-and-cooperation-of-llm-agents-in-games)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：用于协作目标跟踪的多智能体强化学习
-4. [ShapE-GRPO: Shapley-Enhanced Reward Allocation for Multi-Candidate LLM Training](/202604/03/2603.29871v1-shape-grpo-shapley-enhanced-reward-allocation-for-multi-candidate-llm-training)  
+   evidence：多智能体博弈中LLM智能体的策略行为
+4. [GRASP: Gradient Realignment via Active Shared Perception for Multi-Agent Collaborative Optimization](/202604/04/2604.00717v1-grasp-gradient-realignment-via-active-shared-perception-for-multi-agent-collaborative-optimization)  
    标签：评分：8.0/10、query:ag-rl
-   evidence：交互场景下大语言模型智能体的强化学习后训练
-5. [Autonomous overtaking trajectory optimization using reinforcement learning and opponent pose estimation](/202604/03/2603.27207v1-autonomous-overtaking-trajectory-optimization-using-reinforcement-learning-and-opponent-pose-estimation)  
+   evidence：使用贝尔曼均衡的多智能体协作优化框架
+5. [SkyNet: Belief-Aware Planning for Partially-Observable Stochastic Games](/202604/04/2603.27751v1-skynet-belief-aware-planning-for-partially-observable-stochastic-games)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：多智能体自动赛车的强化学习机制
-6. [InconLens: Interactive Visual Diagnosis of Behavioral Inconsistencies in LLM-based Agentic Systems](/202604/03/2603.28106v1-inconlens-interactive-visual-diagnosis-of-behavioral-inconsistencies-in-llm-based-agentic-systems)  
+   evidence：针对部分可观测环境的模型强化学习
+6. [Wan-R1: Verifiable-Reinforcement Learning for Video Reasoning](/202604/04/2603.27866v1-wan-r1-verifiable-reinforcement-learning-for-video-reasoning)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：LLM 智能体系统行为不一致性的诊断
-7. [A Deep Reinforcement Learning Framework for Closed-loop Guidance of Fish Schools via Virtual Agents](/202604/03/2603.28200v1-a-deep-reinforcement-learning-framework-for-closed-loop-guidance-of-fish-schools-via-virtual-agents)  
+   evidence：用于视频推理和导航的可验证强化学习
+7. [Robust Multi-Agent Reinforcement Learning for Small UAS Separation Assurance under GPS Degradation and Spoofing](/202604/04/2603.28900v1-robust-multi-agent-reinforcement-learning-for-small-uas-separation-assurance-under-gps-degradation-and-spoofing)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：通过虚拟智能体进行引导的深度强化学习框架
-8. [Corruption-robust Offline Multi-agent Reinforcement Learning From Human Feedback](/202604/03/2603.28281v1-corruption-robust-offline-multi-agent-reinforcement-learning-from-human-feedback)  
+   evidence：自主系统的多智能体强化学习
+8. [GraSP-STL: A Graph-Based Framework for Zero-Shot Signal Temporal Logic Planning via Offline Goal-Conditioned Reinforcement Learning](/202604/04/2603.29533v1-grasp-stl-a-graph-based-framework-for-zero-shot-signal-temporal-logic-planning-via-offline-goal-conditioned-reinforcement-learning)  
    标签：评分：7.0/10、query:ag-rl
-   evidence：基于人类反馈的离线多智能体强化学习
-9. [Reducing Oracle Feedback with Vision-Language Embeddings for Preference-Based RL](/202604/03/2603.28053v1-reducing-oracle-feedback-with-vision-language-embeddings-for-preference-based-rl)  
+   evidence：离线目标条件强化学习框架
+9. [Deception and Communication in Autonomous Multi-Agent Systems: An Experimental Study with Among Us](/202604/04/2603.26635v1-deception-and-communication-in-autonomous-multi-agent-systems-an-experimental-study-with-among-us)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：用于基于偏好的强化学习的视觉语言嵌入
-10. [Koopman-based surrogate modeling for reinforcement-learning-control of Rayleigh-Benard convection](/202604/03/2603.28074v1-koopman-based-surrogate-modeling-for-reinforcement-learning-control-of-rayleigh-benard-convection)  
+   evidence：多智能体策略环境中大语言模型智能体的研究
+10. [Decentralized MARL for Coarse Correlated Equilibrium in Aggregative Markov Games](/202604/04/2603.27575v1-decentralized-marl-for-coarse-correlated-equilibrium-in-aggregative-markov-games)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：训练强化学习智能体进行流体动力学控制
-11. [Evaluating Privilege Usage of Agents on Real-World Tools](/202604/03/2603.28166v1-evaluating-privilege-usage-of-agents-on-real-world-tools)  
+   evidence：聚合马尔可夫博弈中的去中心化学习
+11. [Distributed Online Submodular Maximization under Communication Delays: A Simultaneous Decision-Making Approach](/202604/04/2603.27803v1-distributed-online-submodular-maximization-under-communication-delays-a-simultaneous-decision-making-approach)  
    标签：评分：6.0/10、query:ag-rl
-   evidence：自主智能体工具使用的安全评估沙箱
+   evidence：多智能体系统的分布式在线决策
 
 
 <div class="dpr-home-promo-card">
