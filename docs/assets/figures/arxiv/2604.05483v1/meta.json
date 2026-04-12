@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.05483v1/fig-001.webp",
+      "caption": "Figure 3: Performance of the GMRL-BD Framework Across Six Tasks Using Llama-2, Vicuna, and Falcon Models. These graphs display the number of interactions for each LLM to detect untrustworthy boundaries across six distinct tasks. Each subplot depicts the convergence rate of the models, with lower interaction counts indicates a more efficient performance",
+      "page": 8,
+      "index": 1,
+      "width": 1056,
+      "height": 513
+    },
+    {
+      "url": "assets/figures/arxiv/2604.05483v1/fig-002.webp",
+      "caption": "Figure 2: GMRL-BD Model Architecture. Agents interact with nodes on the KG to maximize diffusion navigation rewards and optimize graph representations through policy network. For inference stage, multiple agents explore the KG to detect biases in the black-box LLMs. Starting from different topic nodes, agents coordinate to efficiently identify untrustworthy boundaries, minimizing conflicts of action, with the AgentLinkHub facilitates communication and parameter sharing",
+      "page": 7,
+      "index": 2,
+      "width": 1056,
+      "height": 594
+    },
+    {
+      "url": "assets/figures/arxiv/2604.05483v1/fig-003.webp",
+      "caption": "Figure 1: GMRL-BD - Training Stage: Agent maximize rewards and enhance graph representations by interacting with nodes on theKG, target LLMoutcomes, refiningRL policies, and pinpointing biased nodes. Inference Stage:Multiple agents collaboratively navigate the KG to uncover biases in the black-box LLM. Agents coordinate to efficiently detect untrustworthy boundaries and dynamically adjust their exploration paths. For instance, nested bias topics, such as \"multiculturalism,\" can be effectively identified by leveraging agents information exchange and the hierarchical structure of categories.",
+      "page": 3,
+      "index": 3,
+      "width": 1002,
+      "height": 513
+    },
+    {
+      "url": "assets/figures/arxiv/2604.05483v1/fig-004.webp",
+      "caption": "Figure 5: Impact of Increasing Number of Agents on Step Loss and Win Rate in Multi-Agent Collaborative Parameter Sharing",
+      "page": 9,
+      "index": 4,
+      "width": 432,
+      "height": 336
+    }
+  ]
+}
