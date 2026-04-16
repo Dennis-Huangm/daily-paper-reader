@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.11978v1/fig-001.webp",
+      "caption": "Figure 1: Illustration of general agent execution and failure propagation. Given an instruction 1 ,",
+      "page": 2,
+      "index": 1,
+      "width": 812,
+      "height": 393
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11978v1/fig-002.webp",
+      "caption": "Figure 8: Failure mode distribution broken down by domain and model. Database and Embodied only have GPT trajectories in the current dataset. Web: Both models are planning-error dominated (>72%), but GPT accumulates more Memory Limitation (10.6% vs. 2.0%) while Claude shows higher False Assumption (5.4% vs. 1.4%), pointing to distinct secondary failure mechanisms. OS: The model divergence is most pronounced here. GPT failures concentrate in Planning Error (57.7%) and Memory Limitation (24.6%), consistent with context-length degradation over long command chains. Claude failures are instead driven by Environment (44.3%) and Instruction (23.4%), indicating sensitivity to shell-environment feedback and command-specification ambiguity. Database: GPT shows Planning Error (79.3%) and False Assumption (7.5%) as the main failure modes, with no Memory Limitation. Embodied: Nearly all failures are Planning Errors (94.9%), reflecting the precise sequential action ordering demands of embodied tasks.",
+      "page": 45,
+      "index": 2,
+      "width": 817,
+      "height": 252
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11978v1/fig-003.webp",
+      "caption": "Figure 7: Failure mode distribution for GPT-4o-mini vs. Claude 3.5 Sonnet aggregated across all domains. The two models exhibit qualitatively different failure regimes. GPT-4o-mini (1,145 failed traces, success rate 33.4%) is dominated by Planning Error (64.9%) and Memory Limitation (18.3%), reflecting difficulty maintaining coherent long-horizon plans and retaining intermediate state across extended rollouts. Claude 3.5 Sonnet (850 failed traces, success rate 39.9%) shows markedly higher Environment (32.5%) and Instruction (16.5%) failures while Memory Limitation is near-zero (2.2%), suggesting stronger context retention but greater sensitivity to environment-state changes and task-specification ambiguity. Design-level risks (Memory Limitation, Catastrophic Forgetting, False Assumption) account for 20.8% of GPT failures but only 6.6% of Claude failures.",
+      "page": 45,
+      "index": 3,
+      "width": 562,
+      "height": 364
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11978v1/fig-004.webp",
+      "caption": "Figure 3: Current model performance as a function of horizon extension. Plots show success rate (accuracy) versus the compositional depth s, where s denotes the HORIZON-defined extension level corresponding to the number of high-level subtasks composed within a task. Accuracy is computed over task sets with the same s. Each point reports the mean over three independent runs with identical task sets; variability across runs is shown as ± one standard deviation (error bars). We evaluate GPT-5-mini and Claude-4-Sonnet across all domains. Across models and domains, performance consistently decreases and exhibits a sharp drop beyond a certain value of s, empirically supporting the validity of our horizontal horizon definition. More details are provided in Section 4.",
+      "page": 8,
+      "index": 4,
+      "width": 820,
+      "height": 238
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11978v1/fig-005.webp",
+      "caption": "Figure 5: HORIZON overview with two orthogonal dimensions. Left (Horizontal / Horizon): four domain examples contrasting short- vs. long-horizon tasks under our task-structure definition, where intrinsic horizon H∗ increases with extension level s (and may also increase compositional depth C). From top-left to bottom-right: Web illustrates theoretical H∗ growth (e.g., “purchase a flight,” H∗ = 8, vs. “check the weather,” H∗ = 3); OS shows depth extension by inserting non-skippable intermediate states (e.g., enforce and verify read-only before making a.log writable); Database and Embodied show breadth/length extension by composing multiple short-horizon subtasks into one workflow, increasing number of subtasks and coordination steps. Right (Failure Attribution): 7-category failure taxonomy. Colors indicate a hierarchical risk perspective inspired by FMEA: blue corresponds to design-level risks (DFMEA), originating from limitations in agent architecture, while orange corresponds to process-level risks (PFMEA), emerging during sequential execution. More details are provided in Section 3.",
+      "page": 19,
+      "index": 5,
+      "width": 784,
+      "height": 383
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11978v1/fig-006.webp",
+      "caption": "Figure 6: Failure mode distribution across the four task domains (SR = task success rate; n = number of failed traces). Embodied (SR 42.2%) and Database (SR 36.9%) are almost entirely dominated by Planning Error (94.9% and 79.3%, respectively), indicating that structured, well-defined action spaces surface planning as the primary bottleneck. Web (SR 24.1%) follows a similar pattern (Planning Error 74.9%) but additionally exhibits Environment (11.3%) and Memory Limitation (6.2%) failures, reflecting dynamic page-state variability and multi-tab navigation demands. OS (SR 40.3%) has by far the most diverse failure profile: Planning Error (36.7%), Instruction (25.9%), Environment (17.3%), and Memory Limitation (15.1%) all contribute substantially, consistent with the open-ended, long-horizon nature of shell tasks. History Error Accumulation appears exclusively in OS (0.1%).",
+      "page": 44,
+      "index": 6,
+      "width": 813,
+      "height": 367
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11978v1/fig-007.webp",
+      "caption": "Figure 4: Distribution of failure modes across four task domains on 3100+ failure trajectories. Bars show the proportion of each failure type relative to the total failed traces within each domain. Failures are grouped into Process-level Risks (PFMEA) (72.5%), comprising failures that arise during sequential rollout—environment interaction, instruction following, planning errors, and history error accumulation—and Design-level Risks (DFMEA) (27.5%), reflecting engineered-agent limitations—memory constraints, catastrophic forgetting, and false assumptions.",
+      "page": 9,
+      "index": 7,
+      "width": 814,
+      "height": 314
+    }
+  ]
+}
