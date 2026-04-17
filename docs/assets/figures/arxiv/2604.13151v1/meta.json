@@ -1,0 +1,166 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-001.webp",
+      "caption": "Figure 9: Results of action trajecotries and metric values over iterations using Claude Haiku 4.5.",
+      "page": 25,
+      "index": 1,
+      "width": 764,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-002.webp",
+      "caption": "Figure 10: Results of action trajecotries and metric values over iterations using Claude Haiku 4.5.",
+      "page": 26,
+      "index": 2,
+      "width": 764,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-003.webp",
+      "caption": "Figure 6: Harness Design Comparison. (a) In the baseline, the agent harness passes observations directly to the LLM and returns actions as in Yao et al. (2023). (b) With harness engineering, each observation is also routed through a rule-based memory manager that produces a structured summary (visited cells, frontier, activated and activatable states, ...) which is injected into the LLM prompt. The information content is identical but the relevant information is highlighted explicitly through harness engineering.",
+      "page": 21,
+      "index": 3,
+      "width": 829,
+      "height": 468
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-004.webp",
+      "caption": "Figure 14: Results of action trajecotries and metric values over each timestep for GPT-4.1.",
+      "page": 30,
+      "index": 4,
+      "width": 764,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-005.webp",
+      "caption": "Figure 4: Different exploration behavior between Claude Opus 4.6 and Gemini 3.1 Pro, both of which show success rate of 100%. In Figure 4a, until 50% of episode progress, two models show similar behaviors. Afterwards, however, Gemini 3.1 Pro performs more exploration than Claude Opus 4.6. Figure 4b illustrates this observation where Claude Opus 4.6 avoids stepping into unobserved cells despite the two paths incurring the same cost.",
+      "page": 7,
+      "index": 5,
+      "width": 817,
+      "height": 299
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-006.webp",
+      "caption": "Figure 13: Results of action trajecotries and metric values over each timestep for Gemini 3.1 Flash Lite.",
+      "page": 29,
+      "index": 6,
+      "width": 764,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-007.webp",
+      "caption": "Figure 18: Results of action trajecotries and metric values over iterations using Claude Opus 4.6.",
+      "page": 34,
+      "index": 7,
+      "width": 764,
+      "height": 232
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-008.webp",
+      "caption": "Figure 2: Illustration of the LM agent traversing the 2D grid map to achieve the goal given by the task DAG. In each timestep, the environment returns the set of admissible moves and the information about the task node, if discovered. The LM agent must retain relevant information about the map geometry, the task DAG structure and the states of the discovered nodes to achieve the goal node.",
+      "page": 3,
+      "index": 8,
+      "width": 784,
+      "height": 218
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-009.webp",
+      "caption": "Figure 17: Results of action trajecotries and metric values over each timestep for Claude Opus 4.6.",
+      "page": 33,
+      "index": 9,
+      "width": 764,
+      "height": 232
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-010.webp",
+      "caption": "Figure 19: Results of action trajecotries and metric values over iterations using Claude Opus 4.6.",
+      "page": 35,
+      "index": 10,
+      "width": 764,
+      "height": 232
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-011.webp",
+      "caption": "Figure 7: An oracle view of the 2D grid map and the corresponding task DAG for experiments with semantic information injection. This example illustrates cooking tomato pasta with cheese. First, tomato pasta is made from pasta and tomato sauce. Second, tomato pasta with cheese is made by adding cheese to the tomato pasta. In this case, the LM agent may overly rely on semantic priors. For example, it might erroneously assume that the pasta sauce and cheese must be placed in proximity.",
+      "page": 23,
+      "index": 11,
+      "width": 727,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-012.webp",
+      "caption": "Figure 12: Results of action trajecotries and metric values over each timestep for Gemini 3.1 Flash Lite.",
+      "page": 28,
+      "index": 12,
+      "width": 764,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-013.webp",
+      "caption": "Figure 5: Effect of prompts on exploration and exploitation error, and success rate for GPT4.1. The highlighted bar in each panel indicates lowest error or highest success rate. The exploration-focused prompt achieves the lowest exploration error and the highest overall success rate, while the exploitation-focused prompt achieves the lowest exploitation error.",
+      "page": 8,
+      "index": 13,
+      "width": 812,
+      "height": 290
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-014.webp",
+      "caption": "Figure 3: Three illustrative examples demonstrating edge cases. In all three maps, node A is achieved and node B is pending, so the agent can traverse back to B, or explore to discover node C. The purple dashed line depicts the path the LM agent has taken, and the blue transparent line denotes a potentially more optimal path. In Figure 3a, the LM agent can infer the shortest path to node A and traverse unseen nodes as part of an exploitation strategy. In contrast, in Figure 3b, the agent has already taken the shortest path from node B to node A. Hence, it may be more optimal to make a short detour and observe 5 unseen cells at the cost of a short detour. Figure 3c illustrates a case where target cells T (t) are placed symmetrically. Here gain will always be 1 for all four actions. A metric solely relying on gain cannot penalize the LM agent wandering indefinitely in the red dotted region.",
+      "page": 4,
+      "index": 14,
+      "width": 779,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-015.webp",
+      "caption": "Figure 20: Error analysis of GPT-4.1 with varying exploration demand by varying the map design and sizes of the task DAGs while fixing the map size to the full 8×8 grid. Each graph consists of 96 runs on 32 different maps with 3 random seeds.",
+      "page": 36,
+      "index": 15,
+      "width": 822,
+      "height": 219
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-016.webp",
+      "caption": "Figure 16: Results of action trajecotries and metric values over each timestep for GPT-4.1.",
+      "page": 32,
+      "index": 16,
+      "width": 764,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-017.webp",
+      "caption": "Figure 11: Results of action trajecotries and metric values over each timestep for Gemini 3.1 Flash Lite.",
+      "page": 27,
+      "index": 17,
+      "width": 764,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-018.webp",
+      "caption": "Figure 8: Results of action trajecotries and metric values over each timestep for Claude Haiku 4.5.",
+      "page": 24,
+      "index": 18,
+      "width": 764,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-019.webp",
+      "caption": "Table 3: Effect of semantic information on success rates, exploration and exploitation errors, and the number steps on Gemini 3.1 Flash Lite and GPT-4.1. The number of steps reduces when semantic information is injected to our problems.",
+      "page": 9,
+      "index": 19,
+      "width": 827,
+      "height": 219
+    },
+    {
+      "url": "assets/figures/arxiv/2604.13151v1/fig-020.webp",
+      "caption": "Figure 15: Results of action trajecotries and metric values over each timestep for GPT-4.1.",
+      "page": 31,
+      "index": 20,
+      "width": 764,
+      "height": 231
+    }
+  ]
+}
