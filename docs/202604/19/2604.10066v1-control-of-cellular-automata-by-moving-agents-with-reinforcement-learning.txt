@@ -1,0 +1,924 @@
+Title: Control of Cellular Automata by Moving Agents with Reinforcement Learning
+
+URL Source: https://arxiv.org/pdf/2604.10066v1
+
+Published Time: Tue, 14 Apr 2026 00:34:25 GMT
+
+Number of Pages: 12
+
+Markdown Content:
+## Control of Cellular Automata by Moving Agents with Reinforcement Learning 
+
+Franco Bagnoli 1,2,3†[0000 −0002 −6293 −0305] , Bassem Sellami 2[0000 −0001 −6869 −3518] ,Amira Mouakher 2[0000 −0002 −1346 −3851] , and Samira El Yacoubi 2[0000 −0002 −8017 −5286]  
+
+> 1
+
+Department of Physics and Astronomy and CSDC, University of Florence, via G. Sansone 1, 50019 Sesto Fiorentino (Italy) franco.bagnoli@unifi.it , 
+
+> 2
+
+Espace-Dev, UPVD, IRD, UM, Perpignan (France) {bassem.sellami, amira.mouakher,yacoubi}@univ-perp.fr  
+
+> 3
+
+INFN, Sect. Florence (Italy) 
+
+Abstract. In this exploratory paper we introduce the problem of cog-nitive agents that learn how to modify their environment according to local sensing to reach a global goal. We concentrate on discrete dynamics (cellular automata) on a two-dimensional system. We show that agents may learn how to approximate their goal when the environment is pas-sive, while this task becomes impossible if the environment follows an active dynamics. 
+
+Keywords: Control of cellular automata · Reinforcement learning · To-talistic cellular automata. 
+
+1 Introduction 
+
+In this paper we investigate the problem of cognitive agents that learn how to modify their environment, in particular, a two-dimensional Boolean Cellular Automaton (CA) system, in order to achieve a certain goal (the asymptotic density of “one” cells). The environment is modeled as a parallel outer totalistic CA. The environ-ment evolves while agents learn or apply their learned behavior. As we shall see, the most modifiable environment is represented by the identity rule, while other CA rules may represent an impossible obstacle. Agents are represented as totalistic, probabilistic cellular automata with a sensing area (the Moore neighborhood) and an actuator ares (the central cell). Each agent has a global goal: to learn a probabilistic, totalistic rule so that, when applied, it may brings the average density of the environment towards a given target. Agents “learn” by modifying their transition probabilities, which, after many trials, become in general deterministic (either zero or one). The difficulty of the task is mainly due by the environment evolution, i.e., the “physical” world. In the case in which this evolution is passive (all modifications are maintained, identity rule), the control is easy and agents quickly learn the  
+
+> arXiv:2604.10066v1 [nlin.CG] 11 Apr 2026 2F. Bagnoli et al.
+
+corresponding probabilities, which, when applied, lead the system to a state which approximates the target. In the case of more complex environments, which evolve following an active dynamics, learning can be hindered by the lack of examples. In this case may be of help the presence of other agents, which vary the environment. In any case, in active environments, the action of agents generally fails to achieve the desired result, and correspond to small modifications of the “natural” asymptotic density. The outline of this paper is the following. The model is defined in Section 2. Since the action of agents is to learn a totalistic rule, Section 3 is devoted to the study of the possible patterns and asymptotic densities of such a class of automata. Section 4 describes the learning process. Section 5 presents the results in the case of a passive environment, while Section 6 discusses more complex cases. Conclusions are drawn in the last section. 
+
+2 The model 
+
+The model is composed by two main elements: 1. The physical word, here represented by a two-dimensional outer totalistic Boolean CA. 2. The moving agents, that can perform measurements on a given “sensing” area and modify an “actuator” area, according with a “strategy” (a probabilistic totalistic rule) for reaching a target (a global density of “one” cells) that is the subject of learning. In this work we examine the simple case of agents whose sensing area is the set of 9 cells, i.e., the Moore neighborhood (all cells with a distance less or equal to √2 from the central cell), and the only measured quantity is the number of “one” cells. The actuator area is just the central cell. Let us indicate with M the number of cells in the sensing area (see Fig. 1). The measurement quantity is therefore a number 0 ≤ m ≤ M . The control strategy is a vector P (m) ≡ P (1 |m) which gives the probability of imposing a value 1 on the target cell, given a measurement m. Agents have a goal, that for simplicity can be taken as reaching a target number of one cells in the sensing area ¯m, which in principle should correspond to a density ¯ρ = ¯ m/M .The challenge for the learning agent is that of elaborating a strategy (an updating scheme of the actuator area based on the values in the sensing one) able to drive the system towards the desired density. Notice that, while the updating of the “world” is parallel (all cells update their value at the same time, based on the state of their own neighborhood), the action of one agent is serial, on the actuator cell. Therefore, the problem for the agent can also be reformulated as find the serial (or asynchronous) updating function that, combined with the “natural” parallel updating of the system, can drive it to a desired density .Control of CA by Moving Learning Agents 3     
+
+> Fig. 1. An agent (red lines) in its environment. The larger square denotes the sensing ares, the smaller square is the actuator area, the number on the lower-right corner is the target number ¯mof “one” cells (in figure the measured number mis three).
+
+The action of more than one agent is that of partial asynchronism combined with the parallel updating. We shall limit our present investigation to Boolean functions that depend on the Moore neighborhood, for which M = 9 .Before dealing with the learning procedure, let us introduce the dynamics of asynchronous totalistic cellular automata, and the possible outcome of a “pure” (i.e. a deterministic) strategy, using the language of game theory. 
+
+3 Totalistic and outer totalistic Boolean cellular automata 
+
+A cellular automaton is composed by a set of cells, indexed by a integer i, that, at time t, can assume one of a given set of states, si(t). The cells are connected by a network aij ∈ { 0, 1}, and the state of the cells connected to a given one (its neighborhood or vicinity) is denoted by vi(t):
+
+vi(t) = {sj (t) : aij = 1 }.
+
+The evolution of the state of the cells is given by a transition probability 
+
+τ (s′|v), which express the probability that the next state of a cell is s′ if the present state of the neighborhood is v. The normalization of the transition prob-ability is X
+
+> s′
+
+τ (s′|v) = 1 .
+
+This transition probability is generally the same for all cells (homogeneous CA) and is applied simultaneously. 4 F. Bagnoli et al. 
+
+M GE 4 M GE 60                            
+
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> 00.2 0.4 0.6 0.8 1
+> p ∞
+> p0
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 020 40 60 80 100
+> p0=0.22; t=100 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> 00.2 0.4 0.6 0.8 1
+> p ∞
+> p0
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 020 40 60 80 100
+> p0=0.78; t=100
+
+M GE 5 M GE 50                            
+
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> 00.2 0.4 0.6 0.8 1
+> p ∞
+> p0
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 020 40 60 80 100
+> p0=0.45; t=100 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> 00.2 0.4 0.6 0.8 1
+> p ∞
+> p0
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 020 40 60 80 100
+> p0=0.55; t=100
+
+Fig. 2. Asymptotic patterns ( 100 × 100 sites) of parallel updating of totalistic majority rules M GEX , T = 100 . The asymptotic patterns and densities depends on the initial density, except for X ≤ 3 (all ones) and X ≥ 7 (all zeros). The transitions for X = 4 
+
+and X = 6 are dominated by nucleation, that for X = 5 shows a gradual transition of cluster sizes (spinodal decomposition). 
+
+We consider here a two-dimensional lattice of size N × N and Boolean CA, for which si ∈ { 0, 1}. Cells are sequentially numbered from left to right and from top to bottom, so the index i of a cell of coordinates (xi, y i) is given by 
+
+i = yiN + xi; xi = i mod N ; yi = ⌊i/N ⌋.
+
+All operations on xi and yi are modulo N .In our case, the neighborhood of a cell is formed by the 8 nearest cells plus the cell itself. We shall name the cells in the neighborhood (Fig. 1) as 
+
+C ≡ si,E ≡ si+1 , W ≡ si−1, N ≡ si+N , S ≡ si−N ,N E ≡ si+N +1 , N W ≡ si+N −1, SE ≡ si−N +1 , SW ≡ si−N −1.
+
+A totalistic function f is completely symmetric with respect to its arguments and therefore only depends on their sum, 
+
+f (x1, x 2, x 3, . . . ) = g X
+
+i
+
+xi
+
+!
+
+.
+
+In order to use a compact notation, we shall indicate with H the sum of the state of cells at distance 1 and √2,
+
+H = N + S + E + W + N E + N W + SE + SW, Control of CA by Moving Learning Agents 5
+
+M LE 0p M LE 1p M LE 2p0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.24; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.24; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.32; t=100 
+
+M LE 3p M LE 4p M LE 5p0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.40; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.48; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.58; t=100 
+
+M LE 6p M LE 7p M LE 8p0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.68; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.80; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.80; t=100 
+
+Fig. 3. Results for lattices of 100 × 100 sites of fully synchronous updating of totalistic minority rules M LEXp , T = 100 . Left: asymptotic density ρ∞ vs initial density ρ0.Right: a snapshot of the configuration for ρ0 corresponding to the red dotted line at left. The asymptotic patterns and densities depends on the initial density, except for 
+
+X = 9 (all ones), T = 100 . Patterns and curves take opposite values for odd time steps. 6 F. Bagnoli et al. 
+
+MLE 0s : ρ∞ = 0 .15 MLE 1s : ρ∞ = 0 .25 MLE 2s : ρ∞ = 0 .35 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.26; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.35; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.35; t=100 
+
+MLE 3s : ρ∞ = 0 .5 MLE 4s : ρ∞ = 0 .5 MLE 5s : ρ∞ = 0 .50
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.35; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.35; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.35; t=100 
+
+MLE 6s : ρ∞ = 0 .65 MLE 7s : ρ∞ = 0 .75 MLE 8s : ρ∞ = 0 .85 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.35; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.35; t=100 0
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1
+
+0 0.2 0.4 0.6 0.8 1
+
+> p ∞
+
+p 0
+
+0
+
+20 
+
+40 
+
+60 
+
+80 
+
+100 
+
+0 20 40 60 80 100 
+
+p 0 =0.35; t=100 
+
+Fig. 4. Results for lattices of 100 ×100 sites of fully asynchronous updating of totalistic minority rules MLEXs , T = 100 . Left: Final density ρ∞ vs initial density ρ0. Right: asymptotic patterns for initial density corresponding to the red dotted line. There is no dependence on the initial density. Except for X = 0 and X = 8 (chaotic), all other patterns are composed of static domains, that may finally merge. The pattern for 
+
+MLE 9s (X = 9 ) is all ones ( ρ∞ = 1 ), and the pattern for ML 0s is all zeros ( ρ∞ = 0 ). Control of CA by Moving Learning Agents 7
+
+and M = H + C.A totalistic transition probability depends only on M , while an outer total-istic transition probability depends separately on C and H.Clearly, 0 ≤ M ≤ 9, and therefore the totalistic transition probability set can be seen as a 9-component vector P (M ) ≡ τ (1 |M ). The outer totalistic transition probabilities can be seen as two vectors P0(H) ≡ τ (1 |C = 0 , H ) and 
+
+P1(H) ≡ τ (1 |C = 1 , H ).For a deterministic CA the transition probability vector is formed only by zeros or ones. The evolution function for deterministic CA is also called a “rule”. Following Ref. [1], we can introduce a series of abbreviations for denoting the rules of two-dimensional deterministic, totalistic or outer totalistic, Boolean CA. For a totalistic rule one uses a M followed by the list of values which give 
+
+s′ = 1 . For instance, the majority rule can be written as M 56789 . For such rules can also say that this rule gives 1 if M ≥ X (or M > Y ; Y = X − 1), and can be indicated as M GEX (or M GY ). So the same majority rule can be written as 
+
+M GE 5 or M G 4. Similarly, we can indicate the minority rule as MLE 4 or ML 5,respectively. For outer totalistic rules we use the symbol H and we repeat the list for the cases s = 0 and s = 1 . For instance, the game of Life [2] is an outer totalistic rule for which P0(3) = P1(2) = P2(3) = 1 and zero otherwise. It can be denoted as H3H23 .The identity rule, which does not change anything, is again an outer totalistic table with P0(H) = 0 and P1(H) = 1 . It should be indicated as HHGE 0 but for simplicity it will be denoted by I.Finally, we append a “ p” to indicate parallel updating, a “ s” for fully asyn-chronous (“serial”) updating, and a “ m” (“mixed”) otherwise. The patterns for extended majority rules of the type M GEX , X ∈ { 0, . . . , 9}
+
+are reported in Fig. 2. The patterns do not depend on the synchronicity of the updating and in general show a dependence on the initial density ρ0 (fraction of one cells). A similar behavior is shown by minority rules of the type MLEXp , with parallel updating, as shown in Fig. 3. Since in general the local zero-neighborhood is mapped to one, and (except for MLE 9), local one-neighborhood is mapped to zero, the patterns flip at each time step. Also, in this case, the patterns and the asymptotic densities depend on the initial density. On the contrary, for fully asynchronous minority rules of the type M LEXs ,the patterns are independent of the initial values, and the final density only depends on the rule used. The patterns M LEXs are examples of the possible action of an agent with a pure (deterministic) strategy, when the evolution of the world is given by the identity rule (i.e., it keeps all modifications made), since in this case the application of the rule determines the final density regardless of the initial one. 8 F. Bagnoli et al. 
+
+Table 1. Reinforcement learning of strategy for s = 0 . If the flip of the spin does not affect m or it overcomes the target, the strategy does not change. Otherwise, if the flip ( s′ = 1 ) brings m′ closer than m to the target, the effect of flipping is reinforced (∆P (m) > 0), otherwise it is decreased. The effects on ∆P (m) for s = 1 are reversed in sign. Other combinations are not possible. 
+
+condition f ( ¯ m, m ) f ( ¯ m, m ) f (m′, m ) ∆P (m)
+
+m′ = m any any 0 0
+
+m′ > ¯m > m 1 −1 any 0
+
+m′ < ¯m < m −1 1 any 0¯m > m ′ > m 1 1 1 +2 r
+
+¯m = m′ > m 1 0 1 +r
+
+¯m > m > m ′ 1 1 −1 −2r
+
+¯m = m > m ′ 0 1 −1 −r
+
+¯m = m < m ′ 0 −1 1 −r
+
+¯m < m < m ′ −1 −1 1 −2r
+
+¯m = m′ < m −1 0 −1 +r
+
+¯m < m ′ < m −1 −1 −1 +2 r
+
+4 Learning 
+
+Agents apply reinforcement learning [3] to reach their goal. The idea is the following: the agent has a target density ¯m; it measures the actual density m in the sensing area (its neighborhood), flips the central spin (the actuator area), and measures the density m′ at the following time step. If the flip does not affect the density, or if m < ¯m and m′ > ¯m (or the opposite, m > ¯m and m′ < ¯m), nothing happens. Otherwise, if the flip brings 
+
+m′ closer than m to the target, the effect of flipping is reinforced, in the sense that P (m) is modified in order to increase the probability of the effect of flipping, otherwise it is decreased. This strategy is summarized in Table 1, columns 1 and 5. We can make the evolution of strategy more compact. Let us define a test function 
+
+f (x, y ) = 
+
+
+
+−1 if x < y, 
+
+0 if x = y, 
+
+1 if x > y. 
+
+The variation of the strategy is thus given by 
+
+∆P (m) = [ f ( ¯ m, m ) + f ( ¯ m, m ′)] · f (m′, m ) · (1 − 2s)r, 
+
+as reported in Table 1, columns 2-5. Therefore, 
+
+P ′(m) = 
+
+
+
+0 if P ′(m) + ∆P (m) ≤ 01 if P ′(m) + ∆P (m) ≥ 1
+
+P (m) + ∆P (m) otherwise since P (m) is bounded between 0 and 1. Agents train themselves for a certain number T of epochs. Control of CA by Moving Learning Agents 9
+
+5 Passive environment 
+
+Let us first investigate what happens when the environment is passive, i.e., it follows the identity rule. We assume here that all agents have the same target, and that there is no interference (other agents whose target areas are inside the sensing area of the one under investigation). In this case the evolution of the strategy is quite simple. For s = 0 , given a measurement m < ¯m, we get m′ = m+1 so P (m) increases by a positive amount, while it decreases if m > ¯m, and vice versa for s = 1 .          
+
+> (a) (b)
+> Fig. 5. The evolution (learning) of the strategy P(m, t )vs time for the identity rule, with ¯m= 2 and N= 13 . (a) One single agent; (b) 10 agents.
+
+If the agent is able to sample all possible values of m for a sufficient large number of times, the final strategy is just P (m) = 1 for m < ¯m, and P (m) = 0 
+
+for m > ¯m, i.e., a minority rule M LEs for a single agent, or M LEm for more than one agents. As seen in Section 3, this is a pure strategy that gives an asymptotic density independent on the initial one (for the passive environment), and thus can approximate the target ¯m.It is evident that here the learning rate r plays little role, while the “vari-ability” of the environment is important: notice the slow learning of P (0) and 
+
+P (9) .The agent alters the environment while testing, and therefore the density tends to be skewed towards 0.5, while, when applying the learned strategy, the density tends to that of the fully asynchronous minority rule strategy (Sect. 3). The variability of the sampled values of m is improved if more agents are learning at the same time, or by mixing agents with different goals. 
+
+6 More complex environments 
+
+In this preliminary paper we explore the consequences of three rules for the evolution of the environment: the frustrated identity H0HGE 1p, i.e, the identity except that for H = 0 C = 0 gives C′ = 1 and C = 1 gives C′ = 0 ; the double frustrated identity H0HGE 1p, which, “flips” also the case H = 8 , and the Game 10 F. Bagnoli et al. 0                                          
+
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> 00.2 0.4 0.6 0.8 1
+> ρ'
+> ρ
+> Asymptotic dens. 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 020 40 60 80 100
+> p0=0.28; t=100 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> 00.2 0.4 0.6 0.8 1
+> ρ'
+> ρ
+> Asymptotic dens. 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 020 40 60 80 100
+> p0=0.50; t=540 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> 00.2 0.4 0.6 0.8 1
+> ρ'
+> ρ
+> Asymptotic dens. 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 020 40 60 80 100
+> p0=0.28; t=380
+
+Fig. 6. Results for lattices of 100 × 100 sites of fully synchronous updating of outer totalistic minority rules, T = 100 . From top to bottom: H0HGE 1p, H08 H1234567 p
+
+and Life H3H23 p. Left: the asymptotic density as a function of the initial one. Right: a snapshot of a configuration corresponding to the initial density marked by the red dotted line in the left column. Control of CA by Moving Learning Agents 11 
+
+of Life, H3H23 p. As shown in Figure 6, the correspondence between the initial and the final density (which is fully diagonal for the identity rule), shows more and more “unnatural” targets: for H0HGE 1p the target ¯ρ < 0.38 is not in the natural range, for H0HGE 1p also the target ¯ρ > 0.62 is unnatural, for Life 
+
+H3H23 p only targets ¯ρ < 0.03 are natural.            
+
+> Fig. 7. The learning process for the H0HGE 1penvironment. Left: ¯m= 5 .2(¯ρ= 0 .6). Right: ¯m= 0 (¯ρ= 0 ).
+
+For the frustrated majority rule, a target within the natural range (say, ¯m =5.4 – ¯ρ = 0 .6) gives the same results as in the passive environment, since it involves the “identity” portion of the density graph. However, agents never learn what to do for local densities that are forbidden by the rule, for instance for 
+
+m = 0 in the H0HGE 1p environment, P (0) always remains at the original value 
+
+0.5 since agents can never be successful in changing such a local configuration (Fig. 7-left), the same happens also for P (9) and environment H08 H1234567 p.Setting a target outside the natural area, for instance ¯m = 0 for H0HGE 1p,correctly induces all “evolving” probabilities (in this case, all except P (0) ) to reach the “right” values (Fig. 7-right), but the application of the rule can only partially alter the local density. In the last case, the density obtained by applying the rule with 20 agents on a 100 × 100 lattice only gives ρ∞ ≃ 0.3.     
+
+> Fig. 8. The learning process for the Game of Life, H3H23 penvironment, and ¯m= 0 .03 .
+
+For the Game of Life, H3H23 p, let us set a target in the natural range, 
+
+¯ρ = 0 .01 − 0.03 (0 < ¯m < 0.27 ), but different from the trivial ones ¯ρ = 0 12 F. Bagnoli et al. 
+
+(extinction). The first result is that a single agent cannot fulfill the task, since it always brings the system to extinction (the asymptotic “animals” in life [4] are quite sensible to perturbations), while the presence of more agents is able to “keep alive” the environment. However, agents are unable to learn what to do for local measurements with m = 0 , since all actions that they perform on such a local configuration give C′ = 0 (no improvement towards the target), so their are left with P (0) = 0 .5 and the learned rule for small values of m is 
+
+P (1) = P (2) = P (3) = 0 (only P (4) = 1 ), so the application of such a rule always brings the system to extinction, Figure 8. Setting a higher target, like ¯m = 1 , brings P (0) = 1 , but this is still insuffi-cient to get an asymptotic density different from zero. Only setting unreachable targets like ¯m = 9 induces all P (m) = 1 , with a final density only slightly above the “natural” one, ¯ρ = 0 .06 with 20 agents in a 100 × 100 lattice. 
+
+7 Conclusions 
+
+We have investigated the problem of moving cognitive agents (modeled as total-istic probabilistic cellular automata) that learn how to modify their environment (modeled as a deterministic, outer-totalistic cellular automata). Agent can sense the local configuration of the environment and alter the center cell, trying to make the local density to go towards their predefined target. We have shown that agents may learn how to approach their goal when the environment is passive, and only partially or not at all if the environment follows an active dynamics. There are many other aspects of the model to be investigated in future works. 
+
+References 
+
+[1] Gérard Y. Vichniac. “Simulating physics with cellular automata”. In: Phys-ica D: Nonlinear Phenomena 10.1–2 (1984), pp. 96–116. issn : 0167-2789. 
+
+doi : 10.1016/0167- 2789(84)90253- 7 . url : http://dx.doi.org/10. 1016/0167-2789(84)90253-7 .[2] Martin Gardner. “Mathematical Games”. In: Scientific American 223.4 (1970), pp. 120–123. issn : 0036-8733. doi : 10.1038/scientificamerican1070-120 . url : http://dx.doi.org/10.1038/scientificamerican1070-120 .[3] Reinforcement Learning: State-of-the-Art . Springer Berlin Heidelberg, 2012. 
+
+isbn : 9783642276453. doi : 10 . 1007 / 978 - 3 - 642 - 27645 - 3 . url : http : //dx.doi.org/10.1007/978-3-642-27645-3 .[4] Franco Bagnoli, Raúl Rechtman, and Stefano Ruffo. “Some facts of life”. In: Physica A: Statistical Mechanics and its Applications 171.2 (Feb. 1991), pp. 249–264. issn : 0378-4371. doi : 10.1016/0378-4371(91)90277-j . url :
+
+http://dx.doi.org/10.1016/0378-4371(91)90277-J .

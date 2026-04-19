@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.10066v1/fig-001.webp",
+      "caption": "Fig. 4. Results for lattices of 100×100 sites of fully asynchronous updating of totalistic minority rules MLEXs, T = 100. Left: Final density ρ∞ vs initial density ρ0. Right: asymptotic patterns for initial density corresponding to the red dotted line. There is no dependence on the initial density. Except for X = 0 and X = 8 (chaotic), all other patterns are composed of static domains, that may finally merge. The pattern for MLE9s (X = 9) is all ones (ρ∞ = 1), and the pattern for ML0s is all zeros (ρ∞ = 0).",
+      "page": 6,
+      "index": 1,
+      "width": 706,
+      "height": 489
+    },
+    {
+      "url": "assets/figures/arxiv/2604.10066v1/fig-002.webp",
+      "caption": "Fig. 6. Results for lattices of 100 × 100 sites of fully synchronous updating of outer totalistic minority rules, T = 100. From top to bottom: H0HGE1p, H08H1234567p and Life H3H23p. Left: the asymptotic density as a function of the initial one. Right: a snapshot of a configuration corresponding to the initial density marked by the red dotted line in the left column.",
+      "page": 10,
+      "index": 2,
+      "width": 462,
+      "height": 526
+    },
+    {
+      "url": "assets/figures/arxiv/2604.10066v1/fig-003.webp",
+      "caption": "Fig. 1. An agent (red lines) in its environment. The larger square denotes the sensing ares, the smaller square is the actuator area, the number on the lower-right corner is the target number m̄ of “one” cells (in figure the measured number m is three).",
+      "page": 3,
+      "index": 3,
+      "width": 364,
+      "height": 365
+    },
+    {
+      "url": "assets/figures/arxiv/2604.10066v1/fig-004.webp",
+      "caption": "Fig. 2. Asymptotic patterns (100×100 sites) of parallel updating of totalistic majority rules MGEX, T = 100. The asymptotic patterns and densities depends on the initial density, except for X ≤ 3 (all ones) and X ≥ 7 (all zeros). The transitions for X = 4 and X = 6 are dominated by nucleation, that for X = 5 shows a gradual transition of cluster sizes (spinodal decomposition).",
+      "page": 4,
+      "index": 4,
+      "width": 558,
+      "height": 372
+    },
+    {
+      "url": "assets/figures/arxiv/2604.10066v1/fig-005.webp",
+      "caption": "Fig. 5. The evolution (learning) of the strategy P (m, t) vs time for the identity rule, with m̄ = 2 and N = 13. (a) One single agent; (b) 10 agents.",
+      "page": 9,
+      "index": 5,
+      "width": 617,
+      "height": 214
+    },
+    {
+      "url": "assets/figures/arxiv/2604.10066v1/fig-006.webp",
+      "caption": "Fig. 3. Results for lattices of 100×100 sites of fully synchronous updating of totalistic minority rules MLEXp, T = 100. Left: asymptotic density ρ∞ vs initial density ρ0. Right: a snapshot of the configuration for ρ0 corresponding to the red dotted line at left. The asymptotic patterns and densities depends on the initial density, except for X = 9 (all ones), T = 100. Patterns and curves take opposite values for odd time steps.",
+      "page": 5,
+      "index": 6,
+      "width": 706,
+      "height": 488
+    }
+  ]
+}

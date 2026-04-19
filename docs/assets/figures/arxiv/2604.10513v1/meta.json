@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.10513v1/fig-001.webp",
+      "caption": "Figure 2: Behavioral Improvement Lifecycle Using Semantic Feature Analysis",
+      "page": 3,
+      "index": 1,
+      "width": 844,
+      "height": 442
+    },
+    {
+      "url": "assets/figures/arxiv/2604.10513v1/fig-002.webp",
+      "caption": "Figure 5: Decision Tree",
+      "page": 8,
+      "index": 2,
+      "width": 1056,
+      "height": 492
+    },
+    {
+      "url": "assets/figures/arxiv/2604.10513v1/fig-003.webp",
+      "caption": "Table 1: Accuracy before and after AMAP. Difficulty levels: E = easy, M = medium, H = hard (colour-coded). Δ reported in percentage points (pp).",
+      "page": 8,
+      "index": 3,
+      "width": 519,
+      "height": 278
+    },
+    {
+      "url": "assets/figures/arxiv/2604.10513v1/fig-004.webp",
+      "caption": "Figure 3: Workflow View",
+      "page": 5,
+      "index": 4,
+      "width": 506,
+      "height": 390
+    }
+  ]
+}
