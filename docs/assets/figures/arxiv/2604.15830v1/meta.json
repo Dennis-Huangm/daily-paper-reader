@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.15830v1/fig-001.webp",
+      "caption": "Table 2: Comprehensive ablation studies on PieceHint components. All experiments use Nemotron-1.5B as the base model. The best result in each group is bolded with distinct colors.",
+      "page": 7,
+      "index": 1,
+      "width": 879,
+      "height": 360
+    },
+    {
+      "url": "assets/figures/arxiv/2604.15830v1/fig-002.webp",
+      "caption": "Figure 3: Training dynamics on AIME24 across ablation variants. All curves start from similar initial performance and diverge as training progresses, with PieceHint (red solid lines) consistently achieving the highest final performance while maintaining stable convergence.",
+      "page": 7,
+      "index": 2,
+      "width": 917,
+      "height": 264
+    },
+    {
+      "url": "assets/figures/arxiv/2604.15830v1/fig-003.webp",
+      "caption": "Figure 2: Overview of PieceHint. We identify critical reasoning pieces via value scores, allocate them by model capability, and progressively withdraw hints during training for hint-free reasoning.",
+      "page": 3,
+      "index": 3,
+      "width": 950,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2604.15830v1/fig-004.webp",
+      "caption": "Table 13: Decomposed steps with value scores.",
+      "page": 18,
+      "index": 4,
+      "width": 611,
+      "height": 970
+    },
+    {
+      "url": "assets/figures/arxiv/2604.15830v1/fig-005.webp",
+      "caption": "Figure 4: Pass@k performance across different sampling budgets showing convergent behavior at higher k values.",
+      "page": 8,
+      "index": 5,
+      "width": 922,
+      "height": 276
+    },
+    {
+      "url": "assets/figures/arxiv/2604.15830v1/fig-006.webp",
+      "caption": "Table 4: Model-specific problem selection and piece allocation parameters. Each model uses its own checkpoint as the capability reference model µ0 for variance-based selection.",
+      "page": 17,
+      "index": 6,
+      "width": 900,
+      "height": 261
+    },
+    {
+      "url": "assets/figures/arxiv/2604.15830v1/fig-007.webp",
+      "caption": "Table 3: General training hyperparameters and system configuration (shared across all models).",
+      "page": 16,
+      "index": 7,
+      "width": 961,
+      "height": 1202
+    }
+  ]
+}

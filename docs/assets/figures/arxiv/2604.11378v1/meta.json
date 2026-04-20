@@ -1,0 +1,150 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-001.webp",
+      "caption": "Table 6: Positioning Graph Harness relative to existing approaches.",
+      "page": 11,
+      "index": 1,
+      "width": 990,
+      "height": 311
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-002.webp",
+      "caption": "Table 10: Recovery levels, triggers, and scope.",
+      "page": 26,
+      "index": 2,
+      "width": 940,
+      "height": 227
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-003.webp",
+      "caption": "Table 8: Design principles: what is sacrificed and what is gained.",
+      "page": 21,
+      "index": 3,
+      "width": 732,
+      "height": 340
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-004.webp",
+      "caption": "Table 16: Nine representative projects from the 70-project survey. Full project list available in supplementary material.",
+      "page": 47,
+      "index": 4,
+      "width": 732,
+      "height": 594
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-005.webp",
+      "caption": "Table 1: Summary of notation used throughout this paper.",
+      "page": 2,
+      "index": 5,
+      "width": 718,
+      "height": 340
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-006.webp",
+      "caption": "Table 2: Graph Harness vs. LangGraph.",
+      "page": 7,
+      "index": 6,
+      "width": 644,
+      "height": 452
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-007.webp",
+      "caption": "Table 12: Seven-group experimental design. Each row adds exactly one feature to the previous row.",
+      "page": 29,
+      "index": 7,
+      "width": 698,
+      "height": 508
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-008.webp",
+      "caption": "Table 5: Systematic comparison of Graph Harness with related LLM agent and workflow systems.",
+      "page": 10,
+      "index": 8,
+      "width": 856,
+      "height": 244
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-009.webp",
+      "caption": "Figure 3: Three-layer separation: planning, execution, and recovery.",
+      "page": 23,
+      "index": 9,
+      "width": 630,
+      "height": 335
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-010.webp",
+      "caption": "Table 11: Expressiveness boundary of Graph Harness.",
+      "page": 28,
+      "index": 10,
+      "width": 756,
+      "height": 255
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-011.webp",
+      "caption": "Table 3: Classical DAG scheduling vs. LLM agent scheduling: why the analogy is not trivial.",
+      "page": 8,
+      "index": 11,
+      "width": 742,
+      "height": 538
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-012.webp",
+      "caption": "Table 14: Excluded capabilities and their rationale.",
+      "page": 40,
+      "index": 12,
+      "width": 798,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-013.webp",
+      "caption": "Figure 1: Motivating example: a bug-fix task as a DAG. Blue nodes form the first parallel wave; green nodes form the second. The any of join selects one patch; the other is skipped. Note: This example illustrates SGH’s potential benefits under ideal conditions: (1) the planner correctly identifies all parallel structure, (2) dependencies are fully known at planning time, and (3) the LLM executes each node correctly. Real-world tasks may not exhibit such clean parallelism, and the planner’s ability to recognize independent operations is a prerequisite for these benefits. See Section 3.7 for discussion of what happens when the planner fails.",
+      "page": 4,
+      "index": 13,
+      "width": 402,
+      "height": 517
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-014.webp",
+      "caption": "Table 7: Observed trade-offs across 70 surveyed agent systems.Categories are mutually exclusive based on the primary execution pattern observed. Percentages are approximate; sensitivity analysis within ±10% does not change the ordinal ranking (Agent Loop is most common, Graph/flow is least common). See Section A.5 for methodology.",
+      "page": 19,
+      "index": 14,
+      "width": 918,
+      "height": 198
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-015.webp",
+      "caption": "Table 13: Task tier design and expected behavior.",
+      "page": 32,
+      "index": 15,
+      "width": 636,
+      "height": 482
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-016.webp",
+      "caption": "Table 15: Complete state transition table.",
+      "page": 44,
+      "index": 16,
+      "width": 972,
+      "height": 419
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-017.webp",
+      "caption": "Figure 4: Node state machine. Terminal states (gray) are stable: once entered, they are never left. Transitions: running → failed retryable occurs on transient errors (network timeout, rate limit) that may succeed on retry; running → failed occurs on structural errors (missing dependencies, invalid plan) that cannot be fixed by retrying the same node.",
+      "page": 24,
+      "index": 17,
+      "width": 948,
+      "height": 476
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11378v1/fig-018.webp",
+      "caption": "Table 4: Graph Harness vs. classical workflow engines.",
+      "page": 9,
+      "index": 18,
+      "width": 684,
+      "height": 565
+    }
+  ]
+}

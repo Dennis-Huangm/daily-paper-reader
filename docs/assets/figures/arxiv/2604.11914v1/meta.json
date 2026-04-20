@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.11914v1/fig-001.webp",
+      "caption": "Figure 1: Architecture overview. Observations pass through a temporal embedding and three cortical cells with increasing time constants. A global workspace broadcasts across levels. Three self-monitoring modules (bottom) monitor the hierarchy. In the add-on design, module outputs are fed back as input features. In the structural variant, they sit on the decision critical path: confidence gates exploration, surprise triggers workspace broadcasts, and self-model predictions enter the policy head.",
+      "page": 4,
+      "index": 1,
+      "width": 798,
+      "height": 523
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11914v1/fig-002.webp",
+      "caption": "Table 1: Food/death ratio across conditions (mean ± std, n=20 seeds). No condition significantly outperforms the no-self-monitoring baseline in the standard environment. Dashes indicate conditions not run: structural integration was developed after the initial null result and tested only at 50k steps; Single τ was a diagnostic ablation run only in the standard 10k condition.",
+      "page": 8,
+      "index": 2,
+      "width": 752,
+      "height": 199
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11914v1/fig-003.webp",
+      "caption": "Figure 2: Module output collapse (seed 42, add-on design, standard 1D environment). (a) Confidence is flat at ∼0.47. (b) Attention allocation is constant across cortical levels. (c) γeff varies by < 0.0002. (d) Surprise rises from zero (no prediction at step 0) to a plateau within ∼200 steps and remains constant; vertical lines mark deaths, which produce no response.",
+      "page": 9,
+      "index": 3,
+      "width": 910,
+      "height": 628
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11914v1/fig-004.webp",
+      "caption": "Table 2: Component-wise structural ablation (non-stationary, 50k steps, n=20 seeds). Each single-pathway variant activates only one structural integration mechanism.",
+      "page": 10,
+      "index": 4,
+      "width": 632,
+      "height": 200
+    }
+  ]
+}

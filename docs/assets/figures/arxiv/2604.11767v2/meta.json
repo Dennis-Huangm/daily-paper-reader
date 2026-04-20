@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.11767v2/fig-001.webp",
+      "caption": "Table 3. Lint results stratified by framework.",
+      "page": 11,
+      "index": 1,
+      "width": 792,
+      "height": 274
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11767v2/fig-002.webp",
+      "caption": "Table 2. Lint results on 835 GitHub agent configurations.",
+      "page": 11,
+      "index": 2,
+      "width": 685,
+      "height": 211
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11767v2/fig-003.webp",
+      "caption": "Table 7. Real-world agent pattern tests. Each pattern constructs a production-style 𝜆𝐴 term, executes via real LLM calls, and verifies the output matches the operational semantics prediction. “Output” shows the actual LLM result.",
+      "page": 15,
+      "index": 3,
+      "width": 510,
+      "height": 265
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11767v2/fig-004.webp",
+      "caption": "Table 8. Cost Bound validation: predicted vs. actual oracle calls.",
+      "page": 15,
+      "index": 4,
+      "width": 710,
+      "height": 200
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11767v2/fig-005.webp",
+      "caption": "Table 6. DSL wrapper overhead (excluding LLM latency).",
+      "page": 14,
+      "index": 5,
+      "width": 785,
+      "height": 534
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11767v2/fig-006.webp",
+      "caption": "Table 4. Precision of static analysis tools across domains.",
+      "page": 13,
+      "index": 6,
+      "width": 740,
+      "height": 261
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11767v2/fig-007.webp",
+      "caption": "Table 10. Comparison of agent/workflow formalisms.",
+      "page": 17,
+      "index": 7,
+      "width": 527,
+      "height": 277
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11767v2/fig-008.webp",
+      "caption": "Table 1. Implementation architecture: code↔ formalism correspondence.",
+      "page": 9,
+      "index": 8,
+      "width": 785,
+      "height": 591
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11767v2/fig-009.webp",
+      "caption": "Table 9. Five agent architecture paradigms as 𝜆𝐴 fragments. Each paradigm uses only a subset of the 11 term formers. “Configs” indicates the number of real-world GitHub configurations from our dataset (Section 7) that exercise each paradigm’s translation.",
+      "page": 16,
+      "index": 9,
+      "width": 805,
+      "height": 478
+    }
+  ]
+}
