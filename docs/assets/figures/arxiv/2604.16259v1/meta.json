@@ -1,0 +1,134 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-001.webp",
+      "caption": "Figure 3: Reliance on task-reward signal on Math-500: For the tilted sampling optima, with β = ∞ denoting the tempered sampling optima, we see that increased reliance on the task-reward, i.e. lower β, leads to both improved as well as more stable performance.",
+      "page": 6,
+      "index": 1,
+      "width": 821,
+      "height": 186
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-002.webp",
+      "caption": "Figure 8: Reliance on task-reward signal on Math-500 for models trained with fixed length: We see that increased reliance on task-reward, i.e. lower β, leads to both improved as well as more stable performance.",
+      "page": 15,
+      "index": 2,
+      "width": 826,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-003.webp",
+      "caption": "Table 2: Impact of fixed and variable length: To analyze the instability of distribution sharpening, we experiment with a fixed length variant which ignores the EOS token in likelihood computation. We see that high likelihood samples are biased towards shorter sequences, and thus distribution sharpening while maintaining the capability of variable sequence lengths leads to unstable behavior – shown in red.",
+      "page": 7,
+      "index": 3,
+      "width": 828,
+      "height": 353
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-004.webp",
+      "caption": "Table 7: Llama-3.2-3B - Variable, Last checkpoint",
+      "page": 18,
+      "index": 4,
+      "width": 818,
+      "height": 530
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-005.webp",
+      "caption": "Table 8: Llama-3.2-3B - Variable, Best checkpoint",
+      "page": 18,
+      "index": 5,
+      "width": 818,
+      "height": 530
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-006.webp",
+      "caption": "Figure 4: Training Health of Qwen3-4B-Instruct-2507: We monitor train reward, entropy, validation accuracy and response length when fine-tuning the 4B model for either taskreward or distribution sharpening based RL. Monotonic increase in train reward highlights that the learned policy is consistently improving in terms of the optimization objective.",
+      "page": 8,
+      "index": 6,
+      "width": 826,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-007.webp",
+      "caption": "Figure 5: Reliance on task-reward signal for Qwen3-4B-Instruct-2507: For tilted sampling, with β = ∞ denoting the tempered sampling optima, we see that increased reliance on the task-reward, i.e. lower β, leads to both improved as well as more stable performance.",
+      "page": 8,
+      "index": 7,
+      "width": 818,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-008.webp",
+      "caption": "Table 9: Llama-3.2-3B - Fixed, Last checkpoint",
+      "page": 19,
+      "index": 8,
+      "width": 818,
+      "height": 530
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-009.webp",
+      "caption": "Table 10: Llama-3.2-3B - Fixed, Best checkpoint",
+      "page": 19,
+      "index": 9,
+      "width": 818,
+      "height": 530
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-010.webp",
+      "caption": "Table 5: Qwen2.5-3B - Fixed, Last checkpoint",
+      "page": 17,
+      "index": 10,
+      "width": 818,
+      "height": 530
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-011.webp",
+      "caption": "Table 6: Qwen2.5-3B - Fixed, Best checkpoint",
+      "page": 17,
+      "index": 11,
+      "width": 818,
+      "height": 530
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-012.webp",
+      "caption": "Table 11: Qwen3-4B - Variable, Last checkpoint",
+      "page": 20,
+      "index": 12,
+      "width": 760,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-013.webp",
+      "caption": "Table 12: Qwen3-4B - Variable, Best checkpoint",
+      "page": 20,
+      "index": 13,
+      "width": 760,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-014.webp",
+      "caption": "Figure 1: Pass@1 Accuracy of 3B models: We compare inference-time distribution sharpening methods, task-reward RL and distribution sharpening based RL, where fine-tuning methods are evaluated at both the last and early stopped checkpoint. We observe that inference-time distribution sharpening can be competitive with task-reward based RL, while distribution sharpening based RL is highly unstable.",
+      "page": 5,
+      "index": 14,
+      "width": 810,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-015.webp",
+      "caption": "Table 4: Qwen2.5-3B - Variable, Best checkpoint",
+      "page": 16,
+      "index": 15,
+      "width": 818,
+      "height": 531
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16259v1/fig-016.webp",
+      "caption": "Table 3: Qwen2.5-3B - Variable, Last checkpoint",
+      "page": 16,
+      "index": 16,
+      "width": 818,
+      "height": 529
+    }
+  ]
+}
