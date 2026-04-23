@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.19859v1/fig-001.webp",
+      "caption": "Figure 2 Pass@K performance of DR-Venus on BrowseComp (left) and BrowseComp-ZH (right).",
+      "page": 12,
+      "index": 1,
+      "width": 972,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19859v1/fig-002.webp",
+      "caption": "Figure 3 Browse ratio of correct, wrong, and overall trajectories under SFT and RL across six benchmarks.",
+      "page": 12,
+      "index": 2,
+      "width": 968,
+      "height": 294
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19859v1/fig-003.webp",
+      "caption": "Table 2 Ablation study on BrowseComp and BrowseComp-ZH. All SFT models are trained based on REDSearcher trajectories.",
+      "page": 11,
+      "index": 3,
+      "width": 952,
+      "height": 200
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19859v1/fig-004.webp",
+      "caption": "Table 1 Overall performance comparison on six widely used deep research benchmarks.",
+      "page": 10,
+      "index": 4,
+      "width": 872,
+      "height": 863
+    }
+  ]
+}

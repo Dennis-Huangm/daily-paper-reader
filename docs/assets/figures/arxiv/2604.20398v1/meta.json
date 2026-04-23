@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.20398v1/fig-001.webp",
+      "caption": "Figure 8: Impact of γ and λ on website generation performance. The heatmaps show the parameter landscape under FSR, AAS, and VRR metrics. The gold box marks the optimal setting (γ = 0.1, λ = 0.1), which yields the best overall performance.",
+      "page": 11,
+      "index": 1,
+      "width": 816,
+      "height": 229
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20398v1/fig-002.webp",
+      "caption": "Figure 2: Token length distributions of prompts and generated responses for several state-of-the-art LLMs on end-to-end multi-page website generation tasks across WebGen-Instruct, WebGen-Bench, and WebDev Arena. For each instance, the prompt is formed by concatenating the system prompt with the corresponding natural-language website design instruction. The first two panels show the prompt length distributions on WebGen-Instruct (training set) and WebGen-Bench (test set), together with the response length distributions aggregated over WebGen-Bench. The last two panels show the prompt length distributions and response length distributions aggregated over WebDev Arena (test set). These statistics provide a quantitative characterization of input and output lengths across models and datasets in realistic website generation scenarios.",
+      "page": 7,
+      "index": 2,
+      "width": 659,
+      "height": 444
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20398v1/fig-003.webp",
+      "caption": "Table 1: Performance comparison of WebGen-R1 and various state-of-the-art LLMs from multiple institutions on the WebGen-Bench benchmark, evaluated by FSR, AAS, and VRR. We also report the score improvement (±) of our WebGen-R1 relative to the base model, Qwen2.5-Coder-7B-Instruct. Bold values indicate the best results.",
+      "page": 8,
+      "index": 3,
+      "width": 684,
+      "height": 434
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20398v1/fig-004.webp",
+      "caption": "Figure 1: Overview of WebGen-R1, a reinforcement learning framework for functional and aesthetic website generation. Given a system prompt, a user specification, and a template manifold, the policy πθ generates only the variable project components, which are then injected into predefined scaffold slots to form a complete website project. The generated project is evaluated by a hierarchical verification and rendering pipeline. In Phase I, static compliance verification checks structural, file-level, command-level, and content-level constraints and terminates invalid samples early. In Phase II, statically valid projects proceed through dependency installation, bundling, local serving, and browser-based rendering, producing screenshots together with runtime and console logs. Based on these observations, WebGen-R1 uses a cascaded multimodal reward that assigns scalar rewards to static or execution failures and otherwise combines a VLM-based aesthetic perception score, a functional integrity score derived from execution logs, and a reasoning format reward. The resulting reward is used to optimize the model with GRPO. This design combines template-level structural constraints, execution-grounded functional reward supervision, and visually informed aesthetic reward supervision, enabling efficient end-to-end RL for high-quality multi-page website generation.",
+      "page": 4,
+      "index": 4,
+      "width": 822,
+      "height": 409
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20398v1/fig-005.webp",
+      "caption": "Table 5: Statistics of the WebGen-Bench and WebDev Arena benchmarks, including the number of samples, instruction length statistics in tokens measured by tiktoken’s cl100k_base tokenizer, the number of test cases, web development categories, and an example task.",
+      "page": 17,
+      "index": 5,
+      "width": 822,
+      "height": 470
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20398v1/fig-006.webp",
+      "caption": "Figure 9: Case study comparing WebGen-R1-7B with three strong baselines. The top three rows show in-distribution examples from WebGen-Bench, whereas the bottom three rows show out-ofdistribution examples from WebDev Arena.",
+      "page": 12,
+      "index": 6,
+      "width": 842,
+      "height": 730
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20398v1/fig-007.webp",
+      "caption": "Table 2: Category-wise performance comparison of WebGen-R1 and various LLMs from multiple institutions on the WebGen-Bench benchmark, evaluated by FSR. We also report the score improvement (±) of our WebGen-R1 relative to the base model, Qwen2.5-Coder-7B-Instruct. The first three columns correspond to categories of website-generation instructions, and the last three columns correspond to categories of test cases, following [28].",
+      "page": 9,
+      "index": 7,
+      "width": 718,
+      "height": 283
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20398v1/fig-008.webp",
+      "caption": "Figure 3: Comparison of WebGen-R1 and baseline LLMs across 13 multi-scenario front-end development tasks from WebGen-Bench, evaluating both functional correctness and visual fidelity.",
+      "page": 9,
+      "index": 8,
+      "width": 736,
+      "height": 340
+    }
+  ]
+}

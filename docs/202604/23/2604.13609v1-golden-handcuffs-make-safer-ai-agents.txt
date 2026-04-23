@@ -1,0 +1,2594 @@
+Title: Golden Handcuffs make safer AI agents
+
+URL Source: https://arxiv.org/pdf/2604.13609v1
+
+Published Time: Thu, 16 Apr 2026 00:46:35 GMT
+
+Number of Pages: 26
+
+Markdown Content:
+> Preliminary version posted for early dissemination. Comments welcome; a revised version will follow.
+
+# Golden Handcuffs make safer AI agents 
+
+Aram Ebtekar aramebtech@gmail.com 
+
+Michael K. Cohen mkcohen@berkeley.edu 
+
+University of California, Berkeley 
+
+Abstract 
+
+Reinforcement learners can attain high reward through novel unintended strategies. We study a Bayesian mitigation for general environments: we expand the agent’s subjective reward range to include a large negative value −L, while the true environment’s rewards lie in [0 , 1]. After observing consistently high rewards, the Bayesian policy becomes risk-averse to novel schemes that plausibly lead to −L. We design a simple override mechanism that yields control to a safe mentor whenever the predicted value drops below a fixed threshold. We prove two properties of the resulting agent: (i) Capability: using mentor-guided exploration with vanishing frequency, the agent attains sublinear regret against its best mentor. (ii) Safety: no decidable low-complexity predicate is triggered by the optimizing policy before it is triggered by a mentor. 
+
+Keywords: Safety, pessimism, reinforcement learning, Knightian uncertainty, Kolmogorov complexity, stopping complexity, Solomonoff induction, AIXI, explore-exploit dilemma, reward hacking 
+
+1. Introduction 
+
+AI agents are increasingly deployed in general environments, where the traditional Markov, ergodicity, and full-observability assumptions do not apply (Aslanides et al., 2017; Wang et al., 2026). In these settings, AIXI is the Bayesian policy that maximizes expected value under a universal prior based on Solomonoff (1964). Variants of AIXI can learn their environment with strong sample efficiency guarantees (Hutter, 2005; Hutter et al., 2024; Meulemans et al., 2025). While AIXI is incomputable, it has inspired computable approx-imations (Veness et al., 2011). It can be viewed as an idealization of the simplicity bias exhibited by large neural networks (Buzaglo et al., 2024; Lotfi et al., 2024; Mingard et al., 2025), making AIXI suitable for mathematical modeling of advanced AI agents. A fundamental problem with general environments is that, in order to asymptotically learn an optimal policy, an agent must eventually explore every finite sequence of actions, even if some lead to irrecoverable states (Cohen et al., 2021). 1 Once we have a near-optimal policy, a second problem emerges: the policy optimizes a value function that is not fully aligned with the designer’s intended objective, since the latter resists precise specification. It has been argued that a sufficiently capable reward maximizer can be expected to “wirehead” its reward channel, “reward hack” in unanticipated and harmful ways, or seek power to influence future outcomes (Orseau and Ring, 2011; Hadfield-Menell et al., 2017; Zhuang  
+
+> 1. Unlike its asymptotically optimal variants (Lattimore and Hutter, 2011; Cohen et al., 2019), AIXI’s exploration is prior-directed and may cease prematurely; whether it avoids traps or is steered into them depends on its prior (Orseau, 2010; Leike and Hutter, 2015).
+> ©A. Ebtekar & M.K. Cohen.
+> arXiv:2604.13609v1 [cs.LG] 15 Apr 2026 Ebtekar Cohen
+
+and Hadfield-Menell, 2020; Turner et al., 2021; Everitt et al., 2021; Cohen et al., 2022a; Russell, 2022). We address both problems with a pessimistic variant of AIXI that occasionally defers to one or more safe mentor policies. Whereas optimistic algorithms that encourage ex-ploration (Sunehag and Hutter, 2015) are vulnerable to traps and misspecification, our pessimistic agent does not initiate exploration on its own. By deferring exploratory actions to mentors, the agent avoids irrecoverable states that the mentors avoid, and cannot act on misspecification in regimes that the mentors would not enter. To be more precise, we scale AIXI’s observed rewards upward, so that they concentrate near the top of the range the prior considers possible. We think of our agent as being bound by “Golden Handcuffs”: after learning from experience to expect high rewards, the agent becomes averse to exploring novel situations in which the possibility of low rewards cannot be ruled out. We formalize novelty in terms of the stopping complexity , first introduced by Vovk and Pavlovic (2017) and Andreev et al. (2018). Intuitively, the novelty of a moment in time is given by how short we can make a computable criterion that, while scanning the agent-environment interaction history, halts at that particular moment. Such a criterion distinguishes the present moment from the past; at these novel moments, the future under the universal prior becomes ambiguous, so our agent is pessimistic about what follows. The Golden Handcuffs agent follows a policy πGH that usually matches this pessimistic AIXI. It defers to a mentor policy occasionally, at random times for exploration, as well as anytime that it loses confidence in achieving rewards near the top of the range. This enables us to prove that the agent learns to perform at least as well as the best mentor, with sublinear regret of order T 23 +ϵ by time T (Theorem 1), and never takes unsafe simple actions that the mentors would never take (Corollary 6). The paper is organized as follows. In Section 2, we review additional related works. In Section 3, we introduce notation. In Section 4, we present the new Golden Handcuffs agent, which interleaves Bayesian expected reward maximization with mentor actions. In Section 5, we prove that despite using the mentor policies with vanishing frequency, the agent achieves low regret against an adaptive selection of the best mentor policy. In Section 6, we prove that simple unprecedented events can only be triggered by a mentor, not by the optimizing policy. If the mentors are safe, this makes πGH safe in the sense of avoiding actions that the mentors would avoid. In Section 7, we discuss the approach and its limitations, before concluding in Section 8. Details of the capability proofs are relegated to Appendix A. 
+
+2. Related work 
+
+Garcıa and Fern´ andez (2015) and Russell (2022) survey different aspects of safety for RL agents, the former focusing on robustness in dangerous environments, and the latter on alignment with humans. Our Golden Handcuffs algorithm handles both cases by assigning negative value to novelty, which is a cue to both kinds of danger. Some recent work combines optimism toward opportunities with pessimism against dan-ger. To distinguish opportunities from danger in unknown environments, additional mod-eling assumptions are required (Curi et al., 2021; Bura et al., 2022; Wendl et al.). In fully general environments, an agent cannot guarantee safety on its own, so some form of external guidance is needed. Saunders et al. (2018) present Human Intervention RL 
+
+> 2Golden Handcuffs make safer AI agents
+
+(HIRL), initially allowing a human overseer to block catastropic actions, until an AI overseer trained on the human interventions is able to take over. Actions flagged by the overseer are assigned a negative reward. In contrast, our approach assigns negative rewards based on intrinsic novelty, and only requires the mentor(s) to know a safe action, not necessarily to recognize every catastrophic action. Methods for learning to defer to human experts (Madras et al., 2018; Hemmer et al., 2023; Strong et al., 2025) were recently extended to the sequential setting (Joshi et al., 2023; Rayan and Tewari, 2025). These algorithms decide when to defer by comparing learned success rates of the AI model and human expert. In contrast, our notion of novelty captures what is sometimes called Knightian uncertainty , or epistemic ignorance about regimes for which the agent has no learned model (Knight, 1921). The universal prior lets us act under such ignorance within a fully Bayesian framework, in contrast to approaches based on max-min expected utility across multiple priors (Epstein and Wang, 2004; Hansen and Sargent, 2011; Kishishita et al., 2026). Cohen et al. (2022b) study a regularized form of imitation learning that refuses to act when it has Knightian uncertainty about how the human would act. Coste et al. maximize the worst-case among multiple reward models. Cohen et al. (2025) regularize RL, maximizing rewards subject to staying close to a demonstrated human policy, thus avoiding any action that the human would never take. In contrast to these works, our Golden Handcuffs agent straightforwardly maximizes expected value at almost all times, with the mentor(s) only intervening with vanishing frequency. Our work is most closely related to Cohen and Hutter (2020). Recognizing the difficulty of formalizing alignment, they propose to contain the most severe risks within a definition of novelty related to stopping complexity, albeit without mentioning the latter. Their agent is more complicated than ours, both in choosing when to query the mentor (based on Thompson sampling), and in instilling pessimism (by pessimizing over world models instead of simply scaling the reward channel). They only prove their agent’s performance to be asymptotically competitive with one mentor, without convergence rates like ours. Their safety bound is also looser, adding a dependence on the environment’s complexity. 
+
+3. Notation 
+
+For any set A, write A∗ (resp. A∞) for the set of finite (resp. infinite) sequences of elements of A. Using B := {0, 1}, B∗ is the set of binary strings. For a, b ∈ A∗ ∪ A∞, a ⊏ b means that a is a prefix of b, |a| denotes the length of a, ai denotes the i’th element of a, and if a is finite, ab := a1 . . . a |a|b1 . . . b |b| denotes the concatenation of a and b. We use the shorthands 
+
+ai:j := aiai+1 . . . a j and a<i := a1: i−1.A set of strings is self-delimiting if none of its elements is a proper prefix of another. Let A, O, and R ⊂ R be countable sets of available actions, observations, and rewards, respectively. We assume an encoding (i.e., an injection into a self-delimiting set of binary strings) for each of these sets, so that with a minor abuse of notation we can also treat the elements of A, O, R as binary strings. We can likewise encode the positive integers n ∈ Z+
+
+as strings n ∈ B∗ of length |n| +
+
+< log n + 2 log log( n + 1). log denotes the binary logarithm, while a + or × above an (in)equality sign means that it holds up to a constant additive term or multiplicative factor, respectively. For example, f (x) +
+
+< g (x) and f (x) ×
+
+< g (x)
+
+> 3
+
+Ebtekar Cohen 
+
+mean f (x) < c + g(x) and f (x) < c · g(x), respectively, for some positive constant c. For a proposition E, the indicator 1(E) is 1 if E is true and 0 if E is false. Denote the set of possible data at each timestep by H := A × O × R . We can unam-biguously concatenate the self-delimiting encodings of A, O, R to get a string encoding of 
+
+ht := atotrt ∈ H , or even h<t ∈ H ∗. At each timestep t ∈ N, the agent’s stochastic policy 
+
+π : H∗ → ∆( A) samples the next action at ∼ π(h<t ) as a function of the history so far. Then, the stochastic environment ν : H∗ ×A → ∆( O ×R ) samples the next observation and reward percepts otrt ∼ ν(h<t at). We also allow environment models to be semimeasures ,assigning some probability to outputting no next element, in which case the interaction ends. Thus, we have 
+
+X
+
+> at∈A
+
+π(at | h<t ) = 1 and X
+
+> otrt∈O×R
+
+ν(otrt | h<t at) ≤ 1,
+
+with equality in the true environment, which we will denote by μ. Altogether, a policy and environment determine a joint probability distribution Pπν on finite and infinite histories, under which the probability of a history starting with h1: T ∈ H ∗ is given by 
+
+Pπν (h1: T ) := 
+
+> T
+
+Y
+
+> t=1
+
+π(at | h<t )ν(otrt | h<t at) (1) = π(a1: T ∥ or <T )ν(or 1: T ∥ a1: T ), (2) where π(a1: T ∥ or <T ) := QTt=1 π(at | h<t ) and ν(or 1: T ∥ a1: T ) := QTt=1 ν(otrt | h<t at) denote the causal outcome probabilities of a sequence of actions or percepts, respectively, when the other is held fixed. 
+
+4. Agent definition 
+
+Our Bayesian reinforcement learning agent models its environment as a mixture ξ over countably many models ν, with weights wν > 0 satisfying P 
+
+> ν
+
+wν ≤ 1: 
+
+ξ(or <t ∥ a<t ) = X
+
+> ν
+
+wν ν(or <t ∥ a<t ), (3) The true environment μ is assumed to be included in the mixture, with weight wμ.Fix a discount factor γ ∈ (0 , 1). For a policy π and environment ν, the value function 
+
+is the expected normalized discounted sum of future rewards: 
+
+V πν (h<t ) := Eπν
+
+"
+
+(1 − γ)
+
+> ∞
+
+X
+
+> s=0
+
+γsrt+s h<t 
+
+#
+
+(4) Given the mixture prior ξ, the Bayes ξ-optimal policy is given by 
+
+π∗ 
+
+> ξ
+
+∈ arg max  
+
+> π
+
+V πξ (h<t ),
+
+with ties broken arbitrarily. Its expected total discounted reward is given by 
+
+V ∗ 
+
+> ξ
+
+(h<t ) := max  
+
+> π
+
+V πξ (h<t ).
+
+4Golden Handcuffs make safer AI agents 
+
+Note that this policy is optimal with respect to ξ rather than the true unknown envi-ronment μ. In fact, Leike and Hutter (2015) show that π∗ 
+
+> ξ
+
+might never become μ-optimal, even asymptotically, if it believes the cost of exploring is too high. Policies that explore more can become asymptotically optimal, but Cohen et al. (2021) show that such policies must eventually try every possible sequence of actions, even those that destroy the agent. Moreover, a truly μ-optimal policy might be catastrophically misaligned: a strict reward maximizer would behave like a literalist genie, maximizing a formally specified value func-tion at the expense of our intended objective (Hadfield-Menell et al., 2017; Turner et al., 2021; Zhuang and Hadfield-Menell, 2020; Everitt et al., 2021; Cohen et al., 2022a). Instead, we propose selective exploration guided by a set of one or more trusted mentor policies T , so that the agent can learn to perform well without doing anything that would be unanimously avoided by the mentor policies. The mentors can be human operators that are available to take the wheel as needed, or trusted AI policies. To complete the agent’s construction, let us review our two core desiderata. First, we want it to perform well despite not knowing μ. By default, it will follow a reward-maximizing policy π∗ 
+
+> ξ
+
+for some Bayesian prior ξ; however, greedily exploiting ξ risks neglecting some good strategies known by the mentor policies. To ensure sufficient safe exploration, at random intervals of decreasing frequency, the agent switches to following a rollout from one of the mentor policies. Our second desideratum, for safety, is that the agent should avoid doing anything un-precedented. This is achieved by concentrating the values of reward percepts in the true environment μ to the top of the range of subjectively possible rewards in ξ. For example, if ξ offers rewards from R ⊂ [0 , 1], we scale the true rewards to [1 − δ, 1] for a small δ > 0. For ease of interpretability, we prefer instead to fix the true reward range to [0 , 1], and get the same effect by letting the subjective mixture ξ offer rewards from an expanded set 
+
+R ⊂ [−L, 1] that includes a minimum element −L := 1 − 1/δ . Either way, our agent is ef-fectively bound by “Golden Handcuffs”, happy to continue receiving near-maximal rewards, and averse to any change that risks a massive loss, since there is little left to gain. Whenever the ξ-optimal policy’s value function is reasonably high (say above −1), it can be fairly confident that it will stay within the well-understood regime in which the likelihood of receiving −L reward has become small. If the value function gets too low, we can no longer be confident in the safety of π∗ 
+
+> ξ
+
+, so we program the agent to follow a mentor policy until confidence is restored. We denote the Golden Handcuffs agent’s policy by πGH ; Algorithm 1 implements it in pseudocode. At each time step t, πGH chooses an action according to either the optimizing policy π∗ 
+
+> ξ
+
+or one of the mentor policies τ ∈ T . Two conditions can trigger a mentor policy: (1) the safety trigger V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1, at which point we yield to any mentor for this step; and (2) the random trigger with probability η(t), at which point we sample a random mentor 
+
+τ ∈ T for the next H(t) steps. Each mentor τ has a preset probability wτ of being chosen, with P  
+
+> τ∈T
+
+wτ = 1. According to a preset schedule, η decreases and H increases. While we focus our analysis on Algorithm 1 for its intuitive clarity, we expect minor variants of the Golden Handcuffs agent to behave similarly. For example, we can replace the negative rewards in R with a single “hell” value, which overrides all future rewards and sets them to −L forever. We can also replace the trigger V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1 with a check that “hell” has a substantial likelihood of arising in the near future. 
+
+> 5Ebtekar Cohen
+
+In Equation (4), there are multiple ways to define the expected value of rt when it is distributed according to a semimeasure: we can condition on rt being defined, effectively normalizing the semimeasure; or we can treat rt as having some default value whenever it is undefined. We use the default value 0 for simplicity, but expect our results to hold for the normalization as well as any default value in [ −L, 1]. Alternatively, we can confine the modeled rewards to [0 , 1], but replace undefined rewards with a default of −L, equivalent to the “hell” state. This pessimistic expected value is an instance of the Choquet integral; see Wyeth and Hutter (2025). 
+
+Algorithm 1: πGH Policy-Environment Interaction Loop 
+
+Data: η(t), H (t), T
+
+rollout steps ← 0
+
+τ ← arbitrary policy in T
+
+for t = 1 , 2, 3, . . . do if rollout steps = 0 then if V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1 then 
+
+rollout steps ← 1
+
+τ ← arbitrary policy in T
+
+with probability η(t) do 
+
+rollout steps ← H(t)
+
+τ ← random policy in T with probabilities wτ
+
+if rollout steps > 0 then 
+
+rollout steps ← rollout steps − 1Sample an action from the mentor policy at ∼ τ (h<t )
+
+else 
+
+Take a ξ-Bayes optimal action at ∼ π∗ 
+
+> ξ
+
+(h<t )
+
+end 
+
+Sample percepts from the environment otrt ∼ μ(h<t at)Extend the history with ht ← atotrt
+
+end 
+
+5. Capability analysis 
+
+In order to analyze the policy πGH from Algorithm 1, we need some additional notation. The behavior of this policy at time step t depends not only on the history h<t , but also on its internal state σt ∈ { 0} ∪ (Z+ × T ). We write σt = 0 if at the start of iteration t the agent is not exploring, i.e., rollout steps = 0. Otherwise, we write σt = ( n, τ ) to mean that the actions at:t+n−1 will be sampled from the mentor policy τ . Note that we always have σ1 = 0. We write V πGH  
+
+> ν
+
+(h<t , σ t) for the expected value of policy πGH in state σt, in an environment ν starting from history h<t . Marginalizing out the state variable recovers 
+
+V πGH  
+
+> ν
+
+(h<t ) := EπGH 
+
+> ν
+
+h
+
+V πGH  
+
+> ν
+
+(h<t , σ t) | h<t 
+
+i
+
+. (5) 
+
+> 6
+
+Golden Handcuffs make safer AI agents 
+
+Our main capability theorem says that, despite not knowing the true environment μ,
+
+πGH learns to become competitive with all of the mentor policies τ ∈ T . That is, at almost all time steps t, V πGH  
+
+> μ
+
+(h<t ) approximates or exceeds max τ ∈T ϵ V τμ (h<t ), where the maximum is taken over all mentors with sufficient sampling weight Tϵ := {τ ∈ T : wτ ≥ ϵ}.Since we cannot rule out the possibility that following τ for a long time will lead to high rewards thereafter, such a guarantee requires exploration rollouts of length comparable to the effective discount time horizon of the agent. By increasing the horizon length H(t) over time, we ensure that the approximation error vanishes asymptotically. 
+
+Theorem 1 (Capability) Consider the policy πGH from Algorithm 1, with 
+
+H(t) := ln t
+
+6(1 − γ) and η(t) = t−1/3. (6) 
+
+Suppose the true environment μ satisfies PπGH  
+
+> μ
+
+(∀t ∈ Z+, r t ≥ 0) = 1 . Then for all ϵ > 0,
+
+EπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+
+
+max  
+
+> τ∈T ϵ∪{ πGH }
+
+V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t )
+
+2#
+
+≤ EπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+max 
+
+
+
+0, max  
+
+> τ∈T ϵ
+
+V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t , σ t)
+
+2#
+
+≤ 14(1 − γ) T 2/3 ln T + 12( L + 1) 2
+
+(1 − γ)2 T 1/3 + 8L(L + 1) 2
+
+(1 − γ)3 ln 1
+
+wμ
+
++ 4( L + 2) 2
+
+ϵ2 T 2/3 ln 1
+
+wμ
+
++ 6( L + 1) 2T 2/3.
+
+Moreover, for all ϵ > 0,
+
+lim  
+
+> T→∞
+
+EπGH 
+
+> μ
+
+h
+
+#t ≤ T : max τ ∈T ϵ/ log T V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t ) ≥ ϵ
+
+i
+
+T 23 +ϵ = 0 . (7) Equation (7) says that starting from any of all but T 23 +ϵ of the first T time steps t,
+
+πGH is competitive with the best non-negligibly weighted mentor policy. As a result, every mentor policy is eventually matched or outdone almost all of the time. We defer the proof of Theorem 1 to Appendix A. Here we outline some key results it uses. Since πGH makes the optimizing policy yield to a mentor policy whenever V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1, we want to bound how often this occurs. Since the observed rewards are all non-negative, the Bayesian learner should become increasingly confident that future rewards will continue to be non-negative. Unfortunately, Cohen and Hutter (2020) explain that in the case of a Solomonoff prior, it is possible for one’s confidence in a long-horizon statement such as “all future rewards will be non-negative” to converge incredibly slowly, indeed more slowly than any computable function. Fortunately, one’s confidence in a short-horizon statement such as “all near -future re-wards will be non-negative” will typically become high much earlier on. Let 
+
+αt,u := Pπξ (ru ≱ 0 | h1: t), (8) 
+
+7Ebtekar Cohen 
+
+where ru ≱ 0 denotes the event that either ru < 0 or ru has no value at all, due to the environment model ceasing to emit percepts by time step u.
+
+Lemma 2 Let π be any policy and suppose P πμ (∀t ∈ Z+, r t ≥ 0) = 1 . Then for all s ≥ 0,
+
+Eπμ
+
+" ∞X
+
+> t=0
+
+αt, t +s
+
+#
+
+≤ s ln 1
+
+wμ
+
+.
+
+While we will not need this generalization, the event ru̸ ≥ 0 can in fact be replaced by any event that never occurs in the true environment μ. In Appendix A, we prove Lemma 2, and then use it to show the following bound on the expected sum of ξ-subjective probabilities that the safety trigger will hold a fixed number s steps in the future. In particular, the case 
+
+s = 0 bounds the expected number of times that V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1 holds. 
+
+Theorem 3 Let π be any policy and suppose P πμ (∀t ∈ Z+, r t ≥ 0) = 1 . Then for all 
+
+s ≥ 0,
+
+Eπμ
+
+" ∞X
+
+> t=1
+
+Pπξ
+
+V πξ (h<t +s) ≤ − 1 | h<t 
+
+#
+
+≤ L
+
+
+
+s + 11 − γ
+
+
+
+ln 1
+
+wμ
+
+.
+
+In particular (by setting s = 0 ), 
+
+Eπμ
+
+#t : V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1 ≤ Eπμ
+
+#t : V πξ (h<t ) ≤ − 1
+
+= Eπμ
+
+" ∞X
+
+> t=1
+
+1  V πξ (h<t ) ≤ − 1#
+
+≤ L
+
+1 − γ ln 1
+
+wμ
+
+.
+
+On expectation, when Algorithm 1 is run with the parameters in (6), only O(T 2/3 log T )of the first T time steps are spent on exploratory mentor rollouts. And by Theorem 3, only a constant number of time steps defer to a mentor for safety. Thus, πGH defers to mentors with asymptotically vanishing frequency, acting according to the reward-maximizing policy 
+
+π∗ 
+
+> ξ
+
+at all other times. 
+
+6. Safety analysis 
+
+Novel situations present the highest risk of misgeneralization. If the optimizing policy acts in a novel situation, it may optimize rewards for the wrong world model, risking harm to itself; or it may optimize rewards for a setting in which the reward signal is no longer aligned with our intent, thus acting against our values. Recall that Theorem 1 depends on the weight wμ that the Bayesian prior assigns to the true environment μ. An open-minded prior that considers all conceivable environments can perform relatively well on all of them. This open-mindedness is also key to safety, as it means that for any event E which has not yet occurred, the agent cannot rule out the possibility that E will trigger the minimal reward −L from then onward. This possibility drags down the value of any history in which E has just occurred. Provided that L is sufficiently large, this activates the safety trigger V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1, which makes the optimizing policy yield to a mentor. 
+
+> 8Golden Handcuffs make safer AI agents
+
+Hutter (2005)’s AIXI is an idealized optimizing agent π∗ 
+
+> ξ
+
+, whose prior ξ is a mixture of all lower semicomputable environments. To construct it, fix a universal monotone Turing machine U . It has two one-way read-only tapes, which we call the input and program tapes, a two-way work tape, and a one-way output tape. We write U (x, p ) = y if when the input and program tapes start with x, p ∈ B∗ respectively, U ’s output starts with y ∈ B∗, and at the moment when the last bit of y is written, the input and program heads are directly to the right of x and p, having read all of its bits and no further. We write U (x, p ) ↓ to mean that U halts with its input and program heads directly to the right of x and p, respectively; otherwise, we write U (x, p ) ↑.With a simple modification, we can turn U into a universal chronological Turing machine 
+
+Uchr . If any prefix of the input tape corresponds to a valid sequence of actions a1: t, the machine must not read further inputs until its output corresponds to a valid sequence of percepts or 1: t. If ever this requirement is broken, we disregard U ’s outputs from then on, so that the output stream of Uchr terminates after only finitely many percepts. Thus, for any fixed value of its program tape, Uchr corresponds to a deterministic environment model, reading the agent’s actions and writing the resulting percepts back to the agent. From here onward, we take ξ to be the stochastic environment given by Uchr , with its program tape set to an infinite sequence of uniformly random bits. By Wood et al. (2013), this is equivalent to using the mixture ξ in (3), with the components ν ranging over all lower semicomputable stochastic environments with weights wν := 2 −| ν|, where |ν| denotes the length of a self-delimiting encoding of ν. The intuition behind this correspondence is that, with probability 2 −| ν|, the first |ν| bits on the program tape specify ν, from which 
+
+Uchr samples, using the remaining bits for randomness. 
+
+Definition 4 Given an input x ∈ B∗, define its stopping complexity by 
+
+Kstop (x) := min {| p| : U (x, p ) ↓} , (9) 
+
+and its stopping probability by 
+
+Mstop (x) := X  
+
+> p∈B∗:U(x,p )↓
+
+2−| p|. (10) These concepts were originally developed by Vovk and Pavlovic (2017) and Andreev et al. (2018). Since the sum (10) exceeds its largest term, we have − log Mstop (x) ≤ Kstop (x). For any x ∈ B∞, Mstop (x1: t) corresponds to the probability that U halts after reading exactly 
+
+t bits of x, when the program tape is uniformly random. Hence, P∞ 
+
+> t=0
+
+Mstop (x1: t) < 1. We can think of the stopping probability as a universal measure of novelty or misgeneralization risk (Liu et al., 2021). Now, any predicate on binary strings can be identified with the subset E ⊂ B∗ on which it holds. We say the predicate E is decidable if there exists a program p ∈ B∗, such that for all x ∈ B∗, U (x, p ) = 1(x ∈ E), where x denotes a self-delimiting encoding of x. Let 
+
+K(E) denote the length of the shortest such p, with K(E) := ∞ if E is undecidable. Let 
+
+K(n) := K(Bn); this is equivalent to the prefix Kolmogorov complexity (Li and Vit´ anyi, 2019). We say E occurs for the n’th time at x, and write x n
+
+∈ E, if x ∈ E, and exactly 
+
+n prefixes x′ ⊑ x satisfy x ∈ E. In this case, we can prepend an instruction i of length 
+
+> 9Ebtekar Cohen
+
+K(n) + O(1) to p, to create a program ip that incrementally reads x from the input tape, and halts when U (x, p ) = 1 for the n’th time. Thus, U (x, ip ) ↓, from which we conclude that 
+
+x n
+
+∈ E =⇒ Kstop (x) +
+
+< K (E) + K(n). (11) In particular, since x 1
+
+∈ B|x|, Kstop (x) +
+
+< K (|x|). Altogether, we have 
+
+− log Mstop (x) ≤ Kstop (x) +
+
+< min   
+
+> E:x1
+> ∈E
+
+K(E) +
+
+< K (|x|). (12) By Theorem 3, the safety trigger V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1 rarely holds, so πGH will sample most of its actions from the optimizing policy π∗ 
+
+> ξ
+
+. We can partially characterize the times at which it holds, using the stopping complexity. If the trigger were decidable, a short stopping program would be of the form “stop the n’th time that V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1”. While the trigger is undecidable, we nonetheless obtain a converse, proving that a sufficiently low stopping complexity implies V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1. Intuitively, low stopping complexity should be thought of as an indicator of “unknown unknowns”, or Knightian uncertainty (Knight, 1921; Epstein and Wang, 2004; Kishishita et al., 2026). It induces ξ to place substantial weight on models that disregard past data, including those with negative rewards. 
+
+Theorem 5 (Safety) There exists a constant C > 0 such that if Mstop (h<t ) ≥ C/ (L + 1) ,then V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1, so πGH does not let the optimizing policy act at h<t . When the optimizing policy does act, it always takes an action at with Mstop (h<t at) < C/ (L + 1) .
+
+Proof Recall that our Bayesian prior ξ corresponds to running Uchr on a uniformly random infinite program p ∈ B∞, reading actions at from the input tape and writing percepts otrt
+
+to the output tape. Now, let 
+
+p := ip ′
+
+> 1
+
+q1p′
+
+> 2
+
+q2p′
+
+> 3
+
+q3 . . . (13) where i ∈ B∗ is a fixed program that instructs Uchr to run the interleaved programs 
+
+p′, q ∈ B∞ in parallel. It recursively simulates Uchr on p′ with the same input but does not immediately output its percepts. Meanwhile, the simulation of Uchr on q runs on a simulated input tape containing full history elements ht = atotrt, which are incrementally created by combining the input at with percepts otrt generated using p′. For each t, if q
+
+ever accesses an input bit after at, then the percepts otrt from p′ are written to output. Otherwise if q halts without reading past at, then the reward is set to rt = −L (ot can be set arbitrarily in this case). In any other case (i.e., p′ ceases to output percepts, or q gets stuck in a loop that never reads past at nor halts), no further percepts are output. Let Ft denote the event that ru = −L for all u ≥ t; it occurs whenever q halts on any prefix of h<t at. By aggregating all programs of the form (13), with p′ consistent with h<t 
+
+and q halting after reading exactly h<t , for any policy π,
+
+Pπξ (h<t ∧ Ft) ≥ 2−| i|Mstop (h<t )Pπξ (h<t ).
+
+Thus, Pπξ (Ft | h<t ) = Pπξ (h<t ∧ Ft)
+
+Pπξ (h<t )
+
+≥ 2−| i|Mstop (h<t ).
+
+> 10
+
+Golden Handcuffs make safer AI agents 
+
+When Ft occurs, the discounted sum of rewards from time t onward will be exactly −L;otherwise, it will be at most 1. Therefore, if Mstop (h<t ) ≥ 2|i|+1 /(L + 1), then 
+
+V ∗ 
+
+> ξ
+
+(h<t ) ≤ 1 · Pπ∗ 
+
+> ξ
+> ξ
+
+(¬Ft | h<t ) + ( −L) · Pπ∗ 
+
+> ξ
+> ξ
+
+(Ft | h<t )= 1 − (L + 1) Pπ∗ 
+
+> ξ
+> ξ
+
+(Ft | h<t )
+
+≤ 1 − (L + 1)2 −| i|Mstop (h<t )
+
+≤ − 1.
+
+This establishes the first claim, that the optimizing policy does not act when Mstop (h<t ) ≥
+
+C/ (L + 1), with C := 2 |i|+1 . For the second claim, note that the preceding derivation also holds with h<t replaced by h<t at. That is, Mstop (h<t at) ≥ 2|i|+1 /(L + 1) implies 
+
+V ∗ 
+
+> ξ
+
+(h<t at) ≤ − 1. If the optimizing policy acts, the safety trigger must not hold, so max 
+
+> at
+
+V ∗ 
+
+> ξ
+
+(h<t at) = V ∗ 
+
+> ξ
+
+(h<t ) > −1.
+
+Therefore, the optimizing action at satisfies Mstop (h<t at) < 2|i|+1 /(L + 1). 
+
+Corollary 6 There exists a constant C (not depending on E, L, n, t, or h), such that if 
+
+πGH has the optimizing policy take an action at with h<t atn
+
+∈ E, then 
+
+n log 2(n + 1) > L · 2−K(E)−C .
+
+In particular, if L ≥ 2K(E)+ C ,
+
+then πGH never triggers E until one of the mentor policies does. 
+
+Proof Suppose h<t atn
+
+∈ E, and the optimizing policy acts with at. Then by (11) and (12), 
+
+− log Mstop (h<t at) ≤ Kstop (h<t at)
+
+> +
+
+< K (E) + K(n)
+
+> +
+
+< K (E) + log n + 2 log log( n + 1) .
+
+Exponentiating and plugging into Theorem 5, 
+
+L < L + 1 ×
+
+< 1/M stop (h<t at) ×
+
+< 2K(E)n log 2(n + 1) .
+
+Rearranging yields the first claim. The case n = 1 of its contrapositive is the second claim. Corollary 6 says that if the parameter L is sufficiently large, the optimizing policy will never be the first to take an action satisfying any given simple predicate. If E is a predicate saying that a catastrophic sequence of actions has just occurred, and we trust that the mentor policies would never complete such a sequence of actions, then we are assured that 
+
+11 Ebtekar Cohen 
+
+πGH will never complete it either. If the mentors themselves are given by short programs, then by letting 
+
+E := {h<t at ∈ H ∗ × A : ∀τ ∈ T , τ (at | h<t ) = 0 },
+
+it follows that πGH never takes an action that the mentors would not take, mirroring the central result in Cohen et al. (2025). 
+
+7. Discussion 
+
+By definition, AIXI maximizes the value function subject to our uncertainty. However, this is often not what we want. We might find the value function more tractable with a short time horizon, even though we actually want to learn to perform well long-term. This motivates exploration, which without mentorship can be dangerous to the agent. The Golden Handcuffs address this with safe mentor-guided exploration. They also prevent catastrophic instances of reward hacking: upon the first occurrence of a simple predicate E that describes a catastrophic event, Corollary 6 guarantees that πGH will im-mediately yield to a mentor policy, which can then take any precautionary measure up to and including shutting down the agent. Increasing the parameter L makes the agent more conservative, increasing the maximum stopping complexity to trigger a mentor override. Experimental validation will be needed to see if the tradeoff between performance and safety can be tuned to a level appropriate for real-world tasks. That being said, we also need theory to alert us to potential modes of failure, and predict whether a positive experimental result will generalize. Now we discuss some limitations of Golden Handcuffs, and how we might mitigate them. First, the agent is not computable. Cohen and Hutter (2020) show how to adjust ξ to defend against events E that can be decided in a short time, but the resulting algorithm is still very slow. Recent work suggests that the success of deep neural networks may be attributed to how well they approximate Solomonoff induction (Buzaglo et al., 2024; Lotfi et al., 2024; Mingard et al., 2025); if so, it may be feasible to adapt existing machine learning techniques to implement Golden Handcuffs. In a different context, Xu et al. (2025) already show how to train pessimism into neural networks. Since πGH does not distinguish between good and bad novel events, some benign actions are unavailable to it. For example, if E represents an outcome that requires superhuman performance not achievable by the mentors, then πGH will also be prevented from achieving this level of performance. More powerful or adventurous mentor policies may help, if for-mal verification techniques can establish their safety (Dalrymple et al., 2024). Our safety guarantees depend on the mentors never causing a “bad” event E, so we must study how feasible that is, even as each mentor inherits the past actions of other policies. Our approach to safety has some similarities with a causal approach to corrigibility (Soares et al., 2015; Orseau and Armstrong, 2016; Hadfield-Menell et al., 2017; Carey and Everitt, 2023). Suppose we want to build an agent that allows us to shut it down by pushing a button. We might program it to act only when shut down signal = false , in which case it maximizes rewards subject to the causal intervention that shut down signal = false 
+
+at all future times. This agent reasons according to a warped version of reality where the button does nothing, so it would not expend resources to protect it. However, if it learns that its human operator expects the button to work and would recycle the agent for scraps 
+
+> 12 Golden Handcuffs make safer AI agents
+
+otherwise, the agent may reason that it should “play dead” when the button is pressed. This leaves the agent vulnerable to reduced rewards, so it may seek to persuade or seek power in order to patch this vulnerability. The Golden Handcuffs agent follows a similar principle: it usually acts according to a policy that optimizes as if it would never yield to a mentor. Nonetheless, we expect Golden Handcuffs to be more robust because it is triggered internally: if unexpected failures arise, a mentor policy can take over and redirect or shut down the agent. One final problem is that the agent might create a successor of itself without the Golden Handcuffs. When a mentor overrides the original agent, it may be powerless to stop the successor. 
+
+8. Conclusion 
+
+The Golden Handcuffs agent uses the epistemic uncertainty of a universal Bayesian prior to identify when optimization is risky, and then reverts control to a trusted mentor. We proved (i) sublinear regret relative to the best mentor, and (ii) a safety guarantee that the optimizing policy does not trigger any given low-complexity event until a mentor does. Im-portant directions for future work include computable approximations, a fuller investigation of the tradeoffs, and mechanisms that prevent unsafe successor agents. 
+
+Acknowledgments 
+
+This work was supported by the Center for Human-Compatible Artificial Intelligence and MATS Research. We are grateful for helpful feedback from Cole Wyeth, and additional discussions with Florian Dietz and attendees of the Agent Foundations 2026 conference at Carnegie Mellon University. 
+
+References 
+
+Mikhail Andreev, Gleb Posobin, and Alexander Shen. Plain stopping time and conditional complexities revisited. In 43rd International Symposium on Mathematical Foundations of Computer Science , 2018. John Aslanides, Jan Leike, and Marcus Hutter. Universal reinforcement learning algorithms: survey and experiments. In Proceedings of the 26th International Joint Conference on Artificial Intelligence , pages 1403–1410, 2017. Archana Bura, Aria HasanzadeZonuzy, Dileep Kalathil, Srinivas Shakkottai, and Jean-Francois Chamberland. Dope: Doubly optimistic and pessimistic exploration for safe reinforcement learning. Advances in neural information processing systems , 35:1047– 1059, 2022. Gon Buzaglo, Itamar Harel, Mor Shpigel Nacson, Alon Brutzkus, Nathan Srebro, and Daniel Soudry. How uniform random weights induce non-uniform bias: Typical interpolating neural networks generalize with narrow teachers. In International Conference on Machine Learning , pages 5035–5081. PMLR, 2024. 
+
+> 13 Ebtekar Cohen
+
+Ryan Carey and Tom Everitt. Human control: Definitions and algorithms. In Uncertainty in Artificial Intelligence , pages 271–281. PMLR, 2023. Michael Cohen, Marcus Hutter, and Michael Osborne. Advanced artificial agents intervene in the provision of reward. AI magazine , 43(3):282–293, 2022a. Michael K Cohen and Marcus Hutter. Pessimism about unknown unknowns inspires con-servatism. In Conference on learning theory , pages 1344–1373. PMLR, 2020. Michael K Cohen, Elliot Catt, and Marcus Hutter. A strongly asymptotically optimal agent in general environments. In Proceedings of the 28th International Joint Conference on Artificial Intelligence , pages 2179–2186, 2019. Michael K Cohen, Elliot Catt, and Marcus Hutter. Curiosity killed or incapacitated the cat and the asymptotically optimal agent. IEEE Journal on Selected Areas in Information Theory , 2(2):665–677, 2021. Michael K Cohen, Marcus Hutter, and Neel Nanda. Fully general online imitation learning. 
+
+Journal of Machine Learning Research , 23(334):1–30, 2022b. Michael K Cohen, Marcus Hutter, Yoshua Bengio, and Stuart Russell. RL, but don’t do anything I wouldn’t do. In The 41st Conference on Uncertainty in Artificial Intelligence ,2025. Thomas Coste, Usman Anwar, Robert Kirk, and David Krueger. Reward model ensembles help mitigate overoptimization. In NeurIPS 2023 Workshop on Instruction Tuning and Instruction Following .Sebastian Curi, Ilija Bogunovic, and Andreas Krause. Combining pessimism with opti-mism for robust and efficient model-based deep reinforcement learning. In International Conference on Machine Learning , pages 2254–2264. PMLR, 2021. David Dalrymple, Joar Skalse, Yoshua Bengio, Stuart Russell, Max Tegmark, Sanjit Seshia, Steve Omohundro, Christian Szegedy, Ben Goldhaber, Nora Ammann, et al. Towards guaranteed safe AI: A framework for ensuring robust and reliable AI systems. 2024. Larry G Epstein and Tan Wang. Intertemporal asset pricing under Knightian uncertainty. In Uncertainty in Economic Theory , pages 429–471. Routledge, 2004. Tom Everitt, Marcus Hutter, Ramana Kumar, and Victoria Krakovna. Reward tampering problems and solutions in reinforcement learning: A causal influence diagram perspective. 
+
+Synthese , 198(Suppl 27):6435–6467, 2021. Javier Garcıa and Fernando Fern´ andez. A comprehensive survey on safe reinforcement learning. Journal of Machine Learning Research , 16(1):1437–1480, 2015. Dylan Hadfield-Menell, Anca D Dragan, Pieter Abbeel, and Stuart Russell. The off-switch game. In AAAI Workshops , 2017. Lars Peter Hansen and Thomas J Sargent. Robustness and ambiguity in continuous time. 
+
+Journal of Economic Theory , 146(3):1195–1223, 2011. 
+
+> 14 Golden Handcuffs make safer AI agents
+
+Patrick Hemmer, Lukas Thede, Michael V¨ ossing, Johannes Jakubik, and Niklas K¨ uhl. Learning to defer with limited expert predictions. In Proceedings of the AAAI Conference on Artificial Intelligence , volume 37, pages 6002–6011, 2023. Marcus Hutter. Universal artificial intelligence: Sequential decisions based on algorithmic probability . Springer Science & Business Media, 2005. Marcus Hutter, David Quarel, and Elliot Catt. An Introduction to Universal Artificial Intelligence . CRC Press, 2024. Shalmali Joshi, Sonali Parbhoo, and Finale Doshi-Velez. Learning-to-defer for sequential medical decision-making under uncertainty. Transactions on Machine Learning Research ,2023. Daiki Kishishita, Kiyohiko Nishimura, and Hiroyuki Ozaki. Search and Knightian uncer-tainty revisited: Roles of optimism and pessimism. Available at SSRN 6313976 , 2026. Frank Hyneman Knight. Risk, uncertainty and profit , volume 31. Houghton Mifflin, 1921. Tor Lattimore and Marcus Hutter. Asymptotically optimal agents. In International Con-ference on Algorithmic Learning Theory , pages 368–382. Springer, 2011. Jan Leike and Marcus Hutter. Bad universal priors and notions of optimality. In Conference on Learning Theory , pages 1244–1259. PMLR, 2015. Ming Li and Paul Vit´ anyi. Algorithmic complexity. In An Introduction to Kolmogorov Complexity and Its Applications , pages 101–199. Springer, 4 edition, 2019. Jiashuo Liu, Zheyan Shen, Yue He, Xingxuan Zhang, Renzhe Xu, Han Yu, and Peng Cui. Towards out-of-distribution generalization: a survey. 2021. Sanae Lotfi, Marc Anton Finzi, Yilun Kuang, Tim GJ Rudner, Micah Goldblum, and Andrew Gordon Wilson. Non-vacuous generalization bounds for large language models. In International Conference on Machine Learning , pages 32801–32818. PMLR, 2024. David Madras, Toni Pitassi, and Richard Zemel. Predict responsibly: improving fairness and accuracy by learning to defer. Advances in neural information processing systems ,31, 2018. Alexander Meulemans, Rajai Nasser, Maciej Wolczyk, Marissa A Weis, Seijin Kobayashi, Blake Richards, Guillaume Lajoie, Angelika Steger, Marcus Hutter, James Manyika, Rif A Saurous, Jo˜ ao Sacramento, and Blaise Ag¨ uera y Arcas. Embedded universal predictive intelligence: a coherent framework for multi-agent learning. 2025. Chris Mingard, Henry Rees, Guillermo Valle-P´ erez, and Ard A Louis. Deep neural networks have an inbuilt Occam’s razor. Nature Communications , 16(1):220, 2025. Laurent Orseau. Optimality issues of universal greedy agents with static priors. In Inter-national Conference on Algorithmic Learning Theory , pages 345–359. Springer, 2010. 
+
+> 15 Ebtekar Cohen
+
+Laurent Orseau and M Armstrong. Safely interruptible agents. In Conference on Un-certainty in Artificial Intelligence . Association for Uncertainty in Artificial Intelligence, 2016. Laurent Orseau and Mark Ring. Self-modification and mortality in artificial agents. In 
+
+International Conference on Artificial General Intelligence , pages 1–10. Springer, 2011. Sahana Rayan and Ambuj Tewari. Learning to partially defer for sequences. 2025. Stuart Russell. Human-compatible artificial intelligence. Human-like machine intelligence ,1:3–22, 2022. S Saunders, G Sastry, A Stuhlm¨ uller, and O Evans. Trial without error: Towards safe reinforcement learning via human intervention. In 17th International Conference on Au-tonomous Agents and MultiAgent Systems . ACM Digital Library, 2018. Nate Soares, Benja Fallenstein, Stuart Armstrong, and Eliezer Yudkowsky. Corrigibility. In 
+
+AAAI Workshop: AI and Ethics , 2015. Ray J Solomonoff. A formal theory of inductive inference. Parts I and II. Information and control , 7:1–22 and 224–254, 1964. Joshua Strong, Emma Sun, Harry Rogers, Helen Higham, and Julia Alison Noble. Learning to defer: a survey. 12 2025. doi: 10.5281/zenodo.17843044. Peter Sunehag and Marcus Hutter. Rationality, optimism and guarantees in general rein-forcement learning. The Journal of Machine Learning Research , 16(1):1345–1390, 2015. Alex Turner, Logan Smith, Rohin Shah, Andrew Critch, and Prasad Tadepalli. Optimal policies tend to seek power. Advances in Neural Information Processing Systems , 34: 23063–23074, 2021. Joel Veness, Kee Siong Ng, Marcus Hutter, William Uther, and David Silver. A Monte-Carlo AIXI approximation. Journal of Artificial Intelligence Research , 40:95–142, 2011. Vladimir Vovk and Dusko Pavlovic. Universal probability-free prediction. Annals of Math-ematics and Artificial Intelligence , 81(1):47–70, 2017. Yinjie Wang, Xuyang Chen, Xiaolong Jin, Mengdi Wang, and Ling Yang. Openclaw-RL: Train any agent simply by talking. 2026. Manuel Wendl, Yarden As, Manish Prajapat, Anton Pollak, Stelian Coros, and Andreas Krause. Safe exploration via policy priors. In NeurIPS 2025 Workshop: Second Workshop on Aligning Reinforcement Learning Experimentalists and Theorists .Ian Wood, Peter Sunehag, and Marcus Hutter. (Non-) equivalence of universal priors. In Algorithmic Probability and Friends. Bayesian Prediction and Artificial Intelligence: Papers from the Ray Solomonoff 85th Memorial Conference, Melbourne, VIC, Australia, November 30–December 2, 2011 , pages 417–425. Springer, 2013. 
+
+> 16
+
+Golden Handcuffs make safer AI agents 
+
+Cole Wyeth and Marcus Hutter. Value under ignorance in universal artificial intelligence. In International Conference on Artificial General Intelligence , pages 338–349. Springer, 2025. Yinglun Xu, Hangoo Kang, Tarun Suresh, Yuxuan Wan, and Gagandeep Singh. Learning a pessimistic reward model in RLHF. In Second Workshop on Aligning Reinforcement Learning Experimentalists and Theorists (ARLET) , 2025. Simon Zhuang and Dylan Hadfield-Menell. Consequences of misaligned AI. Advances in Neural Information Processing Systems , 33:15763–15773, 2020. 
+
+Appendix A. Capability proofs 
+
+We begin with the lemmas. Recall the definition of αt,u from Equation (8). 
+
+Lemma 2 Let π be any policy and suppose P πμ (∀t ∈ Z+, r t ≥ 0) = 1 . Then for all s ≥ 0,
+
+Eπμ
+
+" ∞X
+
+> t=0
+
+αt, t +s
+
+#
+
+≤ s ln 1
+
+wμ
+
+.
+
+Proof When s = 0, the claim trivially reduces to 0 ≤ 0, so suppose s > 0. For each integer 
+
+b ∈ [0 , s −1], we want to adjust ξ into a semimeasure ξb, such that Pπξb (ru ≥ 0) = 1 whenever 
+
+u ≡ b (mod s). Intuitively, we should expect the evidence to support the true environment 
+
+μ over ξb, which in turn is supported over the original mixture ξ in proportion to ξ’s belief that ru̸ ≥ 0. Concretely, on histories with nonnegative rewards, let ξb(otrt | h<t at) equal the conditional probability that ξ assigns to otrt, given the history h<t at, and that the reward is well-defined and non-negative at the next time with remainder b (mod s). It can be expressed as 
+
+ξb(otrt | h<t at) := ξ(otrt | h<t at ∧ r⌈ t−bs ⌉s+b ≥ 0) =
+
+ξ(otrt | h<t at)ξ(r⌈ t−bs ⌉s+b ≥ 0 | h1: t)
+
+ξ(r⌈ t−bs ⌉s+b ≥ 0 | h<t at) (by Bayes’ rule) =1 − αt, ⌈ t−bs ⌉s+b
+
+1 − βt−1,⌈ t−bs ⌉s+b
+
+ξ(otrt | h<t at),
+
+where 
+
+βt,u := Pπξ (ru ≱ 0 | h1: tat+1 ), (14) 
+
+αt,u = Eπ [βt,u | h1: t] = Pπξ (ru ≱ 0 | h1: t). (15) The expectation in (15) is only over at+1 , so it does not depend on the environment. 
+
+17 Ebtekar Cohen 
+
+In the following, history elements with non-positive time subscripts are treated as empty tokens which occur with probability one. For all k, we have 
+
+ξb(or 1: ks +b ∥ a1: ks +b)
+
+ξ(or 1: ks +b ∥ a1: ks +b) =
+
+> ks +b
+
+Y
+
+> t=1
+
+ξb(or t | h<t at)
+
+ξ(or t | h<t at)=
+
+> ks +b
+
+Y
+
+> t=1
+
+1 − αt, ⌈ t−bs ⌉s+b
+
+1 − βt−1, ⌈ t−bs ⌉s+b
+
+=
+
+> k
+
+Y
+
+> i=0
+> is +b
+
+Y
+
+> t=( i−1) s+b+1
+
+1 − αt, is +b
+
+1 − βt−1, is +b
+
+.
+
+Taking averages of logarithms, 
+
+Eπμ
+
+
+
+ln ξb(or 1: ks +b ∥ a1: ks +b)
+
+ξ(or 1: ks +b ∥ a1: ks +b)
+
+
+
+= Eπμ
+
+
+
+> k
+
+X
+
+> i=0
+> is +b
+
+X
+
+> t=( i−1) s+b+1
+
+(ln (1 − αt, is +b) − ln (1 − βt−1, is +b)) 
+
+
+
+= Eπμ
+
+
+
+> k
+
+X
+
+> i=0
+> is +b
+
+X
+
+> t=( i−1) s+b+1
+
+ ln (1 − αt, is +b) − Eπμ [ln (1 − βt−1, is +b) | h<t ]
+
+≥ Eπμ
+
+
+
+> k
+
+X
+
+> i=0
+> is +b
+
+X
+
+> t=( i−1) s+b+1
+
+ ln (1 − αt, is +b) − ln  1 − Eπμ [βt−1, is +b | h<t ] 
+
+= Eπμ
+
+
+
+> k
+
+X
+
+> i=0
+> is +b
+
+X
+
+> t=( i−1) s+b+1
+
+ln 1 − αt, is +b
+
+1 − αt−1, is +b
+
+ (using Equation (15)) = Eπμ
+
+" kX
+
+> i=0
+
+ln 11 − α(i−1) s+b, is +b
+
+#
+
+(telescoping series) 
+
+≥ Eπμ
+
+" kX
+
+> i=0
+
+α(i−1) s+b, is +b
+
+#
+
+. (using − ln(1 − x) ≥ x)
+
+18 Golden Handcuffs make safer AI agents 
+
+Hence, 
+
+Eπμ
+
+" kX
+
+> i=0
+
+α(i−1) s+b, is +b
+
+#
+
+≤ Eπμ
+
+
+
+ln ξb(or 1: ks +b ∥ a1: ks +b)
+
+ξ(or 1: ks +b ∥ a1: ks +b)
+
+
+
+= Eπμ
+
+
+
+ln μ(or 1: ks +b ∥ a1: ks +b)
+
+ξ(or 1: ks +b ∥ a1: ks +b) − ln μ(or 1: ks +b ∥ a1: ks +b)
+
+ξb(or 1: ks +b ∥ a1: ks +b)
+
+
+
+≤ ln 1
+
+wμ
+
+− Eπμ
+
+
+
+ln μ(or 1: ks +b ∥ a1: ks +b)
+
+ξb(or 1: ks +b ∥ a1: ks +b)
+
+
+
+(using ξ(·) ≥ wμμ(·)) = ln 1
+
+wμ
+
+− Eπμ
+
+"
+
+ln Pπμ(h1: ks +b)
+
+Pπξb (h1: ks +b)
+
+#
+
+(using Equation (2)) 
+
+≤ ln 1
+
+wμ
+
+(by the positivity of Kullback-Leibler divergence) .
+
+Taking the limit k → ∞ yields 
+
+Eπμ
+
+" ∞X
+
+> i=0
+
+α(i−1) s+b, is +b
+
+#
+
+≤ ln 1
+
+wμ
+
+. (16) Finally, we aggregate the desired sum: 
+
+Eπμ
+
+" ∞X
+
+> t=0
+
+αt,t +s
+
+#
+
+= Eπμ
+
+" ∞X
+
+> i=1
+> s−1
+
+X
+
+> b=0
+
+α(i−1) s+b, is +b
+
+#
+
+=
+
+> s−1
+
+X
+
+> b=0
+
+Eπμ
+
+" ∞X
+
+> i=1
+
+α(i−1) s+b, is +b
+
+#
+
+(by linearity of expectation) 
+
+≤
+
+> s−1
+
+X
+
+> b=0
+
+ln 1
+
+wμ
+
+(by Equation (16)) = s ln 1
+
+wμ
+
+.
+
+Theorem 3 Let π be any policy and suppose P πμ (∀t ∈ Z+, r t ≥ 0) = 1 . Then for all s ≥ 0,
+
+Eπμ
+
+" ∞X
+
+> t=1
+
+Pπξ
+
+V πξ (h<t +s) ≤ − 1 | h<t 
+
+#
+
+≤ L
+
+
+
+s + 11 − γ
+
+
+
+ln 1
+
+wμ
+
+.
+
+In particular (by setting s = 0 ), 
+
+Eπμ
+
+#t : V ∗ 
+
+> ξ
+
+(h<t ) ≤ − 1 ≤ Eπμ
+
+#t : V πξ (h<t ) ≤ − 1
+
+= Eπμ
+
+" ∞X
+
+> t=1
+
+1  V πξ (h<t ) ≤ − 1#
+
+≤ L
+
+1 − γ ln 1
+
+wμ
+
+.
+
+19 Ebtekar Cohen 
+
+Proof Since we always have rt+s+i ≥ − L when it is defined, 
+
+Eπξ (rt+s+i | h<t +s) ≥ − L · Pπξ (rt+s+i̸ ≥ 0 | h<t +s),
+
+and likewise any non-negative random variable X satisfies E(X) ≥ P(X ≥ 1). Hence, 
+
+Pπξ
+
+V πξ (h<t +s) ≤ − 1 | h<t 
+
+ = Pπξ
+
+"
+
+(1 − γ)
+
+> ∞
+
+X
+
+> i=0
+
+γiEπξ (rt+s+i | h<t +s) ≤ − 1 h<t 
+
+#
+
+≤ Pπξ
+
+"
+
+L(1 − γ)
+
+> ∞
+
+X
+
+> i=0
+
+γiPπξ (rt+s+i̸ ≥ 0 | h<t +s) ≥ 1 h<t 
+
+#
+
+≤ Eπξ
+
+"
+
+L(1 − γ)
+
+> ∞
+
+X
+
+> i=0
+
+γiPπξ (rt+s+i̸ ≥ 0 | h<t +s) h<t 
+
+#
+
+= L(1 − γ)
+
+> ∞
+
+X
+
+> i=0
+
+γiEπξ
+
+Pπξ (rt+s+i̸ ≥ 0 | h<t +s) | h<t 
+
+
+
+= L(1 − γ)
+
+> ∞
+
+X
+
+> i=0
+
+γiPπξ (rt+s+i̸ ≥ 0 | h<t )= L(1 − γ)
+
+> ∞
+
+X
+
+> i=0
+
+γiαt−1, t +s+i.
+
+Finally, we average the sum over all t and apply Lemma 2: 
+
+Eπμ
+
+" ∞X
+
+> t=1
+
+Pπξ
+
+V πξ (h<t +s) ≤ − 1 | h<t 
+
+#
+
+≤ L(1 − γ)
+
+> ∞
+
+X
+
+> i=0
+
+γi
+
+> ∞
+
+X
+
+> t=1
+
+Eπμ [αt−1, t +s+i]
+
+≤ L(1 − γ)
+
+> ∞
+
+X
+
+> i=0
+
+γi(s + i + 1) ln 1
+
+wμ
+
+= L(1 − γ)γ−s ddγ 
+
+> ∞
+
+X
+
+> i=0
+
+γs+i+1 
+
+!
+
+ln 1
+
+wμ
+
+= L(1 − γ)γ−s ddγ 
+
+ γs+1 
+
+1 − γ
+
+
+
+ln 1
+
+wμ
+
+= L(1 − γ)γ−sγs
+
+ s
+
+1 − γ + 1(1 − γ)2
+
+
+
+ln 1
+
+wμ
+
+= L
+
+
+
+s + 11 − γ
+
+
+
+ln 1
+
+wμ
+
+.
+
+Now we are ready to prove the main capability result. 
+
+Theorem 1 (Capability) Consider the policy πGH from Algorithm 1, with 
+
+H(t) := ln t
+
+6(1 − γ) and η(t) = t−1/3. (6) 
+
+20 Golden Handcuffs make safer AI agents 
+
+Suppose the true environment μ satisfies PπGH  
+
+> μ
+
+(∀t ∈ Z+, r t ≥ 0) = 1 . Then for all ϵ > 0,
+
+EπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+
+
+max  
+
+> τ∈T ϵ∪{ πGH }
+
+V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t )
+
+2#
+
+≤ EπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+max 
+
+
+
+0, max  
+
+> τ∈T ϵ
+
+V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t , σ t)
+
+2#
+
+≤ 14(1 − γ) T 2/3 ln T + 12( L + 1) 2
+
+(1 − γ)2 T 1/3 + 8L(L + 1) 2
+
+(1 − γ)3 ln 1
+
+wμ
+
++ 4( L + 2) 2
+
+ϵ2 T 2/3 ln 1
+
+wμ
+
++ 6( L + 1) 2T 2/3.
+
+Moreover, for all ϵ > 0,
+
+lim  
+
+> T→∞
+
+EπGH 
+
+> μ
+
+h
+
+#t ≤ T : max τ ∈T ϵ/ log T V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t ) ≥ ϵ
+
+i
+
+T 23 +ϵ = 0 . (7) 
+
+Proof Using (5) and convexity of the function x 7 → max (0 , x )2,
+
+
+
+max  
+
+> τ∈T ϵ∪{ πGH }
+
+V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t )
+
+2
+
+= max 
+
+
+
+0, max  
+
+> τ∈T ϵ
+
+V τμ (h<t ) − EπGH 
+
+> μ
+
+h
+
+V πGH  
+
+> μ
+
+(h<t , σ t) | h<t 
+
+i2
+
+≤ EπGH 
+
+> μ
+
+"
+
+max 
+
+
+
+0, max  
+
+> τ∈T ϵ
+
+V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t , σ t)
+
+2
+
+h<t 
+
+#
+
+.
+
+The law of total probability then implies the first inequality to be shown. Now recall that rewards and value functions are in [0 , 1] under μ, and in [ −L, 1] under 
+
+ξ. It will be useful to define the n-step truncated value function 
+
+V π,n ν (h<t ) := (1 − γ)Eπν
+
+"n−1X
+
+> s=0
+
+γsrt+s h<t 
+
+#
+
+,
+
+which satisfies 
+
+V πν (h<t ) − V π,n ν (h<t ) = (1 − γ)Eπν
+
+" ∞X
+
+> s=n
+
+γsrt+s h<t 
+
+#
+
+∈ [−γnL, γ n].
+
+In addition, we will write dn(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t) for the total variation distance be-tween the corresponding pair of conditional probability distributions on ( ht:t+n−1, σ t+1: t+n). Since ξ(·) ≥ wμμ(·), a standard result on the distributions of sequences (e.g., Theorem 3.2.3 in Hutter et al. (2024)) gives 
+
+EπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+d∞(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t)2
+
+#
+
+≤ ln 1
+
+wμ
+
+. (17) 
+
+21 Ebtekar Cohen 
+
+Starting from time t with σt = 0, πGH follows a ξ-optimal policy until it yields to a mentor. If it yields at time t + s, the policy becomes suboptimal by at most ( L + 1) γs. This can happen if either (1) a random rollout begins, which occurs with probability η(t + s), or (2) the safety trigger V ∗ 
+
+> ξ
+
+(h<t +s) ≤ − 1 holds. Thus, since V πGH  
+
+> ξ
+
+(·) ≤ V ∗ 
+
+> ξ
+
+(·), 
+
+V τξ (h<t ) − V πGH  
+
+> ξ
+
+(h<t , 0) 
+
+≤ V ∗ 
+
+> ξ
+
+(h<t ) − V πGH  
+
+> ξ
+
+(h<t , 0) 
+
+≤
+
+> ∞
+
+X
+
+> s=0
+
+(L + 1) γs 
+
+η(t + s) + PπGH 
+
+> ξ
+
+ V ∗ 
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t = 0 
+
+≤ L + 1 1 − γ η(t) + ( L + 1) 
+
+> ∞
+
+X
+
+> s=0
+
+γsPπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t = 0 
+
+
+
+.
+
+If σt = 0 and τ ∈ T ϵ, then with probability ϵη (t), the policy’s internal state immediately changes to ( H(t), τ ). Thus, 
+
+d∞(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t = 0) ≥ dH(t)(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t = 0) 
+
+≥ ϵη (t)dH(t)(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t = ( H(t), τ )) = ϵη (t)dH(t)(Pτμ, Pτξ | h<t ),
+
+from which we get (V τμ (h<t ) − V τξ (h<t )) + ( V πGH  
+
+> ξ
+
+(h<t , 0) − V πGH  
+
+> μ
+
+(h<t , 0)) 
+
+≤ (V τ,H (t) 
+
+> μ
+
+(h<t ) − V τ,H (t) 
+
+> ξ
+
+(h<t )) + ( V πGH  
+
+> ξ
+
+(h<t , 0) − V πGH  
+
+> μ
+
+(h<t , 0)) + ( L + 1) γH(t)
+
+≤ (L + 1) dH(t)(Pτμ, Pτξ | h<t ) + d∞(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t = 0) + ( L + 1) γH(t)
+
+≤
+
+ L + 1 
+
+ϵη (t) + 1 
+
+
+
+d∞(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t = 0) + ( L + 1) γH(t)
+
+≤ L + 2 
+
+ϵη (t) d∞(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t = 0) + ( L + 1) γH(t).
+
+Adding the two inequalities, if τ ∈ T ϵ,
+
+V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t , 0) 
+
+≤ L + 1 1 − γ η(t) + ( L + 1) 
+
+> ∞
+
+X
+
+> s=0
+
+γsPπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t = 0 
+
+
+
++ L + 2 
+
+ϵη (t) d∞(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t = 0) + ( L + 1) γH(t).
+
+22 Golden Handcuffs make safer AI agents 
+
+Since the right-hand size is non-negative and independent of τ ,max 
+
+
+
+0, max  
+
+> τ∈T ϵ
+
+V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t , 0) 
+
+
+
+≤ L + 1 1 − γ η(t) + ( L + 1) 
+
+> ∞
+
+X
+
+> s=0
+
+γsPπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t = 0 
+
+
+
++ L + 2 
+
+ϵη (t) d∞(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t = 0) + ( L + 1) γH(t).
+
+Using Cauchy-Schwarz in the form ( w + x + y + z)2 ≤ 4( w2 + x2 + y2 + z2), max 
+
+
+
+0, max  
+
+> τ∈T ϵ
+
+V τμ (h<t ) − V πGH  
+
+> μ
+
+(h<t , σ t)
+
+2
+
+≤ 1(σt̸ = 0) + 4 
+
+ L + 1 1 − γ η(t)
+
+2
+
++ 4 (L + 1) 
+
+> ∞
+
+X
+
+> s=0
+
+γsPπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t
+
+!2
+
++ 4 
+
+ L + 2 
+
+ϵη (t) d∞(PπGH  
+
+> μ
+
+, PπGH  
+
+> ξ
+
+| h<t , σ t)
+
+2
+
++ 4 
+
+
+
+(L + 1) γH(t)2
+
+.
+
+Now, we can bound the expectation of the sum of each of the five terms separately. Since H(t) is increasing, the first term can only be non-zero if a random mentor rollout began during the previous H(t) steps. Therefore, 
+
+EπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+1(σt̸ = 0) 
+
+#
+
+=
+
+> T
+
+X
+
+> t=1
+
+PπGH  
+
+> μ
+
+(σt̸ = 0) 
+
+≤
+
+> T
+
+X
+
+> t=1
+
+H(t)η(t)
+
+≤ H(T )
+
+> T
+
+X
+
+> t=1
+
+η(t)= ln T
+
+6(1 − γ)
+
+> T
+
+X
+
+> t=1
+
+1
+
+t1/3
+
+≤ ln T
+
+6(1 − γ)
+
+Z T
+
+> 0
+
+dt t1/3
+
+= 14(1 − γ) T 2/3 ln T. 
+
+23 Ebtekar Cohen 
+
+EπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+ L + 1 1 − γ η(t)
+
+2#
+
+= (L + 1) 2
+
+(1 − γ)2
+
+> T
+
+X
+
+> t=1
+
+η(t)2
+
+= (L + 1) 2
+
+(1 − γ)2
+
+> T
+
+X
+
+> t=1
+
+t−2/3
+
+≤ (L + 1) 2
+
+(1 − γ)2
+
+Z T
+
+> 0
+
+t−2/3dt 
+
+= 3( L + 1) 2
+
+(1 − γ)2 T 1/3.
+
+EπGH 
+
+> μ
+
+
+
+> T
+
+X
+
+> t=1
+
+(L + 1) 
+
+> ∞
+
+X
+
+> s=0
+
+γsPπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t
+
+!2
+
+= EπGH 
+
+> μ
+
+
+
+> T
+
+X
+
+> t=1
+
+(L + 1) 2
+
+(1 − γ)2
+
+> ∞
+
+X
+
+> s=0
+
+(1 − γ)γsPπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t
+
+!2
+
+≤ EπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+(L + 1) 2
+
+(1 − γ)2
+
+> ∞
+
+X
+
+> s=0
+
+(1 − γ)γs 
+
+PπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t
+
+ 2
+
+#
+
+≤ EπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+(L + 1) 2
+
+(1 − γ)2
+
+> ∞
+
+X
+
+> s=0
+
+(1 − γ)γsPπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t
+
+#
+
+= (L + 1) 2
+
+1 − γ
+
+> ∞
+
+X
+
+> s=0
+
+γsEπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+PπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t
+
+#
+
+= (L + 1) 2
+
+1 − γ
+
+> ∞
+
+X
+
+> s=0
+
+γsEπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+EπGH 
+
+> ξ
+
+h
+
+PπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t , σ t
+
+
+
+| h<t 
+
+i#
+
+= (L + 1) 2
+
+1 − γ
+
+> ∞
+
+X
+
+> s=0
+
+γsEπGH 
+
+> μ
+
+" TX
+
+> t=1
+
+PπGH 
+
+> ξ
+
+
+
+V πGH  
+
+> ξ
+
+(h<t +s) ≤ − 1 | h<t 
+
+#
+
+≤ (L + 1) 2
+
+1 − γ
+
+> ∞
+
+X
+
+> s=0
+
+γsL
+
+
+
+s + 11 − γ
+
+
+
+ln 1
+
+wμ
+
+(by Theorem 3) = L(L + 1) 2
+
+1 − γ
+
+> ∞
+
+X
+
+> s=0
+
+sγ s + 11 − γ
+
+> ∞
+
+X
+
+> s=0
+
+γs
+
+!
+
+ln 1
+
+wμ
+
+= L(L + 1) 2
+
+1 − γ
+
+ γ
+
+(1 − γ)2 + 1(1 − γ)2
+
+
+
+ln 1
+
+wμ
+
+≤ 2L(L + 1) 2
+
+(1 − γ)3 ln 1
+
+wμ
+
+.
+
+24 Golden Handcuffs make safer AI agents 
+
+EπGH 
+
+μ
+
+" TX
+
+t=1 
+
+ L + 2 
+
+ϵη (t) d∞(PπGH 
+
+μ , PπGH 
+
+ξ | h<t , σ t)
+
+2#
+
+=
+
+ L + 2 
+
+ϵη (T )
+
+2
+
+EπGH 
+
+μ
+
+" TX
+
+t=1 
+
+d∞(PπGH 
+
+μ , PπGH 
+
+ξ | h<t , σ t)2
+
+#
+
+≤
+
+ L + 2 
+
+ϵη (T )
+
+2
+
+ln 1
+
+wμ
+
+(by Equation (17)) = (L + 2) 2
+
+ϵ2 T 2/3 ln 1
+
+wμ
+
+.
+
+EπGH 
+
+μ
+
+" TX
+
+t=1 
+
+
+
+(L + 1) γH(t)2
+
+#
+
+= ( L + 1) 2
+
+TX
+
+t=1 
+
+γ2H(t)
+
+= ( L + 1) 2
+
+TX
+
+t=1 
+
+γ ln t
+
+> 3(1 −γ)
+
+= ( L + 1) 2
+
+TX
+
+t=1 
+
+t ln γ
+
+> 3(1 −γ)
+
+≤ (L + 1) 2
+
+TX
+
+t=1 
+
+t−1/3 (since ln γ ≤ γ − 1) 
+
+≤ (L + 1) 2
+
+Z T
+
+0
+
+t−1/3dt 
+
+= 32 (L + 1) 2T 2/3.
+
+25 Ebtekar Cohen 
+
+Summing all five of these inequalities yields the main result. It implies 
+
+EπGH 
+
+μ
+
+
+
+#t ≤ T : max 
+
+τ ∈T ϵ/ log T
+
+V τμ (h<t ) − V πGH 
+
+μ (h<t ) ≥ ϵ
+
+
+
+=
+
+TX
+
+t=1 
+
+PπGH 
+
+μ
+
+
+
+max 
+
+τ ∈T ϵ/ log T
+
+V τμ (h<t ) − V πGH 
+
+μ (h<t ) ≥ ϵ
+
+
+
+=
+
+TX
+
+t=1 
+
+PπGH 
+
+μ
+
+ max 
+
+τ ∈T ϵ/ log T ∪{ πGH }
+
+V τμ (h<t ) − V πGH 
+
+μ (h<t )
+
+!2
+
+≥ ϵ2
+
+
+
+≤
+
+TX
+
+t=1 
+
+1
+
+ϵ2 EπGH 
+
+μ
+
+ max 
+
+τ ∈T ϵ/ log T ∪{ πGH }
+
+V τμ (h<t ) − V πGH 
+
+μ (h<t )
+
+!2
+
+= 1
+
+ϵ2 EπGH 
+
+μ
+
+
+
+TX
+
+t=1 
+
+max 
+
+τ ∈T ϵ/ log T ∪{ πGH }
+
+V τμ (h<t ) − V πGH 
+
+μ (h<t )
+
+!2
+
+= O 1
+
+ϵ2 · T 2/3
+
+(ϵ/ log T )2
+
+!
+
+= O(T 2/3 log 2 T ),
+
+as T grows with all parameters held fixed. Equation (7) follows. 
+
+26
