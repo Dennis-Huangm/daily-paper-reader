@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.16995v1/fig-001.webp",
+      "caption": "Table 1: Performance comparison of RL methods across a set of reasoning benchmarks. Results are highlighted in bold when SPS outperforms vanilla GRPO, indicating enhanced exploration.",
+      "page": 7,
+      "index": 1,
+      "width": 921,
+      "height": 986
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16995v1/fig-002.webp",
+      "caption": "Figure 1: Illustration of squeezing effect. y∗n denotes the sequence that dominates the output distribution (i.e., the sequence consistently sampled by greedy decoding). Subfigure (a) shows the normal RL case, where probability mass shifts along the gradient direction. Subfigure (b) shows that when the distribution is already imbalanced, the updates further concentrate probability mass into the dominant peak, a phenomenon referred to as the squeezing effect.",
+      "page": 3,
+      "index": 2,
+      "width": 434,
+      "height": 330
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16995v1/fig-003.webp",
+      "caption": "Figure 2: Partial results of the preliminary study. Subfigures (a) and (b) show the effect of GRPO on average question accuracy over the combined dataset. Subfigure (c) presents the dynamics of the Pass@128 metric during training, revealing an empirical boundary on exploration. More results can be found in Figure 5.",
+      "page": 4,
+      "index": 3,
+      "width": 890,
+      "height": 247
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16995v1/fig-004.webp",
+      "caption": "Figure 3: An overview of our SPS approach. Our training pipeline follows an iterative loop consisting of two complementary phases: (a) We first perform standard RL to explore the dataset and generate rollouts, from which a subset is sampled as demonstrations; (b) In the subsequent IRL phase, these demonstrations are leveraged to steer probability squeezing by reshaping the policy distribution. In practice, the two phases are interleaved to form a continual and unified training process.",
+      "page": 5,
+      "index": 4,
+      "width": 940,
+      "height": 379
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16995v1/fig-005.webp",
+      "caption": "Figure 5: Accuracy distribution variation of Qwen2.5-Math-1.5B",
+      "page": 16,
+      "index": 5,
+      "width": 907,
+      "height": 567
+    },
+    {
+      "url": "assets/figures/arxiv/2604.16995v1/fig-006.webp",
+      "caption": "Table 2: Hyperparameter setting of applied RL methods",
+      "page": 16,
+      "index": 6,
+      "width": 417,
+      "height": 356
+    }
+  ]
+}
