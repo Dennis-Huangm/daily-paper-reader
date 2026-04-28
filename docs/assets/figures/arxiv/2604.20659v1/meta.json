@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.20659v1/fig-001.webp",
+      "caption": "Figure 5: Response length dynamics under reinforcement learning for Gemma and Qwen Math models, showing opposite evolution trends across training.",
+      "page": 15,
+      "index": 1,
+      "width": 760,
+      "height": 262
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20659v1/fig-002.webp",
+      "caption": "Figure 1: (A) GRPO-VPS supervises intermediate reasoning via a segment-wise process signal computed as the change in the model’s belief in the correct answer across consecutive reasoning segments. (B) At the macro level, we visualize how the probed confidence evolves in the reasoning models. Trajectories that ultimately lead to correct answers exhibit more pronounced upward trends. (C) At the micro level, reasoning chunks with negative confidence increments often contain hallucinations, redundancies, or unhelpful detours.",
+      "page": 2,
+      "index": 2,
+      "width": 894,
+      "height": 550
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20659v1/fig-003.webp",
+      "caption": "Table 1: Experimental results on Qwen-Math Models. BASE denotes the corresponding Qwen or Gemma base model without any fine-tuning.",
+      "page": 7,
+      "index": 3,
+      "width": 894,
+      "height": 483
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20659v1/fig-004.webp",
+      "caption": "Table 4: Hyperparameters used for GRPO-VPS",
+      "page": 14,
+      "index": 4,
+      "width": 406,
+      "height": 369
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20659v1/fig-005.webp",
+      "caption": "Figure 7: Example to show",
+      "page": 18,
+      "index": 5,
+      "width": 850,
+      "height": 1190
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20659v1/fig-006.webp",
+      "caption": "Figure 8: Example to show",
+      "page": 19,
+      "index": 6,
+      "width": 877,
+      "height": 1223
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20659v1/fig-007.webp",
+      "caption": "Figure 3: Left: Visualize the distribution of response lengths within the early training steps. GRPO method exhibits a longer tail, while our method shows a more concentrated distribution. Right: MATH Evaluation accuracy of GRPO and our method along training steps. Average gradient norm per update during training.",
+      "page": 9,
+      "index": 7,
+      "width": 861,
+      "height": 395
+    },
+    {
+      "url": "assets/figures/arxiv/2604.20659v1/fig-008.webp",
+      "caption": "Figure 6: (a) Subject-wise distribution of the MMLU-Pro test set. (b) Evolution of training entropy loss. (c) Test accuracy progression on TheoremQA during the training process.",
+      "page": 16,
+      "index": 8,
+      "width": 995,
+      "height": 329
+    }
+  ]
+}

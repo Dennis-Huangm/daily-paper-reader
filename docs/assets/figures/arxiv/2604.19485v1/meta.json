@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.19485v1/fig-001.webp",
+      "caption": "Figure 4: Training and validation curves across four tasks. Top row: training success rate (smoothed). Bottom row: validation success rate (unsmoothed; stars mark each method’s peak). EVPO tracks or exceeds the best competing method throughout most of training.",
+      "page": 7,
+      "index": 1,
+      "width": 826,
+      "height": 392
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19485v1/fig-002.webp",
+      "caption": "Table 1: Best validation success rate across four tasks. Bold indicates the best result per task. For each task, the success rate is calculated based on a total of 512 experimental results, obtained by sampling 16 times for each of the 32 queries.",
+      "page": 7,
+      "index": 2,
+      "width": 829,
+      "height": 356
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19485v1/fig-003.webp",
+      "caption": "Figure 2: Training dynamics of PPO on Sokoban. (a) Batch-level EV over training steps. (b) Policy gradient norms. (c) Training success rate. The shaded region in (a–c) marks the early phase where EV is low. (d) Effect of injecting Gaussian noise into a converged critic on FrozenLake.",
+      "page": 3,
+      "index": 3,
+      "width": 826,
+      "height": 190
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19485v1/fig-004.webp",
+      "caption": "Table 2: Per-task / per-method hyperparameter overrides. εlo/εhi are the PPO-style clip thresholds. Where DAPO and StarPO-S show different values from the other methods on the same task (e.g., DAPO’s clip-higher asymmetry, or the StarPO-S Sokoban configuration that preserves the original RAGEN recipe), those settings are defining features of the respective algorithms rather than tuning choices, and we therefore do not force them to match the other methods.",
+      "page": 18,
+      "index": 4,
+      "width": 636,
+      "height": 501
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19485v1/fig-005.webp",
+      "caption": "Figure 5: Gating trigger probability (êvB > 0, i.e., selection of critic over batch mean) across training.",
+      "page": 8,
+      "index": 5,
+      "width": 826,
+      "height": 189
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19485v1/fig-006.webp",
+      "caption": "Figure 6: Threshold sensitivity analysis. Top row: training metrics (smoothed); bottom row: validation metrics (unsmoothed). (a, c, e, g) Best success rate as a function of the EV switching threshold; stars mark τ=0. (b, d, f, h) Full curves under each threshold setting. Performance peaks at τ=0 on both tasks.",
+      "page": 8,
+      "index": 6,
+      "width": 826,
+      "height": 400
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19485v1/fig-007.webp",
+      "caption": "Figure 3: Reducing critic variance helps the actor. (a) Cold-start: replacing the critic output with ḠB during early training on Sokoban (left) and FrozenLake (right). (b) Critic Warmup: pre-training the critic before actor training begins.",
+      "page": 4,
+      "index": 7,
+      "width": 826,
+      "height": 185
+    }
+  ]
+}
