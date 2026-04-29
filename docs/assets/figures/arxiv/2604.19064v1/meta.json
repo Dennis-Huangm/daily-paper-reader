@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.19064v1/fig-001.webp",
+      "caption": "Fig. 1. Stability–diversity trade-off in VLN self-improvement: over-stable learning commits to a single hypothesis, whereas over-diverse learning yields uncoordinated hypotheses and inconsistent updates; SDB encourages structured coordination.",
+      "page": 1,
+      "index": 1,
+      "width": 529,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19064v1/fig-002.webp",
+      "caption": "TABLE I PERFORMANCE COMPARISON ON THE REVERIE DATASET ACROSS VAL SEEN, VAL UNSEEN, AND TEST UNSEEN SPLITS.",
+      "page": 7,
+      "index": 2,
+      "width": 1068,
+      "height": 221
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19064v1/fig-003.webp",
+      "caption": "Fig. 3. Step-wise Planning Change Rate (SPCR) on NavGPT-2, averaged over the first 9 navigation steps. SDB yields consistently higher change rates, indicating more dynamic and context-sensitive plan refinement.",
+      "page": 7,
+      "index": 3,
+      "width": 516,
+      "height": 358
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19064v1/fig-004.webp",
+      "caption": "Fig. 2. Overview of Stability–Diversity Balance (SDB). SDB is inserted between the backbone encoder and the navigation policy network. It expands the decision context into K hypotheses (1→K, explore) and consolidates them into a single reliable decision representation (K→1, stabilize) for training and execution.",
+      "page": 3,
+      "index": 4,
+      "width": 1076,
+      "height": 515
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19064v1/fig-005.webp",
+      "caption": "TABLE VI BACKBONE GENERALITY OF SDB ACROSS DATASETS.",
+      "page": 8,
+      "index": 5,
+      "width": 529,
+      "height": 535
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19064v1/fig-006.webp",
+      "caption": "Fig. 4. Step-wise reasoning details. Each column shows the agent’s observation and the corresponding selected thought at each navigation step. Top: Baseline (NavGPT-2). Bottom: NavGPT-2 + SDB (ours). Step indices and colors correspond to the top-down view in Figure 5. Compared with the baseline, SDB leads to more instruction-consistent decisions and more interpretable step-wise reasoning.",
+      "page": 9,
+      "index": 6,
+      "width": 1076,
+      "height": 540
+    },
+    {
+      "url": "assets/figures/arxiv/2604.19064v1/fig-007.webp",
+      "caption": "Fig. 5. Top-down trajectory comparison between NavGPT-2 + SDB (red) and the baseline (blue) under the same instruction. The SDB-enhanced agent follows the instruction more closely and reaches the goal, whereas the baseline deviates early. Step colors correspond to Figure 4.",
+      "page": 9,
+      "index": 7,
+      "width": 529,
+      "height": 391
+    }
+  ]
+}

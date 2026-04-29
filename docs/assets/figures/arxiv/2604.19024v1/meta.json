@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.19024v1/fig-001.webp",
+      "caption": "Figure 1: Comparison of NPGPD-HF and ZPGPD-HF. In these experiments, we truncate the horizon to a fixed length of H = 80 and vary the number of evaluators M = 16, 64, 256.",
+      "page": 13,
+      "index": 1,
+      "width": 812,
+      "height": 618
+    }
+  ]
+}
