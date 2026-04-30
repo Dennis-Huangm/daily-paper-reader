@@ -6,110 +6,103 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-04-29
-- 运行时间：2026-04-29 21:08:50 UTC
+- 最新运行日期：2026-04-30
+- 运行时间：2026-04-30 20:12:47 UTC
 - 运行状态：成功
-- 本次总论文数：29
-- 精读区：18
+- 本次总论文数：27
+- 精读区：16
 - 速读区：11
 
 ### 今日简报（AI）
-- 今日共生成 29 篇推荐（精读 18 篇，速读 11 篇）
-- 精读：《Rethinking Reinforcement Fine-Tuning in LVLM: Convergence, Reward Decomposition, and Generalization》（10.0/10）, 《AgenticQwen: Training Small Agentic Language Models with Dual Data Flywheels for Industrial-Scale Tool Use》（10.0/10）
-- 速读：《Policy Gradient Primal-Dual Method for Safe Reinforcement Learning from Human Feedback》（8.5/10）, 《WebGen-R1: Incentivizing Large Language Models to Generate Functional and Aesthetic Websites with Reinforcement Learning》（8.5/10）, 《GRPO-VPS: Enhancing Group Relative Policy Optimization with Verifiable Process Supervision for Effective Reasoning》（8.5/10）
-- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202604/29/README](/202604/29/README)
+今日精选 27 篇前沿成果，重点解析 AgenticQwen 如何通过双数据飞轮实现工业级工具调用的性能突破。
+核心结论显示，混合 LLM-RL 框架能有效弥合推理与行动的鸿沟，显著提升跨域对话任务的执行效率。
+建议关注 Agent 的自我进化与可验证过程监督技术，这是掌握开放环境下自主学习能力的关键路径。
+- 详情：[/202604/30/README](/202604/30/README)
 
 ### 精读区论文标签
-1. [Rethinking Reinforcement Fine-Tuning in LVLM: Convergence, Reward Decomposition, and Generalization](/202604/29/2604.19857v1-rethinking-reinforcement-fine-tuning-in-lvlm-convergence-reward-decomposition-and-generalization)  
+1. [AgenticQwen: Training Small Agentic Language Models with Dual Data Flywheels for Industrial-Scale Tool Use](/202604/30/2604.21590v1-agenticqwen-training-small-agentic-language-models-with-dual-data-flywheels-for-industrial-scale-tool-use)  
    标签：评分：10.0/10、query:ag-rl
-   evidence：用于提升LVLM智能体能力的强化微调
-2. [AgenticQwen: Training Small Agentic Language Models with Dual Data Flywheels for Industrial-Scale Tool Use](/202604/29/2604.21590v1-agenticqwen-training-small-agentic-language-models-with-dual-data-flywheels-for-industrial-scale-tool-use)  
+   evidence：通过多轮强化学习训练小型智能体模型
+2. [Bridging Reasoning and Action: Hybrid LLM-RL Framework for Efficient Cross-Domain Task-Oriented Dialogue](/202604/30/2604.23345v1-bridging-reasoning-and-action-hybrid-llm-rl-framework-for-efficient-cross-domain-task-oriented-dialogue)  
    标签：评分：10.0/10、query:ag-rl
-   evidence：使用多轮强化学习和双数据飞轮训练小型智能体语言模型。
-3. [DR-Venus: Towards Frontier Edge-Scale Deep Research Agents with Only 10K Open Data](/202604/29/2604.19859v1-dr-venus-towards-frontier-edge-scale-deep-research-agents-with-only-10k-open-data)  
+   evidence：用于任务导向对话的混合LLM-RL框架
+3. [BitRL: Reinforcement Learning with 1-bit Quantized Language Models for Resource-Constrained Edge Deployment](/202604/30/2604.24273v1-bitrl-reinforcement-learning-with-1-bit-quantized-language-models-for-resource-constrained-edge-deployment)  
+   标签：评分：10.0/10、query:ag-rl
+   evidence：使用1比特量化语言模型构建强化学习智能体的框架
+4. [Self-Guided Plan Extraction for Instruction-Following Tasks with Goal-Conditional Reinforcement Learning](/202604/30/2604.20601v1-self-guided-plan-extraction-for-instruction-following-tasks-with-goal-conditional-reinforcement-learning)  
    标签：评分：9.5/10、query:ag-rl
-   evidence：应用代理强化学习来训练小语言模型研究智能体
-4. [Self-Guided Plan Extraction for Instruction-Following Tasks with Goal-Conditional Reinforcement Learning](/202604/29/2604.20601v1-self-guided-plan-extraction-for-instruction-following-tasks-with-goal-conditional-reinforcement-learning)  
+   evidence：LLM生成计划并通过强化学习反馈在协同训练循环中进行优化
+5. [SOLAR-RL: Semi-Online Long-horizon Assignment Reinforcement Learning](/202604/30/2604.22558v1-solar-rl-semi-online-long-horizon-assignment-reinforcement-learning)  
    标签：评分：9.5/10、query:ag-rl
-   evidence：大语言模型规划器与强化学习智能体的迭代协同训练
-5. [SOLAR-RL: Semi-Online Long-horizon Assignment Reinforcement Learning](/202604/29/2604.22558v1-solar-rl-semi-online-long-horizon-assignment-reinforcement-learning)  
+   evidence：用于在动态GUI任务上训练多模态大模型智能体的强化学习
+6. [DLM: Unified Decision Language Models for Offline Multi-Agent Sequential Decision Making](/202604/30/2604.23557v1-dlm-unified-decision-language-models-for-offline-multi-agent-sequential-decision-making)  
    标签：评分：9.5/10、query:ag-rl
-   evidence：将多模态大模型智能体与半在线强化学习框架结合，用于处理GUI任务
-6. [CODA: Coordination via On-Policy Diffusion for Multi-Agent Offline Reinforcement Learning](/202604/29/2604.23308v1-coda-coordination-via-on-policy-diffusion-for-multi-agent-offline-reinforcement-learning)  
+   evidence：用于离线多智能体强化学习的决策语言模型
+7. [DPEPO: Diverse Parallel Exploration Policy Optimization for LLM-based Agents](/202604/30/2604.24320v1-dpepo-diverse-parallel-exploration-policy-optimization-for-llm-based-agents)  
    标签：评分：9.5/10、query:ag-rl
-   evidence：基于扩散的多智能体离线强化学习
-7. [BitRL: Reinforcement Learning with 1-bit Quantized Language Models for Resource-Constrained Edge Deployment](/202604/29/2604.24273v1-bitrl-reinforcement-learning-with-1-bit-quantized-language-models-for-resource-constrained-edge-deployment)  
-   标签：评分：9.5/10、query:ag-rl
-   evidence：使用量化大语言模型构建强化学习智能体决策框架。
-8. [DPEPO: Diverse Parallel Exploration Policy Optimization for LLM-based Agents](/202604/29/2604.24320v1-dpepo-diverse-parallel-exploration-policy-optimization-for-llm-based-agents)  
-   标签：评分：9.5/10、query:ag-rl
-   evidence：提出了一种专门针对LLM智能体的强化学习算法（DPEPO），旨在改进其探索能力。
-9. [SAVOIR: Learning Social Savoir-Faire via Shapley-based Reward Attribution](/202604/29/2604.18982v1-savoir-learning-social-savoir-faire-via-shapley-based-reward-attribution)  
+   evidence：针对基于LLM的代理的并行探索强化学习算法
+8. [WebGen-R1: Incentivizing Large Language Models to Generate Functional and Aesthetic Websites with Reinforcement Learning](/202604/30/2604.20398v1-webgen-r1-incentivizing-large-language-models-to-generate-functional-and-aesthetic-websites-with-reinforcement-learning)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：通过强化学习训练语言智能体，并采用一种新型的信用分配框架。
-10. [EVPO: Explained Variance Policy Optimization for Adaptive Critic Utilization in LLM Post-Training](/202604/29/2604.19485v1-evpo-explained-variance-policy-optimization-for-adaptive-critic-utilization-in-llm-post-training)  
+   evidence：使用强化学习端到端训练LLM代理进行网页生成
+9. [ProMMSearchAgent: A Generalizable Multimodal Search Agent Trained with Process-Oriented Rewards](/202604/30/2604.20486v1-prommsearchagent-a-generalizable-multimodal-search-agent-trained-with-process-oriented-rewards)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：用于LLM后训练和策略优化的强化学习
-11. [ProMMSearchAgent: A Generalizable Multimodal Search Agent Trained with Process-Oriented Rewards](/202604/29/2604.20486v1-prommsearchagent-a-generalizable-multimodal-search-agent-trained-with-process-oriented-rewards)  
+   evidence：通过强化学习训练的多模态搜索智能体
+10. [V-tableR1: Process-Supervised Multimodal Table Reasoning with Critic-Guided Policy Optimization](/202604/30/2604.20755v1-v-tabler1-process-supervised-multimodal-table-reasoning-with-critic-guided-policy-optimization)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：通过强化学习和过程导向奖励训练多模态智能体
-12. [Co-Evolving LLM Decision and Skill Bank Agents for Long-Horizon Tasks](/202604/29/2604.20987v1-co-evolving-llm-decision-and-skill-bank-agents-for-long-horizon-tasks)  
+   evidence：用于多模态LLM推理的过程监督强化学习框架
+11. [GraphPlanner: Graph Memory-Augmented Agentic Routing for Multi-Agent LLMs](/202604/30/2604.23626v1-graphplanner-graph-memory-augmented-agentic-routing-for-multi-agent-llms)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：用于长时程任务的LLM决策智能体，结合可学习技能库在交互式环境中进行决策
-13. [AEL: Agent Evolving Learning for Open-Ended Environments](/202604/29/2604.21725v1-ael-agent-evolving-learning-for-open-ended-environments)  
+   evidence：将多智能体LLM的智能路由建模为马尔可夫决策过程
+12. [AgenticCache: Cache-Driven Asynchronous Planning for Embodied AI Agents](/202604/30/2604.24039v1-agenticcache-cache-driven-asynchronous-planning-for-embodied-ai-agents)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：LLM智能体通过汤普森采样强化学习在连续情节中学习检索策略
-14. [Process Supervision of Confidence Margin for Calibrated LLM Reasoning](/202604/29/2604.23333v1-process-supervision-of-confidence-margin-for-calibrated-llm-reasoning)  
+   evidence：使用LLM和异步更新的具身AI智能体规划框架
+13. [Agent-Centric Visual Reinforcement Learning under Dynamic Perturbations](/202604/30/2604.24661v2-agent-centric-visual-reinforcement-learning-under-dynamic-perturbations)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：用于校准 LLM 推理的强化学习框架
-15. [Bridging Reasoning and Action: Hybrid LLM-RL Framework for Efficient Cross-Domain Task-Oriented Dialogue](/202604/29/2604.23345v1-bridging-reasoning-and-action-hybrid-llm-rl-framework-for-efficient-cross-domain-task-oriented-dialogue)  
+   evidence：动态扰动下的以智能体为中心的视觉强化学习
+14. [JURY-RL: Votes Propose, Proofs Dispose for Label-Free RLVR](/202604/30/2604.25419v1-jury-rl-votes-propose-proofs-dispose-for-label-free-rlvr)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：面向任务对话智能体的 LLM-RL 混合框架
-16. [DLM: Unified Decision Language Models for Offline Multi-Agent Sequential Decision Making](/202604/29/2604.23557v1-dlm-unified-decision-language-models-for-offline-multi-agent-sequential-decision-making)  
+   evidence：针对大模型推理的带可验证奖励的无标签强化学习
+15. [A Survey of Multi-Agent Deep Reinforcement Learning with Graph Neural Network-Based Communication](/202604/30/2604.25972v1-a-survey-of-multi-agent-deep-reinforcement-learning-with-graph-neural-network-based-communication)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：基于大语言模型的离线多智能体强化学习决策模型
-17. [JigsawRL: Assembling RL Pipelines for Efficient LLM Post-Training](/202604/29/2604.23838v1-jigsawrl-assembling-rl-pipelines-for-efficient-llm-post-training)  
+   evidence：多智能体深度强化学习框架综述
+16. [GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents](/202604/30/2604.26752v1-glm-5v-turbo-toward-a-native-foundation-model-for-multimodal-agents)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：用于高效智能体强化学习流水线和LLM后训练的框架
-18. [JURY-RL: Votes Propose, Proofs Dispose for Label-Free RLVR](/202604/29/2604.25419v1-jury-rl-votes-propose-proofs-dispose-for-label-free-rlvr)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：结合大语言模型与强化学习，利用可验证奖励和形式化验证进行训练
+   evidence：多模态智能体的强化学习与智能体框架集成
 
 ### 速读区论文标签
-1. [Policy Gradient Primal-Dual Method for Safe Reinforcement Learning from Human Feedback](/202604/29/2604.19024v1-policy-gradient-primal-dual-method-for-safe-reinforcement-learning-from-human-feedback)  
+1. [EvoAgent: An Evolvable Agent Framework with Skill Learning and Multi-Agent Delegation](/202604/30/2604.20133v2-evoagent-an-evolvable-agent-framework-with-skill-learning-and-multi-agent-delegation)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：结合RLHF开发有助且无害的LLM智能体
-2. [WebGen-R1: Incentivizing Large Language Models to Generate Functional and Aesthetic Websites with Reinforcement Learning](/202604/29/2604.20398v1-webgen-r1-incentivizing-large-language-models-to-generate-functional-and-aesthetic-websites-with-reinforcement-learning)  
+   evidence：具有技能学习和多智能体委派功能的LLM智能体框架
+2. [GRPO-VPS: Enhancing Group Relative Policy Optimization with Verifiable Process Supervision for Effective Reasoning](/202604/30/2604.20659v1-grpo-vps-enhancing-group-relative-policy-optimization-with-verifiable-process-supervision-for-effective-reasoning)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：使用强化学习端到端训练大语言模型，作为多轮代理框架的替代方案
-3. [GRPO-VPS: Enhancing Group Relative Policy Optimization with Verifiable Process Supervision for Effective Reasoning](/202604/29/2604.20659v1-grpo-vps-enhancing-group-relative-policy-optimization-with-verifiable-process-supervision-for-effective-reasoning)  
+   evidence：通过强化学习和过程监督增强LLM推理能力
+3. [AEL: Agent Evolving Learning for Open-Ended Environments](/202604/30/2604.21725v1-ael-agent-evolving-learning-for-open-ended-environments)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：通过可验证的过程监督强化学习来增强大语言模型的推理能力
-4. [V-tableR1: Process-Supervised Multimodal Table Reasoning with Critic-Guided Policy Optimization](/202604/29/2604.20755v1-v-tabler1-process-supervised-multimodal-table-reasoning-with-critic-guided-policy-optimization)  
+   evidence：使用汤普森采样强化的LLM智能体经验学习框架
+4. [Active Inference: A method for Phenotyping Agency in AI systems?](/202604/30/2604.23278v1-active-inference-a-method-for-phenotyping-agency-in-ai-systems)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：针对多模态大语言模型的强化学习框架，旨在激发推理能力
-5. [The Essence of Balance for Self-Improving Agents in Vision-and-Language Navigation](/202604/29/2604.19064v1-the-essence-of-balance-for-self-improving-agents-in-vision-and-language-navigation)  
+   evidence：将代理动作链实例化为部分可观测马尔可夫决策过程
+5. [TriEx: A Game-based Tri-View Framework for Explaining Internal Reasoning in Multi-Agent LLMs](/202604/30/2604.20043v1-triex-a-game-based-tri-view-framework-for-explaining-internal-reasoning-in-multi-agent-llms)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：在导航任务中使用策略诱导经验进行决策的自我改进智能体。
-6. [Multi-modal Reasoning with LLMs for Visual Semantic Arithmetic](/202604/29/2604.19567v1-multi-modal-reasoning-with-llms-for-visual-semantic-arithmetic)  
+   evidence：交互式设置中多智能体大语言模型的解释性框架
+6. [EvoAgent: An Evolvable Agent Framework with Skill Learning and Multi-Agent Delegation](/202604/30/2604.20133v1-evoagent-an-evolvable-agent-framework-with-skill-learning-and-multi-agent-delegation)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：使用强化学习作为后训练手段，增强大语言模型在机器人等智能体任务中的推理能力
-7. [A Self-Evolving Framework for Efficient Terminal Agents via Observational Context Compression](/202604/29/2604.19572v1-a-self-evolving-framework-for-efficient-terminal-agents-via-observational-context-compression)  
+   evidence：具有技能学习和用户反馈驱动闭环的可进化LLM代理框架
+7. [Lever: Inference-Time Policy Reuse under Support Constraints](/202604/30/2604.20174v1-lever-inference-time-policy-reuse-under-support-constraints)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：针对终端环境智能体任务的自进化框架，通过上下文压缩支持长程推理决策。
-8. [Active Inference-Enabled Agentic Closed-Loop ISAC with Long-Horizon Planning](/202604/29/2604.19599v1-active-inference-enabled-agentic-closed-loop-isac-with-long-horizon-planning)  
+   evidence：强化学习中推理时策略复用的框架
+8. [Dynamical Priors as a Training Objective in Reinforcement Learning](/202604/30/2604.21464v1-dynamical-priors-as-a-training-objective-in-reinforcement-learning)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：提出了一种基于主动推理的代理系统，用于闭环系统中的自主决策和规划。
-9. [Governed Auditable Decisioning Under Uncertainty: Synthesis and Agentic Extension](/202604/29/2604.19112v1-governed-auditable-decisioning-under-uncertainty-synthesis-and-agentic-extension)  
+   evidence：塑造动作概率时间演化的强化学习训练框架
+9. [Stateless Decision Memory for Enterprise AI Agents](/202604/30/2604.20158v1-stateless-decision-memory-for-enterprise-ai-agents)  
    标签：评分：6.5/10、query:ag-rl
-   evidence：该论文讨论了代理AI系统以及在不确定性下进行受控决策的决策系统架构。
-10. [Taming Actor-Observer Asymmetry in Agents via Dialectical Alignment](/202604/29/2604.19548v1-taming-actor-observer-asymmetry-in-agents-via-dialectical-alignment)  
+   evidence：企业级AI智能体的无状态决策记忆架构
+10. [Efficient Agent Evaluation via Diversity-Guided User Simulation](/202604/30/2604.21480v1-efficient-agent-evaluation-via-diversity-guided-user-simulation)  
    标签：评分：6.5/10、query:ag-rl
-   evidence：关注执行复杂自主工作流的LLM智能体以及用于自我反思的多智能体框架。
-11. [Memory-Augmented LLM-based Multi-Agent System for Automated Feature Generation on Tabular Data](/202604/29/2604.20261v1-memory-augmented-llm-based-multi-agent-system-for-automated-feature-generation-on-tabular-data)  
+   evidence：系统性探索智能体与用户交互的模拟框架
+11. [Sovereign Agentic Loops: Decoupling AI Reasoning from Execution in Real-World Systems](/202604/30/2604.22136v1-sovereign-agentic-loops-decoupling-ai-reasoning-from-execution-in-real-world-systems)  
    标签：评分：6.5/10、query:ag-rl
-   evidence：基于大语言模型的多智能体系统，并结合学习目标的反馈
+   evidence：用于代理循环和推理耦合的控制平面架构
 
 
 <div class="dpr-home-promo-card">
