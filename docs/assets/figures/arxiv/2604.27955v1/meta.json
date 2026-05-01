@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.27955v1/fig-001.webp",
+      "caption": "Table 4: Synthetic and RL-generated corpora for on-policy data generation and self-improvement.",
+      "page": 25,
+      "index": 1,
+      "width": 722,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27955v1/fig-002.webp",
+      "caption": "Table 3: Perception and grounding datasets for reward shaping and state evaluation.",
+      "page": 25,
+      "index": 2,
+      "width": 744,
+      "height": 185
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27955v1/fig-003.webp",
+      "caption": "Figure 7: An asynchronous distributed architecture for GUI RL agent training, addressing slow environment interaction latency. It decouples slow data generation (CPU/mobile emulators as Rollout Workers) from fast GPU-cluster learning. Rollout Workers feed trajectories/gradients to a buffer, while the Learner sends updated policy parameters back asynchronously via HybridFlow, enabling massive parallelism and efficient GPU utilization.",
+      "page": 29,
+      "index": 3,
+      "width": 910,
+      "height": 375
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27955v1/fig-004.webp",
+      "caption": "Figure 4: Timeline of GUI Agent Development.",
+      "page": 10,
+      "index": 4,
+      "width": 832,
+      "height": 446
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27955v1/fig-005.webp",
+      "caption": "Table 1: Comparison of representative open-source GUI agent models with RL-based training. Modality: T=Text, I=Image, V=Video. Platform: D=Desktop, M=Mobile, W=Web.",
+      "page": 10,
+      "index": 5,
+      "width": 979,
+      "height": 316
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27955v1/fig-006.webp",
+      "caption": "Figure 6: This pyramid depicts a four-stage data-training pipeline for agent capability, progressing from static data imitation to offline RL, synthetic simulation, and online RL, to achieve robust generalization.",
+      "page": 23,
+      "index": 6,
+      "width": 910,
+      "height": 423
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27955v1/fig-007.webp",
+      "caption": "Figure 5: The Reward Engineering Pyramid balances accuracy and generality for GUI Agents: rule-based rewards (base) offer precision; learned rewards (middle) provide dense signals; LLM-as-Judge (apex) enables broad semantic task handling with hallucination risks.",
+      "page": 19,
+      "index": 7,
+      "width": 932,
+      "height": 442
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27955v1/fig-008.webp",
+      "caption": "Figure 3: A taxonomy of representative GUI agent papers organised along five dimensions: Foundations (pioneer systems), Environments & Benchmarks (evaluation platforms), Frontier Systems (deployed agents), RL Optimization (training methods), and Specialized Capabilities (perception, reasoning, and recovery).",
+      "page": 9,
+      "index": 8,
+      "width": 901,
+      "height": 963
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27955v1/fig-009.webp",
+      "caption": "Figure 2: Overview of the RL training pipeline for GUI agents. The agent perceives the GUI environment through screenshots, reasons about the task, and executes actions. RL optimizes the policy through reward signals derived from task completion, visual grounding accuracy, and intermediate reasoning quality.",
+      "page": 5,
+      "index": 9,
+      "width": 910,
+      "height": 598
+    }
+  ]
+}

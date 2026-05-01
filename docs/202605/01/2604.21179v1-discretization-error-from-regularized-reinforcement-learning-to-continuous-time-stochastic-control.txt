@@ -1,0 +1,3436 @@
+Title: Discretization error from regularized Reinforcement Learning to continuous-time stochastic control
+
+URL Source: https://arxiv.org/pdf/2604.21179v1
+
+Published Time: Fri, 24 Apr 2026 00:19:23 GMT
+
+Number of Pages: 30
+
+Markdown Content:
+DISCRETIZATION ERROR FROM REGULARIZED REINFORCEMENT LEARNING TO CONTINUOUS-TIME STOCHASTIC CONTROL 
+
+HUY ˆEN PHAM 1, YUMING PAUL ZHANG 2, AND YUHUA ZHU 3
+
+Abstract. This paper establishes a rigorous connection between regularized discrete-time rein-forcement learning (RL) and continuous-time stochastic optimal control. Specifically, classical RL algorithms are typically solving a regularized discrete-time Bellman equation. We study the dis-cretization error, namely, the gap between the optimal policy induced by the regularized discrete-time Bellman equation and the true optimal feedback control of the underlying continuous-time stochastic control problem. By deriving quantitative convergence rates for this gap, we provide a rigorous foundation for understanding the stability and implementation of exploratory RL policies in stochastic continuous-time environments. 
+
+Key words: Hamilton–Jacobi–Bellman equations, stochastic control, reinforcement learning, con-vergence rate. 
+
+AMS subject classifications: 35F21, 60J60, 68W40, 93E20. 
+
+Contents 
+
+1. Introduction 12. Preliminaries 52.1. The classical optimal control problem 52.2. Relaxed controls 62.3. Discretely Sampled Processes 73. Optimal feedback relaxed controls of MDP 84. Error estimates 12 5. Further regularity properties of MDP 18 6. Convergence to the classical optimal control 22 Acknowledgements 25 Appendix A. Remarks 25 Appendix B. Proof of the discrete-time regularized Bellman equation 27 Appendix C. Proof of Lemma 3.1 and Lemma 3.4 28 References 29 1. Introduction 
+
+This paper studies the discounted infinite-horizon stochastic optimal control with dynamics gov-erned by stochastic differential equations (SDEs) [10], [48]. This problem is fundamental for mod-eling systems that evolve continuously under persistent uncertainty and lack a natural terminal time. The infinite-horizon formulation captures long-run performance through stationary or er-godic objectives, yielding time-consistent policies, while SDEs provide a realistic description of continuous-time noise and fluctuations. This framework underpins a wide range of applications, 
+
+> 1
+
+Centre de Math´ ematiques Appliqu´ ees (CMAP), Ecole Polytechnique, France (huyen.pham@polytechnique.edu).  
+
+> 2
+
+Department of Mathematics & Statistics, Auburn University, USA. (yzhangpaul@auburn.edu).  
+
+> 3
+
+Department of Statistics and Data Science, University of California, Los Angeles, USA. (yuhuazhu@ucla.edu).  
+
+> 1
+> arXiv:2604.21179v1 [math.OC] 23 Apr 2026 2H. PHAM, Y. P. ZHANG, AND Y. ZHU
+
+including portfolio optimization in finance[29], stabilization and navigation in robotics [38], and resource management in energy and capacity investment problems [8]. The optimal control for stochastic control problems can be formulated over different classes of admissible controls, most notably open-loop and closed-loop (feedback) controls. An open-loop control is defined as a process adapted to the underlying filtration (e.g., the Brownian filtration), and therefore depend on the entire past realization of the driving noise. This formulation provides a mathematically convenient and general admissible class for analysis, but such controls are not directly implementable in practice, as the underlying noise is not observable. In contrast, feed-back controls only depend on the current state of the system and are directly implementable from observable system trajectories. In fully observed Markov stochastic control problems under stan-dard regularity conditions, it is well known that optimizing over open-loop controls yields the same value as restricting to feedback controls. Moreover, it can be computed by solving the associated Hamilton–Jacobi–Bellman (HJB) equation [10, 48, 33, 5]. Consequently, feedback controls play a central role in stochastic control, as they are both implementable and, in classical settings, achieve optimal performance without loss relative to the broader class of adapted controls. In many real-world applications, the system dynamics are unknown due to modeling complexity, unobserved factors, or high-dimensional environments, and only discretely sampled trajectory data are available. Reinforcement learning (RL) therefore provides a natural data-driven framework for approximating the optimal control directly from observed data [40, 46]. However, learning from limited and noisy data can lead to instability and overfitting. Regularized RL, particularly with entropy regularization, alleviates these issues by encouraging exploration and smoothing the optimization landscape, resulting in more stable learning and improved sample efficiency [43, 51, 16, 46, 23]. This raises a natural question: how far is the optimal feedback control learned via RL from the true optimal policy of the underlying continuous-time stochastic control problem? Existing RL algorithms based on discretely sampled trajectory data primarily focus on solving discrete-time Bellman equations and characterizing algorithmic and statistical errors relative to the corresponding discrete-time optimal policy [22, 6, 44, 18]. There is a growing literature on continuous-time reinforcement learning. One may end up a different formulation if continuously observed trajectories are available [45, 21]. However, when only discrete-time observations are available, the continuous-time objective is typically approximated by a discrete-time cumulative sum, effectively reducing the problem to a discrete-time Markov decision process (see Remark 2.1). The resulting discretization error is largely overlooked in the existing literature. Quantifying and understanding this discretization error is the central focus of this paper. To be more specific, this paper focuses on the discretization error, namely, the gap between the optimal policy induced by the regularized discrete-time Bellman equation and the true optimal feedback control in the continuous-time stochastic control problem. We decompose this error into two components. The first captures the discrepancy between the optimal policy of the regularized discrete-time Bellman equation and that of its continuous-time counterpart, arising from time discretization of both the control and value function. The second captures the gap between the regularized and unregularized continuous-time Bellman equations, which reflects the effect of entropy regularization. We emphasize that our comparison is conducted at the level of feedback policies, rather than value functions. However, directly measuring distances between policies is not meaningful, as policies that differ substantially pointwise may still induce similar performance. Instead, we compare policies through the value functions induced under the true system dynamics, namely the continuous-time SDE. Analyzing this performance-based discrepancy of feedback policies is a central technical challenge of the paper. Our problem differs a lot from the open-loop problem. For example, the work of [24, 36] concerns piecewise constant control which is given by adapted random processes taking constant values on DISCRETIZATION ERROR 3
+
+small time intervals. The authors obtained the discretization error estimate for the value func-tions by employing Krylov’s method of shaking the coefficients. The proof relies on the regularity property and the stability analysis of solutions to the regularized PDEs. In this work, our objective extends beyond deriving error estimates for the optimal value func-tions; we aim to establish a fine estimate for the feedback control. This presents a unique challenge: while the optimal piecewise constant control depends on the full history of the process, a feedback control is restricted to a deterministic function. The shaking coefficients method and the regular-ization argument fail to provide direct estimates for feedback controls. In our setting, these feedback controls could be significantly more sensitive to small perturbations. From a technical standpoint, once the discretization with time step h is applied at the level of the feedback control, the regularity of the optimal discrete value function Vh may be limited, see Proposition 5.4. Specifically, we can only show that Vh and the corresponding optimal feedback control π∗ 
+
+> h
+
+are Lipschitz continuous with a constant of O(h−1/2). Consequently, er (defined in (2.4)) lacks sufficient regularity, which implies the increment er(Xt+h) − er(Xt) can possibly be as large as 
+
+O(1). To address these difficulties, we adopt a relaxed control formulation. Instead of tracking each trajectory of Xt, we estimate the differences of the density functions of Xt and the discrete trajecto-ries via the Fokker-Planck equation. Using the uniform L∞-bounds of the density of the stochastic control, the relaxed control formulation reduces the problem to estimating the density functions of trajectories for each fixed control value u. Such a procedure leads to a surprisingly outcome that we obtain a nearly linear error in h when applying feedback control discretely with a time step of size h. This fast convergence, however, comes at the cost of a dependence on the exploration approximation parameter λ.After establishing error estimates for the discrete application of feedback controls, we are able to compare policies through different value functions. Furthermore, these estimates yield a straight-forward corollary for comparing the corresponding optimal value functions. 
+
+Contributions. The main contribution of the paper are twofolds. First, we characterize the discretization error. Given a fixed exploration parameter λ > 0, the optimal randomized feedback policy and the optimal value from the regularized RL approximation (see (2.13)) is π∗,λ h and V λh . We plug this RL policy π∗,λ h into the continuous time RL problem and compare it with the continuous optimal value function. We also take the optimal randomized policy π∗,λ from the continuous time problem into the discrete time RL problem and compare it with the discrete optimal value function 
+
+V λh . Let us use V λ[π] (resp. V λh [π]) to denote the value function of the continuous time (resp. discrete time) problem associated to a randomized policy π. V λ[π] (resp. V λh [π]) measures the performance of policy π under the continuous-time dynamics (resp. discrete time). We obtain the following estimates (see Theorem 4.3 and Corollary 6.3 and Theorem 6.5 for details). To the best of our knowledge, this is the first result providing quantitative estimates for the discretization error of feedback controls. 
+
+Theorem 1.1. Under certain conditions, there exists C = C(λ0) such that for any h ∈ (0 , 1) and 
+
+λ ∈ (0 , λ 0),
+
+V λ[π∗,λ h ] − V λ 
+
+> ∞
+
++ V λh [π∗,λ ] − V λh ∞ + V λ − V λh ∞ ≤ Cλ −N h| ln h|,
+
+v(·) − V [π∗,λ h ]( ·) ∞ ≤ Cλ | ln λ| + Cλ −N h| ln h|.
+
+Here N denotes the dimension of the control space. The estimates say that the approximation of randomized policy contributes an error of λ| ln λ| (see [42]), while the discrete feedback control approximation contributes an error of λ−N h| ln h|. When this upper bound is sharp, it provides an optimal schedule for choosing λ in terms of h. That is, when λ := h1/(N +1) , the upper bound achieves its minimum, Cλ | ln λ| + Cλ −N h| ln h| = eO(h1/(N +1) ). 4 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+The second contribution of this paper arises as a byproduct of the main theorem: we improve regularity bounds for entropy-regularized RL under SDE-induced transition kernels. It is well known in the RL literature that ∥V λh ∥∞ = O((1 − γ)−1) [35, 5], which diverges as the discounted factor γ → 1. Even under Lipschitz transition dynamics, the same unfavorable dependence persists for the gradient bound ∥∇ V λh ∥∞ [1]. When approximating a continuous-time control problem, one has γ = e−βh , which leads to ∥V λh ∥∞, ∥∇ V λh ∥∞ = O(h−1), and hence diverge as h → 0. In contrast, we show that when the transition kernel is induced by an SDE, both the value function and its gradient admit uniform-in-h bounds (See Lemma 5.3): ∥V λh ∥∞, ∥∇ V λh ∥∞ ≤ C. We further establish analogous uniform-in-h bounds for the optimal policy π∗,λ h from regularized RL (see Lemmas 3.4 and 6.2). On the other hand, we find that ∇π∗,λ h ∞ scales as O(h−1/2) (see Proposition 5.4), which suggests that the feedback controls can be sensitive to perturbations. To the best of our knowledge, such regularity results have not been established in the existing RL literature. 
+
+Related works. The development of discretization methods for continuous-time stochastic optimal control has evolved from classical numerical analysis toward modern reinforcement learning (RL) frameworks. In the classical setting, a primary focus has been the approximation of value functions for controlled diffusion processes using piecewise constant policies. Krylov [24] and Reisinger et al. [36] established that such approximations yield an error that is at most of order 1 /4. This foundational work has been extended to more complex settings, such as the discretization of both state and control action spaces. For instance, the paper [3] analyzed approximate Q-learning for controlled diffusions, providing upper bounds for the approximation error of the optimal value function when the continuous problem is subject to piecewise constant control processes. These approaches often rely on the framework of viscosity solutions and the Hamilton-Jacobi-Bellman (HJB) equation, as detailed in the comprehensive works of [10], [48], [33]. Another established line of work approximates continuous diffusions by discrete-time Markov chains on finite state spaces. The seminal work of Kushner and Dupuis [25] provides a system-atic methodology for this via weak convergence, ensuring that the discrete-model value functions converge to the continuous-time HJB solution. Alternatively, quantization algorithms in [31] offer a way to discretize the state space into optimal grids, which is particularly effective for multi-dimensional stochastic control problems. Similarly, recent research on the stabilization of hybrid systems (e.g., [47]) explores how discrete-time observations can ensure almost sure exponential sta-bility. There is also a growing body of work that quantifies discretization error in continuous state spaces, though primarily in the policy evaluation setting (i.e., for a fixed policy). [30] analyzes the discrepancy between the discrete-time and continuous-time Bellman equations at the level of the value function and propose higher-order Bellman equations to reduce this error. [49] introduces an alternative formulation tailored to the continuous-time structure and shows that, under suitable conditions, it achieves smaller discretization error for policy evaluation. In recent years, the literature has shifted toward exploratory formulations of stochastic control to bridge the gap with reinforcement learning. Wang, Zariphopoulou, and Zhou [45] introduced a stochastic control approach to RL that utilizes exploratory dynamics to capture learning under entropy regularization. This has led to further investigations into how sampling stochastic policies at discrete time points affects convergence. Szpruch et al. [41] and Giegrich et al. [13] have explored these limits, particularly in linear-quadratic (LQ) settings with Gaussian policies, showing how sampling algorithms converge toward continuous learning limits. Bender and Thuan [4] have analyzed the “grid-sampling limit” of SDEs, providing a rigorous look at how the dynamics behave when actions are sampled only on a discrete grid. Additionally, Jia, Ouyang, and Zhang [19] recently proved that as the sampling mesh size tends to zero, the controlled state process converges weakly to the dynamics with coefficients aggregated according to the stochastic policy. When the diffusion coefficients are uncontrolled, they obtained convergence rate between the dynamics. However, these DISCRETIZATION ERROR 5
+
+studies primarily address time-dependent (open-loop) controls or the global behavior of the state process under sampling. Our work departs from these established directions by focusing on the quantitative discretization error for feedback controls. The existing literature along this dimension remains limited. [14] studies the convergence of learned feedback controls for linear–convex models with jumps with respect to the number of episodes, rather than discretization error in time. Later, [49] establishes an 
+
+O(h) discretization error for the approximated feedback policy under an alternative, unregularized framework distinct from the standard regularized MDP formulation we study in this paper. We provide a more detailed comparison with [50] in Remark 6.1. 
+
+Outline. Section 2 defines the mathematical foundations, including classical optimal control, relaxed controls, and discretely sampled processes. Section 3 introduces the optimal feedback relaxed controls within the framework of Markov Decision Processes (MDPs), while Section 4 provides the core technical contribution through detailed error estimates between the discrete and continuous models. Section 5 explores further regularity properties of the MDP to support the stability of the solution. In Section 6, we prove the convergence rate to the classical optimal control problem. 2. Preliminaries 
+
+2.1. The classical optimal control problem. Let (Ω , F, P, {F t}t≥0) be a filtered probability space on which we have a d-dimensional Ft-adapted Brownian motion ( Bt, t ≥ 0). Let U ⊆ RN
+
+be a generic action/control space, and ν = ( νt, t ≥ 0) be a control which is an Ft-adapted process taking values in U . We denote by U the set of such admissible open-loop controls ν = ( νt, t ≥ 0). The classical stochastic control problem is to control the state variable Xt valued in Rd, whose dynamics is governed by the following stochastic differential equation (SDE): 
+
+dX νt = b(Xνt , ν t)dt + σ(Xνt )dB t, (2.1) where b : Rd × U → Rd denotes the drift term, and σ : Rd → Rd×d is the covariance matrix of the state variable. Throughout the manuscript, we will only consider the case when σ is uncontrolled, and we denote Σ = σσ T . The superscript ‘ ν’ in Xνt emphasizes the dependence of the state variable on the control ν = ( νt)t. A feedback control is a control process ν in the form νt = u( Xνt ) for some measurable function u : Rd → U , called feedback deterministic policy. The goal of the control problem is to maximize the total discounted reward over infinite horizon, leading to the (optimal) value function: 
+
+v(x) = sup 
+
+> ν∈U
+
+E
+
+Z ∞
+
+> 0
+
+e−βt r(Xνt , ν t)dt Xν 
+
+> 0
+
+= x
+
+
+
+, x ∈ Rd, (2.2) where r : Rd × U → R is a reward function, and β > 0 is the discount factor. By a standard dynamic programming argument, the value function v in (2.2) solves the HJB equation: 
+
+−βv (x) + sup 
+
+> u∈U
+
+
+
+r(x, u ) + b(x, u ) · ∇ v(x) + 12 tr(Σ( x)∇2v(x)) 
+
+
+
+= 0 . (2.3) Furthermore, the optimal control is in feedback form, i.e., it is represented as a deterministic mapping from the current state to the action/control space: ν∗ 
+
+> t
+
+= u ∗(X∗ 
+
+> t
+
+) where the optimal feedback policy u ∗ : Rd → U is given by the following formula (under certain conditions so that the following is well-defined): u∗(x) ∈ arg max 
+
+> u∈U
+
+
+
+r(x, u ) + b(x, u ) · ∇ v(x) + 12 tr(Σ( x)∇2v(x)) 
+
+
+
+.
+
+We refer readers to [10, 48, 34] for detailed accounts of the classical stochastic control theory. 6 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+2.2. Relaxed controls. The relaxed control problem is concerned with a probability distribution of controls ϖ = ( ϖt(·), t ≥ 0) over the control space U from which each trial is sampled [45]. For each t, ϖt ∈ P (U ), with P(U ) being the set of absolutely continuous probability density functions on U . The exploratory state dynamics is 
+
+dX ϖt = eb(Xϖt , ϖ t)dt + σ(Xϖt )dB t, (2.4) where the coefficient eb(·, ·) is defined by 
+
+eb(x, π) := 
+
+Z
+
+> U
+
+b(x, u )π(u)du, for ( x, π) ∈ Rd × P (U ). The distributional control ϖ = ( ϖt, t ≥ 0) is also known as the relaxed control, and a classical control ν = ( νt, t ≥ 0) is a degenerated relaxed control when ϖt is taken as the Dirac mass at νt.For the optimization problem, to avoid the degenerate case and to encourage exploration, Shan-non’s entropy is added to the objective function: 
+
+V (x) = sup  
+
+> ϖis admissible
+
+E
+
+ Z ∞
+
+> 0
+
+e−βt 
+
+er(Xϖt , ϖ t) − λ
+
+Z
+
+> U
+
+ϖt(u) ln ϖt(u)du 
+
+
+
+dt Xϖ 
+
+> 0
+
+= x
+
+
+
+, (2.5) where, for any π ∈ P (U ), 
+
+er(x, π) := 
+
+Z
+
+> U
+
+r(x, u )π(u)du, (2.6) and λ > 0 is a fixed weight parameter controlling the level of exploration, and the definition of 
+
+ϖ = ( ϖt) being admissible is given by [42, Definition 1]. Following [45], by dynamic programming, the HJB equation associated to (2.4)–(2.5) is 
+
+− βV (x) + sup  
+
+> π∈P (U)
+
+Z
+
+> U
+
+(r(x, u ) + b(x, u ) · ∇ V (x) − λ ln π(u)) π(u)du + 12 tr(Σ( x)∇2V (x)) = 0 .
+
+(2.7) Then, the optimal distributional feedback policy is obtained by solving the maximization problem in (2.7) with the constraints R 
+
+> U
+
+π(u)du = 1 and π(u) ≥ 0 a.e. on U . Indeed, through the verification theorem argument and the fact that V is C2,α under certain conditions, the optimal control can be written as 
+
+ϖ∗ 
+
+> t
+
+(u) = π∗(X∗ 
+
+> t
+
+, u ), t ≥ 0where 
+
+π∗(x, u ) := exp   1 
+
+> λ
+
+[r(x, u ) + b(x, u ) · ∇ V (x)] R 
+
+> U
+
+exp   1 
+
+> λ
+
+[r(x, u ) + b(x, u ) · ∇ V (x)]  du . (2.8) Plugging this into (2.7) yields that V satisfies the following nonlinear parabolic PDE: 
+
+−βV (x) + λ ln R 
+
+> U
+
+exp  1
+
+> λ
+
+ r(x, u ) + b(x, u ) · ∇ xV (x) du + 12 tr(Σ( x)∇2
+
+> x
+
+V (x)) = 0 . (2.9) As for general feedback randomized policy π : Rd → P (U ), we let Xπt satisfy (2.4) with ϖt(u) := 
+
+π(Xπt , u ). The solution exists by the classical theory as long as eb(x, π (x, ·)) and σ(x) are Lipschitz continuous in x. For simplicity, let us take π(x, u ) to be uniformly Lipschitz continuous in x and assume that R 
+
+> U
+
+1du is finite. Then the SDE is well-posedness. Next, define 
+
+V [π]( x) = E
+
+ Z ∞
+
+> 0
+
+e−βt 
+
+er(Xπt , π (Xπt , ·)) − λ
+
+Z
+
+> U
+
+π(Xπt , u ) ln π(Xπt , u )du 
+
+
+
+dt Xπ 
+
+> 0
+
+= x
+
+
+
+. (2.10) where er is defined in (2.6). DISCRETIZATION ERROR 7
+
+2.3. Discretely Sampled Processes. The detailed framework of the discrete sampling is given in [41, 19]. For readers’ convenience, we briefly discuss the settings below. We need to define a sequence of the state process with random actions sampled according to the feedback control π. For each i ∈ N0, let (Ω i, Fi, Pi) be a probability space, ξi a random variable, and φ a function such that Ωi ∋ ω 7 → φ(x, ξ i(ω)) = u ∈ U
+
+has distribution π(x, u ) under a measure Pi. Moreover, they are mutually independent and are independent from (Ω , F, P). The discrete state dynamic is given by the following. For all i ∈ N0,we define iteratively for t ∈ [ih, (i + 1) h], 
+
+Y πt = Y πih +
+
+Z tih 
+
+b(Y πs , ν ih ) ds +
+
+Z tih 
+
+σ(Y πs ) dB s, νih = φ(Y πih , ξ i) ∼ π(Y πih , ·) (2.11) We will always use the letter ‘ Y ’ to denote discretely sampled dynamics. The probability density function of Y πh given Y π 
+
+> 0
+
+= x is given by R 
+
+> U
+
+ρh(y|x, u )π(x, u )du where ρt(y|x, u ) = ρ(t, y ) satisfies the Fokker-Planck equation: for t ∈ [0 , h ], 
+
+∂tρ(t, y ) = ∇ · 
+
+
+
+−b(y, u )ρ(t, y ) + 12 ∇ · 
+
+
+
+σ(y)σ(y)⊤ρ(t, y )
+
+
+
+, ρ(0 , y ) = δx(y). (2.12) Similarly to Remark 3.2 [19], although this definition depends on the sampling scheme φ and (ξn), the error estimates of the sampled dynamics and the cost function using the sampled dynamics depend only on the properties of the control π.Having the sampled dynamics, we consider the discrete cost function: 
+
+Vh[π]( x) = E
+
+" ∞X
+
+> i=0
+
+e−βih h
+
+
+
+r(Y πih , ν ih ) − λ
+
+Z
+
+> U
+
+π(Y πih , u ) ln π(Y πih , u )du 
+
+
+
+Y π 
+
+> 0
+
+= x
+
+#
+
+. (2.13) Next, we define 
+
+Vh(x) := sup 
+
+> π
+
+Vh[π]( x). (2.14) We will show in Proposition 3.3 that there exists a feedback stochastic control π∗ 
+
+> h
+
+that is the maximizer of the above MDP problem. 
+
+Remark 2.1. We emphasize that the discretization error between the feedback policy derived from the above Bellman equation (2.14) and the true continuous-time optimal control is also relevant to many continuous-time RL algorithms. For example, the algorithms proposed in Section 4.1 of [21] are derived from the optimal control formulation (2.4) - (2.5) . These algorithms are applicable when continuous-time data are available as they require computing continuous-time integrals along trajectories of xt under a fixed policy π.When only discrete-time observations are available (as in Algorithms 1 and 2 of [21] ), integrals of the form R f (xt) dt are approximated by sums P 
+
+> i
+
+f (xti ) ∆ t. This approximation implicitly corresponds to solving a discrete-time Bellman equation under a fixed policy, thereby introducing a discretization error. This error propagates through subsequent quantities. In particular, one obtains q(s, a ) =   
+
+> Q∆t(s,a )−V(s)∆t
+
+, and the induced policy from q(s, a ): π(a|s) ∝ exp 
+
+ 1 
+
+> γ
+
+q(s, a )
+
+
+
+∝ exp 
+
+ 1 
+
+> γ∆t
+
+Q∆t(s, a )
+
+
+
+,which coincides with the soft policy improvement scheme [15] for the discrete-time Bellman equation 
+
+(2.14) with λ = γ∆t.Similar phenomena arise broadly in classical continuous-time RL literature [2, 20, 9] : although methods are motivated by continuous-time formulations, their practical implementations operating on discrete-time data implicitly are solving discrete-time Bellman equation (2.14) (or their un-regularized counterparts). However, the discretization error induced by this mismatch is typically overlooked. Addressing this gap is precisely the focus of this paper. 8 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+3. Optimal feedback relaxed controls of MDP 
+
+In this section, we prove well-posedness of optimal feedback relaxed controls of MDP. We will need the following assumptions: (H1) U ⊆ RN for some N ≥ 1 is compact, and is equipped with the standard Euclidean metric, and |U | < ∞, where | · | denotes the volume. (H2) Suppose that b(x, u ) and Σ( x) are uniformly C2,α in x. There exist λmin > 0 and M1, M 2 ≥ 1such that Σ( ·) ≥ λmin Id, and 
+
+∥b(·, ·)∥∞, ∥σ(·)∥∞, ∥b(·, ·)∥Lip , ∥σ(·)∥Lip ≤ M1,
+
+∥r(·, ·)∥∞, ∥r(·, ·)∥Lip ≤ M2.
+
+Let ρh(y|x, u ) be the solution to (2.12) at t = h, which represents the p.d.f of Yh given Y0 = x for the stochastic process driven by dY t = b(Yt, u )dt + σ(Yt)dB t. By dynamic programming principle, one has 
+
+Vh(x) = sup 
+
+> π(x, ·)
+
+Z 
+
+> U
+
+
+
+rλh (x, u ; π) + γ
+
+Z 
+
+> Rd
+
+Vh(y)ρh(y|x, u )dy 
+
+ 
+
+π(x, u )du 
+
+
+
+. (3.1) where 
+
+γ := e−βh and rλh (x, u ; π) := r(x, u )h − λh ln π(x, u ).
+
+We provide the rigorous proof of the equivalency between the discrete-time optimal control problem (2.13)–(2.14) and the regularized discrete-time Bellman equation (3.1) in Appendix B. Define the operator T ∗ as follows, 
+
+T ∗W (x) := sup 
+
+> π(x, ·)
+
+Eu∼π(x, ·)
+
+h
+
+rλh (x, u ; π) + γEY πh ∼ρh(·| x,u )[W (Y πh )|Y0 = x]
+
+i
+
+. (3.2) We state key properties of the operator in the following lemmas, which will be used repeatedly later. 
+
+Lemma 3.1 (Argmax of T ∗). Let ρh be defined as the above and γ = e−βh . We have 
+
+T ∗W (x) = λh ln 
+
+Z 
+
+> U
+
+exp 
+
+ r(x, u )h + γ R 
+
+> Rd
+
+W (y)ρh(y|x, u )dy λh 
+
+
+
+du 
+
+
+
+and the supremum of (3.2) is achieved at 
+
+πWh (u|x) := 1
+
+Z(x) exp 
+
+ r(x, u )h + γ R W (y)ρh(y|x, u )dy λh 
+
+
+
+, (3.3) 
+
+with the normalization constant Z(x) := 
+
+Z
+
+> U
+
+exp 
+
+ r(x, u )h + γ R W (y)ρh(y|x, u )dy λh 
+
+
+
+du. 
+
+From the above lemma, if given the optimal value function Vh from (2.14), one has the explicit form of the optimal feedback control of the regularized MDP problem, which is π∗ 
+
+> h
+
+= πVh 
+
+> h
+
+and 
+
+π∗
+
+> h
+
+(x, u ) = 1
+
+Z(x) exp 
+
+ r(x, u )h + γ R Vh(y)ρh(y|x, u )dy λh 
+
+
+
+, (3.4) where Z(x) = R 
+
+> U
+
+exp 
+
+ r(x,u )h+R Vh(y)ρh(y|x,u )dy λ
+
+
+
+du is a normalization constant. Next, we give the contractive property of the operator T ∗ in the following Lemma. 
+
+Lemma 3.2 (Contraction) . For any bounded functions W1 and W2,
+
+∥T ∗W1(·) − T ∗W2(·)∥∞ ≤ γ ∥W1(·) − W2(·)∥∞ .
+
+Based on the above two lemmas, we conclude with the following result. DISCRETIZATION ERROR 9
+
+Proposition 3.3 (Well-posedness of MDP feedback controls) . We have that (2.14) admits a unique solution Vh(x) ∈ L∞(Rd) that is the fixed point of T ∗, and the supremum in (3.1) is achieved at π∗
+
+> h
+
+given by (3.4) .
+
+Closely related results have appeared in the RL literature [51, 16]. We present the proofs in Appendix C for completeness. In the following lemma, we show that π∗ 
+
+> h
+
+is uniformly bounded depending on λ.
+
+Lemma 3.4 (Boundedness of π∗
+
+> h
+
+). Under the assumptions of (H1)(H2) , suppose that Cd∥∇ σ∥∞h 12 ≤ 
+
+> 12
+
+for some dimensional constant Cd. We have 
+
+∥π∗
+
+> h
+
+(x, u )∥∞ ≤ exp 
+
+ 2∥r∥∞ + 16 ∥b∥∞∥∇ Vh∥∞
+
+λ
+
+
+
+.
+
+We remark that, as shown in Lemma 5.3, provided that β ≥ 1 + 2 ∥∇ b∥∞ + ∥∇ Σ∥2 
+
+> ∞
+> 4λmin
+
+, we have the following bound: 
+
+∥∇ xVh(·)∥∞ ≤ eh ∥∇ xr∥∞ .
+
+Proof. By the formula of π∗ 
+
+> h
+
+in (3.4), for any function ϕ(x) independent of u, we have 
+
+π∗
+
+> h
+
+(x, u ) = 1
+
+Zϕ(x) exp 
+
+ r(x, u )h + γ R 
+
+> Rd
+
+Vh(y)ρh(y|x, u )dy − γϕ (x)
+
+λh 
+
+
+
+,
+
+where Zϕ(x) = R 
+
+> U
+
+exp 
+
+ r(x,u )h+γ R 
+
+> RdVh(y)ρh(y|x,u )dy −γϕ (x)
+> λ
+
+
+
+du . Therefore, to obtain an L∞-bound for 
+
+π∗
+
+> h
+
+, it suffices to estimate Z
+
+> Rd
+
+Vh(y)ρh(y|x, u )dy − ϕ(x)for a suitable choice of ϕ(x). Let us fix u0 ∈ U , let ρ0(t, y ) be the unique solution to (2.12), and Y0,t solves 
+
+dY 0,t = b(Y0,t , u 0)dt + σ(Y0,t )dB t and Y0,0 = x. 
+
+Then direct computation yields 
+
+|Y0,t − Yt| ≤ 
+
+Z t
+
+> 0
+
+|b(Y0,s , u 0) − b(Ys, u )|ds +
+
+Z t
+
+> 0
+
+|σ(Y0,s ) − σ(Ys)|dB s
+
+≤ 2∥b∥∞t +
+
+Z t
+
+> 0
+
+|σ(Y0,s ) − σ(Ys)|dB s.
+
+(3.5) By the Burkholder-Davis-Gundy inequality (see [37, Chapter IV]), there exists a dimensional con-stant Cd such that 
+
+E
+
+"
+
+sup 
+
+> t0∈[0 ,t ]
+
+Z t0
+
+> 0
+
+(σ(Y0,s ) − σ(Ys)) dB s
+
+#
+
+≤ Cd E
+
+"Z t
+
+> 0
+
+|σ(Y0,s ) − σ(Ys)|2ds 
+
+1/2#
+
+≤ Cd∥∇ σ∥∞t 12 E
+
+h
+
+sup 
+
+> t0∈[0 ,t ]
+
+|Y0,t 0 − Y0,t 0 |
+
+i
+
+.
+
+We get from (3.5) that 
+
+E sup 
+
+> t∈[0 ,h ]
+
+|Y0,t − Yt| ≤ 2∥b∥∞h + Cd∥∇ σ∥∞h 12 E
+
+h
+
+sup 
+
+> t∈[0 ,h ]
+
+|Y0,t − Yt|
+
+i
+
+.
+
+Consequently, if Cd∥∇ σ∥∞h 12 ≤ 12 ,
+
+E|Y0,h − Yh| ≤ 4∥b∥∞h. (3.6) 10 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+Now, recall that ρh(y|x, u ) is the p.d.f of Yh and so 
+
+Z
+
+> Rd
+
+Vh(y)ρh(y|x, u )dy = EVh(Yh).
+
+We also let ρ0 be the p.d.f of Y0,h and then 
+
+ϕ(x) := 
+
+Z
+
+> Rd
+
+Vh(y)ρ0(y)dy = EVh(Y0,h )which is independent of u. It follows from (3.6) that 
+
+Z
+
+> Rd
+
+Vh(y)ρh(y|x, u )dy − ϕ(x) = |E(Vh(Yh) − Vh(Y0,h )) |≤ ∥∇ Vh∥∞E|Yh − Y0,h | ≤ 4∥b∥∞∥∇ Vh∥∞h. 
+
+With this selection of ϕ, we have 
+
+∥π∗
+
+> h
+
+∥∞ ≤ 1
+
+|U | exp 
+
+ 2 ∥r(x, u )∥∞ h + 2 γ(R 
+
+> Rd
+
+Vh(y)ρh(y|x, u )dy − ϕ(x)) 
+
+λh 
+
+
+
+≤ exp 
+
+ 2∥r∥∞ + 8 ∥b∥∞∥∇ Vh∥∞
+
+λ
+
+
+
+.
+
+□
+
+The following results concern the regularity property of the continuous value function and are a consequence of the classical PDE regularity theory. 
+
+Lemma 3.5 (Regularity of V ). Under the assumptions of (H1)(H2) , then V from (2.5) is uniformly 
+
+C2,α for any α ∈ (0 , 1) . Furthermore, there exists C ≥ 1 depending only on d, λ 0 and the constants in (H2) , but independent of β ≥ 1 and any λ ∈ (0 , λ 0), such that 
+
+∥V ∥∞ ≤ ∥ r∥∞/β, ∥∇ V ∥∞ ≤ C/ pβ and ∥D2V ∥∞ ≤ C. 
+
+Consequently, π∗(x, u ) from (2.8) is uniformly bounded and is Lipschitz continuous in x with bounds of the form exp( C/λ ).Proof. Since ±∥ ˜r∥∞/β is a sub- and a super- solution, respectively, to (2.9), the first claim follows from the comparison principle and that ∥˜r∥∞ = ∥r∥∞.Let Sd be the space of d × d symmetric matrices equipped with the spectral norm. Note that V
+
+is the unique viscosity solution to 
+
+Fλ(D2V, ∇V, V, x ) = 0 where Fλ : Sd × Rd × R × Rd → R is given by 
+
+Fλ(X, p, s, x ) := βs − λ ln 
+
+Z
+
+> U
+
+exp 
+
+ 1
+
+λ
+
+ r(x, u ) + b(x, u ) · p
+
+du + 12 tr( σ(x)σ(x)T X).
+
+It was verified in Theorem 10 [42] that the operator Fλ satisfies the regularity assumptions (a)-(c) [42] uniformly for all λ ∈ (0 , λ 0), and it is concave in the sense of Definition 4 [42]. By direct computation, there exists a dimensional constant C such that for any x, y ∈ Rd and ( X, p, q, s, t ) ∈Sd × Rd × Rd × R × R,
+
+|Fλ(X, p, s, x ) − Fλ(X, q, t, y )| ≤ β|s − t| + ∥r∥Lip |x − y| + ∥b∥∞|p − q|
+
++ C(∥b∥Lip + ∥Σ∥Lip )|x − y|(|p| + |q| + |X|),
+
+|F (0 , 0, 0, x )| ≤ ∥ r∥∞.
+
+If writing 
+
+β2(x, y ) = C(∥b∥Lip + ∥Σ∥Lip )|x − y|, γ2(x, y ) = ∥r∥Lip |x − y|,DISCRETIZATION ERROR 11 
+
+it follows from the Schauder estimate, see [27, Theorem 5.1] (with the above β2 and γ2) and [7], that V is uniformly C2,α and 
+
+∥V ∥C2,α ≤ C(∥V ∥∞ + ∥r∥Cα ) ≤ C(∥V ∥∞ + ∥r∥∞ + ∥r∥Lip ) (3.7) for some C possibly depending on d, β, λ 0 and the constants in (H2), but independent of λ ∈ (0 , λ 0). To see that the C2 norm is independent of β ≥ 1, we apply a scaling argument. Note that 
+
+w(x) := V (x/ √β) solves 
+
+Gλ/β (D2w, Dw, w, x ) = 0 where 
+
+Gλ/β (X, p, s, x ) := s − λβ ln 
+
+Z
+
+> U
+
+exp 
+
+ βλ
+
+ rβ (x, u ) + bβ (x, u ) · p
+
+du + 12 tr( σβ (x)σβ (x)T X)and 
+
+rβ (x, u ) := r(x/ √β, u )
+
+β , bβ (x, u ) := b(x/ √β, u )
+
+√β and σβ (x, u ) := σ(x/ pβ).
+
+Since |V | ≤ ∥ r∥∞/β , then |w| ≤ ∥ r∥∞/β . Furthermore, it is direct to see that the L∞ and Lipchitz norms of 
+
+βr β (x, u ), pβ b β (x, u ), σβ (x, u )are non-increasing as β ≥ 1 increases, and also that σβ σβ T (x, u ) ≥ λmin Id is preserved, and λ/β ≤ λ.Recall that the regularity estimate (3.7) is independent of λ. So, the regularity estimate for Gλ/β 
+
+is independent of λ and is only depending on the L∞ and Lipschitz continuity of the coefficients. Therefore, we obtain 
+
+∥w∥C2,α ≤ C(∥w∥∞ + ∥rβ ∥∞ + ∥rβ ∥Lip ) ≤ C/β 
+
+for some C depending only on d and the L∞ and Lipchitz norms of rβ (x, u ), bβ (x, u ) and σβ (x, u ) (in 
+
+x), but is independent of λ ∈ (0 , λ 0) and β ≥ 1. This yields the conclusion on V after transforming 
+
+w back to V .Finally, it follows from (2.8) that π∗(x, u ) is uniformly bounded and Lipschitz continuous in x,with a bound of the form exp( C/λ ), where C depends on d and the constants in (H2). □
+
+Lastly, we estimate the regularity of V [π] given a bounded feedback control π.
+
+Lemma 3.6 (Regularity of V [π]) . Suppose that π is uniformly bounded. Then we have for all 
+
+λ ∈ (0 , λ 0) and β ≥ 1,
+
+∥V [π]( ·)∥∞ ≤ λ ln ∥π∥∞/β, ∥∇ V [π]( ·)∥∞ ≤ C/ pβ, 
+
+where C > 0 depends only on d, ∥Σ∥C1 , ∥r∥∞, ∥b∥∞ and λ0∥ R 
+
+> U
+
+π ln π du ∥∞. Furthermore, if π(x, u )
+
+is uniformly Lipschitz in x, then V ∈ C2.Proof. It follows from dynamic programming that V = V [π] satisfies 
+
+− βV (x) + ˜ r(x, π ) + ˜b(x, π ) · ∇ V (x) + 12 tr(Σ( x)∇2V (x)) − λ
+
+Z
+
+> U
+
+π(x, u ) ln π(x, u )du = 0 .
+
+The comparison principle immediately yields that ∥V ∥∞ ≤ λ ln ∥π∥∞/β .Since Σ( ·) ∈ C1, ˜ r(·, π ), ˜b(·, π ) and π(·, u ) are bounded, then by the classical regularity theory for elliptic equations (see e.g., [26, Theorem 15.1]), V is uniformly bounded in C1,α . Applying the scaling argument the same as in the proof of Lemma 3.5 yields the second estimate. If π(·, u ) is Lipschitz continuous, then so are ˜ r(·, π ), ˜b(·, π ) and R 
+
+> U
+
+π(·, u ) ln π(·, u )du . It follows from the classical theory for elliptic equations that V ∈ C2 . □12 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+4. Error estimates 
+
+One of the major goal of the section is to estimate the difference between the two value functions from (2.10) and (2.13), with a fixed bounded feedback randomized policy. 
+
+Theorem 4.1 (Discretization error for fixed policy) . Assume (H1)(H2) . For h ∈ (0 , 12 ) and a given feedback randomized policy π, let V [π] and Vh[π] be defined by (2.10) and (2.13) , respectively. Further assume that V [π]( ·) ∈ C2 and 
+
+∥π(·, ·)∥∞ ≤ L1, ∥∇ V [π]( ·)∥∞ ≤ L2, for some L1, L 2 ≥ 2.
+
+Then there exists C > 0 depending only on d, b and Σ such that 
+
+∥V [π] − Vh[π]∥∞ ≤ C(L1L2 + λL 1 ln L1)h| ln h|.
+
+Proof. Let us write V (x) = V [π]( x) for simplicity and recall the process Y πt from (2.11). We start from Itˆ o’s formula applied to V (Y πt ) with discount factor e−βt . For h ∈ (0 , 1) and i ∈ N0, we have 
+
+e−βh V (Y π
+
+> (i+1) h
+
+) = V (Y πih ) + 
+
+Z (i+1) hih 
+
+e−β(t−ih )h
+
+− βV (Y πt ) + b(Y πt , a i) · ∇ V (Y πt )+ 12 Σ( Y πt ) : D2V (Y πt )
+
+i
+
+dt +
+
+Z (i+1) hih 
+
+e−β(t−ih )σ(Y πt ) · ∇ V (Y πt ) dB t,
+
+where ai(ω) = φ(Y πih , ξ i(ω)). Then taking expectations gives 
+
+E
+
+h
+
+e−βh V (Y π
+
+> (i+1) h
+
+)
+
+i
+
+= E [V (Y πih )] + E
+
+Z (i+1) hih 
+
+e−β(t−ih )h
+
+− βV (Y πt ) + b(Y πt , a i) · ∇ V (Y πt )+ 12 Σ( Y πt ) : D2V (Y πt )
+
+i
+
+dt. 
+
+(4.1) We divide the rest of the proof into several steps. 
+
+Step 1. In this step, we provide several useful estimates for the p.d.f for the stochastic process 
+
+Y πt . Let ρ(t, y ) = ρ0,x (t, y ) satisfy ρ(0 , y ) = δx(y) for some fixed x ∈ Rd, and for t ∈ [ih, (i + 1) h], it satisfies the Fokker-Planck equation 
+
+∂tρ(t, y ) = ∇ · 
+
+
+
+−b(y, a ih )ρ(t, y ) + 12 ∇ · 
+
+
+
+σ(y)σ(y)⊤ρ(t, y )
+
+
+
+.
+
+Since b(y, ·) and σ(y) are assumed to be uniformly bounded in C2,α in y, it follows from [28, Theorem 2.12] and its Remark 2.13 (see also [11, 39]) that for all t ∈ (0 , 2]: there exist C ≥ 1 and 
+
+c ∈ (0 , 1] depending only on d and the constants in (H2) such that 
+
+C−1K(t, x − y) ≤ ρ(t, y ) ≤ CK (t, x − y),
+
+|∇ jy ρ(t, y )| ≤ Ct −j/ 2K(t, x − y), j = 1 , 2, (4.2) where K(t, x ) := t−d/ 2 exp  −c|x|2/t .Direct computation yields 
+
+ρ(t, y ) − ρ(ih, y ) = 
+
+Z tih 
+
+ρt(s, y )ds =
+
+Z tih 
+
+b(y, a ih ) · ∇ xρ + 12 Σ( y) : ∇2
+
+> x
+
+ρ ds. 
+
+Hence, we get for t ∈ [ih, (i + 1) h] and h ≤ ih ≤ 2, 
+
+Z
+
+> Rd
+
+|ρ(t, y ) − ρ(ih, y )|dy ≤
+
+Z
+
+> Rd
+
+Z (i+1) hih 
+
+∥b∥∞∥∇ xρ∥∞ + 12 ∥Σ∥∞∥∇ 2
+
+> x
+
+ρ∥∞dsdy 
+
+> (4.2)
+
+≤ C
+
+Z
+
+> Rd
+
+Z (i+1) hih 
+
+(∥b∥∞s− 12 + ∥Σ∥∞s−1)s− d 
+
+> 2
+
+exp 
+
+
+
+− c|x−y|2
+
+> s
+
+
+
+dsdy 
+
+≤ C(∥b∥∞i− 12 h 12 + ∥Σ∥∞i−1).
+
+(4.3) DISCRETIZATION ERROR 13 
+
+To consider large t ≥ 2, for any positive integer k, let ik := ⌈k/h ⌉ and so ikh ∈ [k, k + h). Recall the reproduction property in [28, Theorem 1.4] item 6. Then for all t ≥ ikh, we have 
+
+ρ(t, y ) = 
+
+Z
+
+> Rd
+
+ρ(ikh, z )ρik h,z (t, y )dz (4.4) where ρik h,z (t, y ) satisfies for i ≥ ik and then t ∈ [ih, (i + 1) h], 
+
+∂tρik h,z (t, y ) = ∇ · 
+
+
+
+−b(y, a ih )ρik h,z (t, y ) + 12 ∇ · 
+
+
+
+σ(y)σ(y)⊤ρik h,z (t, y )
+
+
+
+with ρik h,z (ikh, y ) = δz (y). Now suppose t ∈ [k + 1 , k + 2] for some k ≥ 1, then t − ikh ∈ [1 − h, 2]. It follows from (4.2) that 
+
+|∇ jy ρik h,z (t, y )| ≤ C(t − ikh)−j/ 2K(t − ikh, z − y) ≤ CK (t − ikh, z − y), j = 1 , 2. (4.5) Also using that ρ(ikh, ·) is a probability density function, for j = 1 , 2 and t ∈ [k + 1 , k + 2], we have 
+
+Z
+
+> Rd
+
+|∇ j ρ(t, y )|dy (4.4) 
+
+≤
+
+Z Z 
+
+> R2d
+
+ρ(ikh, z )|∇ j ρik h,z (t, y )|dzdy 
+
+> (4.5)
+
+≤ C
+
+Z
+
+> Rd
+
+ρ(ikh, z )
+
+Z 
+
+> Rd
+
+K(t − ikh, z − y)dy 
+
+
+
+dz ≤ C, 
+
+where C is independent of k. So, the estimate holds uniformly for all t ≥ 2. Finally, it follows that for t ∈ [ih, (i + 1) h] with ih ≥ 2, we have 
+
+Z
+
+> Rd
+
+|ρ(t, y ) − ρ(ih, y )|dy ≤
+
+Z
+
+> Rd
+
+Z (i+1) hih 
+
+∥b∥∞∥∇ xρ∥∞ + 12 ∥Σ∥∞∥∇ 2
+
+> x
+
+ρ∥∞dsdy 
+
+≤ C(∥b∥∞ + ∥Σ∥∞)
+
+Z (i+1) hih 
+
+Z
+
+> Rd
+
+|∇ xρ(s, y )| + |∇ 2
+
+> x
+
+ρ(s, y )|dyds 
+
+≤ C(∥b∥∞ + ∥Σ∥∞)h. 
+
+(4.6) 
+
+Step 2. In this step we aim to bound 
+
+Di,f (t) := E
+
+Z 
+
+> U
+
+f (Y πih , u ) − f (Y πt , u )du 
+
+
+
+where t ∈ [ih, (i + 1) h] and f (x, u ) is a bounded function. First, direct computation yields 
+
+Di,f (t) ≤ 2∥f ∥∞. (4.7) Now, we seek for a more accurate bound. If i ∈ [1 , 2/h ] and t ∈ [ih, (i + 1) h], we have 
+
+|Di,f (t)| =
+
+Z Z 
+
+> Rd×U
+
+f (y, u )( ρ(t, y ) − ρ(ih, y )) dydu 
+
+≤ ∥ f ∥∞
+
+Z Z 
+
+> Rd×U
+
+|ρ(t, y ) − ρ(ih, y )|dydu 
+
+> (4.3)
+
+≤ C∥f ∥∞(∥b∥∞i− 12 h 12 + ∥Σ∥∞i−1).
+
+(4.8) If i ≥ 2/h and t ∈ [ih, (i + 1) h], 
+
+|Di,f (t)| ≤ ∥ f ∥∞
+
+Z Z 
+
+> Rd×U
+
+|ρ(t, y ) − ρ(ih, y )|dydu 
+
+> (4.6)
+
+≤ C∥f ∥∞(∥b∥∞ + ∥Σ∥∞)h. 
+
+(4.9) 14 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+Now, we set 
+
+Di,π (t) := E
+
+
+
+λ
+
+Z
+
+> U
+
+π(Y πt , u ) ln π(Y πt , u )du − λ
+
+Z
+
+> U
+
+π(Y πih , u ) ln π(Y πih , u )du 
+
+
+
+,
+
+and then 
+
+Di,π (t) = E
+
+Z 
+
+> U
+
+λπ (y, u ) ln π(y, u )( ρ(t, y ) − ρ(ih, y )) dydu 
+
+
+
+.
+
+Let us take f (x, u ) = λπ (x, u ) ln π(x, u ), and since π ≤ L1 and L1 ≥ 2, we have ∥f ∥∞ ≤ λL 1 ln L1.We get from (4.7)–(4.9) that for t ∈ [ih, (i + 1) h], 
+
+|Di,π (t)| ≤ 
+
+
+
+2λL 1 ln L1, i = 0 ,CλL 1 ln L1
+
+
+
+∥b∥∞i− 12 h 12 + ∥Σ∥∞i−1
+
+
+
+, i ∈ [1 , 2/h ],CλL 1 ln L1(∥b∥∞ + ∥Σ∥∞)h, i > 2/h. 
+
+(4.10) Next, we define 
+
+Di,r (t) := E [r(Y πih , a ih ) − ˜r(Y πt , π )] .
+
+By the definition, ξi is independent of Y πih and ω → u = ai(ω) has the distribution density of 
+
+π(Y πih , u ). Therefore 
+
+Di,r (t) = E
+
+Z 
+
+> U
+
+r(Y πih , u )π(Y πih , u ) − r(Y πt , u )π(Y πt , u )du 
+
+
+
+= E
+
+Z 
+
+> U
+
+r(y, u )π(y, u )( ρ(t, y ) − ρ(ih, y )) dydu 
+
+
+
+.
+
+Setting f (x, u ) = r(x, u )π(x, u ), then ∥f ∥∞ ≤ L1∥r∥∞. It follows from (4.7)–(4.9) that for t ∈
+
+[ih, (i + 1) h], 
+
+|Di,r (t)| ≤ 
+
+
+
+2L1∥r∥∞, i = 0 ,CL 1∥r∥∞
+
+
+
+∥b∥∞i− 12 h 12 + ∥Σ∥∞i−1
+
+
+
+, i ∈ [1 , 2/h ],CL 1∥r∥∞(∥b∥∞ + ∥Σ∥∞)h, i > 2/h. 
+
+(4.11) 
+
+Step 3. The goal is to estimate 
+
+Di,b (t) := E[b(Y πt , a i) · ∇ V (Y πt )] − E[˜b(Y πt , π ) · ∇ V (Y πt )] .
+
+Firstly, since b and ∇V are uniformly finite, we have a trivial bound 
+
+|Di,b (t)| ≤ 2L2∥b∥∞.
+
+To obtain a more accurate estimate, we define 
+
+Di,b, 1(t) := E
+
+h˜b(Y πt , π ) · ∇ V (Y πt ) − ˜b(Y πih , π ) · ∇ V (Y πih )
+
+i
+
+,Di,b, 2(t) := E
+
+h
+
+b(Y πt , a i) · ∇ V (Y πt ) − ˜b(Y πih , π ) · ∇ V (Y πih )
+
+i
+
+.
+
+If i ∈ [1 , 2/h ] and t ∈ [ih, (i + 1) h], we have from (4.8) that 
+
+|Di,b, 1(t)| =
+
+Z Z 
+
+b(y, u )π(y, u )∇V (y)( ρ(t, y ) − ρ(ih, y )) dydu 
+
+≤ CL 1L2∥b∥∞(∥b∥∞i− 12 h 12 + ∥Σ∥∞i−1).
+
+While if i ≥ 2/h , we use (4.9) to get 
+
+|Di,b, 1(t)| ≤ CL 1L2∥b∥∞(∥b∥∞ + ∥Σ∥∞)h. DISCRETIZATION ERROR 15 
+
+Next, similarly as before, since ξi is independent of Y πih and ω → u = ai(ω) has the distribution density of π(Y πih , u ), we get 
+
+Di,b, 2(t) = E [b(Y πt , a i) · ∇ V (Y πt ) − b(Y πih , a i) · ∇ V (Y πih )] =
+
+Z Z 
+
+b(y, a i)∇V (y)( ρ(t, y ) − ρ(ih, y )) dydu. 
+
+Then, it follows from (4.8) and (4.9) that for i ∈ [1 , 2/h ] and t ∈ [ih, (i + 1) h], 
+
+|Di,b, 2(t)| ≤ C∥b∥∞L1(∥b∥∞i− 12 h 12 + ∥Σ∥∞i−1),
+
+and for i ≥ 2/h ,
+
+|Di,b, 2(t)| ≤ C∥b∥∞L1(∥b∥∞ + ∥Σ∥∞)h. 
+
+Overall, combining the above estimates yields for t ∈ [ih, (i + 1) h], 
+
+|Di,b (t)| ≤ | Di,b, 1(t)| + |Di,b, 2(t)|≤
+
+
+
+2L2∥b∥∞, i = 0 ,CL 1L2∥b∥∞(∥b∥∞i− 12 h 12 + ∥Σ∥∞i−1), i ∈ [1 , 2/h ],CL 1L2∥b∥∞(∥b∥∞ + ∥Σ∥∞)h, i > 2/h. . (4.12) 
+
+Step 4. We complete the proof in this step. Let us denote 
+
+Ai := e−β(i+1) hE
+
+h
+
+V (Y π
+
+> (i+1) h
+
+)
+
+i
+
+− e−βih E[V (Y πih )] + E
+
+Z (i+1) hih 
+
+e−βt 
+
+
+
+˜r(Y πih , π ) − λ
+
+Z
+
+> U
+
+π(Y πih , u ) ln π(Y πih , u )
+
+
+
+dudt. 
+
+Since V satisfies the following HJB equation, 
+
+−βV (Y πt ) + ˜b(Y πt , π ) · ∇ V (Y πt ) + 12 Σ( Y πt ) : D2V (Y πt ) = −˜r(Y πt , π ) + λ
+
+Z
+
+> U
+
+π(Y πt , u ) ln π(Y πt , u )du, 
+
+we can write 
+
+Ai = e−β(i+1) hE
+
+h
+
+V (Y π
+
+> (i+1) h
+
+)
+
+i
+
+− e−βih E[V (Y πih )] + E
+
+Z (i+1) hih 
+
+e−βt λ
+
+Z 
+
+> U
+
+π(Y πt , u ) ln π(Y πt , u )du −
+
+Z
+
+> U
+
+π(Y πih , u ) ln π(Y πih , u )
+
+
+
+dudt 
+
+− E
+
+Z (i+1) hih 
+
+e−βt h
+
+− βV (Y πt ) + ˜b(Y πt , π ) · ∇ V (Y πt ) + 12 Σ( Y πt ) : D2V (Y πt )
+
+i
+
+dt 
+
++ E
+
+Z (i+1) hih 
+
+e−βt [˜ r(Y πih , π ) − ˜r(Y πt , π )] dt. 
+
+Applying (4.1) to the above yields 
+
+Ai = E
+
+Z (i+1) hih 
+
+e−βt λ
+
+Z 
+
+> U
+
+π(Y πt , u ) ln π(Y πt , u )du −
+
+Z
+
+> U
+
+π(Y πih , u ) ln π(Y πih , u )
+
+
+
+dudt 
+
++ E
+
+Z (i+1) hih 
+
+e−βt h
+
+b(Y πt , a i) − ˜b(Y πt , π )
+
+i
+
+· ∇ V (Y πt ) dt + E
+
+Z (i+1) hih 
+
+e−βt [˜ r(Y πih , π ) − ˜r(Y πt , π )] dt 
+
+= E
+
+Z (i+1) hih 
+
+e−βt [Di,π (t) + Di,b (t) + Di,r (t)] dt. 16 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+Therefore, we get from the estimates in the previous steps ((4.10), (4.11), (4.12)): 
+
+|Ai| ≤ 
+
+
+
+2( L2∥b∥∞ + λL 1 ln L1 + L1∥r∥∞)h, i = 0 ,C(L1L2∥b∥∞ + λL 1 ln L1 + L1∥r∥∞)( ∥b∥∞i− 12 h 12 + ∥Σ∥∞i−1), i ∈ [1 , 2/h ],Ce −βih (L1L2∥b∥∞ + λL 1 ln L1 + L1∥r∥∞)( ∥b∥∞ + ∥Σ∥∞)h, i > 2/h. 
+
+Hence, summing up Ai for i = 0 , 1, . . . yields 
+
+> ∞
+
+X
+
+> i=0
+
+Ai ≤ C∗
+
+
+
+h + C
+
+Z 2
+
+> h
+
+(ht − 12 + ht −1)dt + C
+
+Z ∞
+
+> 2
+
+e−βt h dt 
+
+
+
+≤ C∗h| ln h|, (4.13) where 
+
+C∗ := C(L1L2 + λL 1 ln L1)with C depending only on d, b and Σ. Finally, note that 
+
+> ∞
+
+X
+
+> i=0
+
+Ai = −E[V (Y π 
+
+> 0
+
+)] + 
+
+> ∞
+
+X
+
+> i=0
+
+Z (i+1) hih 
+
+e−βt h
+
+˜r(Y πt , π ) − λ
+
+Z
+
+> U
+
+π(Y πih , u ) ln π(Y πih , u )du 
+
+i
+
+dt. 
+
+Recall that Y π 
+
+> 0
+
+= x (so E[V (Y π 
+
+> 0
+
+)] = V [π]( x)). Thus, also using 
+
+> ∞
+
+X
+
+> i=0
+
+Z (i+1) hih 
+
+e−βt − e−βih ˜r(Y πt , π ) − λ
+
+Z
+
+> U
+
+π(Y πih , u ) ln π(Y πih , u )du dt ≤ C(∥r∥∞ + λL 1 ln L1)h, 
+
+we then obtain from (2.13) and (4.13) that 
+
+|V [π]( x) − Vh[π]( x)| ≤ C∗h| ln h|.
+
+□
+
+In the following corollary, we plug-in the optimal randomized feedback policy from the MDP to the continuous time problem. Then the error w.r.t. the optimal value function of the MDP is h| log h|. The same estimate is derived if we plug in the optimal control obtained from the continuous-time problem to the discrete-time problem, making the control piece-wise constant in time and the value function is a sum over discrete-time. Recall V and π∗ in (2.10) and (2.8), and recall Vh and π∗ 
+
+> h
+
+from Proposition 3.3. We have 
+
+V = V [π∗] and Vh(x) = Vh[π∗
+
+> h
+
+]( x). 
+
+Corollary 4.2 (Discretization error for value functions) . Assume (H1)(H2) , h ∈ (0 , 12 ), and 
+
+Cd∥∇ σ∥∞h 12 ≤ 12 and β ≥ 1 + 2 ∥∇ b∥∞ + ∥∇ Σ∥2
+
+> ∞
+
+4λmin 
+
+(4.14) 
+
+for some dimensional constant Cd. Then there exists C > 0 such that 
+
+∥V [π∗
+
+> h
+
+]( ·) − Vh(·)∥∞ ≤ C(1 + ∥π∗
+
+> h
+
+∥∞)h| ln h| ≤ C exp( Cλ )h| ln h|,
+
+and 
+
+∥V (·) − Vh[π∗]( ·)∥∞ ≤ C(1 + ∥π∗∥∞)h| ln h| ≤ C exp( Cλ )h| ln h|.
+
+The constant C here depends only on d, (H1)(H2) and an upper bound of λ > 0.Proof. Note that Lemma 3.4 (and its remark) and Lemma 3.6 show that the conditions of Theorem 4.1 hold with π = π∗
+
+> h
+
+. Indeed, we have 
+
+∥π∗
+
+> h
+
+(x, u )∥∞ ≤ exp ( C/λ ) .
+
+And then since 
+
+λ
+
+Z
+
+> U
+
+π∗
+
+> h
+
+(x, u ) ln π∗
+
+> h
+
+(x, u )du ≤ Cλ + λ ln ∥π∗
+
+> h
+
+(x, u )∥∞ ≤ Cλ + C, DISCRETIZATION ERROR 17 
+
+Lemma 3.6 yields ∥∇ V [π∗
+
+> h
+
+]( ·)∥ ≤ C where C depends on the assumptions and an upper bound of 
+
+λ. Because Vh = Vh[π∗
+
+> h
+
+], we conclude the proof for the first estimate by applying Theorem 4.1. Similarly, by Lemma 3.5 and (2.8), there exists C independent of λ ∈ (0 , λ 0) such that ∥∇ V ∥∞ ≤
+
+C and ∥π∗∥∞ ≤ exp( C/λ ). Then the second estimate follows from Theorem 4.1. □
+
+In the following result, we show that the optimal feedback control for the discrete relaxed control problem is close to the one in the continuous setting. 
+
+Theorem 4.3 (Discretization error for optimal feedback controls) . Under the assumptions of Corol-lary 4.2, there exists a constant C > 0, depending on the same constants as in the corollary, such that 
+
+V [π∗
+
+> h
+
+]( ·) ≤ V (·) ≤ V [π∗
+
+> h
+
+]( ·) + C exp( Cλ )h| ln h|,Vh[π∗]( ·) ≤ Vh(·) ≤ Vh[π∗]( ·) + C exp( Cλ )h| ln h|,
+
+|V (·) − Vh(·)| ≤ C exp( Cλ )h| ln h|.
+
+Actually, in all the above estimates, we can replace C exp( Cλ ) by C(1 + ∥π∗∥∞ + ∥π∗
+
+> h
+
+∥∞).
+
+The first inequality tells us the following “error”. If we obtain the optimal control from the RL approximation, and then plug it back to the true continuous-time problem, the error we expect in terms of the value function. The second estimate is useful, for instance, when our goal is to solve an RL problem by approx-imating it with a PDE. It shows that if we apply the optimal control from the continuous-time problem to the discrete-time formulation, the resulting error with respect to the true optimal value function in RL can be quantified. 
+
+Proof. For the first estimate, notice that 
+
+V (x) = sup 
+
+> π
+
+V [π]( x) = V [π∗]( x)by (2.5). Therefore, it follows from the definition that 
+
+V (x) ≥ V [π∗
+
+> h
+
+]( x).
+
+Next, write C∗ := C exp( Cλ ). We apply Corollary 4.2 to get that 
+
+|V [π∗
+
+> h
+
+]( x) − Vh(x)| ≤ C∗h| ln h|,
+
+and Corollary 4.2 to get that 
+
+|V (x) − Vh[π∗]( x)| ≤ C∗h| ln h|.
+
+By the definition of π∗
+
+> h
+
+, we have 
+
+Vh = Vh(π∗
+
+> h
+
+) ≥ Vh[π∗].
+
+The three estimates yield 
+
+V [π∗
+
+> h
+
+] ≥ Vh(π∗
+
+> h
+
+) − C∗h| ln h| ≥ Vh[π∗] ≥ V (·) − 2C∗h| ln h|. (4.15) The second claim follows similarly. For the last estimate, (4.15) yields 
+
+V (·) ≤ Vh(·) + C∗h| ln h|.
+
+The other direction follows from a similar argument. Finally, the statement of Corollary 4.2 yields that we can replace C∗ by C(1+ ∥π∗∥∞+∥π∗
+
+> h
+
+∥∞). □18 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+5. Further regularity properties of MDP 
+
+In this section, we provide several regularity estimates for MDP. For a fixed u ∈ U , recall that ρt(y|x, u ) is defined in (2.12). For any bounded function W : Rd → R
+
+and t ≥ 0, define (P ut W (·))( x) := 
+
+Z
+
+> Rd
+
+W (y)ρt(y|x, u )dy. 
+
+Since ρt(·| x, u ) is a probability distribution, for any bounded W ,
+
+|P ut W (x)| ≤ ∥ W ∥∞. (5.1) By the definition of P ut and that b, σ are time-independent, we know that f (x, t ) := P ut W (x)satisfies the following forward Kolmogorov equation [32], 
+
+∂tf (x, t ) = Lb, Σf (x, t ), with f (x, 0) = W (x), (5.2) and 
+
+Lb, Σ := b(x, u ) · ∇ x + 12 Σ( x) : ∇2
+
+> x
+
+.
+
+The next two lemmas are concerned with the regularity of solutions to (5.2) with possibly a source term. We aim to provide a quantitative tracking of the constants involved. 
+
+Lemma 5.1 (Estimates for (5.2)) . Assume (H2) . Let W be a uniformly bounded and Lipschitz continuous function on Rd and let f be as the above. For any t ≥ 0, we have 
+
+∥∇ xf (x, t )∥∞ ≤ eA0t ∥∇ xW ∥∞ , A0 := 2 ∥∇ b∥∞ + ∥∇ Σ∥2 
+
+> ∞
+> 4λmin
+
+.
+
+Proof. Let ql := ∂xl f for l = 1 , . . . , d and q = ( ql) and write ∥q∥2 
+
+> ∞
+
+= Pdl=1 (∂xl f (x, t )) 2. Due to (5.2), ql satisfies 
+
+∂tql = Lb, Σql + L∂xl b,∂ xl Σ(f ), with ql(0 , x ) = ∂xl W (x).
+
+Multiplying ql to the above equation and then summing it over l give 
+
+∂t( 12 ∥q∥2
+
+> ∞
+
+) = Lb, Σ( 12 ∥q∥2
+
+> ∞
+
+) − 12
+
+X
+
+> l
+
+(∇ql)⊤Σ( ∇ql) + q⊤∇b · q + X
+
+> l
+
+12 (∂xl Σ : ∇q)ql
+
+≤ L b, Σ( 12 ∥q∥2
+
+> ∞
+
+) − λmin 
+
+2 ∥∇ q∥2 
+
+> ∞
+
++ ∥∇ b∥∞ ∥q∥2 
+
+> ∞
+
++ 12 ∥∇ Σ∥∞ ∥∇ q∥∞ ∥q∥∞
+
+≤ L b, Σ( 12 ∥q∥2
+
+> ∞
+
+) + ∥∇ b∥∞ + ∥∇ Σ∥2
+
+> ∞
+
+8λmin 
+
++ 12
+
+!
+
+∥q∥2 
+
+> ∞
+
+.
+
+Then for 
+
+A0 = 2 ∥∇ b∥∞ + ∥∇ Σ∥2
+
+> ∞
+
+4λmin 
+
+and w := 12 exp( −A0t)∥q∥2
+
+> ∞
+
+,
+
+we have ∂tw ≤ L b, Σw. Since 12 ∥∇ W ∥∞ is a solution to ∂tv = Lb, Σv and w(·, 0) ≤ 12 ∥∇ W ∥∞, the comparison principle yields 12 exp( −A0t)∥q∥2 
+
+> ∞
+
+≤ 12 ∥∇ W ∥∞,
+
+which shows the conclusion. □
+
+The next goal is to obtain the derivative of f with respect to u.
+
+Lemma 5.2 (Higher estimates for (5.2)) . Assume (H2) . Let g(x, t ) satisfy 
+
+∂tg(x, t ) = Lb, Σg(x, t ) + R(x, t ), with g(x, 0) = 0 .
+
+Then there exists C ≥ 1 depending only on d, λ min and M1 such that for any t ≥ 0 we have 
+
+∥g(·, t )∥∞ ≤ t sup 
+
+> s∈[0 ,t ]
+
+∥R(·, s )∥∞, ∥∇ xg(·, t )∥∞ ≤ C√t sup 
+
+> s∈[0 ,t ]
+
+∥R(·, s )∥∞.DISCRETIZATION ERROR 19 
+
+In particular, if letting f u(x, t ) := ( P ut W (·))( x) for some bounded function W , then 
+
+∥∇ uf u(·, t )∥∞ ≤ ∥∇ ub∥∞t sup 
+
+> s∈[0 ,t ],u ∈U
+
+∥∇ xf u(·, s )∥∞,
+
+∥∇ u∇xf u(·, t )∥∞ ≤ C∥∇ ub∥∞
+
+√t sup 
+
+> s∈[0 ,t ],u ∈U
+
+∥∇ xf u(·, s )∥∞.
+
+Proof. Since b, σ are uniformly bounded and Lipschitz continuous by (H2), the classical results (see e.g., [11, 28, 39]) yield that the density function ρt(y|x, u ) satisfies the following estimates for all 
+
+t ∈ (0 , 1]: there exist C ≥ 1 and c ∈ (0 , 1] depending only on d and the constants in (H2) such that 
+
+|∇ jx ρt(y|x, u )| ≤ Ct −j/ 2K(t, x − y), j = 1 , 2, (5.3) where 
+
+K(x, t ) := t−d/ 2 exp  −c|x|2/t  , t > 0.
+
+Consequently, for any bounded function f we have 
+
+|∇ x(P ut f )( x)| ≤ 
+
+Z
+
+> Rd
+
+f (y)|∇ xρt(y|x, u )|dy ≤ Ct − 12
+
+Z
+
+> Rd
+
+f (y)K(t, x − y)dy ≤ Ct − 12 ∥f ∥∞. (5.4) By Duhamel’s principle, we have g(·, t ) = R t 
+
+> 0
+
+P ut−sR(·, s )ds . Therefore, by (5.1), 
+
+|g(x, t )| = |
+
+Z t
+
+> 0
+
+P ut−sR(x, s )ds | ≤ 
+
+Z t
+
+> 0
+
+∥R(·, s )∥∞ds ≤ t sup 
+
+> s∈[0 ,t ]
+
+∥R(·, s )∥∞,
+
+and by (5.4), 
+
+|∇ xg(x, t )| = |
+
+Z t
+
+> 0
+
+∇xP ut−sR(x, s )ds | ≤ C
+
+Z t
+
+> 0
+
+(t − s)− 12 ∥R(·, s )∥∞ds ≤ C√t sup 
+
+> s∈[0 ,t ]
+
+∥R(·, s )∥∞.
+
+For the last claim, let us take u1̸ = u. Set w(x, t ) := f u(x, t ) − f u1 (x, t ), which then satisfies 
+
+∂tw(x, t ) = Lb, Σw(x, t ) + ( b(x, u ) − b(x, u 1)) · ∇ w(x, t ), with w(x, 0) = 0 .
+
+Here we used that Σ is independent of u. It follows from the first two claims of the lemma that 
+
+∥w(x, t )∥∞ ≤ t sup 
+
+> s∈[0 ,t ]
+
+∥(b(·, u ) − b(·, u 1)) · ∇ w(·, s )∥∞
+
+≤ 2t|u − u1|∥∇ ub∥∞ sup 
+
+> s∈[0 ,t ],v ∈U
+
+∥∇ f v(·, s )∥∞,
+
+∥∇ w(x, t )∥∞ ≤ C√t sup 
+
+> s∈[0 ,t ]
+
+∥(b(·, u ) − b(·, u 1)) · ∇ w(·, s )∥∞
+
+≤ 2C√t|u − u1|∥∇ ub∥∞ sup 
+
+> s∈[0 ,t ],v ∈U
+
+∥∇ f v(·, s )∥∞,
+
+which finishes the proof. □
+
+It is known that Vh ∈ L∞ from Proposition 3.3. In the following result, we provide an explicit estimate and, moreover, we show that it is Lipschitz continuous. 
+
+Lemma 5.3 (Regularity of Vh). Under the assumptions of (H1)(H2) , for all h ∈ (0 , 1] we have 
+
+∥Vh(·)∥∞ ≤ h ∥r∥∞
+
+1 − exp( −βh ) ,
+
+and, if β ≥ 1 + A0 with A0 = 2 ∥∇ b∥∞ + ∥∇ Σ∥2 
+
+> ∞
+> 4λmin
+
+, we have 
+
+∥∇ xVh(·)∥∞ ≤ eh ∥∇ xr∥∞ ,20 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+and for some C depending only on the assumptions, 
+
+∥∇ 2
+
+> x
+
+Vh(·)∥∞ ≤ Ch −1.
+
+Proof. By the contraction property from Lemma 3.2, we get 
+
+∥Vh∥∞ = ∥T ∗Vh − T ∗0 + T ∗0∥∞ ≤ ∥ T ∗Vh − T ∗0∥ + ∥T ∗0∥ ≤ γ ∥Vh∥ + ∥T ∗0∥∞ .
+
+Applying Lemma 3.1 and (H1), the above inequality leads to 
+
+∥Vh∥∞ ≤ 11 − γ ∥T ∗0∥∞ = λh 
+
+1 − γ ln 
+
+Z
+
+> U
+
+exp 
+
+ r(x, u )
+
+λ
+
+
+
+du ≤ h ∥r∥∞
+
+1 − γ ,
+
+which gives the first inequality. For the second inequality, recall that Vh is the unique fixed point of T ∗V = V , and 
+
+T ∗V (x) = λh ln 
+
+Z 
+
+> U
+
+exp 
+
+ r(x, u )h + γ R 
+
+> Rd
+
+V (y)ρh(y|x, u )dy λh 
+
+
+
+du 
+
+
+
+.
+
+For any Lipschitz function V and a fixed control u, denote 
+
+Q(x, u ) := r(x, u )h + γ
+
+Z
+
+> Rd
+
+V (y)ρh(y|x, u )dy and π(x, u ) := exp 
+
+ Q(x,u )
+
+> λh
+
+R 
+
+> U
+
+exp 
+
+ Q(x,u ′)
+
+> λh
+
+
+
+du ′
+
+.
+
+Then one has 
+
+∇x(T ∗V ) = 
+
+λh ∇x
+
+hR 
+
+> U
+
+exp 
+
+ Q(x,u )
+
+> λh
+
+
+
+du 
+
+iR 
+
+> U
+
+exp 
+
+ Q(x,u )
+
+> λh
+
+
+
+du 
+
+= Eu∼π(x, ·) [∇xQ(x, u )] 
+
+≤ ∥∇ xQ∥∞ ≤ ∥∇ xr∥∞ h + γ ∥∇ x(PhV )∥∞
+
+≤ ∥∇ xr∥∞ h + γ exp ( A0h) ∥∇ xV ∥∞
+
+where we applied Lemma 5.1 in the last inequality. Therefore, since γ = e−βh , by approximating 
+
+Vh by smooth functions, we actually obtain 
+
+∥∇ Vh∥∞ = ∥∇ x(T ∗Vh)∥∞ ≤ exp [( A0 − β) h] ∥∇ Vh∥∞ + ∥∇ xr∥∞ h
+
+which, by the assumption that β ≥ 1 + A0, implies that for h ∈ (0 , 1], 
+
+∥∇ Vh∥∞ ≤ h
+
+1 − e(A0−β)h ∥∇ xr∥∞ ≤ eh ∥∇ xr∥∞ .
+
+Now, for any V ∈ C2(Rd), direct computation yields 
+
+∇2
+
+> x
+
+(T ∗V ) = Eu∼π(x, ·)
+
+∇2
+
+> x
+
+Q(x, u ) + 1
+
+λh 
+
+
+
+Eu∼π(x, ·)[∇xQ(x, u )2] −  Eu∼π(x, ·)[∇xQ(x, u )] 2]
+
+
+
+.
+
+Let us denote 
+
+Vu∼π(x, ·)[∇xQ(x, u )] := Eu∼π(x, ·)[∇xQ(x, u )2] −  Eu∼π(x, ·)[∇xQ(x, u )] 2].
+
+One has 
+
+Vu∼π(x, ·)[∇xQ(x, u )] ∞ ≤ |U |2
+
+4 ∥∇ u∇xQ(x, u )∥2
+
+> ∞
+
+It follows from Lemma 5.2 that 
+
+∥∇ u∇xQ(x, u )∥∞ = ∥∇ u∇xr∥∞ h + γ ∥∇ u∇x(P uh V )∥∞ ≤ C
+
+h
+
+h + γ ∥∇ xV ∥∞
+
+√h
+
+i
+
+.
+
+Therefore, one has 
+
+Vu∼π(x, ·)[∇xQ(x, u )] ∞ ≤ C2 h
+
+h2 + γ2 ∥∇ xV ∥2 
+
+> ∞
+
+h
+
+i
+
+.DISCRETIZATION ERROR 21 
+
+Furthermore, due to (5.3), 
+
+|∇ 2
+
+> x
+
+(PhV )( x)| ≤ 
+
+Z
+
+> Rd
+
+V (y)|∇ 2
+
+> x
+
+ρt(y|x, u )|dy ≤ Ct −1
+
+Z
+
+> Rd
+
+V (y)K(t, x − y)dy ≤ Ct −1∥V ∥∞.
+
+Thus, we get 
+
+Eu∼π(x, ·)
+
+∇2
+
+> x
+
+Q(x, u ) ≤ ∇2
+
+> x
+
+r ∞ h + γ ∇2
+
+> x
+
+PhV ∞ ≤ ∇2
+
+> x
+
+r ∞ h + Ch −1 ∥V ∥∞ ,
+
+which implies that 
+
+∇2T ∗V ≤ ∇2
+
+> x
+
+r ∞ h + Ch −1 ∥V ∥∞ + 1
+
+λ C2 h
+
+h + γ2 ∥∇ xV ∥2
+
+> ∞
+
+i
+
+.
+
+Hence, since Vh = T ∗Vh, we get 
+
+∇2
+
+> x
+
+Vh ∞ ≤
+
+
+
+∇2
+
+> x
+
+r ∞ + 1
+
+λ C2
+
+
+
+h + Ch −1 ∥Vh∥∞ + 1
+
+λ C2γ2 ∥∇ xVh∥2 
+
+> ∞
+
+.
+
+□
+
+Lemma 3.4 obtains an explicit L∞-bound for π∗
+
+> h
+
+. In the following lemma, we show that π∗ 
+
+> h
+
+is uniformly Lipschitz continuous with Lipschitz constant of order Cλ√h .
+
+Proposition 5.4 (Regularity of π∗
+
+> h
+
+). Under the assumptions of Lemma 5.3, we have 
+
+∥∇ x(ln π∗
+
+> h
+
+)∥∞ ≤ Cλ√h (∥∇ u∇xr∥∞
+
+√h + ∥∇ ub∥∞∥∇ xr∥∞).
+
+Proof. Denote 
+
+Q∗(x, u ) := r(x, u )h + γ
+
+Z
+
+> Rd
+
+Vh(y)ρh(y|x, u )dy 
+
+and Z(x) := 
+
+Z
+
+> U
+
+exp 
+
+ r(x, u )h + R Vh(y)ρh(y|x, u )dy λ
+
+
+
+du. 
+
+It follows from Lemma 5.2 that 
+
+∇u∇x
+
+Z
+
+> Rd
+
+Vh(y)ρh(y|x, u )dy ∞ ≤ C∥∇ ub∥∞
+
+√h sup 
+
+> s∈[0 ,h ],u ∈U
+
+∥∇ xP u 
+
+> s
+
+Vh(·)∥∞.
+
+By Lemma 5.1 and Lemma 5.3, we have sup 
+
+> s∈[0 ,h ],u ∈U
+
+∥∇ xP u 
+
+> s
+
+Vh(·)∥∞ ≤ eA0h∥∇ xVh(·)∥∞ ≤ he A0h
+
+1 − e(A0−β)h ∥∇ xr∥∞ .
+
+So, we obtain 
+
+∥∇ u∇xQ∗∥∞ ≤ ∥∇ u∇xr∥∞h + C∥∇ ub∥∞eA0hh
+
+1 − e(A0−β)h ∥∇ xr∥∞
+
+√h. (5.5) Finally, since 
+
+∇xπ∗
+
+> h
+
+(x, u ) = exp 
+
+ Q∗(x,u )
+
+> λh
+
+ ∇xQ∗(x,u )
+
+> λh
+
+Z(x) −
+
+exp 
+
+ Q∗(x,u )
+
+> λh
+
+
+
+∇Z(x)
+
+Z(x)2
+
+= π∗
+
+> h
+
+(x, u )
+
+λh 
+
+
+
+∇xQ∗ − λh ∇ZZ
+
+
+
+= π∗
+
+> h
+
+(x, u )
+
+λh 
+
+
+
+∇xQ∗ − Eu∼π∗ 
+
+> h
+
+[∇xQ∗]
+
+
+
+,
+
+we get from (5.5) that 
+
+∥∇ x(ln π∗
+
+> h
+
+)∥∞ ≤ (λh )−1 ∇xQ∗ − Eu∼π∗ 
+
+> h
+
+[∇xQ∗] ∞
+
+≤ (λh )−1|U | ∥∇ u∇xQ∗∥∞
+
+≤ (λ√h)−1|U |C(∥∇ u∇xr∥∞
+
+√h + ∥∇ ub∥∞∥∇ xr∥∞).22 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+□
+
+6. Convergence to the classical optimal control 
+
+In this section, we compare the classical optimal control and the relaxed optimal control problems, both in the continuous setting. We further need the following condition. (H3) Assume U ⊆ RN with some N ≥ 1 and [17, Assumption 4.2]. In particular, U = [0 , 1] N
+
+satisfies the condition. To state the precise assumption, for any α ∈ (0 , 1] and e ∈ SN −1, we define a cone ∆ αe as ∆αe := {x ∈ RN : x · e ≥ α|x|} .
+
+Then [17, Assumption 4.2] says that: there exist ζ > 0 and α ∈ (0 , 1] such that for any u ∈ U ,there is a cone ∆ αe for some e = eu ∈ SN −1 such that ∆αe (u) ∩ Bζ (u) ⊆ U, 
+
+where ∆ αe (u) := {u + x : x ∈ ∆αe }.As a consequence of this condition, we obtain the following lemma, which is used to provide a polynomial upper bound of π∗ in (2.8). While the proof closely follows the one in [17, Lemma 4.4], our claim is slightly more general; we therefore provide a complete proof for clarity and self-containment. 
+
+Lemma 6.1 (An L∞ estimate) . Assuming (H3) , let g : Rd × Rd × U → R be a function that is uniformly Lipschitz continuous. Then there exists C depending only on (H3) such that 
+
+Γ( x, p, u ) := exp ( g(x, p, u )) 
+
+R 
+
+> U
+
+exp ( g(x, p, u )) du ≤ C(1 + ∥∇ u g∥∞)N .
+
+Proof. Fixing any u0 ∈ U , direct computation yields Γ( x, y, u 0)−1 =
+
+Z
+
+> U
+
+exp ( g(x, p, u ) − g(x, p, u 0)) du ≥
+
+Z
+
+> U
+
+exp ( −∥∇ u g∥∞|u − u0|) du. 
+
+Then, by the assumption, there exists eu ∈ SN such that 
+
+Z
+
+> U
+
+e−∥∇ u g∥∞|u−u0|du ≥
+
+Z  
+
+> ∆αeu 0(u0)∩Bζ(u0)
+
+e−∥∇ u g∥∞|u−u0|du =
+
+Z  
+
+> ∆αe1∩Bζ(0)
+
+e−∥∇ u g∥∞|u|du, 
+
+where, in the last equality, we shift and rotate the cone ∆ αeu0 (u0) to ∆ αe1 with e1 denoting the positive direction of the first coordinate of RN .It remains to estimate the right-hand side of the above. If ∥∇ u g∥∞ζ ≤ 1, 
+
+Z  
+
+> ∆αe1∩Bζ(0)
+
+e−∥∇ u g∥∞|u|du ≥ Leb( Bζ (0)) . (6.1) If ∥∇ u g∥∞ζ > 1, we use polar coordinates to get 
+
+Z  
+
+> ∆αe1∩Bζ(0)
+
+e−∥∇ u g∥∞|u|du = C1
+
+Z ζ
+
+> 0
+
+rN −1e−∥∇ u g∥∞rdr 
+
+= C1∥∇ u g∥−N
+
+> ∞
+
+Z ∥∇ u g∥∞ζ
+
+> 0
+
+zN −1e−z dz ≥ C1C2∥∇ u g∥−N 
+
+> ∞
+
+,
+
+where C1 is the surface area of SN −1 and C2 := R 10 zN −1e−z dz . This and (6.1) finish the proof. □
+
+Denote π∗,λ := π∗ from (2.8), and π∗,λ h := π∗ 
+
+> h
+
+from (2.14). Assuming (H3) and using Lemma 6.1, we obtain a polynomial upper bound (in terms of λ) for π∗,λ h and π∗,λ , which improves the bound of exp( C/λ ) that we used before. DISCRETIZATION ERROR 23 
+
+Lemma 6.2 (Upper bound for π∗,λ h ). Assuming (H2)(H3) , we have 
+
+π∗,λ h (x, u ), π∗,λ (x, u ) ≤ C(1 + λ−N )
+
+Proof. First, let us derive the upper bound for π∗,λ h . It follows from (3.4) that 
+
+π∗,λ h (x, u ) = exp ( g(x, u )) 
+
+R 
+
+> U
+
+exp ( g(x, u )) du , where g(x, u ) := r(x, u )h + γ R Vh(y)ρh(y|x, u )dy λh .
+
+By Lemmas 5.1 – 5.3, we get if β ≥ 1 + 2 ∥∇ b∥∞ + ∥∇ Σ∥2 
+
+> ∞
+> 4λmin
+
+=: 1 + A0,
+
+Z
+
+Vh(y)ρh(y|x, u )dy = ∥∇ uP uh Vh∥∞
+
+> Lemma 5 .2
+
+≤ ∥∇ ub∥∞h sup 
+
+> s∈[0 ,h ],u ∈U
+
+∥∇ xP us Vh∥∞
+
+> Lemma 5 .1
+
+≤ ∥∇ ub∥∞ exp( A0h)h∥∇ xVh∥∞
+
+> Lemma 5 .3
+
+≤ ∥∇ ub∥∞ exp( A0h)ehh ∥∇ xr∥∞ ≤ Ch. 
+
+Hence, we obtain |∇ u g(x, u )| ≤ Cλ . We then get from Lemma 6.1 that 
+
+π∗,λ h (x, u ) ≤ C(1 + ∥∇ u g∥∞)N ≤ C(1 + λ−N ). (6.2) Next, note that 
+
+π∗,λ (x, u ) = Γ( x, ∇V (·), u )with Γ( x, p, u ) := exp   1 
+
+> λ
+
+[r(x, u ) + b(x, u ) · p]R 
+
+> U
+
+exp   1 
+
+> λ
+
+[r(x, u ) + b(x, u ) · p] du ,
+
+where V = V [π∗,λ ] solves (2.7). By Lemma 3.5, there exists C ≥ 1 depending only on d, λ0 and the constants in (H2) (independent of β ≥ 1 and λ ∈ (0 , λ 0)) such that ∥∇ V ∥∞ ≤ C/ √β. Hence, Lemma 6.1 implies 
+
+π∗,λ (x, u ) ≤ C(1 + 1 
+
+> λ
+
+[∥∇ ur∥∞ + ∥∇ ub∥∞∥∇ V ∥∞]) N ≤ C(1 + λ−N )for some C depending only on d, λ 0 and the conditions. □
+
+Combining Theorem 4.3 with the lemma, we obtain the following corollary. 
+
+Corollary 6.3. Under the assumptions of Theorem 4.3 and (H3) and λ ∈ (0 , λ 0), we have 
+
+∥V [π∗
+
+> h
+
+]( ·) − V (·)∥∞ + ∥Vh[π∗]( ·) − Vh(·)∥∞ + ∥V (·) − Vh(·)∥∞ ≤ Cλ −N h| ln h|.
+
+For a general feedback randomized policy π : Rd → P (U ), let 
+
+v[π]( x) = E
+
+ Z ∞
+
+> 0
+
+e−βt ˜r(Xπt , π (Xπt , ·)) dt Xπ 
+
+> 0
+
+= x
+
+
+
+, (6.3) where Xπt satisfies (2.4) with ϖt(u) := π(Xπt , u ) and ˜ r is from (2.6). The following result measures the difference between the optimal feedback controls for the clas-sical problem and the relaxed problem as λ → 0. Recall V [π] from (2.10). 
+
+Theorem 6.4 (Continuous feedback controls) . Assume (H2)(H3) . There exists C depending only on d, (H2)(H3) and an upper bound of λ and 1/β such that 
+
+v[π∗,λ ]( ·) − V [π∗,λ ]( ·) ≤ Cλ (1 + | ln λ|).
+
+Moreover, letting v solve (2.3) , we have 
+
+v(·) − v[π∗,λ ]( ·) ≤ Cλ (1 + | ln λ|).24 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+Proof. By (6.3) and (2.10), 
+
+v[π]( x) − V [π]( x) = E
+
+
+
+λ
+
+Z
+
+> U
+
+π(Xπt , u ) ln π(Xπt , u )du 
+
+
+
+dt Xπ 
+
+> 0
+
+= x
+
+
+
+. (6.4) Thus, to prove the first estimate, it suffices to show that 
+
+Z
+
+> U
+
+π∗,λ (x, u ) ln π∗,λ (x, u )du ≤ C(1 + | ln λ|).
+
+Indeed, it follows from Lemma 6.2 that 
+
+Z
+
+> U
+
+π∗,λ (x, u ) ln π∗,λ (x, u )du ≤ ln C(1 + λ−N )
+
+Z
+
+> U
+
+π∗,λ (x, u )du ≤ C′(1 + | ln λ|)which finishes the proof of the first statement. For the second one, it follows from [42, Corollary 16] and the remark after that 
+
+|v(·) − V [π∗,λ ]( ·)| ≤ Cλ (1 + | ln λ|).
+
+This and the first claim imply the second claim. □
+
+The following result says that given time discretization h, in order to approximate the classical optimal control problem ( λ = 0), we might select an optimal temperature parameter λ depending on the dimension N of the action space. Indeed, if selecting λ := h1/(N +1) , the error is bounded by 
+
+Cλ | ln λ| + Cλ −N h| ln h| ≤ Ch 1  
+
+> N+1
+
+| ln h|.
+
+Theorem 6.5 (MDP feedback controls) . Assume (H2)(H3) , h ∈ (0 , 12 ), λ 0 > 0, and (4.14) . There exists C depending only on d, (H2)(H3) and λ0 such that, for any λ ∈ (0 , λ 0), we have 
+
+v(·) − V [π∗,λ h ]( ·) ≤ Cλ | ln λ| + Cλ −N h| ln h|,
+
+v(·) − v[π∗,λ h ]( ·) ≤ Cλ | ln λ| + Cλ −N h| ln h|.
+
+Remark 6.1 (Comparison to [50]) . This is the main theorem of the paper. It shows that if one computes the optimal feedback control from the regularized MDP formulation (3.1) , then deploys this policy in the true continuous-time dynamics and evaluates performance using the continuous-time objective, the resulting policy is suboptimal compared to the true optimal control. The performance gap is bounded by ˜O(λ + λ−N h).
+
+Optimizing over the regularization parameter λ yields the bound ˜O(h 1  
+
+> N+1
+
+). This can be interpreted as the best achievable rate for any regularized RL algorithms. The MDP-based framework relies solely on the discrete-time transition distribution ρh(y | x, u )
+
+defined in (2.12) to approximate the optimal feedback control associated with the continuous-time HJB equation (2.3) . In contrast, [50] propose an alternative approximation, termed PhiBE, which uses the same transition distribution ρh(y | x, u ) but achieves an O(h) convergence rate, strictly faster than that of the MDP framework. This is because the PhiBE formulation mirrors the structure of the (unregularized) HJB equation and explicitly leverages the SDE-driven nature of the underlying dynamics. By comparison, the MDP formulation does not incorporate this structural information, even though it is used in the analysis. Proof. It follows from Lemma 6.2 that 
+
+π∗,λ (x, u ), π∗,λ h (x, u ) ≤ C(1 + ∥∇ u g∥∞)N ≤ C(1 + λ−N ).
+
+The first claim follows from 
+
+v(·) − V [π∗,λ ]( ·) ≤ Cλ (1 + | ln λ|) and DISCRETIZATION ERROR 25 
+
+V [π∗,λ h ]( ·) ≤ V [π∗,λ ]( ·) ≤ V [π∗,λ h ]( ·) + C(1 + λ−N )h| ln h|,
+
+which are due to Theorem 6.4 and Theorem 4.3, respectively. For the second claim, it remains to bound v[π∗,λ h ]( x) − V [π∗,λ h ]( x). Due to (6.4), we have 
+
+∥v[π∗,λ h ] − V [π∗,λ h ]∥∞ ≤ λ sup 
+
+> x∈Rd
+
+Z
+
+> U
+
+π∗,λ h (x, u ) ln π∗,λ h (x, u )du . (6.5) It follows from (6.2) that Z
+
+> U
+
+π∗,λ h (x, u ) ln π∗,λ h (x, u )du ≤ C(1 + | ln λ|)which, combining with (6.5), yields the second claim. □
+
+Acknowledgements 
+
+Y. Zhu is supported by the NSF grants No 2529107. Y. P. Zhang acknowledges support from NSF CAREER grant DMS-2440215 and Simons Foundation Travel Support MPS-TSM-00007305. 
+
+Appendix A. Remarks 
+
+In this section, we discuss two explicit continuous stochastic optimal control examples. The first one shows that the feedback control of a classical optimal control problem is, in general, discontinuous. While the one for the relaxed control problem is continuous. The second example shows that such discontinuity of feedback controls might lead to completely different dynamics if one applies the it discretely in time. The first one is a temperature control problem [12]. Consider 
+
+v(x) := inf  
+
+> (νt)
+
+E
+
+ Z ∞
+
+> 0
+
+e−tf (Xt)dt 
+
+
+
+, (A.1) where Xt satisfies 
+
+dX t = −∇ f (Xt)dt + √2νtdB t, X0 = x, 
+
+and ( νt, t ≥ 0) is taken as the control over U = [ a, 1] with a ∈ (0 , 1). For b(x, u ) = −∇ f (x), and 
+
+σ(x, u ) = √2u, v satisfies 
+
+−v(x) + f (x) − ∇ f (x) · ∇ v(x) + inf 
+
+> u∈[a, 1]
+
+u tr( ∇2v(x))  = 0 .
+
+From this, we get that the optimal feedback policy u ∗ can be represented by u∗(x) := 
+
+ a if tr( ∇2v(x)) ≥ 0,
+
+1 if tr( ∇2v(x)) < 0,
+
+which is a discontinuous function. The exploratory version of (A.1) with temperature parameter λ is introduced in [12], and the corresponding exploratory HJB equation for the value function V is given by 
+
+−ρV (x) + ∇f (x) · ∇ V(x) + f (x) − λ ln 
+
+Z 1
+
+> a
+
+exp 
+
+
+
+− tr( ∇2V(x)) 
+
+λ u
+
+
+
+du = 0 ,
+
+with the optimal feedback control 
+
+π∗(x, u ) = exp 
+
+
+
+− tr( ∇2V(x)) 
+
+λ u
+
+ Z 1
+
+> a
+
+exp 
+
+
+
+− tr( ∇2V(x)) 
+
+λ u
+
+
+
+du 
+
+−1
+
+, u ∈ [a, 1] .
+
+So for the relaxed problem, the feedback control as a distribution is continuous, by Lemma 3.5. In the next example, we show that the dynamics are not stable with respect to the discretization. We consider σ ≡ 0 and both the reward function rh(x) and the optimal value function vh(x) depend 26 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+on h ∈ (0 , 1). Let us take β > 0, γ ∈ R and n ≥ 2, and consider the following equation in dimension 1: 
+
+−βv h + sup 
+
+> u∈[−1,1]
+
+h
+
+rh(x, u ) + uv hx
+
+i
+
+= 0 , x ∈ R, (A.2) where 
+
+rh(x, u ) := β(γx + hn sin 2πx h ) − γu − 2πh n−1| cos 2πx h |.
+
+By direct computation, 
+
+vh(x) := γx + hn sin 2πx h
+
+is the solution to (A.2) and hn sin 2πx h can be viewed as a perturbation when h is small. Moreover, we have 
+
+rh(x, u ) + uv hx = βv h + 2 πh n−1(u cos 2πx h − | cos 2πx h |). (A.3) And we claim that the following holds: 
+
+• The Cn norm of vh and the Lipschitz norm of rh are locally uniformly finite independent of h ∈ (0 , 1). 
+
+• The system states in the discrete setting (with step size h) and in the continuous setting can be completely different even as h → 0. In the following, we compute the dynamics of the system states in both the discrete and the continuous setting. Using (A.2) and (A.3), the optimal feedback control is given by u∗(x) := 
+
+(
+
+1 when cos 2πx h > 0,
+
+−1 when cos 2πx h < 0.
+
+Let Y solve iteratively for t ∈ [ih, (i + 1) h) with i ≥ 0, 
+
+dY = u ∗(Y (ih )) dt and Y (0) = 0 . (A.4) Since u ∗(Y (0)) = u ∗(0) = 1, the ODE (A.4) yields Y (t) = t for t ∈ [ih, (i + 1) h]. Next, for 
+
+t ∈ [h, 2h], we note that cos( 2πY (h) 
+
+> h
+
+) = cos 2 π = 1. Thus, u ∗(Y (h)) = 1 and again the ODE (A.4) yields Y (t) = t for t ∈ [h, 2h]. Continuing in this manner, we obtain 
+
+Y (t) = t for all t ≥ 0, and u∗(Y (ih )) = u ∗(ih ) = 1 . (A.5) However, the ODE dX = u ∗(X)dt becomes for all i ∈ Z,
+
+dX = dt when X(t) ∈ (ih − h 
+
+> 4
+
+, ih + h 
+
+> 4
+
+)
+
+dX = −dt when X(t) ∈ (ih + h 
+
+> 4
+
+, ih + 3h 
+
+> 4
+
+).
+
+Solving the ODE with initial data X(0) = 0 yields 
+
+X(t) = 
+
+(t − ih if t ∈ (ih − h 
+
+> 4
+
+, ih + h 
+
+> 4
+
+),ih + h 
+
+> 2
+
+− t if t ∈ (ih + h 
+
+> 4
+
+, ih + 3h 
+
+> 4
+
+),
+
+which is completely different from Y (t) in (A.5) in the discrete setting. Thus, even just perturbing the system slightly (as h → 0), the system states obtained from the classical optimal control problem (2.1) and (2.2) can be largely different. In this sense, the feedback control problem is not stable with respect to the discretization. It remains unclear whether the value functions exhibit instability relative to the discretization; however, in this specific example, the resulting value functions do not differ significantly. DISCRETIZATION ERROR 27 
+
+Appendix B. Proof of the discrete-time regularized Bellman equation 
+
+Proposition B.1. The discrete-time regularized Bellman equation (3.1) is equivalent to the regu-larized optimal control problem defined in (2.13) - (2.14) .Proof. Step 1. Fixed feedback policy: Fix an admissible feedback randomized policy π(x, ·). Denoting rλh (x, u ; π) := r(x, u ) − λ log π(x, u )) h, by (2.13), 
+
+Vh[π]( x) = 
+
+Z
+
+> U
+
+π(x, u ) rλh (x, u ; π) + e−βh E
+
+
+
+> ∞
+
+X
+
+> j=0
+
+e−βjh rλh (Y π
+
+> (j+1) h
+
+, ν (j+1) h; π)|Y π 
+
+> 0
+
+= x, ν 0 = u
+
+!
+
+du 
+
+=
+
+Z
+
+> U
+
+π(x, u ) rλh (x, u ; π)+ e−βh E
+
+E
+
+
+
+> ∞
+
+X
+
+> j=0
+
+e−βjh rλ(Y π
+
+> (j+1) h
+
+, ν (j+1) h; π)|Y πh , Y π 
+
+> 0
+
+= x, ν 0 = u
+
+ |Y π 
+
+> 0
+
+= x, ν 0 = u
+
+!
+
+du. 
+
+=
+
+Z
+
+> U
+
+π(x, u ) rλh (x, u ; π) + e−βh E [Vh[π]( Y πh )|Y π 
+
+> 0
+
+= x, ν 0 = u]
+
+!
+
+du, 
+
+where the last equality is by the Markov property. Therefore, one has 
+
+Vh[π]( x) = Eu∼π(x, ·)
+
+h
+
+rλh (x, u ; π) + γEY πh ∼ρh(·| x,u ) [Vh(Y πh )] 
+
+i
+
+Now we prove the contraction property of the operator [T πW ]( x) := Eu∼π(x, ·)
+
+h
+
+rλh (x, u ; π) + γEY πh ∼ρh(·| x,u ) [W (Y πh )] 
+
+i
+
+For any x,
+
+T πW1(x) − T πW2(x) = Eu∼π(x, ·)
+
+h
+
+γEy∼ρh(·| x,u )
+
+ W1(y) − W2(y)i
+
+≤ γ Eu∼π(x, ·)Ey∼ρh(·| x,u ) W1(y) − W2(y) ≤ γ∥W1 − W2∥∞.
+
+Taking supremum over x on the LHS of the above inequality gives the γ-contraction: 
+
+∥T πW1 − T πW2∥∞ ≤ γ∥W1 − W2∥∞. (B.1) Finally, we prove the monotonicity of the operator. If W1(x) ≤ W2(x) for ∀x ∈ Rd, then 
+
+T πW1(x) = Eu∼π(x, ·)
+
+h
+
+rλh (x, u ; π) + γEY πh ∼ρh(·| x,u ) [W1(Y πh )] 
+
+i
+
+≤ Eu∼π(x, ·)
+
+h
+
+rλh (x, u ; π) + γEY πh ∼ρh(·| x,u ) [W2(Y πh )] 
+
+i
+
+= T πW2(x)(B.2) 
+
+Step 2. Proof of the upper bound: Given Vh(x) from (2.14), we prove that Vh(x) ≤ T ∗[Vh]( x)with T ∗ defined in (3.2). For any feedback randomized policy π(x, ·), by Step 1, Vh[π] = T πVh[π]. By the monotonicity of T π (B.2) and Vh[π] ≤ Vh pointwisely, one has Vh[π] = T πVh[π] ≤ T πVh ≤ T ∗Vh. Taking the supremum over π on the RHS, one has, 
+
+Vh = sup 
+
+> π
+
+Vh[π] ≤ T ∗Vh, point-wisely . (B.3) 
+
+Step 3. Proof of the lower bound: Fix ε > 0. By definition of T ∗, there exists a feedback policy πε such that 
+
+T ∗Vh(x) ≤ T πε Vh(x) + ε, ∀x. 28 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+Let V [πε] denote the value function under πε, which satisfies V [πε] = T πε V [πε]. By Step 2 (B.3), the monotonicity (B.2), and γ-contractivity (B.1) of T πε ,
+
+Vh − V [πε] ≤ T ∗Vh − T πε V [πε]
+
+≤ ∥ T ∗Vh − T πε Vh∥∞ + ∥T πε Vh − T πε V [πε]∥∞
+
+≤ ε + γ∥Vh − V [πε]∥∞.
+
+Hence, ∥Vh − V [πε]∥∞ ≤ ε + γ∥Vh − V [πε]∥∞, which gives ∥Vh − V [πε]∥∞ ≤ ε 
+
+> 1−γ
+
+. Using again 
+
+T ∗Vh ≤ T πε Vh + ε, we obtain for each x,
+
+T ∗Vh(x) ≤ T πε Vh(x) − T πε V [πε]( x) + V [πε]( x) + ε ≤ γ∥Vh − V [πε]∥∞ + V [πε]( x) + ε
+
+Combining the above inequality with ∥Vh − V [πε]∥∞ ≤ ε 
+
+> 1−γ
+
+yields T ∗Vh(x) ≤ Vh(x) + ε 
+
+> 1−γ
+
+. Letting 
+
+ε ↓ 0 yields 
+
+T ∗Vh(x) ≤ Vh(x). (B.4) 
+
+Step 4. Conclusion: Combining (B.3) and (B.4), we obtain Vh(x) = T ∗Vh(x), which is exactly (3.1). This completes the proof. □
+
+Appendix C. Proof of Lemma 3.1 and Lemma 3.4 
+
+Proof of Lemma 3.1. Let 
+
+Q(x, u ) := r(x, u )h + γ
+
+Z
+
+W (y)ρh(y|x, u )dy, 
+
+and for any fixed x = x0, (3.3) can equivalently written as 
+
+π∗
+
+> h
+
+(u) = πWh (u|x0) = eQ0(u)/(λh )
+
+Z0
+
+, Q0(u) := Q(x0, u ), Z0 := Z(x0).
+
+Using the definitions of rλh , ρh and Q, and for any π, direct computation yields 
+
+E
+
+h
+
+rλh (x0, u ; π) + γE[W (Y πh )|Y0 = x0]
+
+i
+
+=
+
+Z
+
+> U
+
+
+
+r(x0, u )h − λh ln π(u) + γ
+
+Z
+
+W (y)ρh(y|x0, u )dy 
+
+
+
+π(u)du 
+
+= λh 
+
+Z Q0(u)
+
+λh π(u) − π(u) ln π(u)du 
+
+
+
+= λh 
+
+Z 
+
+(ln π∗
+
+> h
+
+(u) + ln( Z0)) π(u) − π(u) ln π(u)du 
+
+
+
+= λh 
+
+
+
+ln( Z0) −
+
+Z
+
+π(u) ln π(u)
+
+π∗
+
+> h
+
+(u) du 
+
+
+
+= λh [ln( Z0) − KL( π|| π∗
+
+> h
+
+)du ]Since KL( π|| π∗
+
+> h
+
+) ≥ 0 and the maximum is achieved at π = π∗
+
+> h
+
+, therefore, 
+
+T ∗W (x) = sup 
+
+> π
+
+E
+
+h
+
+rλh (x0, u ; π) + γE[W (Y πh )|Y0 = x0]
+
+i
+
+= λh ln( Z0)and the maximum is achieved at π = π∗
+
+> h
+
+. □DISCRETIZATION ERROR 29 
+
+Proof of Lemma 3.4. By Lemma 3.1, one has 
+
+∥T ∗W1(·) − T ∗W2(·)∥∞
+
+= λh ln 
+
+R 
+
+> U
+
+exp 
+
+ r(x,u )h+γ R W2(y)+( W1(y)−W2(y)) ρh(y|x,u )dy λh 
+
+
+
+du 
+
+R 
+
+> U
+
+exp 
+
+ r(x,u )h+γ R W2(y)ρh(y|x,u )dy λh 
+
+
+
+du 
+
+
+
+= λh ln 
+
+R 
+
+> U
+
+exp 
+
+ r(x,u )h+γ R W2(y)ρh(y|x,u )dy λh 
+
+
+
+exp 
+
+ γ R (W1(y)−W2(y)) ρh(y|x,u )dy λh 
+
+
+
+du 
+
+R 
+
+> U
+
+exp 
+
+ r(x,u )h+γ R W2(y)ρh(y|x,u )dy λh 
+
+
+
+du 
+
+
+
+≤ λh ln 
+
+ exp 
+
+ γ∥W1−W2∥∞
+
+> λh
+
+ R 
+
+> U
+
+exp 
+
+ r(x,u )h+γ R W2(y)ρh(y|x,u )dy λh 
+
+
+
+du 
+
+R 
+
+> U
+
+exp 
+
+ r(x,u )+ γ R W2(y)ρh(y|x,u )dy λh 
+
+
+
+du 
+
+
+
+= λh ln 
+
+
+
+exp 
+
+ γ ∥W1 − W2∥∞
+
+λh 
+
+ 
+
+= γ ∥W1 − W2∥∞ .
+
+□
+
+References 
+
+[1] K. Asadi, D. Misra, and M. Littman. Lipschitz continuity in model-based reinforcement learning. In International conference on machine learning , pages 264–273. PMLR, 2018. [2] L. C. Baird. Reinforcement learning in continuous time: Advantage updating. In Proceedings of 1994 IEEE International Conference on Neural Networks (ICNN’94) , volume 4, pages 2448–2453. IEEE, 1994. [3] E. Bayraktar and A. D. Kara. Approximate q learning for controlled diffusion processes and its near optimality. 
+
+SIAM Journal on Mathematics of Data Science , 5(3):615–638, 2023. [4] C. Bender and N. T. Thuan. On the grid-sampling limit sde. arXiv preprint arXiv:2410.07778 , 2024. [5] D. Bertsekas. Dynamic programming and optimal control: Volume I , volume 4. Athena scientific, 2012. [6] D. P. Bertsekas and J. N. Tsitsiklis. Neuro-dynamic programming: an overview. In Proceedings of 1995 34th IEEE conference on decision and control , volume 1, pages 560–564. IEEE, 1995. [7] L. A. Caffarelli and X. Cabr´ e. Fully nonlinear elliptic equations , volume 43 of American Mathematical Society Colloquium Publications . American Mathematical Society, Providence, RI, 1995. [8] A. K. Dixit and R. S. Pindyck. Investment under uncertainty . Princeton university press, 1994. [9] K. Doya. Reinforcement learning in continuous time and space. Neural computation , 12(1):219–245, 2000. [10] W. H. Fleming and H. M. Soner. Controlled Markov processes and viscosity solutions , volume 25 of Stochastic Modelling and Applied Probability . Springer, second edition, 2006. [11] A. Friedman. Stochastic differential equations and applications . Dover Publications, Inc., Mineola, NY, 2006. Two volumes bound as one, Reprint of the 1975 and 1976 original published in two volumes. [12] X. Gao, Z. Q. Xu, and X. Y. Zhou. State-dependent temperature control for langevin diffusions. SIAM J. Control Optim. , 60(3):1250–1268, 2022. [13] M. Giegrich, C. Reisinger, and Y. Zhang. Convergence of policy gradient methods for finite-horizon exploratory linear-quadratic control problems. SIAM Journal on Control and Optimization , 62(2):1060–1092, 2024. [14] X. Guo, A. Hu, and Y. Zhang. Reinforcement learning for linear-convex models with jumps via stability analysis of feedback controls. SIAM Journal on Control and Optimization , 61(2):755–787, 2023. [15] T. Haarnoja, H. Tang, P. Abbeel, and S. Levine. Reinforcement learning with deep energy-based policies. In 
+
+International conference on machine learning , pages 1352–1361. PMLR, 2017. [16] T. Haarnoja, A. Zhou, P. Abbeel, and S. Levine. Soft actor-critic: Off-policy maximum entropy deep reinforce-ment learning with a stochastic actor. In International conference on machine learning , pages 1861–1870. Pmlr, 2018. [17] Y.-J. Huang, Z. Wang, and Z. Zhou. Convergence of policy iteration for entropy-regularized stochastic control problems. SIAM Journal on Control and Optimization , 63(2):752–777, 2025. [18] T. Jaakkola, M. Jordan, and S. Singh. Convergence of stochastic iterative dynamic programming algorithms. 
+
+Advances in neural information processing systems , 6, 1993. [19] Y. Jia, D. Ouyang, and Y. Zhang. Accuracy of discretely sampled stochastic policies in continuous-time rein-forcement learning. arXiv preprint arXiv:2503.09981 , 2025. [20] Y. Jia and X. Y. Zhou. Policy gradient and actor-critic learning in continuous time and space: Theory and algorithms. The Journal of Machine Learning Research , 23(1):12603–12652, 2022. 30 H. PHAM, Y. P. ZHANG, AND Y. ZHU 
+
+[21] Y. Jia and X. Y. Zhou. q-learning in continuous time. Journal of Machine Learning Research , 24(161):1–61, 2023. [22] A. A. K. B. N. Jiang and S. M. K. W. Sun. Reinforcement learning: Theory and algorithms. 2026. [23] M. Kearns and S. Singh. Near-optimal reinforcement learning in polynomial time. Machine learning , 49(2):209– 232, 2002. [24] N. Krylov. Approximating value functions for controlled degenerate diffusion processes by using piece-wise con-stant policies. Electronic Journal of Probability , 4:1–19, 1999. [25] H. Kushner and P. Dupuis. Numerical methods for stochastic control problems in continuous time , volume 24 of 
+
+Stochastic modeling and applied probability . Springer-Verlag, New York, 2001. [26] O. A. Ladyzhenskaia, V. A. Solonnikov, and N. N. Ural’tseva. Linear and quasi-linear equations of parabolic type , volume 23. American Mathematical Soc., 1968. [27] Y. Lian, L. Wang, and K. Zhang. Pointwise regularity for fully nonlinear elliptic equations in general forms. 2020. arXiv:2012.00324. [28] S. Menozzi, A. Pesce, and X. Zhang. Density and gradient estimates for non degenerate brownian sdes with unbounded measurable drift. Journal of Differential Equations , 272:330–369, 2021. [29] R. C. Merton. Optimum consumption and portfolio rules in a continuous-time model. In Stochastic optimization models in finance , pages 621–661. Elsevier, 1975. [30] W. Mou and Y. Zhu. On bellman equations for continuous-time policy evaluation i: discretization and approxi-mation. arXiv preprint arXiv:2407.05966 , 2024. [31] G. Pag` es, H. Pham, and J. Printems. An optimal markovian quantization algorithm for multi-dimensional stochastic control problems. Stochastics and Dynamics , 4:501–545, 2004. [32] G. A. Pavliotis. Stochastic processes and applications . Springer, 2016. [33] H. Pham. Continuous-time stochastic control and optimization with financial applications , volume 61. Springer Science & Business Media, 2009. [34] H. Pham. Continuous time stochastic control and optimization with financial applications , volume 61 of Stochastic modeling and applied probability . Springer-Verlag, New York, 2009. [35] M. L. Puterman. Markov decision processes: discrete stochastic dynamic programming . John Wiley & Sons, 2014. [36] C. Reisinger, E. Jakobsen, and A. Picarelli. Improved order 1/4 convergence for piecewise constant policy ap-proximation of stochastic control problems. Electronic Communications in Probability , 24(2019), 2019. [37] D. Revuz and M. Yor. Continuous martingales and Brownian motion , volume 293. Springer Science & Business Media, 2013. [38] R. F. Stengel. Optimal control and estimation . Courier Corporation, 1994. [39] D. W. Stroock and S. S. Varadhan. Multidimensional diffusion processes , volume 233. Springer Science & Business Media, 1997. [40] R. S. Sutton and A. G. Barto. Reinforcement learning: An introduction . MIT press, 2018. [41] L. Szpruch, T. Treetanthiploet, and Y. Zhang. Optimal scheduling of entropy regularizer for continuous-time linear-quadratic reinforcement learning. SIAM Journal on Control and Optimization , 62(1):135–166, 2024. [42] W. Tang, Y. P. Zhang, and X. Y. Zhou. Exploratory HJB equations and their convergence. SIAM Journal on Control and Optimization , 60(6):3191–3216, 2022. [43] E. Todorov. Efficient computation of optimal actions. Proceedings of the national academy of sciences ,106(28):11478–11483, 2009. [44] J. N. Tsitsiklis and B. Van Roy. Average cost temporal-difference learning. Automatica , 35(11):1799–1808, 1999. [45] H. Wang, T. Zariphopoulou, and X. Y. Zhou. Reinforcement learning in continuous time and space: A stochastic control approach. J. Mach. Learn. Res. , 21:1–34, 2020. [46] C. J. Watkins and P. Dayan. Q-learning. Machine learning , 8:279–292, 1992. [47] H. Xu and X. Mao. Razumikhin technique for stabilisation of highly nonlinear hybrid systems by bounded discrete-time state feedback control working intermittently. Numerical Algebra, Control and Optimization ,14(4):669–687, 2024. [48] J. Yong and X. Y. Zhou. Stochastic controls – Hamiltonian systems and HJB equations , volume 43 of Applications of Mathematics (New York) . Springer-Verlag, New York, 1999. [49] Y. Zhu. Phibe: A pde-based bellman equation for continuous time policy evaluation. arXiv preprint arXiv:2405.12535 , 2024. [50] Y. Zhu, Y. Zhang, and H. Zhang. Optimal-phibe: A pde-based model-free framework for continuous-time rein-forcement learning. arXiv preprint arXiv:2506.05208 , 2025. [51] B. D. Ziebart, A. L. Maas, J. A. Bagnell, A. K. Dey, et al. Maximum entropy inverse reinforcement learning. In 
+
+Aaai , volume 8, pages 1433–1438. Chicago, IL, USA, 2008.
