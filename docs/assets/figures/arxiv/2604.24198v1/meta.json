@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.24198v1/fig-001.webp",
+      "caption": "Figure 4: Performance of DataPRM evaluated under two extended TTS strategies, namely: (a) Beam Search and (b) Diverse Verifier Tree Search (DVTS).",
+      "page": 6,
+      "index": 1,
+      "width": 481,
+      "height": 281
+    },
+    {
+      "url": "assets/figures/arxiv/2604.24198v1/fig-002.webp",
+      "caption": "Table 2: Main results on ScienceAgentBench and DABStep. We compare DataPRM against various step verifiers using best-of-𝑁 sampling (𝑁 ∈ {4, 8, 16}) with Qwen3-235B-A22B-Instruct-2507 as the base policy. Best results are in bold. DataPRM achieves state-of-the-art TTS performance using substantially fewer parameters.",
+      "page": 6,
+      "index": 2,
+      "width": 962,
+      "height": 342
+    },
+    {
+      "url": "assets/figures/arxiv/2604.24198v1/fig-003.webp",
+      "caption": "Figure 1: The Collaborative Pipeline Between Data Analysis Agent and Process Reward Model(PRM). The agent addresses data analysis tasks while the PRM supervises the agent’s procedural steps.",
+      "page": 2,
+      "index": 3,
+      "width": 1002,
+      "height": 239
+    },
+    {
+      "url": "assets/figures/arxiv/2604.24198v1/fig-004.webp",
+      "caption": "Table 3: Ablation study of different components. \"Env\", \"Multi\", and \"Refl\" denote the Code Environment, Multi-turn Interaction, and Reflection-aware/Ternary Reward Strategy, respectively. . Best results are in bold.",
+      "page": 7,
+      "index": 4,
+      "width": 956,
+      "height": 194
+    },
+    {
+      "url": "assets/figures/arxiv/2604.24198v1/fig-005.webp",
+      "caption": "Table 1: Representative cases for both error types. Key errors are highlighted in red alongside their descriptions and the PRM’s misjudged reward, illustrating the blind spots of current PRMs.",
+      "page": 3,
+      "index": 5,
+      "width": 952,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2604.24198v1/fig-006.webp",
+      "caption": "Figure 2: (a): General PRMs’ Best-of-N performance on subset of DABStep. (b): General PRMs’ scores on steps with grounding errors despite correct final answers. (c): Ablation study on environment interaction based on prompted LLMs.",
+      "page": 3,
+      "index": 6,
+      "width": 1042,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2604.24198v1/fig-007.webp",
+      "caption": "Table 6: Detailed hyperparameters used in our paper.",
+      "page": 13,
+      "index": 7,
+      "width": 344,
+      "height": 592
+    },
+    {
+      "url": "assets/figures/arxiv/2604.24198v1/fig-008.webp",
+      "caption": "Figure 5: Experiment results on RL training and benchmarks. (a): The evaluation results on DABench and TableBench for models trained with different strategy. (b) and (c): The training reward dynamics and entropy dynamics in RL training for outcome reward and process reward.",
+      "page": 8,
+      "index": 8,
+      "width": 1048,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2604.24198v1/fig-009.webp",
+      "caption": "Figure 3: Overview of DataPRM Framework. (a): A diversity-driven trajectory generation strategy followed by knowledgeaugmented step-level annotaion. (b): DataPRM employs multi-turn interaction, tool-augmented capability and reflection-aware reward strategy for scoring.",
+      "page": 4,
+      "index": 9,
+      "width": 935,
+      "height": 444
+    }
+  ]
+}

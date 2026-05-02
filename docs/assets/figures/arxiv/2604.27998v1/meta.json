@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.27998v1/fig-001.webp",
+      "caption": "Figure 2: RL training dynamics on the low-difficulty setting for LLaMA-3.2-1B-Instruct. The figure shows validation-set performance together with the evolution of response length during training on GSM8K-Aug.",
+      "page": 9,
+      "index": 1,
+      "width": 818,
+      "height": 282
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27998v1/fig-002.webp",
+      "caption": "Figure 3: RL training dynamics on the high-difficulty setting for Qwen2.5-Math-7B. The figure shows validation-set performance on Math500 together with the evolution of response length during training on DAPO-Math-En.",
+      "page": 9,
+      "index": 2,
+      "width": 818,
+      "height": 285
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27998v1/fig-003.webp",
+      "caption": "Figure 1: Key discrepancies and bottlenecks in adapting GRPO to latent-token reasoning. (a) Explicit and latent reasoning differ in both probability density and sampling mechanism. (b) ExplorationOptimization Misalignment: The standard Gumbel density objective yields incorrect directional updates, inadvertently pushing down components from positive-advantage latent trajectories while pushing up components from negative-advantage ones. (c) Latent Mixture Non-Closure: jointly reinforcing several correct latent paths can produce an averaged continuous state that does not correspond to a valid reasoning path.",
+      "page": 2,
+      "index": 3,
+      "width": 824,
+      "height": 229
+    }
+  ]
+}

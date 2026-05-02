@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-001.webp",
+      "caption": "Figure 11: Feature rank shift across adjacent checkpoints during RL on Qwen2.5-7B.",
+      "page": 21,
+      "index": 1,
+      "width": 943,
+      "height": 1158
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-002.webp",
+      "caption": "Figure 2: Feature overlap heatmaps across training checkpoints under different training paradigms.",
+      "page": 7,
+      "index": 2,
+      "width": 927,
+      "height": 184
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-003.webp",
+      "caption": "Figure 3: Distribution of Model Attribution Scores across different training methods on Qwen3-4B-Base.",
+      "page": 7,
+      "index": 3,
+      "width": 819,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-004.webp",
+      "caption": "Figure 12: Feature rank shift across adjacent checkpoints during SFT on Llama3.1-8B-Instruct.",
+      "page": 22,
+      "index": 4,
+      "width": 943,
+      "height": 1158
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-005.webp",
+      "caption": "Figure 8: Feature rank shift across adjacent checkpoints during SFT on Qwen3-4B-Base.",
+      "page": 18,
+      "index": 5,
+      "width": 943,
+      "height": 1158
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-006.webp",
+      "caption": "Figure 13: Feature rank shift across adjacent checkpoints during RL on Llama3.1-8B-Instruct.",
+      "page": 23,
+      "index": 6,
+      "width": 943,
+      "height": 1158
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-007.webp",
+      "caption": "Figure 4: Overlap of identified generalization-controlling features across tasks. Left: Qwen3-4B-RL vs. Qwen3-4BBase. Right: Qwen2.5-7B-RL vs. Qwen2.5-7B.",
+      "page": 8,
+      "index": 7,
+      "width": 763,
+      "height": 293
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-008.webp",
+      "caption": "Figure 9: Feature rank shift across adjacent checkpoints during RL on Qwen3-4B-Base.",
+      "page": 19,
+      "index": 8,
+      "width": 943,
+      "height": 1158
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-009.webp",
+      "caption": "Figure 10: Feature rank shift across adjacent checkpoints during SFT on Qwen2.5-7B.",
+      "page": 20,
+      "index": 9,
+      "width": 943,
+      "height": 1158
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-010.webp",
+      "caption": "Table 1: Performance comparison of SFT- and RL-tuned models on math reasoning tasks and other tasks.",
+      "page": 5,
+      "index": 10,
+      "width": 941,
+      "height": 225
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25011v1/fig-011.webp",
+      "caption": "Figure 5: Distribution of Model Attribution Scores across different training methods on Qwen2.5-7B.",
+      "page": 16,
+      "index": 11,
+      "width": 856,
+      "height": 211
+    }
+  ]
+}

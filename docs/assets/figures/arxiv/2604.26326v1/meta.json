@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.26326v1/fig-001.webp",
+      "caption": "Figure 1: Overview of Entrocraft. It uses entropy-guided rejection sampling to filter rollouts against a target entropy, enabling precise control over the entropy curve throughout RL training. This control addresses performance saturation, a key obstacle to scaling RL. We find that a linear annealing schedule performs best, improving generalization, output diversity, and sustained training.",
+      "page": 2,
+      "index": 1,
+      "width": 826,
+      "height": 327
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26326v1/fig-002.webp",
+      "caption": "Figure 5: Long-term performance comparison. Entrocraft accurately controls the entropy dynamics to be linearly decaying, and thus prevents the performance saturation and significantly improves over GRPO. x-axis: the number of samples used for training.",
+      "page": 10,
+      "index": 2,
+      "width": 806,
+      "height": 201
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26326v1/fig-003.webp",
+      "caption": "Table 5: Full Evaluations on AIME. The proposed Entrocraft consistently improves the final performance of RL algorithms, better than other entropy-preserving methods. The best scores are in bold, and the second-best scores are marked with underlines.",
+      "page": 18,
+      "index": 3,
+      "width": 814,
+      "height": 371
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26326v1/fig-004.webp",
+      "caption": "Table 2: Evaluations on math reasoning benchmarks. The proposed Entrocraft consistently improves the final performance of RL algorithms, better than other entropy-preserving methods. The best scores are in bold, and the second-best scores are marked with underlines.",
+      "page": 8,
+      "index": 4,
+      "width": 798,
+      "height": 343
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26326v1/fig-005.webp",
+      "caption": "Table 4: Core hyperparameters for training implementation. The origin of each hyperparameter is listed, and all empty-source hyperparameters are determined by our experiments.",
+      "page": 17,
+      "index": 5,
+      "width": 614,
+      "height": 253
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26326v1/fig-006.webp",
+      "caption": "Figure 6: Entropy curve comparison across baselines. Other entropy-preserving methods may induce instability during long-term training or may not be sufficiently responsive. In contrast, the proposed Entrocraft effectively controls the entropy curve to be the customized shape.",
+      "page": 17,
+      "index": 6,
+      "width": 809,
+      "height": 399
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26326v1/fig-007.webp",
+      "caption": "Figure 4: Long-term training dynamics of three entropy annealing schemes implemented in Entrocraft. The fixed-target scheme becomes unstable due to rollout imbalance. Both linear and cosine decay schemes remain stable and sustain improvement, and linear decay is slightly better. x-axis: the number of samples used for training.",
+      "page": 9,
+      "index": 7,
+      "width": 810,
+      "height": 434
+    },
+    {
+      "url": "assets/figures/arxiv/2604.26326v1/fig-008.webp",
+      "caption": "Figure 3: Effectiveness of Entrocraft across model size and inference cost. (a) A 4B model can outperform an 8B model with Entrocraft; (b-c) Entrocraft improves inference-time scaling, with pass@K growing faster than under standard GRPO.",
+      "page": 9,
+      "index": 8,
+      "width": 804,
+      "height": 222
+    }
+  ]
+}
