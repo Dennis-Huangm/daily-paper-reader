@@ -1,0 +1,1026 @@
+Title: Leveraging Human Feedback for Semantically-Relevant Skill Discovery
+
+URL Source: https://arxiv.org/pdf/2604.24127v1
+
+Published Time: Tue, 28 Apr 2026 02:06:02 GMT
+
+Number of Pages: 33
+
+Markdown Content:
+# Leveraging Human Feedback for Semantically-Relevant Skill Discovery 
+
+Maxence Hussonnois 1[0000 −0002 −0721 −1850] , Thommen George Karimpanal 2[0000 −0001 −8918 −3314] , and Santu Rana 1[0000 −0003 −2247 −850 X] 
+
+> 1
+
+A2I2, Deakin University, Geelong, Australia 
+
+m.hussonnois@deakin.edu.au, santu.rana@deakin.edu.au  
+
+> 2
+
+School of IT, Deakin University, Geelong, Australia. 
+
+thommen.karimpanalgeorge@deakin.edu.au 
+
+Abstract. Unsupervised skill discovery in reinforcement learning aims to intrinsically motivate agents to discover diverse and useful behaviours. However, unconstrained approaches can produce unsafe, unethical, or misaligned behaviours. To mitigate these risks and improve the practi-cal desireability of discovered skills, recent work grounds the discovery process by leveraging human preference feedback. However, preference-based approaches are feedback-inefficient and inherently ill-equipped to deal with skill spaces composed of a variety of different skills such as run-ning, jumping, walking, etc. To overcome this limitation, we introduce semantic labelling, a novel and feedback-efficient approach that leverages human cognitive strengths to identify and label semantically meaningful behaviours. Based on semantic labelling, we propose Semantically Rele-vant Skill Discovery (SRSD) 3, a novel human-in-the-loop approach that collects semantic labels from human feedback and learns a reward func-tion to encourage skills to be more semantically diverse and relevant. Through our experiments in a 2D navigation environment and four loco-motion environments, we demonstrate that SRSD can improve semantic diversity and discover relevant behaviours while scaling effectively to a large variety of behaviours. 
+
+Keywords: Skill Discovery · Human Feedback · Reinforcement Learn-ing. 
+
+1 Introduction 
+
+Given a well-designed reward function, deep reinforcement learning [35] can ef-fectively solve a variety of decision-making problems like video games [26], board games [34], and robotic tasks [23]. However, designing reward functions that en-able the training of general-purpose agents capable of exhibiting a diverse range of behaviours remains a fundamental open problem. In contrast, animals natu-rally learn a repertoire of behaviours, often called skills, which are both reusable  
+
+> 3
+
+Link to a github repository 
+
+> arXiv:2604.24127v1 [cs.LG] 27 Apr 2026
+
+2 M. Hussonnois et al. 
+
+and can be combined to solve new problems. Inspired by this observation, un-supervised skill discovery [5, 8, 28, 33] aims to intrinsically motivate agents to autonomously learn diverse sets of skills, achieving notable success in domains such as locomotion and manipulation. It’s kicking the ball!  
+
+> Reinforcing relevant skills Penalising irrelevant skills
+> It’s a goal kick!
+> It’s an overhead kick!
+> It’s irrelevant!
+> It’s running!
+> ZZZ
+> Z
+
+Fig. 1: It is challenging to learn many types of skills which are all contextually relevant. For instance, football needs many skills such as running and kicking the ball. While sleeping and painting may be distinct, possible activities irrelevant to the current context (playing football). By querying humans to label semantically relevant skills ("running" or "kicking the ball") while labelling other behaviours as irrelevant, our method discovers diverse and contextually relevant skills. Despite promising results, these approaches fail at consistently learning de-sirable skills and often learn misaligned, unsafe or irrelevant behaviours [12, 17]. To increase the desirability of the skill learned, recent approaches suggest guid-ing skill discovery by initialising training with fixed prior knowledge in the form of expert demonstrations [38], videos [39], safety constraints [17], or prompts for language models [31]. Unfortunately, these approaches are unable to adapt to unforeseen or changing environments. This underscores the need for methods that proactively incorporate human guidance during training, enabling agents to continuously adjust to evolving situations. Recent works [12, 13] proposed involving humans in the skill discovery loop by learning a reward function from human preferences. However, the prefer-ence feedback process becomes increasingly inefficient as the number of different types of preferences increases [40]. This limitation is particularly problematic for skill discovery, which naturally involves a spectrum of distinct behaviours, such as running and kicking the ball (see Figure 1). Thus, these methods of-ten result in skill sets that, although aligned, lack semantic diversity (such as only discovering diverse ways of running forward, while ignoring other semanti-cally relevant skills). Alternatively, humans possess an innate cognitive ability to intuitively group observed behaviours into meaningful, “basic-level” categories, such as kicking the ball, goal-kicking, or running. This phenomenon is exten-sively documented in cognitive psychology [32], which shows that people can Leveraging Human Feedback for Semantically-Relevant Skill Discovery 3
+
+naturally assign behaviours to such categories without explicit training, thereby providing maximal information with minimal cognitive effort. Importantly, this categorisation process remains efficient even as the number of skill types in-creases. Thus, leveraging human semantic categorisation ability into the skill discovery loop holds promise for both enhancing semantic diversity among dis-covered skills and achieving greater feedback efficiency compared to traditional preference-based methods. In this work, we leverage human abilities in semantic categorisation to im-prove both semantic diversity, that is, the range of skill types discovered, and feedback efficiency within the skill discovery process. To achieve this, we in-troduce a semantic labelling procedure (see Figure 1): for each trajectory, the human labeller first indicates whether any relevant behaviour is present; if not, the trajectory is marked as ’irrelevant’. Otherwise, the labeller specifies the most appropriate semantic category. We provide both theoretical and empirical evi-dence that this semantic labelling approach scales more effectively than tradi-tional preference-based feedback as the number of skill types increases, making it especially suited to learning a diverse set of behaviours. Building on this, we present Semantically Relevant Skill Discovery (SRSD) , a framework that collects semantic labels from human feedback, trains a semantic predictor, and introduces a reward function to explicitly encourage the learning of semantically meaning-ful skills. We show that skill discovery methods augmented with our reward formulation achieve superior results on DeepMind Control Suite benchmarks. Furthermore, we demonstrate that incorporating a distributional representation of critics further boosts the performance when learning from multiple intrinsic reward functions. In summary, the main contributions are: 
+
+– Semantic Labelling , a novel feedback-efficient mechanism that learns a se-mantic relevance predictor from human feedback. 
+
+– Semantically Relevant Skill Discovery (SRSD) a novel framework that lever-ages semantic labels to discover more semantically diverse skills. 
+
+– Mitigating aleatoric uncertainty when learning with multiple intrinsic reward functions by incorporating a distributional perspective. 
+
+– Qualitative and quantitative evaluation of SRSD, with suitable comparisons with existing baselines for learning diverse and fine-tuned skills. 
+
+2 Related Work 
+
+Unsupervised Skill Discovery. Unsupervised skill discovery aims to simul-taneously explore the space of learnable behaviours and learn useful and diverse skills [36]. In this regard, previous works [1, 8, 15] relied on the reverse mu-tual information between states and skills to train skills to be distinguishable. Recent works [5, 19] improve the exploration capability by using the forward form of the mutual information with contrastive representation learning [6, 10]. Alternative works [28–30] suggest distance-maximising objectives to learn dy-namic skills in locomotion and pixel-based environments. Yet, these methods do 4 M. Hussonnois et al. Distributional Critics     
+
+> Skill Relevance Learning Semantically Relevant Skill Discovery Interactions with the Enviroment
+> Interactions Collected
+> Relevance Predictor
+> Human Labels
+> Interactions
+> Collected
+> Interactions
+> Collected
+> (a) (b) (c)
+
+Fig. 2: Illustration of our method. First (a), SRSD explores potential relevant type of behaviours by maximising skill diversity and exploring with rdiv and 
+
+rexploration . Then (b), we start eliciting semantic labels, and learn a semantic predictor from these labels. This semantic predictor is used to additionally re-ward skills to be more semantically relevant with rrelevance (c). not consider the environment’s underlying context, and tend to produce dan-gerous or unaligned skills. To this end, the safety-aware skill discovery frame-work [17] was proposed to include user-pre-defined constraints. Alternatively, recent work [16, 31] examines how to incorporate context into skill discovery using LLMs. However, these methods rely on user pre-training-based domain knowledge to actively guide the process towards more desirable skills. Our ap-proach instead focuses on reactive guidance of skills, incorporating the human context only when requested, leading to a more realistic skill discovery process. 
+
+Preference-based Skill Discovery. To discover more desirable skills, preference-based skill discovery approaches are based on preference-based RL (PbRL) [7, 22, 27]. Alternatively, CDP [12] and HaSD [13] use preferences with human-in-the-loop [22] methods to discover more desirable and aligned skills. Our work also employs a human-in-the-loop approach but introduces semantic labelling. Semantic labelling focuses on minimal requirements for behaviour classification, making it more effective than preferences in environments with numerous se-mantic behaviours like running, walking and jumping. 
+
+3 Preliminaries 
+
+Skill Discovery Settings. We consider a Markov Decision Process (MDP) without a reward function, defined as M = ( S, A, P), where S,A and P respec-tively denote the state spaces, action spaces and transition dynamics. Consistent with prior work [5, 8, 29], we note random variables for states and actions as 
+
+S and A. We then consider a latent variable z ∈ Z, on which we condition our policy. We refer to a policy conditioned on a fixed z, with parameter θ, as a skill and it is denoted as πθ (a|s, z ). In this work, we follow Contrastive Skill Leveraging Human Feedback for Semantically-Relevant Skill Discovery 5
+
+Discovery methods [19, 25] that train πθ (a|s, z ) by maximising the forward form of the mutual information I(S; Z) between S and Z:
+
+I(S; Z) = H(S) − H (S|Z), (1) where H(·) denotes the Shannon entropy. Contrastive Skill Discovery methods [19, 25] focus on the forward form of mutual information to explicitly optimise state entropy H(S) to improve exploration. We adopt this method for skill dis-covery due to its state of the art performance on URLB [20]. 
+
+3.1 Contrastive Skill Discovery 
+
+Contrastive skill discovery methods leverage contrastive representation learning to estimate condition entropy and particle-based exploration to estimate state entropy. In the following sections, we will detail both components. 
+
+Contrastive Representation Learning. Contrastive Skill Discovery meth-ods use contrastive representation learning to approximate conditioned state en-tropy H(S|Z) with a discriminator qϕ capable of handling high continuous skill dimensions, improving skill diversity. To this end, we maximise the following lower bound for the conditional entropy (see [25] for a detailed derivation): 
+
+−H (S|Z) ≥ E[log qϕ(s, s ′, z )] with qϕ(s, s ′, z ) = gϕ1 (s, s ′)⊤gϕ2 (z)
+
+∥gϕ1 (s, s ′)∥ ∥ gϕ2 (z)∥ T , (2) where qϕ is a parameterised function used to estimate p(s, s ′, z ). More pre-cisely, qϕ is defined with a similar inner product proposed in [6]. T is a tem-perature parameter and gψ1,2 are neural networks used to learn a state and a skill embedding. Then both encoders gϕ1,2 are trained to to maximise similarity between state transitions and corresponding skills by optimising the following Noise Contrastive Estimation (NCE) loss [10]: 
+
+LN CE = log qϕ(s, s ′, z ) − log 1
+
+N
+
+> N
+
+X
+
+> j=1
+
+exp( qϕ(sj , s ′ 
+
+> j
+
+, z ))) , (3) where s, s ′ are sampled using skill z and sj , s ′ 
+
+> j
+
+are sampled using N − 1 distinct skills. Finally, the trained discriminators can be used to intrinsically reward skills 
+
+πθ (a|s, z ) to generate diverse behaviours for different random variables z ∈ Z
+
+with the following reward rdiv = qϕ(s, s ′|z).
+
+Particle-Based Exploration. As mentioned earlier in this section, optimis-ing skills πθ (a|s, z ) solely with rdiv is not enough to ensure exploration of the behaviour space. To mitigate this issue, CIC proposes rewarding skills for max-imising state entropy by estimating the state entropy H(S) with a particle-based 6 M. Hussonnois et al. 
+
+entropy estimator, APT [24]. Specifically, APT estimates the state entropy by computing the Euclidean distance between the embedding of a state and all its 
+
+k-nearest neighbours resulting in the following reward: 
+
+rexp = HAP T (S) ∝ 1
+
+k
+
+X
+
+> h∗∈Nk
+
+log ∥h − h∗∥ , (4) where hi is an embedding of (s, s ′) from gϕ1 and h∗ is the kNN embedding. 
+
+4 Semantically-Relevant Skill Discovery (SRSD) 
+
+To improve semantic diversity (diversity in the type of skills) in skill discovery, we consider discovering diverse skills that have a high chance of being categorised among relevant semantics by a human overseer. First, we describe the problem formulation for discovering diverse skills that fall into relevant semantics in Sec-tion 4.1. We then introduce our novel semantic labelling feedback mechanism and the resulting relevance reward in Section 4.2. Finally, in Section 4.3 we present our overall SRSD method which is illustrated in Figure 2 and described in Algorithm 1. 
+
+4.1 Semantically-Relevant Skill Discovery Settings 
+
+We extend the skill discovery setting introduced in Section 3 to incorporate the semantic variable c ∈ C , which denote different type of behaviour. Semantics 
+
+C are composed of multiple relevant semantics (relevant type of behaviour) C+ 
+
+> 4
+
+and one irrelevant semantic C− (corresponding to all irrelevant types of be-haviour). Our goal in this work is to learn skills πθ (a|s, z ) that are diverse and that belong to relevant semantics C+.To this end we proposed to follow a multi-objective optimisation problem, where the objectives are the skill discovery objective presented in Section 3 and our novel relevance objective. We formulate our relevance objective as maximis-ing the probability that trajectories τ generated by πθ (a|s, z ) being labelled as one of the relevant semantics C+. Thus we propose to train πθ (a|s, z ) to maximise the following multi-objective problem: 
+
+max 
+
+> πθ
+
+(I(S; Z), p (c ∈ C +|τ )) , (5) where the resulting skills are diverse, with a high chance of being classified among a relevant semantics. Next, we describe how to train πθ (a|s, z ) to maximise our novel relevance objective.   
+
+> 4In this work we consider a fixed number of relevant classes throughout the pre-training. Leveraging Human Feedback for Semantically-Relevant Skill Discovery 7
+
+4.2 Learning Semantically-Relevant Behaviour from Human Feedback 
+
+To maximise the probability of τ induced by πθ (a|s, z ) to be labelled as one of the relevant semantics C+, it is necessary to access the semantic distribution across trajectory p(c|τ ). However such distributions cannot be observed or obtained from the environment. Thus we propose to learn it through human feedback by introducing "Semantic Labelling", a novel human-feedback mechanism. 
+
+Semantic Labelling Process. Semantic labelling involves incorporating a human-in-the-loop approach, where a human observer categorises trajectory seg-ments as belonging to either relevant or irrelevant semantics. Specifically, during semantic labelling, the human is provided with a trajectory segment of horizon 
+
+H, such as σ = (( sk, a k), . . . , (sk+H , a k+H )) ∈ (S × A )H and assigns it a label 
+
+c ∈ C . Recognising cognitive effort and time as a relevant constraint for humans, we assume a fixed budget B of human feedback, represented as ζB = {σi, c i}Bi=0 
+
+during the training process. 
+
+Scaling with respect to |C| : Semantic vs Preference Feedback. To show that semantic-labelling feedback is more suitable than preference to handle mul-tiple semantics, we first define preference over multiple semantics. As pair-wise comparison (preferences) cannot identify multiple semantics alone [40], we sam-ple preference feedback over multiple semantics by first selecting a relevant se-mantic, and then sampling preference feedback. Then we analyse for each feed-back mode the probability of sampling a query that will provide information about a relevant semantic c ∈ C+. We describe that the order for each mode on 
+
+|C| is: 
+
+Proposition 1. Let |C| ≥ 3 denote the total number of semantics. Then, the probability that a single preference feedback query is informative about a relevant semantic is O
+
+ 1
+
+> |C|
+
+
+
+, whereas the probability of a semantic-label query remains 
+
+O(1) , independent of |C| .
+
+The proof is provided in Appendix A.2. This proposition explains that semantic-label feedback scale well to the number of semantics as it is independent of |C| . In contrast, the probability of preference feedback being informative of a relevant semantic will diminish as |C| increases. 
+
+Semantic Predictor. We model the semantic distribution across trajectory 
+
+p(c|τ ) with a parametric semantic predictor pψ (c|σ). As we assume all behaviours to follow the Markov property, we define the semantic predictor with the scoring function qψ in Equation 6: 
+
+pψ (c|σ) = exp( PHt qψ (c|st, a t)) 
+
+P|C|  
+
+> j=0
+
+exp( PHt qψ (cj |st, a t)) . (6) 8 M. Hussonnois et al.  
+
+> Semantic 1 Semantic 2
+
+Fig. 3: Qualitative visualisations of skill discovered with Cheetah, Hopper and Walker. Cheetah learns to run forward and backflip while Hopper learns to hop forward and backflip and finally Walker learns to balance itself by walking and running. Intuitively, this means that the probability of a trajectory segment σ being predicted as c depends exponentially on the sum over the segment of an underly-ing score function. The scoring function qψ is modelled as a neural network with parameters ψ and is trained with a cross-entropy loss. By minimising this loss function, the scoring function learns to generate high scores for the corresponding relevant or irrelevant semantics. 
+
+Collecting Human Feedback and Active Sampling. During training, we repeatedly query a human overseer to collect feedback up to a maximum bud-get. Since some semantics are rare or emerge only in the later stages, a major challenge is ensuring a fair representation of all relevant classes in the dataset while avoiding over-representation of irrelevant examples. To address this, in each query session, we apply a filtering process by dividing the batch of seg-ments among relevant semantics using our semantic predictor. We then sample uniformly among relevant semantics until a predetermined quota is met. This avoids oversampling and enables a more balanced and efficient use of human feedback. We detail the process in the Algorithm 2 in the Appendix. 
+
+Semantically Relevant Rewards Function. Finally, using the scoring func-tion qψ previously introduced, we propose the following novel semantically rele-vant reward function: 
+
+rrel = log exp( qψ (f (c|z)|s, a )) 
+
+P|C| 
+
+> j=0
+
+exp( qψ (cj |s, a )) with f : Z → C +, (7) that rewards skills for generating trajectories that have a high chance of being predicted as relevant. To avoid skills collapsing into relevant semantics that are easier to learn, we propose to divide the skill space Z equally among the |C +|
+
+semantics by replacing the last |C +| dimension of the z latent variable with a one-hot vector that specifies a relevant semantic. Here, f (c|z), is a simple mapping function from Z to C+ that reads the one-hot segment of to determine the relevant class associated. We provide more details in Appendix A.3. Leveraging Human Feedback for Semantically-Relevant Skill Discovery 9
+
+4.3 Semantically Relevant Skill Discovery (SRSD) 
+
+In this section, we present Semantically Relevant Skill Discovery (SRSD), our overall method that learns diverse skills that belong to relevant semantics by maximising the Equation 5. First, SRSD ensures that skills explore potential relevant semantics by maximising skill diversity while exploring with rexp and 
+
+rdiv introduced in Section 3.1. Then, we elicit semantic labels from human feed-back, using which we learn a semantic predictor. We then use this semantic predictor with rrelevance to additionally reward skills to be more semantically relevant. In other words, we train πθ (a|s, z ) to maximise the linear combination of rexp , r div , r rel such that: 
+
+rSRSD  
+
+> t
+
+= rexp  
+
+> t
+
++ rdiv  
+
+> t
+
++ wt · rrel  
+
+> t
+
+with wrt =
+
+(0 if t ≤ t0 
+
+> ζ
+> |B|
+
+otherwise (8) Here, wt is a dynamic weight initialised at 0 and increases as we collect feedback from humans until the number of elements in dataset ζ reaches the budget B as follow: 
+
+Distributional Critic. SRSD linearly combines three learned reward functions which result in a noisy and more complex reward distribution, making approxi-mating the value function challenging. Thus we propose to adopt a distributional representation of critics [3] which allows for learning the aleatoric uncertainty of our reward functions. This is done by incorporating Truncated Quantile Critics (TQC) [18] on top of TD3 [9] as a backbone reinforcement learning algorithm. TQC integrates the distributional perspective by decomposing the expected re-turn into the atoms of a distributional representation. Additionally, it controls overestimation by truncating the right tail of the reward distribution. 
+
+5 Experiments 
+
+Our experiments aim to address the following questions: (Q1) How does SRSD’s performance across various pre-trainings compare to previous methods? (Q2) Is semantic feedback more effective than preference feedback at handling a large range of semantics? 
+
+5.1 Experiment Setup Baselines. We compare SRSD with the following baselines: TD3 [9], LSD [28], CIC [19], ComSD [25], and HaSD [13]. TD3 serves as the backbone RL algorithm for all methods, providing a baseline without pre-training. LSD, CIC and ComSD acts as the baselines for unsupervised skill discovery without human feedback. HaSD, which uses human preferences, serves as the baseline for human-guided skill discovery. To ensure fairness, we integrated each method with TQC, and extended HaSD to handle multiple preference modes. 10 M. Hussonnois et al. 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 
+
+> P(SRSD > X)
+> LSD
+> CIC
+> ComSD
+> HaSD
+> Algorithm X
+
+(a) Zero-shot 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0  
+
+> P(SRSD > X)
+> LSD
+> CIC
+> ComSD
+> HaSD
+> Algorithm X
+
+(b) Few-shot 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0  
+
+> P(SRSD > X)
+> TD3
+> LSD
+> CIC
+> ComSD
+> HaSD
+> Algorithm X
+
+(c) Fine-tuning 
+
+Fig. 4: Average SRSD’s probability of improvement over baselines on downstream tasks on URLB for Zero-shot(a), Few-short(b) and Fine-tuning evaluation(c). Probability of improvement shows how likely it is for SRSD to outperform algo-rithm X on a randomly selected task [2]. SRSD provides consistency performance gains over all baselines. 
+
+Simulating Human Feedback. To facilitate experimentation and reproducibil-ity, we simulated human feedback as previous works [22]. Human feedback is modelled by computing the probability of each relevant semantic being labelled independently. We select the semantic with the highest probability and use it to stochastically choose between labelling the semantic as relevant/ irrelevant. We provide more details in Appendix A.5 along with evaluations using simulated human irrationality. 
+
+Environments. We evaluated our approach across 4 domains from URLB [20] and DeepMind Control Suite (DMC) [37] (Walker, Quadruped, Cheetah, Hop-per) . Each domain comports 4 downstream tasks to evaluate and fine-tune our skills. In these environments, we define relevant skills as downstream tasks and use downstream task rewards as ground-truth rewards. Additionally, we use a 2D point agent navigation environment in a two-dimensional circular room. In this environment, relevant semantics refers to travelling to one of the desired sectors of the environment. Ground-truth rewards are binary values that reward if the agent is in the desired sector. 
+
+Evaluation. Following prior work, we pre-trained CoMSD, HaSD, and SRSD for 1M (Nav2d) and 2M (DMC) steps. All methods were initialised with 5 different random seeds. HaSD and SRSD used 1400 feedback instances. In DMC domains, we assess performance by fine-tuning the pre-trained skills of each method on downstream tasks as per URLB [20]. In this procedure, 100K environment steps are considered, and during the first 4K steps, we randomly sample skills and select the best-performing ones, which are fine-tuned with extrinsic rewards for 96K steps. For HaSD and SRSD, we sampled only semantically relevant skills. After fine-tuning we evaluated each seed for each method 10 times resulting in Leveraging Human Feedback for Semantically-Relevant Skill Discovery 11 
+
+50 scores for each task. We also assessed zero-shot (by evaluating a randomly sampled skill) and few-shot (by evaluating the best-performing skill before being fine-tuned) performances. 2 4 6 8 10 12 14 16               
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> Precision
+> 246810 12 14 16
+> Number of Semantic Relevant Behaviour
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> Recall
+> 246810 12 14 16
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> F1 Score
+> Feedback Type
+> Semantic(ours)
+> Preference
+
+Fig. 5: Impact of semantic and preference feedback on skills learned when han-dling numerous semantic (2,4,8,12,16) in a 2D navigation environment. Precision measures how many skills are semantically relevant, while recall measures how much of the relevant semantics are covered by skills. This shows that compared to semantic-labels, preference feedback is less efficient in settings with multiple semantics, resulting in poor performance. 
+
+(Q1) Performance on DMC Suite. To assess the performance gains brought by SRSD over baseline methods, we report, in Figure 4, the average probability of improvement as presented in [2] across fine-tuning, zero-shot, and few-shot evaluations, respectively. Our analysis reveals that SRSD generally achieves a statistically significant probability of improvement over all baselines (i.e., the probability of improvement exceeds 0.5 and the associated confidence intervals do not overlap 0.5). The main exception arises in comparisons with HaSD on zero-shot and few-shot evaluations, where the increased stochasticity inherent to these scenarios reduces the margin of superiority. Nevertheless, SRSD still demonstrates a mean probability of improvement above 0.5 in these cases, indi-cating consistent performance gains. We provide a granular perspective with de-tailed score distributions for all agents and tasks in Appendix 6 showing SRSD’s superior performance on the more challenging tasks. Generally, both SRSD and HaSD achieve high overall performance due to their ability to systematically reduce the skill search space and target semantically relevant behaviours dur-ing sampling. Finally, Figure 3 presents qualitative examples of diverse skills discovered by the SRSD framework. 
+
+(Q2) Preference feedback vs Semantic feedback. We analyse the impact of semantic and preference feedback on skills learned when handling numerous 12 M. Hussonnois et al. 
+
+relevant semantics (2,4,8,12,16) in the 2D navigation environment. To this end, we sampled 1000 skills after pre-training and evaluated the coverage of each semantic by its associated semantic-conditioned skills. In Figure 5 we compared both feedback types against precision, recall and F1-score metrics. Precision measures how many skills are semantically relevant, while recall measures how much of the relevant semantics are covered by skills. This shows that compared to semantic-labels, preference feedback is less efficient in settings with multiple semantics, resulting in poor performance. Qualitative visualisations of skills for all environments and methods are reported in Appendix A.1. 
+
+Other Experiments. We also investigated the following aspects, which are covered in Appendix A.1. Feedback sensitivity: SRSD remains largely robust to the feedback budget; while zero-shot performance decreases as labels drop (40, 100, 400, 1400 instances), it still outperforms ComSD even with only 40 labels. Active sampling: our strategy allocates the majority of labels to relevant seman-tics (>50% in all domains; up to 79% in Walker), which reduces oversampling of irrelevant semantics, improves fairness across relevant classes (via Jain’s index), and yields measurable performance gains. Distributional perspective: integrating a TQC-based distributional critic delivers statistically significant improvements by managing aleatoric uncertainty and mitigating value overestimation. Reward ablations: all components contribute positively (probability of improvement > 0.5) where rdiv and rrel show consistent, significant gains. Real human-in-the-loop: Authors familiar with the task provided 400 feedback signals across 12 query sessions (1.5 minutes each; ≈20 minutes total) to learn skills that closely match the simulated-feedback setting. 
+
+6 Discussion and Limitation 
+
+We introduce Semantic Relevant Skills Discovery (SRSD), a framework using semantic feedback to improve diversity in the type of skills discovered. In four locomotion environments, SRSD effectively discovers diverse and relevant skills. We provide theoretical and empirical evidence that semantic-labels better suit learning different types of skills compared to preference feedback. Future work will extend SRSD to scenarios where relevant semantics are not fixed but evolve dynamically, leading to settings that better mirror real-world skill discovery. A key limitation of our work is that we only learn skills that are semantically mean-ingful to humans. However, in the context of learning aligned behaviours, this is a desirable characteristic. In addition, while we designed our framework and exper-iments to closely simulate realistic humans with stochasticity and irrationality, incorporating actual human feedback may introduce additional challenges. We leave this aspect for future work. Bibliography 
+
+[1] Achiam, J., Edwards, H., Amodei, D., Abbeel, P.: Variational option dis-covery algorithms. arXiv preprint arXiv:1807.10299 (2018) [2] Agarwal, R., Schwarzer, M., Castro, P.S., Courville, A.C., Bellemare, M.: Deep reinforcement learning at the edge of the statistical precipice. Ad-vances in Neural Information Processing Systems 34 (2021) [3] Bellemare, M.G., Dabney, W., Munos, R.: A distributional perspective on reinforcement learning. In: International conference on machine learning. pp. 449–458. PMLR (2017) [4] Bouthillier, X., Delaunay, P., Bronzi, M., Trofimov, A., Nichyporuk, B., Szeto, J., Mohammadi Sepahvand, N., Raff, E., Madan, K., Voleti, V., et al.: Accounting for variance in machine learning benchmarks. Proceedings of Machine Learning and Systems (2021) [5] Campos, V., Trott, A., Xiong, C., Socher, R., Giró-i Nieto, X., Torres, J.: Explore, discover and learn: Unsupervised discovery of state-covering skills. In: International conference on machine learning. pp. 1317–1327. PMLR (2020) [6] Chen, T., Kornblith, S., Norouzi, M., Hinton, G.: A simple framework for contrastive learning of visual representations. In: International conference on machine learning. pp. 1597–1607. PmLR (2020) [7] Christiano, P.F., Leike, J., Brown, T., Martic, M., Legg, S., Amodei, D.: Deep reinforcement learning from human preferences. In: Guyon, I., Luxburg, U.V., Bengio, S., Wallach, H., Fergus, R., Vishwanathan, S., Gar-nett, R. (eds.) Advances in Neural Information Processing Systems. vol. 30. Curran Associates, Inc. (2017) [8] Eysenbach, B., Ibarz, J., Gupta, A., Levine, S.: Diversity is all you need: Learning skills without a reward function. In: 7th International Conference on Learning Representations, ICLR 2019 (2019) [9] Fujimoto, S., van Hoof, H., Meger, D.: Addressing function approximation error in actor-critic methods. In: Dy, J., Krause, A. (eds.) Proceedings of the 35th International Conference on Machine Learning. Proceedings of Machine Learning Research, vol. 80, pp. 1587–1596. PMLR (10–15 Jul 2018) [10] Gutmann, M., Hyvärinen, A.: Noise-contrastive estimation: A new estima-tion principle for unnormalized statistical models. In: Teh, Y.W., Titter-ington, M. (eds.) Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics. Proceedings of Machine Learning Research, vol. 9, pp. 297–304. PMLR, Chia Laguna Resort, Sardinia, Italy (13–15 May 2010) [11] Huang, S., Dossa, R.F.J., Ye, C., Braga, J., Chakraborty, D., Mehta, K., Araújo, J.G.: Cleanrl: High-quality single-file implementations of deep re-inforcement learning algorithms. Journal of Machine Learning Research 
+
+23 (274), 1–18 (2022) 14 M. Hussonnois et al. 
+
+[12] Hussonnois, M., Karimpanal, T.G., Rana, S.: Controlled diversity with pref-erence: Towards learning a diverse set of desired skills. In: Proceedings of the 2023 International Conference on Autonomous Agents and Multiagent Systems. pp. 1135–1143 (2023) [13] Hussonnois, M., Karimpanal, T.G., Rana, S.: Human-aligned skill discovery: Balancing behaviour exploration and alignment. In: Proceedings of the 24th International Conference on Autonomous Agents and Multiagent Systems. pp. 1025–1033 (2025) [14] JAIN, R.: A quantitative measure of fairness and discrimination for resource allocation in shared computer systems. DEC Research Report (1984) [15] Karol Gregor, D.R., Wierstra, D.: Variational intrinsic control. International Conference on Robotic Learning 0(0), 0 (2016) [16] Kim, H., Lee, B., Lee, H., Hwang, D., Kim, D., Choo, J.: Do’s and don’ts: Learning desirable skills with instruction videos. arXiv preprint arXiv:2406.00324 (2024) [17] Kim, S., Kwon, J., Lee, T., Park, Y., Perez, J.: Safety-aware unsupervised skill discovery. In: 2023 International Conference on Robotics and Automa-tion (ICRA). IEEE (2022) [18] Kuznetsov, A., Shvechikov, P., Grishin, A., Vetrov, D.: Controlling overes-timation bias with truncated mixture of continuous distributional quantile critics. In: International Conference on Machine Learning. pp. 5556–5566. PMLR (2020) [19] Laskin, M., Liu, H., Peng, X.B., Yarats, D., NYU, M., Rajeswaran, A., Abbeel, P.: Contrastive intrinsic control for unsupervised reinforcement learning. In: Proceedings of the 36th International Conference on Neural Information Processing Systems. pp. 34478–34491 (2022) [20] Laskin, M., Yarats, D., Liu, H., Lee, K., Zhan, A., Lu, K., Cang, C., Pinto, L., Abbeel, P.: Urlb: Unsupervised reinforcement learning benchmark. In: Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 2) (2021) [21] Lee, K., Smith, L., Dragan, A., Abbeel, P.: B-pref: Benchmarking preference-based reinforcement learning. In: Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 1) (2021) [22] Lee, K., Smith, L.M., Abbeel, P.: Pebble: Feedback-efficient interactive rein-forcement learning via relabeling experience and unsupervised pre-training. In: International Conference on Machine Learning. pp. 6152–6163. PMLR (2021) [23] Lillicrap, T.P., Hunt, J.J., Pritzel, A., Heess, N., Erez, T., Tassa, Y., Sil-ver, D., Wierstra, D.: Continuous control with deep reinforcement learning. arXiv preprint arXiv:1509.02971 (2015) [24] Liu, H., Abbeel, P.: Behavior from the void: Unsupervised active pre-training. Advances in Neural Information Processing Systems 34 , 18459– 18473 (2021) [25] Liu, X., Chen, Y., Zhao, D.: Comsd: Balancing behavioral quality and di-versity in unsupervised skill discovery. arXiv e-prints pp. arXiv–2309 (2023) Leveraging Human Feedback for Semantically-Relevant Skill Discovery 15 
+
+[26] Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A.A., Veness, J., Bellemare, M.G., Graves, A., Riedmiller, M.A., Fidjeland, A., Ostrovski, G., Petersen, S., Beattie, C., Sadik, A., Antonoglou, I., King, H., Kumaran, D., Wierstra, D., Legg, S., Hassabis, D.: Human-level control through deep reinforcement learning. Nature 518 , 529–533 (2015) [27] Park, J., Seo, Y., Shin, J., Lee, H., Abbeel, P., Lee, K.: Surf: Semi-supervised reward learning with data augmentation for feedback-efficient preference-based reinforcement learning. In: 10th International Conference on Learning Representations, ICLR 2022 (2022) [28] Park, S., Choi, J., Kim, J., Lee, H., Kim, G.: Lipschitz-constrained unsu-pervised skill discovery. In: International Conference on Learning Represen-tations (2021) [29] Park, S., Lee, K., Lee, Y., Abbeel, P.: Controllability-aware unsupervised skill discovery. In: Proceedings of the 40th International Conference on Ma-chine Learning. pp. 27225–27245 (2023) [30] Park, S., Rybkin, O., Levine, S.: Metra: Scalable unsupervised rl with metric-aware abstraction. In: The Twelfth International Conference on Learning Representations (2023) [31] Rho, S., Smith, L., Li, T., Levine, S., Peng, X.B., Ha, S.: Language guided skill discovery. arXiv preprint arXiv:2406.06615 (2024) [32] Rosch, E.: Principles of categorization. In: Collins, A., Smith, E.E. (eds.) Readings in Cognitive Science, a Perspective From Psychology and Artificial Intelligence, pp. 312–22. Morgan Kaufmann Publishers (1988) [33] Sharma, A., Gu, S., Levine, S., Kumar, V., Hausman, K.: Dynamics-aware unsupervised discovery of skills. In: International Conference on Learning Representations (2020) [34] Silver, D., Huang, A., Maddison, C.J., Guez, A., Sifre, L., Van Den Driess-che, G., Schrittwieser, J., Antonoglou, I., Panneershelvam, V., Lanctot, M., et al.: Mastering the game of go with deep neural networks and tree search. nature 529 (7587), 484–489 (2016) [35] Sutton, R.S., Barto, A.G.: Reinforcement learning: an introduction, 2nd edn. adaptive computation and machine learning (2018) [36] Sutton, R.S., Precup, D., Singh, S.: Between mdps and semi-mdps: A frame-work for temporal abstraction in reinforcement learning. Artificial Intelli-gence 112 (1), 181–211 (1999) [37] Tassa, Y., Doron, Y., Muldal, A., Erez, T., Li, Y., Casas, D.d.L., Budden, D., Abdolmaleki, A., Merel, J., Lefrancq, A., et al.: Deepmind control suite. arXiv preprint arXiv:1801.00690 (2018) [38] Wan, W., Zhu, Y., Shah, R., Zhu, Y.: Lotus: Continual imitation learning for robot manipulation through unsupervised skill discovery. In: 2024 IEEE International Conference on Robotics and Automation (ICRA). pp. 537– 544. IEEE (2024) [39] Xu, M., Xu, Z., Chi, C., Veloso, M., Song, S.: Xskill: Cross embodiment skill discovery. In: Conference on robot learning. pp. 3536–3555. PMLR (2023) [40] Zhao, Z., Piech, P., Xia, L.: Learning mixtures of plackett-luce models. In: International Conference on Machine Learning. pp. 2906–2914. PMLR (2016) 16 M. Hussonnois et al. 
+
+A Appendix 
+
+A.1 Additional Experiments 
+
+In this section we provide additional results supporting Q1 and Q2 in Section 5 and additional experiments to address the following questions:(Q3) How sen-sitive is SRSD to feedback budget? (Q4) Does active sampling ensure evenly distributed dataset of semantic labels? (Q5) Does incorporating a distributional perspective improve SRSD performance? (Q6) How does each reward term in-dividually affect training performance? (Q7) How does SRSD perform with real Human-in-the-Loop Experiment? 
+
+(Q1) How does SRSD’s performance across various pre-trainings com-pare to previous methods? To provide a more granular perspective, we in-clude detailed score distributions for all agents and tasks in Figure 6 for the fine-tuning evaluation, focusing on selected baselines. These plots illustrate that SRSD consistently outperforms all baselines, with particularly notable improve-ments on the more challenging tasks (shown to the right of the plots), such as Quadruped Run, Walker Run, Cheetah Run (forward and backward), and Hopper Hop (forward and backward). 
+
+(Q2) Is semantic feedback more effective than preference feedback at handling a large range of semantics? In this section, we qualitatively compare skills learned from semantic labels with those learned from preference feedback. Figure 7a shows the target semantic sectors for the 2D navigation environments with 2, 4, 8, 12, and 16 semantics. Figures 7b and 7c display the skill sets learned by HaSD and SRSD, respectively. We can observe that HaSD’s ability to produce skills that cover all the semantic sectors degrades significantly starting at 4 semantics, whereas SRSD learns a skill set that covers all semantics evenly with more consistency. 
+
+(Q3) How sensitive is SRSD to feedback budget? (Q3) Sensitivity to Human Feedback Budget. We also analyse the sensitivity of SRSD perfor-mance to the human feedback budget. We evaluated SRSD with budgets of 40, 100, 400 and 1400 maximum feedback instances. We report in Figure 8 the aggre-gated normalised score distribution against ComSD over zero-shot capabilities. While reducing feedback negatively impacts SRSD’s zero-shot capability, it still performs better than ComSD even with as few as 40 feedback instances. 
+
+(Q4) Does active sampling ensure evenly distributed dataset of se-mantic labels? We analyse the effect of active sampling on label sample from the Human and of SRSD performances. Figure 10 shows the budget allocation percentage (%) allocated to relevant semantic labels with and without active sampling. Without active sampling, more than 50% of samples were allocated to Leveraging Human Feedback for Semantically-Relevant Skill Discovery 17 0.0  
+
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+
+Walker Stand Walker Walk Walker Flip Walker Run  
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+
+Quadruped Stand Quadruped Walk Quadruped Jump Quadruped Run  
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+
+Cheetah Flip Cheetah Flip backward Cheetah Run forward Cheetah Run backward      
+
+> 0.00 0.25 0.50 0.75 1.00
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+
+Hopper Flip     
+
+> 0.00 0.25 0.50 0.75 1.00
+
+Hopper Flip backward     
+
+> 0.00 0.25 0.50 0.75 1.00
+
+Hopper Hop     
+
+> 0.00 0.25 0.50 0.75 1.00
+
+Hopper Hop backward      
+
+> 0.0 0.2 0.4 0.6 0.8 1.0
+
+Normalized Score( )
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> Fractions of runs with score >
+
+TD3 ComSD HaSD SRSD(ours) 
+
+Fig. 6: Score distributions after fine-tuning skills over 12 downstream tasks on URLB. Score distributions show the fraction of runs above a certain score (higher curve is better) [2]. SRSD achieves competitive performances across all tasks and agents. 18 M. Hussonnois et al. 1.00 0.75 0.50 0.25 0.00 0.25 0.50 0.75 1.00 
+
+> 1.00
+> 0.75
+> 0.50
+> 0.25
+> 0.00
+> 0.25
+> 0.50
+> 0.75
+> 1.00
+> Semantic 1
+> Semantic 2
+> Semantic 3
+> Semantic 4
+> Semantic 5
+> Semantic 6
+> Semantic 7
+> Semantic 8
+> Semantic 9
+> Semantic 10
+> Semantic 11
+> Semantic 12
+> Semantic 13
+> Semantic 14
+> Semantic 15
+> Semantic 16
+
+(a) Example 
+
+(b) HaSD 
+
+(c) SRSD 2 4 8 12 16 Number of Semantics 
+
+Fig. 7: (a) Examples of the desired sectors representing semantic behaviours for each 2D navigation environment with 2,4,8,12 and 16 semantic behaviours. (b) Visualisation of skills learned with HaSD over each 2D navigation environments. (c) Visualisation of skills learned with SRSD over each 2D navigation environ-ments Leveraging Human Feedback for Semantically-Relevant Skill Discovery 19 0.0 0.2 0.4 0.6 0.8 1.0 
+
+## Normalized Score( )
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 
+
+> Fractions of runs with score >
+
+Feedback=1400 
+
+Feedback=400 
+
+Feedback=100 
+
+Feedback=40 
+
+ComSD 
+
+Fig. 8: Aggregated and normalised score distributions for 12 downstream tasks on URLB over zero-shot evaluation. (a) shows the effect of different feedback budgets on SRSD performance. While reducing feedback impacts the zero-shot capability of SRSD, it still performs better than ComSD with a budget of 40. 20 M. Hussonnois et al. 
+
+irrelevant semantic, while, in the Quadruped and Hopper domains, only 15% or 2% of samples were labelled as one of the relevant semantics. In contrast, our ac-tive sampling scheme allocates more than 50% of the samples to relevant classes in all domains and up to 79% in Walker. This shows that it effectively reduces oversampling of irrelevant semantics. Additionally, in Figure 9 we measured the resource allocation fairness across relevant classes. To this end we used Jain’s fairness index [14] metric that measures the equitable distribution of resources among |C +| relevant classes, where a value of 1 represents perfect fairness and a value of 1/|C+| signifies the utmost unfairness (see practical implementation section in Appendix A.4 for more details). We can observe that our active sample also improves the fairness of samples allocated to each relevant class and allows us to collect labels in all relevant semantics. Lastly, we can observe in Figure 11 that reducing oversampling of irrelevant semantic and improving fairness alloca-tion in relevant classes can positively influence SRSD performance. Walker Quadruped Cheetah Hopper  
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> Jain's Fairness Index
+> Active Sampling Random Sampling
+
+Fig. 9: Measure of allocation’s fairness of labels across relevant classes (1 is a uniform distribution, while 1/|C +|, (0.25 here), means that only one relevant class was labelled). Our active sampling methods ensure a balanced dataset unlike random sampling. 
+
+(Q5) Does incorporating a distributional perspective improve SRSD performance? Figure 11 indicates that integrating TQC into SRSD brings statistically meaningful performance gains, as per the Neyman-Pearson statisti-cal testing criterion [4], (i.e., the probability of improvement exceeds 0.75 and the associated confidence intervals do not overlap 0.75). Further analysis reveals that the addition of explicit overestimation controls within TQC significantly im-proves outcomes, with statistical significance. Both components improve SRSD’s Leveraging Human Feedback for Semantically-Relevant Skill Discovery 21 Walker Quadruped Cheetah Hopper  
+
+> 0.0
+> 10.0
+> 20.0
+> 30.0
+> 40.0
+> 50.0
+> 60.0
+> 70.0
+> 80.0
+> Percentage of Budget (%)
+> Allocated to Relevant Classes
+> Active Sampling Random Sampling
+
+Fig. 10: Percentage of budget (%) allocated to labels from the relevant semantics. Compared to random sampling, our active sampling allocated more labels to relevant semantics. performance, emphasising the importance of managing aleatoric uncertainty and mitigating overestimation, particularly in frameworks involving multiple intrin-sic reward functions. 
+
+Q6) How does each reward term individually affect training perfor-mance? Figure 11 shows the average probability of improvement when each reward signal is integrated into SRSD. All reward components achieved a prob-ability above 0.5, indicating consistent performance gains. Both rdiversity and 
+
+rrelevance exhibit statistically significant improvements, while rexploration shows greater variability. This variability likely arises because rexploration is most ben-eficial in tasks requiring exploration, leading to substantial gains in some cases, but more modest improvements when exploration is less critical. 
+
+(Q7) How does SRSD perform with real Human-in-the-Loop Exper-iment? We further evaluated our method with a human in the loop by repli-cating the 2D navigation experiment with four semantics. Authors familiar with the task provided 400 feedback signals across 12 query sessions (1.5 minutes each; ≈20 minutes total). To collect semantic labels for the human-in-the-loop experiment we implemented an interface modelled after [13] and adapted it for semantic labelling (Figure6). The layout is as follows: brief task instructions ap-pear at the top (shared across all experiments). The left panel displays each trajectory segment as a single static image of the agent’s path, following [13] to enable rapid feedback, for more complex behaviours (e.g., in the DeepMind Control suite), this can be replaced by a short video. The right panel provides labelling controls, including a predefined Irrelevant class and an Add Semantic 22 M. Hussonnois et al. 0.4 0.5 0.6 0.7 0.8 0.9 1.0 
+
+> Probability of Improvement of SRSD with X
+> TQC
+> Overstimation
+> Control
+> Active
+> Sampling
+> rexploration
+> rdiversity
+> rrelevance
+> X
+
+Fig. 11: Ablation study of SRSD components. For each variant, the average prob-ability of improvement (with confidence intervals) is reported, quantifying the impact of including these components in SRSD’s architecture. option that lets annotators define new semantic categories up to a preset maxi-mum. Selecting a label advances to the next segment in the selected batch, and annotators can navigate back to revise previous labels with Next and Previous .After all queries are labelled, the user saves them with Save , generating a la-bels.json file. Upon closing the interface, this file is automatically loaded and the SRSD algorithm resumes. Qualitatively, skill sets learned under simulated and real feedback are seman-tically and visually comparable, as shown in Figure 13 in the Appendix. We also measured a 30% disagreement rate between simulated and human labels, likely due to the simulated and real annotators’ stochasticity and, more importantly, mismatches between the simulator’s hand-designed reward and human judge-ments (e.g., trajectories that are close but outside a target region are rejected by the simulator yet often deemed acceptable by humans). Despite label noise, our method remains robust. Leveraging Human Feedback for Semantically-Relevant Skill Discovery 23 
+
+Fig. 12: Interface used to collect human semantic feedback during skill discovery. 
+
+> (a) Skill Set obtained from simulated human feedback.
+> (b) Skill Set obtained from real human feedback.
+
+Fig. 13: Visualisation of Skill Set obtained from simulated human feedback(a) and real human feedback (b). Both skill set are semantically and visually com-parable. 24 M. Hussonnois et al. 
+
+A.2 Scaling with respect to |C| : Semantic vs Preference Feedback. 
+
+Proof. We provide a more detailed analysis of Proposition 1 by defining for each feedback mode the probability to sample a query that is informative about a relevant semantic. First, we assume semantics C, being a set of |C| elements, to be composed of at least one irrelevant semantic (corresponding to all irrelevant types of behaviour) C− and possibly multiple relevant semantic (relevant type of behaviour) C+.
+
+Case 1 |C| = 1 In this case, every behaviour belongs to the irrelevant se-mantic, thus both modes of feedback are inefficient. 
+
+Case 2 |C| = 2 In this case, there is only one relevant semantic along with the irrelevant semantic. This setting correspond to the initial setting of preference-based reinforcement learning, where semantic-label feedback is not necessary. 
+
+General Case |C| ≥ 3: In this case, we assume σ a segment sampled and 
+
+p is the probability of σ to belongs to the irrelevant semantic. Additionally, we assume that relevant semantics are evenly distributed among C+, thus p(σ ∈
+
+ci|ci ∈ C +) = 1 
+
+> |C|− 1
+
+.For semantic-label feedback, a query that is informative about a relevant semantic corresponds to any query with a segment that is not irrelevant seman-tically. Thus: 
+
+psemantic = p(σ / ∈ C −)= 1 − p
+
+→ O(1) as it is independent of |C| 
+
+For preference feedback, a query is informative about a selected relevant semantic ci if the query is composed of a segment σ1 of the selected relevant semantic and a segment σ2 from any other semantics. Thus : 
+
+ppreference = p(σ1 ∈ ci, σ 2 ∈ cj,j ̸ =i)
+
+Each segment is sampled independently, so we get: 
+
+ppreference = p(σ1 ∈ ci) × p(σ2 ∈ cj,j ̸ =i)
+
+The probability to select a segment from a selected relevant semantic p(σ1 ∈ ci)
+
+is the probably of selecting a segment that is not irrelevant semantically times the probability selecting a relevant semantic among all relevant semantics which correspond to : 
+
+p(σ1 ∈ ci) = p(σ1 /∈ C −) × p(σ ∈ ci|ci ∈ C +) = (1 − p) × ( 1
+
+|C| − 1 )Leveraging Human Feedback for Semantically-Relevant Skill Discovery 25 
+
+Thus we finally get: 
+
+ppreference = ( 1 − p
+
+|C| − 1 ) × (1 − ( 1 − p
+
+|C| − 1 )) = ( 1 − p
+
+|C| − 1 ) × ( |C| − 2 + p
+
+|C| − 1 )
+
+→ O( 1
+
+|C| )
+
+A.3 Practical Implementation Defining z and practical implementation of f In our experiment, the skill 
+
+z ∈ RN is a continuous vector of dimension N . Of the N dimension, the N −|C +|first elements are sampled independently of a standard normal distribution and then optionally normalised. The remaining |C +| elements represent a one-hot vector and specify the desired relevant semantic class. The mapping function 
+
+f : Z′ → C + is typically implemented by reading this one-hot segment of z to determine the relevant class associated with a particular skill vector, though any suitable mapping could be used in principle. 
+
+Additional Practical Implementation In this section, we detail practical implementation mechanisms that were not found to significantly improve the performance of SRSD. 
+
+Pseudo-labelling: For SRSD and HaSD we followed previous work [27] work by incorporating pseudo-labels and data-augmentation during the training of the semantic predictor(SRSD) and the reward models(HaSD). Although we ob-served limited improvements over our method, we believe that leveraging the large dataset of diverse yet unlabelled behaviours that skill discovery inherently generates to improve sampling strategy and semantic-predictor capability is a promising research direction. 
+
+Skill Sampling: In SRSD, each skill is associated with a latent variable z,whose final |C|− 1 components are replaced with a one-hot vector representing the selected relevant semantic skills performed. To select which relevant semantics to execute, a naive approach would be to uniformly sample all available semantics. However, this can result in imbalanced exploration, where certain semantics are easier to discover and thus receive more feedback.To address this, we adopt an adaptive sampling strategy: we track the number of feedback instances collected for each relevant semantic and set the sampling probability inversely proportional to this count. This encourages the selection of semantics with less feedback. This promotes more balanced coverage across all semantic classes and enables more uniform exploration and annotation of skills. This mechanism did not yield much impact, partially due to the active sampling scheme that balances feedback collected among semantics. 
+
+Implementation Details and Hyperparameters 26 M. Hussonnois et al. 
+
+Environments: We used a (custom 2D Navigation) publicly released repository to experiment in simpler navigation environments that we customise for our ex-periment. For Deepmind Control Suite we use the the DMC custom task released byURLB. 
+
+Algorithms: As our backbone reinforcement learning algorithm, we use the TD3 implementation from the publicly available codebase LeanRL[11]. For ComSD we use the publicly available code of CIC. For TQC we used the publicly available codebase for (TQC). For HaSD we adapted the publicly available codebase for (HaSD) to fit a similar structure than SRSD. We report other hyper parameters used in Tables 1, 5 for TQC, 2, 3 for skill discovery and 4 for skill fine-tuning. 
+
+Resources. All experiments are conducted on an Ubuntu 20.4 server with 36 cores CPU, 767GB RAM, and a V100 32GB GPU with CUDA version 12.0, each run in Sections 5 took around 10h for pre-training and 15 minutes for skill fine-tuning. Table 1: Hyperparameter TD3 Skill Discovery                            
+
+> Hyperparameter Value Training iteration 1M(Nav2D), 2M(DNC) Learning rate critic 3.0×10 −04 ,1.0×10 −04
+> Learning rate actor 3.0×10 −04 ,1.0×10 −4
+> Update policy frequency 2Update-to-data 1Optimiser Adam Minibatch size 1024 Discount factor γ0.99 Replay buffer size 10 6
+> Hidden layers 2Hidden units per layers 1024(Nav2D), 512(DMC) Target network smoothing coefficient 0.995 Exploration noise 0.2 Policy noise: 0.2 Noise clip: 0.5
+
+A.4 Practical Implementation Jain’s Fairness Index Jain’s fairness index [14] is a metric commonly used for evaluating fairness in static resource allocation among n users, such as dividing a cake into n slices. If each users i receives xi ∈ R+, Jain’s index F airness (x)
+
+produces a value between 0 and 1, and is defined as: Leveraging Human Feedback for Semantically-Relevant Skill Discovery 27 
+
+Table 2: Hyperparameter ComSD 
+
+Hyperparameter Value Learning rate discriminator 1.0 × 10 −04 (Nav2d) Hidden layers 2Hidden units per layers 1024 Z dim 64(Nav2D), 32(DMC) Z vector z ∼ N (0 , 1) continuous Z update frequency 50 k KNN 16 T 0.5 
+
+Table 3: Hyperparameter Skill Labelling learning 
+
+Hyperparameter Value Learning rate 3.0 × 10 −4
+
+Optimiser Adam Minibatch size Size segment 25 Ensemble size 5Hidden layers 2Hidden units per layers 256 Queries per feedback session 140 Frequency of feedback session 15K(Nav2D), 20k(DMC) Start feedback 10k(Nav2D), 20k(DMC |C| 3,5,9,13,17 (Nav2d), 5(DMC) 28 M. Hussonnois et al. 
+
+Table 4: Hyperparameter TD3 Skill Finetunning 
+
+Hyperparameter Value Training iteration 100K( Learning rate critic 1.0 × 10 −04 
+
+Learning rate actor 1.0 × 10 −04 
+
+Update policy frequency 2Update-to-data 1Optimiser Adam Minibatch size 512 Discount factor γ 0.99 Replay buffer size 10 6
+
+Hidden layers 2Hidden units per layers 1024 Target network smoothing coefficient 0.995 Exploration noise 0.2 Policy noise: 0.2 Noise clip: 0.5 
+
+Table 5: Hyperparameter TQC 
+
+Hyperparameter Value Number of quantiles: 25 Number of networks: 3Number of top quantiles to drop: 2 (pre-training), 5(fine-tuning) Leveraging Human Feedback for Semantically-Relevant Skill Discovery 29 
+
+F airness (x) = (P i = 1 nxi)2
+
+n Pni=1 x2
+
+> i
+
+. (9) The higher the value of F airness (x), the fairer the resource-allocation process with the maximum value of 1 indicating that all users receive the same share. Conversely, the lower the value, the more unfair the allocation is, with the mini-mum attainable value being F airness (x) = 1 /n . This occurs when a single users receives all resources and the others receive none. 
+
+Algorithm 1: Semantically Relevant Skill Discovery (SRSD) 
+
+Initialise B, ζ b, πθ , q ψ , g ϕ1,2 ;
+
+for each epoch do for each episode do 
+
+Sample trajectory τ with πθ (at|st, z ) and z ∼ p(z) ;Store trajectory τ in B
+
+end if it’s time to query instructor then 
+
+Select queries {σi}ni=1 ← ActiveSampling (B, q ψ ) ;Collect labels from instruction {ci}ni=1 ;Store transitions ζb ← ζb ∪ { (σi, c i)}ni=1 ;Update qψ with gradient descent on cross-entropy loss; 
+
+end 
+
+Update gϕ1,2 with gradient ascent on LN CE (3) ; Update πθ (a|s, z ) using TD3 [9] and TQC [18] with rSRSD (8); 
+
+end 
+
+Algorithm 2: Active Sampling 
+
+Input Replay Buffer B, Semantic Predictor qψ ;
+
+Initialise Number of feedback to collect n;
+
+Initialise Number of segments to sample l ;Sample segments from replay-buffer: {σi}li=0 ∼ B ;Compute pseudo-labels: {ci}li=0 ← { qψ (σi)}li=0 ;Split the large batch into buckets according to pseudo-labels: {{ σi,j }lj
+
+> i=0
+
+}|C| 
+
+> j=0
+
+;Remove the bucket with pseudo-label as ’irrelevant’: {{ σi,j }lj
+
+> i=0
+
+}|C| 
+
+> j=1
+
+;Select the first min( lj , n 
+
+> |C|− 1
+
+)-samples for each buckets; 
+
+return {{ σi,j }min( lj , n  
+
+> |C|− 1)
+> i=0
+
+}|C| 
+
+> j=1
+
+;30 M. Hussonnois et al. 
+
+A.5 Simulating Human Feedback 
+
+To facilitate experimentation and reproducibility, we simulated human feedback as done in prior work [13, 22]. Human feedback is modelled by first computing the probability of each relevant semantics being used independently. We then select the semantic with the highest probability and use this to stochastically choose between labelling the segment as the relevant semantic or irrelevant semantically. For each relevant semantics, the probability is a re-scaled sum of normalised re-wards over a segment of length H: p(c|σ) = min 
+
+ PHt rct  
+
+> H·τc
+
+, 1
+
+
+
+, where c ∈ C + and τ c
+
+is a threshold. This re-scaling accounts for varying reward magnitudes across rel-evant semantics. We then deterministically select p(c+|σ) = arg max c∈C + p(c|σ)
+
+to sample a Bernoulli Distribution, labelling a segment as c+ with probability 
+
+p(c+|σ) and as irrelevant c− with probability 1 − p(c+|σ). This method realis-tically models human labelling stochasticity, where the likelihood of identifying relevant semantics increases with rewards. 
+
+Simulating Human Irrationality Throughout the experiment section, we simulated humans with a ground truth reward and assumed humans followed the stochastic model previously described. To assess the sensibility of our meth-ods to human simulation, we previous work [21] by testing our methods with various irrationalities. More specifically we evaluate SRSD with a human that can make mistake(there is a probability that the feedback is change), a myopic human (latter part of a segment influences less the feedback) and an amnesic human (latter part of a segment influences more the feedback), we report the detailed performances per task over zero-shot, few-shot and fine-tuning capabil-ity in Figures 15, 16 and 17 for each variation. We also report the aggregate normalised performance over zero-shot, few-shot and fine-tuning in Figure 14. We can observe that each irrationality negatively impact the performance of our method. Amnesic and Myopic performed similarly, the difference might be miti-gated by the small segment size (25) choose for the experiments. In the same way that amnesic and myopic data are detrimental to our methods, collecting 10 % of erroneous feedback would only negatively affect SRSD. However with more than 50 % of erroneous feedback the 0-shot and few-shot capability are significantly degraded. Despite this, all skill sets were improved after fine-tunning. Leveraging Human Feedback for Semantically-Relevant Skill Discovery 31 0.0 0.2 0.4 0.6 0.8 1.0 
+
+Normalized Score( )
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 
+
+> Fractions of runs with score >  Stochastic
+> Amnesic
+> Myopic
+> Mistake (10%)
+> Mistake (50%)
+
+(a) 0-shot 0.0 0.2 0.4 0.6 0.8 1.0 
+
+Normalized Score( )
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0  
+
+> Fractions of runs with score >  Stochastic
+> Amnesic
+> Myopic
+> Mistake (10%)
+> Mistake (50%)
+
+(b) Few-shot 0.0 0.2 0.4 0.6 0.8 1.0 
+
+Normalized Score( )
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0  
+
+> Fractions of runs with score >
+> Stochastic
+> Amnesic
+> Myopic
+> Mistake (10%)
+> Mistake (50%)
+
+(c) Fine-Tuning 
+
+Fig. 14: Aggregated and normalised score distributions for 12 downstream tasks on URLB for various simulated human irrationality. 0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 Walker Stand Walker Walk Walker Flip Walker Run 
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 Quadruped Stand Quadruped Walk Quadruped Jump Quadruped Run 
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 Cheetah Flip Cheetah Flip backward Cheetah Run forward Cheetah Run backward 
+
+0.00 0.25 0.50 0.75 1.00 
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 Hopper Flip 
+
+0.00 0.25 0.50 0.75 1.00 
+
+Hopper Flip backward 
+
+0.00 0.25 0.50 0.75 1.00 
+
+Hopper Hop 
+
+0.00 0.25 0.50 0.75 1.00 
+
+Hopper Hop backward      
+
+> 0.0 0.2 0.4 0.6 0.8 1.0
+
+Normalized Score( )
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> Fractions of runs with score >
+
+Stochastic Amnesic Myopic Mistake (10%) Mistake (50%) 
+
+Fig. 15: Score distributions of 12 downstream tasks on URLB over 0-shot eval-uation for various simulated human irrationality. Score distributions show the fraction of runs above a certain score (higher curve is better)[2] 32 M. Hussonnois et al. 0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 Walker Stand Walker Walk Walker Flip Walker Run 
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 Quadruped Stand Quadruped Walk Quadruped Jump Quadruped Run 
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 Cheetah Flip Cheetah Flip backward Cheetah Run forward Cheetah Run backward 
+
+0.00 0.25 0.50 0.75 1.00 
+
+0.0 
+
+0.2 
+
+0.4 
+
+0.6 
+
+0.8 
+
+1.0 Hopper Flip 
+
+0.00 0.25 0.50 0.75 1.00 
+
+Hopper Flip backward 
+
+0.00 0.25 0.50 0.75 1.00 
+
+Hopper Hop 
+
+0.00 0.25 0.50 0.75 1.00 
+
+Hopper Hop backward      
+
+> 0.0 0.2 0.4 0.6 0.8 1.0
+
+Normalized Score( )
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> Fractions of runs with score >
+
+Stochastic Amnesic Myopic Mistake (10%) Mistake (50%) 
+
+Fig. 16: Score distributions of 12 downstream tasks on URLB over few-shot eval-uation for various simulated human irrationality. Score distributions show the fraction of runs above a certain score (higher curve is better)[2] Leveraging Human Feedback for Semantically-Relevant Skill Discovery 33 0.0  
+
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+
+Walker Stand Walker Walk Walker Flip Walker Run  
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+
+Quadruped Stand Quadruped Walk Quadruped Jump Quadruped Run  
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+
+Cheetah Flip Cheetah Flip backward Cheetah Run forward Cheetah Run backward      
+
+> 0.00 0.25 0.50 0.75 1.00
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+
+Hopper Flip     
+
+> 0.00 0.25 0.50 0.75 1.00
+
+Hopper Flip backward     
+
+> 0.00 0.25 0.50 0.75 1.00
+
+Hopper Hop     
+
+> 0.00 0.25 0.50 0.75 1.00
+
+Hopper Hop backward      
+
+> 0.0 0.2 0.4 0.6 0.8 1.0
+
+Normalized Score( )
+
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> Fractions of runs with score >
+
+Stochastic Amnesic Myopic Mistake (10%) Mistake (50%) 
+
+Fig. 17: Score distributions after fine-tuning skills over 12 downstream tasks on URLB for various simulated human irrationality. Score distributions show the fraction of runs above a certain score (higher curve is better)[2]. SRSD achieves competitive performances across all tasks and agents.

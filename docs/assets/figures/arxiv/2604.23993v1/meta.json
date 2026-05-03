@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.23993v1/fig-001.webp",
+      "caption": "Table 1: Illustrative examples of product pairs in e-commerce product mapping.",
+      "page": 2,
+      "index": 1,
+      "width": 506,
+      "height": 240
+    },
+    {
+      "url": "assets/figures/arxiv/2604.23993v1/fig-002.webp",
+      "caption": "Table 2: Prompt templates used in our experiments. We use a shared Baseline prompt for single-inference baselines and a structured PEFT prompt for supervised fine-tuning.",
+      "page": 5,
+      "index": 2,
+      "width": 506,
+      "height": 673
+    },
+    {
+      "url": "assets/figures/arxiv/2604.23993v1/fig-003.webp",
+      "caption": "Table 3: Main experiment results on the internal product-mapping test set. We report Accuracy (Acc), Precision (Prec), Recall (Rec), and F1. Single inference uses one-pass prompting without external tools; RAG augments the prompt with BM25-retrieved evidence; Multi-Agent RAG coordinates multiple retrieval-and-reasoning agents over the same BM25 evidence pool. Ours summarizes our parameter-efficient variants (LoRA + Reasoning; LoRA + GRPO Reasoning). For each metric, bold indicates the best score and underline indicates the second best score.",
+      "page": 6,
+      "index": 3,
+      "width": 910,
+      "height": 594
+    }
+  ]
+}

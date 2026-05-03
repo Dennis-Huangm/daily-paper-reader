@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.27488v1/fig-001.webp",
+      "caption": "Table 1 Performance Comparison Between Original and Optimized Skills on Skill-X.",
+      "page": 6,
+      "index": 1,
+      "width": 952,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27488v1/fig-002.webp",
+      "caption": "Figure 1 Performance Comparison of Original vs. Optimized Skills across Skill-X.",
+      "page": 2,
+      "index": 2,
+      "width": 986,
+      "height": 516
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27488v1/fig-003.webp",
+      "caption": "Table 2 Skill Performance Analysis: Original vs Optimized Results (48 Skills) organized by Improvement Level.",
+      "page": 7,
+      "index": 3,
+      "width": 890,
+      "height": 1205
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27488v1/fig-004.webp",
+      "caption": "Figure 2 Overview of Skills-Coach.",
+      "page": 3,
+      "index": 4,
+      "width": 979,
+      "height": 487
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27488v1/fig-005.webp",
+      "caption": "Table 3 8 Evaluation Dimensions with 51 Specific Assessment Criteria",
+      "page": 12,
+      "index": 5,
+      "width": 940,
+      "height": 997
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27488v1/fig-006.webp",
+      "caption": "Figure 4 Key Contents from the Pollyreach Summary Report.",
+      "page": 9,
+      "index": 6,
+      "width": 984,
+      "height": 243
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27488v1/fig-007.webp",
+      "caption": "Figure 3 Comparison of Standard and Advanced Test Tasks Generated for Pollyreach.",
+      "page": 9,
+      "index": 7,
+      "width": 984,
+      "height": 904
+    }
+  ]
+}
