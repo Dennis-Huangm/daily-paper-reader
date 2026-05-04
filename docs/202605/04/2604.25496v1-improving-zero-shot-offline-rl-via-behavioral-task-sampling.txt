@@ -1,0 +1,960 @@
+Title: Improving Zero-Shot Offline RL via Behavioral Task Sampling
+
+URL Source: https://arxiv.org/pdf/2604.25496v1
+
+Published Time: Wed, 29 Apr 2026 00:51:00 GMT
+
+Number of Pages: 18
+
+Markdown Content:
+# Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+Nazim Bendib 1 Nicolas Perrin-Gilbert 1 Olivier Sigaud 1
+
+## Abstract 
+
+Offline zero-shot reinforcement learning (RL) aims to learn agents that optimize unseen reward functions without additional environment inter-action. The standard approach to this problem trains task-conditioned policies by sampling task vectors that define linear reward functions over learned state representations. In most existing algorithms, these task vectors are randomly sam-pled, implicitly assuming this adequately captures the structure of the task space. We argue that doing so leads to suboptimal zero-shot general-ization. To address this limitation, we propose extracting task vectors directly from the offline dataset and using them to define the task distri-bution used for policy training. We introduce a simple and general reward function extraction procedure that integrates into existing offline zero-shot RL algorithms. Across multiple benchmark environments and baselines, our approach im-proves zero-shot performance by an average of 20%, highlighting the importance of principled task sampling in offline zero-shot RL. 
+
+## 1. Introduction 
+
+Modern reinforcement learning (RL) agents are increasingly expected to solve not a single task, but many different tasks that are specified only at deployment time (Doncieux et al., 2018; Sigaud et al., 2023; Hughes et al., 2024). In fields such as natural language processing (Brown et al., 2020; Wei et al., 2021) and computer vision (Radford et al., 2021; Alayrac et al., 2022; Kirillov et al., 2023), this is largely achieved by training general models that can perform new tasks in a zero-shot manner when given an appropriate task specification. Achieving a similar level of flexibility in RL remains challenging, particularly when agents must operate from offline data. A common approach to offline zero-shot RL (ZSRL) is to      
+
+> 1Institut des Syst `emes Intelligents et de Robotique, ISIR, Sor-bonne Universit ´e, Paris, France. Correspondence to: Nazim Bendib <nazim.bendib@sorbonne-universite.fr >.
+> Preprint. April 29, 2026.
+
+learn reward-conditioned policies trained on a parametric family of reward functions. Methods such as Successor Features (SF) (Borsa et al., 2018; Touati et al., 2022) and Forward–Backward representations (FB) (Touati & Ollivier, 2021) follow this paradigm. They can be decomposed into two components: (1) a reward generation mechanism that defines a space of reward functions, and (2) a policy learning mechanism that trains a conditional policy to maximize re-ward functions sampled from this space. In both SF methods and FB, reward functions take the form Rz (s) = ϕ(s)⊤z,where ϕ(s) ∈ Rd is a learned state embedding, representing the state features and defining a feature space within Rd,and z is a task vector sampled from a predefined distribu-tion. The state representation ϕ(s) is intended to capture semantically meaningful properties of the state (e.g., ve-locity, orientation), while the task vector z specifies how these properties are weighted to define a particular task and reward function. Prior work has primarily focused on learning rich represen-tations ϕ(s) that best summarize the environment dynamics, under the assumption that richer representations induce a richer space of reward functions. In contrast, policy training is treated as a secondary component, with conditional poli-cies trained using reward functions obtained by uniformly sampling task vectors from a unit hypersphere Sd−1 ⊂ Rd.We argue that this task sampling strategy suffers from a mismatch between the geometry of the task space and the physics of the environment. Although tasks are sampled to cover all possible directions, the environment dynamics limit the possible behaviors. As a result, most sampled tasks end up being poorly matched to the agent’s capabilities. In high-dimensional settings, due to the concentration of measure phenomenon (Ledoux, 2001), uniformly sampled tasks tend to be almost orthogonal to the behaviors the agent can produce. When this happens, the reward signal becomes very weak for nearly all behaviors, making them appear similarly ineffective. This becomes hard for the agent to tell which behaviors are better, slowing down learning and leading to weak performance, not only on the sampled training tasks, but also when generalizing to new ones. In this work, we address the challenge of suboptimal zero-shot generalization in offline reinforcement learning by mov-ing beyond the standard practice of uniform task sampling. 1
+
+> arXiv:2604.25496v1 [cs.AI] 28 Apr 2026 Improving Zero-Shot Offline RL via Behavioral Task Sampling
+
+We demonstrate both theoretically and empirically that sam-pling task vectors uniformly from a high-dimensional hy-persphere leads to ”signal dilution”, where reward varia-tions vanish, and the learning signal becomes dominated by noise. To mitigate this, we introduce sampling from the Behavioral Task Distribution (BTD), a simple yet effective method that extracts task vectors directly from the offline dataset to ensure they reflect what is actually achievable in the environment. Our approach is simple, method-agnostic, and can be in-tegrated into existing offline ZSRL frameworks without modifying their representation learning objectives. Across multiple benchmark environments and baseline methods, learning the task distribution yields an average +20% in-crease in zero-shot performance. The code will be made publicly available upon acceptance. 
+
+## 2. Related Work 
+
+2.1. Zero-shot Reinforcement Learning 
+
+Zero-shot reinforcement learning (ZSRL) has been stud-ied through several families of approaches. A prominent line of work is based on successor features (SF) (Dayan, 1993; Barreto et al., 2017; Borsa et al., 2018; Chen et al., 2023), which learn universal value functions expressed as linear combinations of predefined or learned state features. These state features are typically obtained from representa-tion learning techniques such as autoencoders (Bank et al., 2023), contrastive learning (Chen et al., 2020), low-rank de-compositions (Touati et al., 2022; Jeen et al., 2024), or latent predictive models (Grill et al., 2020; Lawson et al., 2025). Extensions like the forward–backward method (Touati & Ol-livier, 2021; Touati et al., 2022) build on the SF framework while avoiding explicit learning of state features altogether. A key advantage of SF-based methods is their low inference cost: at test time, a near-optimal policy for a new task can be obtained without additional training or planning, often via a simple regression problem. Another class of approaches focuses on learning general world models (Yu et al., 2023; Ding et al., 2024; Jiang et al., 2023), which enable ZSRL when combined with planning algorithms. Finally, some methods aim to generalize across tasks by learning latent encodings of reward functions during training (Frans et al., 2024; Ingebrand et al., 2024), typically by sampling and optimizing over randomly generated rewards. This work builds upon SF based methods and FB, which represent state-of-the-art for ZSRL due to their strong performance and minimal test-time overhead, and seeks to further en-hance their performance. 
+
+2.2. Adaptive Goal Sampling 
+
+Most goal-conditioned reinforcement learning (GCRL) methods (Liu et al., 2022) assume a fixed, often uniform, distribution over goals for simplicity and benchmarking (Schaul et al., 2015; Andrychowicz et al., 2017), despite this being inefficient due to trivial, unreachable, or redundant goals. Consequently, several works move beyond uniform sampling by actively selecting or reweighting goals dur-ing training. This includes automatic curriculum (Portelas et al., 2020; Castanet et al., 2022) and autotelic methods (Colas et al., 2022) that adapt goal sampling online based on competence or learning progress (Florensa et al., 2018). Specifically, novelty-based approaches prioritize goals at the exploration frontier to discover new state-space regions (Ren et al., 2019; Campero et al., 2020), while density-based methods leverage statistical estimators to prioritize goals in sparsely visited areas of the goal space (Pitis et al., 2020; Pong et al., 2019). While those methods focus on online adaptation, in this work, we apply similar principles to the offline setting by replacing the uniform sampling of train-ing goals with a learned behavioral task distribution. This ensures that training tasks are grounded in behavioral data, leading to more efficient learning and superior zero-shot generalization. 
+
+2.3. Inverse Reinforcement Learning 
+
+Inverse Reinforcement Learning (IRL) aims to recover re-ward functions from expert behavior (Ng & Russell, 2000), later evolving into the Maximum Entropy framework to handle reward ambiguity (Ziebart et al., 2008). While Deep MaxEnt IRL and Guided Cost Learning scaled these meth-ods to high-dimensional spaces (Wulfmeier et al., 2015; Finn et al., 2016), adversarial approaches like GAIL and AIRL further refined distribution matching and reward porta-bility (Ho & Ermon, 2016; Fu et al., 2018). Recent innova-tions include non-adversarial efficiency via IQ-Learn (Garg et al., 2021) and addressing complex real-world factors like demonstrator expertise (Beliaev & Pedarsani, 2025), multi-agent dynamics (Freihaut & Ramponi, 2024), and history-dependent behavior (Ke et al., 2025). While IRL is not designed for ZSRL, our method is closely related: rather than inferring a single reward, it extracts a distribution of diverse reward functions from the offline dataset, enabling the training of a generalist agent. 
+
+## 3. Background 
+
+In the following, we present the problem setup and notations used throughout the paper, and review Successor Features (SF) methods (Borsa et al., 2018) and Forward–Backward (FB) representations (Touati & Ollivier, 2021). 2Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+3.1. Problem Setup and Notations 
+
+We define a Markov Decision Process (MDP) by the tuple 
+
+M = ⟨S , A, P, μ, γ ⟩, where S is the state space, A is the action space, P : S × A × S → [0 , 1] is the transition probability distribution such that P(s′|s, a ) = P(st+1 =
+
+s′|st = s, a t = a), μ : S → [0 , 1] is the initial state distribution s0 ∼ μ(s0), and γ ∈ [0 , 1) is the discount factor. We operate in the offline setting, where the agent learns from a fixed dataset D = {τi}Ni=1 consisting of trajectories collected by a single or multiple unknown behavior policies. Let ϕ : S → Rd denote a bounded learned state embedding. We consider linear reward functions of the form Rz (s) = 
+
+ϕ(s)⊤z, parameterized by a task vector z ∈ Sd−1 ⊂ Rd
+
+where Sd−1 is the unit d-sphere. Let Π be the set (popula-tion) of all policies π : S → ∆( A), with ∆( X ) denoting the set of all probability distributions over a set X .
+
+3.2. Successor Features 
+
+Given a state embedding ϕ(s) ∈ Rd learned via some cri-teria (e.g., autoencoders or low-rank approximations), SF methods learn the successor features of a family of policies 
+
+πz for all task vectors z ∈ Rd:
+
+
+
+ψ(s0, a 0, z ) = E
+
+h P 
+
+> t≥0
+
+γtϕ(st) s0, a 0, π z
+
+i
+
+,πz (s) := arg max a ψ(s, a, z )⊤z
+
+(1) The successor features ψπ satisfy the Rd-valued Bellman equation ψπ = ϕ + γP π ψπ with Pπ the policy-induced transition matrix. Therefore, we can train ψ by minimizing the Bellman residual 
+
+E(st,a t,s t+1 )
+
+> ∼D
+
+ψ(st, a t, z )−ϕ(st)−γ ¯ψ(st+1 , π z (st+1 ), z )
+
+> 2
+
+(2) where ¯ψ is a non-trainable target version of ψ, as in Deep Q-learning (Mnih et al., 2013). This objective can be improved since we do not use the full vector ψ(s, a, z ); only the scalar 
+
+ψ(s, a, z )⊤z is required for defining the policies. Instead, we can minimize 
+
+E(st,a t,s t+1 )∼D 
+
+
+
+ψ(st, a t, z )⊤z − ϕ(st)⊤z
+
+−γ ¯ψ(st+1 , π z (st+1 ), z )⊤z
+
+2
+
+.
+
+(3) This trains ψ(s, a, z )⊤z as the Q-function Q(s, a, z ) corre-sponding to the reward Rz (s) = ϕ(s)⊤z.Once a test reward Rtest (·) is revealed, we use a set of evalu-ated samples Dr = {(si, R test (si)) }Nr 
+
+> i=1
+
+to estimate the task vector ztest . Specifically, we solve 
+
+ztest := arg min  
+
+> z
+
+Es∼D r
+
+ Rtest (s) − ϕ(s)⊤z2
+
+
+
+(4) 
+
+= EDr [ϕϕ ⊤]−1Er [ϕR test ], (5) and define the policy 
+
+πztest (s) = arg max  
+
+> a∈A
+
+ψ(s, a, z test )⊤ztest .
+
+This policy is guaranteed to be optimal for all rewards in the linear span of the features ϕ.
+
+3.3. Forward Backward 
+
+Let M π be the successor measure defined as: 
+
+M π (s0, a 0, s ) := E
+
+ X
+
+> t≥0
+
+γtI{st = s} s0, a 0, π 
+
+
+
+. (6) The goal of FB is to learn representations F : S ×A× Rd →
+
+Rd and B : S → Rd to learn a finite-rank model of the measure M π such that: 
+
+(ψ(s0, a 0, z ) = E
+
+h P 
+
+> t≥0
+
+γtϕ(st) s0, a 0, π z
+
+i
+
+,πz (s) := arg max a ψ(s, a, z )⊤z
+
+The successor measure M π satisfies a Bellman-like equation 
+
+M π = P + γP π M π . Therefore, we can train F and B by minimizing the Bellman residual on the parametric model 
+
+M = F ⊤B. This results in minimizing: 
+
+E(st,a t,s t+1 )
+
+> s′∼D
+
+
+
+F (st, a t, z )⊤B(s′)
+
+− γ ¯F (st+1 , π z (st+1 ), z )⊤ ¯B(s′)
+
+2
+
+− 2 E(st,a t,s t+1 )
+
+> ∼D
+
+h
+
+F (st, a t, z )⊤B(st+1 )
+
+i
+
+(7) where ¯F and ¯B are non-trainable target versions of F and 
+
+B. Similarly to SF above, only F (s, a, z )⊤z is needed to define the policy. So we include an auxiliary loss to focus training on F (., z )⊤z:
+
+E(st,a t,s t+1 )∼D
+
+
+
+F (st, a t, z )⊤z − B(st+1 )⊤(EρBB ⊤)−1z
+
+−γ ¯F (st+1 , π z (st+1 ), z )⊤z
+
+2
+
+.
+
+(8) This trains F (s, a, z )⊤z as the Q-function Q(s, a, z ) to the reward Rz (s) = B(s)⊤E[BB ⊤]−1z. 
+
+3Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+Once a test reward function Rtest (·) is revealed, we estimate 
+
+ztest := Es∼D r [Rtest B(s)] . (9) and similarly define the policy 
+
+πztest (s) = arg max  
+
+> a∈A
+
+F (s, a, z test )⊤ztest .
+
+This policy is guaranteed to be optimal for all rewards in the linear span of the features ϕ.
+
+3.4. Connections between SF and FB 
+
+FB representations are related to SF, by setting ψ(s, a, z ) := 
+
+F (s, a, z ) and ϕ(s) = E[BB ⊤]−1B(s). Thus, FB can be used to produce both ϕ and ψ in SF, although training is different: SF methods require a trained ϕ to train a policy while FB learns ϕ simultaneously with the policy. In what follows, to view SF and FB as instances of the same framework, we standardize the notation by using ϕ(s) to denote the learned state embeddings in both methods. This allows a unified treatment of SF and FB representations. 
+
+## 4. Method 
+
+We define the feature occupancy ψπ ∈ Rd of a policy π
+
+for a given MDP M as the discounted feature expectation: 
+
+ψπ := Es0∼μ
+
+" ∞X
+
+> t=0
+
+γtϕ(st) π
+
+#
+
+. (10) The feature occupancy ψπ compresses the behavior of policy 
+
+π into a single vector that summarizes which state features are induced following that policy. While ϕ(s) encodes state features (e.g., velocity, contact), ψπ captures their total discounted accumulation along trajectories generated by π,i.e., the region of the feature space that the policy occupies under the MDP dynamics. In particular, for linear rewards of the form Rz (s) = ϕ(s)⊤z, the expected discounted return of policy π for a reward function Rz (.) can be written as 
+
+J(π, z ) = Es0∼μ
+
+" ∞X
+
+> t=0
+
+γtRz (s) π
+
+#
+
+(11) 
+
+= Es0∼μ
+
+" ∞X
+
+> t=0
+
+γtϕ(st)⊤z π
+
+#
+
+(12) 
+
+= ( ψπ )⊤z. (13) Note that J(π, z ) = ∥ψπ ∥2 cos( ψπ , z ) for z ∈ Sd−1, which measures the projection of the feature occupancy induced by policy π onto the task direction z, jointly reflecting align-ment and magnitude along z.Note that feature occupancy ψπ is different from successor features ψ(s, a, z ) because feature occupancy is an uncon-ditional expectation over the policy’s stationary distribution, while successor features are conditional expectations that depend on a specific starting state and action. We denote by Ψ the behavioral space of the MDP M,which is the set of all feature occupancies achievable by any policy π ∈ Π:
+
+Ψ = {ψπ ∈ Rd | π ∈ Π}. (14) Since ϕ(s) is bounded, each feature occupancy ψπ is a discounted sum of bounded vectors, so there exists CΨ with 
+
+∥ψπ ∥2 ≤ CΨ for all π ∈ Π, making Ψ a bounded set in Rd.
+
+4.1. Limits of Uniform Sampling 
+
+Since we are training a task-conditioned policy, the goal is to learn π⋆(.|z) = arg max π∈Π J(π, z ), ∀z ∈ Sd−1. A critical requirement for learning π⋆ is that the expected return J(π, z ) must vary sufficiently over the policy space to distinguish better policies from worse ones. We measure this variation as the variance of expected returns across different policies for a given task. We show that uniform task sampling in high dimensions makes this performance variation vanish. 
+
+Proposition 4.1 (Vanishing Task-Specific Variance) . Let 
+
+z ∼ Unif( Sd−1) be a task vector. Let Ψ ⊂ Rd be the behavioral space, and let ΣΨ denote its covariance matrix. Let λ1 ≥ λ2 ≥ · · · ≥ λd ≥ 0 be the eigenvalues of ΣΨ.Then the expected variance of the returns across the policy population satisfies: 
+
+Ez∼Unif( Sd−1)[Var π∼Π(J(π, z ))] = 1
+
+d
+
+> d
+
+X
+
+> i=1
+
+λi, (15) 
+
+and converges to 0 as d → ∞ .For proof see Appendix A. 
+
+In Proposition 4.1, the quantity Var π∼Π(J(π, z )) represents the variance of expected returns across the entire policy pop-ulation Π for a fixed task z, not the variance in return esti-mation for a single policy. For uniform task sampling, this inter-policy variance is reduced as the ambient dimension d
+
+grows. Consequently, the gap in expected return between any two policies π1 and π2 for a task z ∼ Unif( Sd−1)
+
+shrinks toward zero. In practice, this vanishing return signal yields gradient sig-nals of very small magnitude, likely to be dominated by the training noise preventing training from reliably identifying the optimal behaviors. This degrades the generalization ca-pability of the policy, resulting in suboptimal performance on training tasks and even poorer performance on unseen test tasks. 4Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+4.2. Dataset-driven task vectors 
+
+Rather than sampling task vectors uniformly from the unit hypersphere, we propose constructing tasks directly from the offline dataset. Concretely, given an offline dataset 
+
+D, we note Dsub the set of all possible subtrajectories of varying lengths extracted from D.We define pdata as the empirical set of task vectors extracted from the offline dataset: 
+
+pdata = {zτ | τ ∈ D sub }, (16) with: 
+
+zτ = ˜ψτ
+
+∥ ˜ψτ ∥2
+
+, ˜ψτ = 
+
+> |τ|
+
+X
+
+> t=0
+
+γtϕ(st), (17) where ˜ψτ is the empirical feature occupancy induced by the trajectory τ . Accordingly, zτ defines the task vector that maximizes the reward value assigned to trajectory τ , i.e., 
+
+zτ = arg max z ( ˜ψτ )⊤z. Note that this does not imply that τ
+
+is an optimal trajectory for Rzτ ; rather, since τ is generated by a behavioral policy πβ ∈ Π (in the data collection pro-cess), the empirical feature occupancy ˜ψτ approximates the true feature occupancy of πβ , which lies in the behavioral space Ψ.By deriving tasks from the offline dataset, we sample task vectors zτ that correspond to actual behaviors observed in the environment. These vectors naturally align with the directions in which policies can produce meaningful vari-ation of the return. In contrast, uniformly sampled tasks are equally likely to point in any direction, most of which are orthogonal or poorly aligned with the achievable behav-iors. As shown in Proposition 4.1, this leads to vanishing variance of the return as the feature dimension increases, making it difficult for the agent to distinguish better policies from worse ones. Sampling from pdata avoids this issue by concentrating on inherently meaningful tasks, allowing the policy to reliably identify optimal behaviors. This creates a more informative learning signal throughout training, which stabilizes policy optimization and ultimately leads to better zero-shot generalization to unseen tasks. Importantly, this approach is well-aligned with how test tasks are typically designed in practice. In common RL benchmarks, test tasks are physically grounded variations of behavior within the environment dynamics (e.g., different locomotion gaits, jumps, or flips). Although these tasks are not seen during training, they are not arbitrary, as they encourage behaviors that are plausible under the physics of the environment and are therefore likely to be represented within the behavioral space Ψ.
+
+4.3. Learning a Behavioral Task Distribution 
+
+In practice, to capture the distribution of achievable tasks, we fit a parametric density model pθ (z) to the empirical task set pdata . We refer to this fitted distribution as the Behavioral Task Distribution (BTD). To construct pdata , we sample 
+
+Nτ subtrajectories of random lengths from the dataset, and extract task vectors from these subtrajectories as described in Section 4.2. In our implementation, pθ is a Gaussian Mixture Model trained by maximum likelihood on pdata .During policy training, we replace uniform sampling of task vectors from the unit hypersphere with sampling from the learned BTD, z ∼ pθ (z). All other components of the of-fline ZSRL algorithm remain unchanged. This modification biases training towards tasks that fall within the behavioral space, while preserving compatibility with existing repre-sentation learning and policy optimization pipelines. All implementation details about our method are presented in Appendix B. 
+
+## 5. Experiments 
+
+In this section, we aim to evaluate the proposed BTD-sampling method across multiple aspects of ZSRL. Our ex-periments are designed to answer four questions: (1) Over-all zero-shot performance: How well do policies trained with BTD-sampling perform compared to uniform task sam-pling across benchmark environments? (2) Robustness to representation methods: Does BTD-sampling improve performance consistently across different latent encodings? 
+
+(3) Robustness of BTD to latent dimension: Does BTD-sampling continue to perform well as the latent dimension grows? (4) Combining task sampling strategies: Can blending BTD-sampling with baseline task sampling lead to further improvements? 
+
+Environments: We conduct experiments on standard ZSRL benchmarks from ExoRL (Yarats et al., 2022), includ-ing Cheetah (run backward, walk backward, walk forward, run forward), Walker (stand, walk, run, flip), and Quadruped (stand, walk, run, jump). For the main results, policies are trained using datasets collected by Random Network Distil-lation (Burda et al., 2018). Further details about the tasks are provided in Appendix C. Performance for each environment is computed as the average over its test tasks. 
+
+Baselines: We consider seven baselines: 
+
+• Reconstruction and dynamics-based methods: Au-toencoder (AEnc) (Chen & Guo, 2023), Transition model 
+
+(Trans) , Lower-Rank Approximation of the transition prob-ability (LRA P) and of the successor measure (LRA SR) 
+
+(Touati et al., 2022), to learn state encoder ϕ(s), on top of which we train successor features. 5Improving Zero-Shot Offline RL via Behavioral Task Sampling AEnc Trans LRA_P LRA_SR BYOL BYOL- FB Avg                 
+
+> 0
+> 100
+> 200
+> 300
+> 400
+> 500
+> 600
+> Test performance
+> Cheetah
+> AEnc Trans LRA_P LRA_SR BYOL BYOL-FB Avg
+> 0
+> 100
+> 200
+> 300
+> 400
+> 500
+> 600
+> 700
+> Test performance
+> Walker
+> AEnc Trans LRA_P LRA_SR BYOL BYOL-FB Avg
+> 0
+> 100
+> 200
+> 300
+> 400
+> 500
+> 600
+> 700
+> 800
+> Test performance
+> Quadruped
+> Offline TD3 Baseline BTD (ours)
+
+Figure 1. Zero-shot performance comparison across task sampling strategies. Results on Cheetah, Walker, and Quadruped for multiple representations show that BTD-sampling improves average performance and reduces sensitivity to representation choice. The horizontal red line indicates offline TD3 (oracle). 
+
+• Self-supervised representation learning methods: BYOL (Grill et al., 2020) and BYOL-γ (Lawson et al., 2025) learn the state encoder ϕ(s) through latent-predictive learning, which we then use for learning successor features. 
+
+• Forward-backward representations (FB) (Touati & Ol-livier, 2021). For more details about the baselines, see Appendix D. For each baseline, we compare two main variants that differ only in how reward functions are sampled during policy training: the original method using uniformly sampled task vectors ( Baseline ) and our proposed BTD-sampling variant (BTD ). 
+
+Implementation: Across all experiments, we first train the state encoder ϕ(s), then we fix it and train the policy. Policy learning is performed using offline TD3 (Fujimoto et al., 2018). Network architectures and training hyperpa-rameters are kept fixed across methods to isolate the effect of the task sampling strategy (see Appendix B.4). The latent task dimension is set to 50 by default, unless specified other-wise. The performance for one environment is computed as the average over its test tasks. For each test task, to estimate the corresponding task vector, we reveal the rewards of 5120 
+
+random states as in (Touati et al., 2022). All reported results are averaged over 5 seeds. 
+
+5.1. Overall Zero-Shot Performance 
+
+To assess the effectiveness of BTD-sampling for ZSRL, we compare baseline methods with their BTD-sampling counterparts across multiple environments and tasks. 
+
+Results As illustrated in Figure 1, our proposed BTD-sampling method consistently outperforms the correspond-ing baselines in nearly all experimental settings, achieving superior test performance in 13 of 15 tests and comparable performance in the remaining two, with an average improve-Cheetah Walker Quadruped 
+
+> 400
+> 500
+> 600
+> 700
+> 800
+> Test performance
+> Baseline
+> BTD
+> Offline TD3
+
+Figure 2. Average test performance and variability of all base-line methods (solid) against their BTD-sampling counterparts (hatched) across three environments. BTD-sampling consis-tently improves performance while significantly reducing variance, raising the lower bound of performance toward the offline TD3 oracle. 
+
+ment of +20% . This gain is particularly substantial in the Cheetah environment and when using AEnc and LRA P to learn state embeddings. Moreover, BTD-sampling improves upon the state-of-the-art FB across all three environments. In general, these results show that BTD-sampling reliably improves performance in various locomotion tasks using various baseline methods. 
+
+5.2. Sensitivity to Representation Learning Methods 
+
+To evaluate the robustness of BTD-sampling across all base-line methods, we compute their average performance for each environment and compare the resulting distributions be-tween the baseline and BTD-sampling, providing a measure of both overall performance and variability. 
+
+Results As illustrated in Figure 2, BTD-sampling consis-tently improves test performance while reducing the vari-ance in all environments. The resulting test performance 6Improving Zero-Shot Offline RL via Behavioral Task Sampling 50 100 250 500 750 1000                  
+
+> Latent task dimension
+> 100
+> 200
+> 300
+> 400
+> 500
+> 600
+> Test performance
+> Cheetah
+> 50 100 250 500 750 1000
+> Latent task dimension
+> 100
+> 200
+> 300
+> 400
+> 500
+> 600
+> 700
+> Walker
+> 50 100 250 500 750 1000
+> Latent task dimension
+> 0
+> 100
+> 200
+> 300
+> 400
+> 500
+> 600
+> 700
+> 800
+> Quadruped
+> AEnc Trans LRA-P LRA-SR BYOL BYOL-FB
+> BTD (ours) Baseline
+
+Figure 3. Test performance across a range of latent task dimensions d. Baseline performance drops in high dimensions as task vectors become increasingly orthogonal to the behavioral space, diluting the training signal. In contrast, BTD-sampling maintains robust performance by learning a task distribution that stays within the behavioral space, ensuring a consistent and informative training signal. 
+
+distributions are significantly more compact, indicating a higher degree of consistency compared to the baseline. Specifically, BTD-sampling significantly raises the lower bound of performance and improves all methods, including low-performing ones. 
+
+5.3. Effect of task space dimension 
+
+Proposition 4.1 predicts that baseline methods are increas-ingly likely to suffer from signal dilution as the latent task dimension grows, resulting in degraded performance. We evaluate this empirically and investigate whether BTD-sampling can maintain robust performance under the same conditions. To do so, we train policies using both baseline methods and BTD-sampling across a range of latent di-mensions [50 , 100 , 250 , 500 , 750 , 1000] and measure their performance in test tasks. This setup enables a direct com-parison of the sensitivity of baselines to high-dimensional task spaces with the robustness offered by BTD-sampling. 
+
+Results Figure 3 shows that, consistent with Proposi-tion 4.1, the baselines exhibit a sharp performance degrada-tion as the dimension of the task space increases. In all three environments, the baselines struggle in high-dimensional settings, with scores often dropping rapidly as the dimension grows beyond 100. Particularly, in the Cheetah and Walker tasks, the performance of baselines collapses to near-failure performance at dimensions 750 and 1000. This trend empirically confirms that uniform sampling ap-proaches are highly sensitive to the dimensionality of the task space. As the dimension grows, uniformly sampled task vectors become increasingly likely to be orthogonal to the behavioral space, resulting in rewards that fail to discriminate between different behaviors. In contrast, BTD-sampling demonstrates remarkable robust-ness to high-dimensional task spaces. While the perfor-mance of baselines decays rapidly, BTD-sampling maintains relatively stable and superior performance across the entire spectrum of latent dimensions. Even at dimensions as high as 1000, BTD-sampling models retain significantly higher scores compared to their baseline counterparts. These re-sults indicate that BTD-sampling effectively mitigates the adverse effects of high-dimensional spaces. It does so by leveraging the offline dataset to align the task distribution with the behavioral space. This stabilizes the underlying baseline methods against the performance drops predicted by our theoretical analysis. 
+
+5.4. Combining task sampling strategies 
+
+We investigate whether combining BTD-sampling with ex-isting task sampling strategies can further improve zero-shot performance. Specifically, we train policies using mixtures of tasks sampled from BTD and from a uniform distribution over the unit sphere Unif( Sd−1). By varying the mixture proportion, we aim to understand whether hybrid task sam-pling strategies can yield additional gains in generalization, or whether the introduction of uniformly random tasks in-terferes with the effectiveness of BTD-guided exploration. 
+
+Results Figure 4 shows that performance consistently de-grades as the interpolation parameter α increases. This trend is particularly pronounced in Cheetah and Walker, where performance drops across all tasks. In Quadruped, the effect is less evident, mainly because the baseline perfor-mance is already comparable to that of the BTD-sampling policy. Overall, these results indicate that incorporating uniformly random tasks does not improve robustness and instead harms policy performance. This underscores the im-7Improving Zero-Shot Offline RL via Behavioral Task Sampling 0.0 0.2 0.4 0.6 0.8 1.0                 
+
+> Interpolation parameter
+> 350
+> 400
+> 450
+> 500
+> 550
+> 600
+> Test performance
+> Cheetah
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Interpolation parameter
+> 400
+> 450
+> 500
+> 550
+> 600
+> 650
+> Walker
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Interpolation parameter
+> 400
+> 450
+> 500
+> 550
+> 600
+> 650
+> 700
+> 750
+> Quadruped
+> AEnc Trans LRA-P LRA-SR BYOL BYOL-FB
+
+Figure 4. Test performance across Cheetah, Walker, and Quadruped as the interpolation parameter α varies from 0 (pure BTD-sampling) to 1 (pure uniform). Increasing the proportion of uniformly sampled tasks leads to performance degradation across almost all methods. This shows that uniform sampling dilutes the training signal rather than enhancing generalization. This confirms that aligning the task distribution with the behavioral space is essential for effective zero-shot transfer. 
+
+portance of aligning the task distribution with the behavioral space to enable effective zero-shot generalization. 
+
+5.5. Ablation study 
+
+We validate key components in Appendix E: (1) compar-isons of BTD-sampling to alternative sampling heuristics to determine whether the performance of BTD comes from the continuity of the distribution or from the dataset alone; (2) empirical verification of signal dilution, as demonstrated in Proposition 4.1; (3) effect of the number of GMM com-ponents on zero-shot performance; and (4) visualization of the task space to assess how effective uniform sampling is at recovering behaviorally grounded tasks. 
+
+## 6. Conclusion 
+
+In this work, we identified a flaw in current offline zero-shot reinforcement learning (ZSRL): the reliance on uniform task sampling from the unit hypersphere during policy train-ing. Our theoretical analysis reveals a ”signal dilution” phenomenon in which reward variance vanishes as task di-mensions increase, causing the learning signal to collapse. Crucially, we observed that the task distributions derived from the offline dataset is less affected by this growth, pro-viding a robust signal regardless of the ambient dimension. To back up this observation, we introduced the Behavioral Task Distribution (BTD) sampling, which extracts relevant task vectors from offline data to guide policy training. By grounding the task distribution in achievable behavioral spaces, BTD-sampling ensures that the learning process re-mains informative at any scale. Our empirical results demon-strate that BTD-sampling consistently outperforms standard baselines, achieving an average 20% improvement in zero-shot performance in the kind of physically relevant tasks one actually cares about in real-world deployment. Ultimately, our findings highlight that in offline ZSRL, defining which tasks to learn is as important as learning how to solve them, and that building on data-driven task distributions offer a scalable path toward more generalizable agents. 
+
+## References 
+
+Alayrac, J.-B., Donahue, J., Luc, P., Miech, A., Barr, I., Hasson, Y., Lenc, K., Mensch, A., Millican, K., Reynolds, M., et al. Flamingo: a visual language model for few-shot learning. Advances in neural information processing systems , 35:23716–23736, 2022. Andrychowicz, M., Wolski, F., Ray, A., Schneider, J., Fong, R., Welinder, P., McGrew, B., Tobin, J., Pieter Abbeel, O., and Zaremba, W. Hindsight experience replay. Advances in neural information processing systems , 30, 2017. Bank, D., Koenigstein, N., and Giryes, R. Autoencoders. 
+
+Machine learning for data science handbook: data min-ing and knowledge discovery handbook , pp. 353–374, 2023. Barreto, A., Dabney, W., Munos, R., Hunt, J. J., Schaul, T., van Hasselt, H. P., and Silver, D. Successor features for transfer in reinforcement learning. Advances in neural information processing systems , 30, 2017. Beliaev, M. and Pedarsani, R. Inverse reinforcement learn-ing by estimating expertise of demonstrators. In Pro-ceedings of the AAAI Conference on Artificial Intelli-gence , volume 39, 2025. URL https://doi.org/ 10.48550/arxiv.2402.01886 .8Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+Borsa, D., Barreto, A., Quan, J., Mankowitz, D., Munos, R., Van Hasselt, H., Silver, D., and Schaul, T. Uni-versal successor features approximators. arXiv preprint arXiv:1812.07626 , 2018. Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J. D., Dhariwal, P., Neelakantan, A., Shyam, P., Sastry, G., Askell, A., et al. Language models are few-shot learners. 
+
+Advances in neural information processing systems , 33: 1877–1901, 2020. Burda, Y., Edwards, H., Storkey, A., and Klimov, O. Ex-ploration by random network distillation. arXiv preprint arXiv:1810.12894 , 2018. Campero, A., Raileanu, R., K ¨uttler, H., Tenenbaum, J. B., Rockt ¨aschel, T., and Grefenstette, E. Learning with amigo: Adversarially motivated intrinsic goals. arXiv preprint arXiv:2006.12122 , 2020. Castanet, N., Lamprier, S., and Sigaud, O. Stein variational goal generation for adaptive exploration in multi-goal reinforcement learning. arXiv preprint arXiv:2206.06719 ,2022. Chen, B., Zhu, C., Agrawal, P., Zhang, K., and Gupta, A. Self-supervised reinforcement learning that transfers using random features. Advances in Neural Information Processing Systems , 36:56411–56436, 2023. Chen, S. and Guo, W. Auto-encoders in deep learning—a review with new perspectives. Mathematics , 11(8):1777, 2023. Chen, T., Kornblith, S., Norouzi, M., and Hinton, G. Asimple framework for contrastive learning of visual rep-resentations. In International conference on machine learning , pp. 1597–1607. PmLR, 2020. Colas, C., Karch, T., Sigaud, O., and Oudeyer, P.-Y. Autotelic agents with intrinsically motivated goal-conditioned reinforcement learning: a short survey. Jour-nal of Artificial Intelligence Research , 74:1159–1199, 2022. Dayan, P. Improving generalization for temporal difference learning: The successor representation. Neural computa-tion , 5(4):613–624, 1993. Ding, Z., Zhang, A., Tian, Y., and Zheng, Q. Diffusion world model. CoRR , 2024. Doncieux, S., Filliat, D., D ´ıaz-Rodr ´ıguez, N., Hospedales, T., Duro, R., Coninx, A., Roijers, D. M., Girard, B., Per-rin, N., and Sigaud, O. Open-ended learning: a concep-tual framework based on representational redescription. 
+
+Frontiers in neurorobotics , 12:59, 2018. Finn, C., Levine, S., and Abbeel, P. Guided cost learn-ing: Deep inverse optimal control via policy optimization. In Proceedings of the 33rd International Conference on Machine Learning (ICML) , pp. 49–58, 2016. Florensa, C., Held, D., Geng, X., and Abbeel, P. Automatic goal generation for reinforcement learning agents. In 
+
+International conference on machine learning , pp. 1515– 1528. PMLR, 2018. Frans, K., Park, S., Abbeel, P., and Levine, S. Unsupervised zero-shot reinforcement learning via functional reward encodings. arXiv preprint arXiv:2402.17135 , 2024. Freihaut, T. and Ramponi, G. On feasible rewards in multi-agent inverse reinforcement learning. arXiv preprint arXiv:2411.15046 , 2024. URL https://doi.org/ 10.48550/arxiv.2411.15046 .Fu, J., Levine, S., and Abbeel, P. Learning robust rewards with adversarial inverse reinforcement learning. In Inter-national Conference on Learning Representations (ICLR) ,2018. Fujimoto, S., Hoof, H., and Meger, D. Addressing function approximation error in actor-critic methods. In Interna-tional conference on machine learning , pp. 1587–1596. PMLR, 2018. Garg, D., Chakraborty, S., Cundy, C., Song, J., and Er-mon, S. Iq-learn: Inverse soft-q learning for imitation. In Advances in Neural Information Processing Systems (NeurIPS) , volume 34, pp. 29328–29339, 2021. Grill, J.-B., Strub, F., Altch ´e, F., Tallec, C., Richemond, P., Buchatskaya, E., Doersch, C., Avila Pires, B., Guo, Z., Gheshlaghi Azar, M., et al. Bootstrap your own latent-a new approach to self-supervised learning. Advances in neural information processing systems , 33:21271–21284, 2020. Ho, J. and Ermon, S. Generative adversarial imitation learn-ing. In Advances in Neural Information Processing Sys-tems (NeurIPS) , pp. 4565–4573, 2016. Hughes, E., Dennis, M., Parker-Holder, J., Behbahani, F., Mavalankar, A., Shi, Y., Schaul, T., and Rocktaschel, T. Open-endedness is essential for artificial superhuman intelligence. arXiv preprint arXiv:2406.04268 , 2024. Ingebrand, T., Zhang, A., and Topcu, U. Zero-shot rein-forcement learning via function encoders. arXiv preprint arXiv:2401.17173 , 2024. Jeen, S., Bewley, T., and Cullen, J. Zero-shot reinforce-ment learning from low quality data. Advances in Neural Information Processing Systems , 37:16894–16942, 2024. 9Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+Jiang, Z., Xu, Y., Wagener, N., Luo, Y., Janner, M., Grefen-stette, E., Rockt ¨aschel, T., and Tian, Y. H-gap: Hu-manoid control with a generalist planner. arXiv preprint arXiv:2312.02682 , 2023. Ke, J., Wu, F., Wang, J., Markowitz, J., and Wu, A. In-verse reinforcement learning with switching rewards and history dependency for characterizing animal behaviors. In International Conference on Learning Representa-tions (ICLR) , 2025. URL https://doi.org/10. 48550/arxiv.2501.12633 .Kirillov, A., Mintun, E., Ravi, N., Mao, H., Rolland, C., Gustafson, L., Xiao, T., Whitehead, S., Berg, A. C., Lo, W.-Y., et al. Segment anything. In Proceedings of the IEEE/CVF international conference on computer vision ,pp. 4015–4026, 2023. Lawson, D., Hugessen, A., Cloutier, C., Berseth, G., and Khetarpal, K. Self-predictive representations for combi-natorial generalization in behavioral cloning, 2025. URL 
+
+https://arxiv.org/abs/2506.10137 .Ledoux, M. The Concentration of Measure Phe-nomenon . Mathematical surveys and monographs. Amer-ican Mathematical Society, 2001. ISBN 9780821837924. URL https://books.google.fr/books?id= mCX_cWL6rqwC .Liu, M., Zhu, M., and Zhang, W. Goal-conditioned re-inforcement learning: Problems and solutions. arXiv preprint arXiv:2201.08299 , 2022. Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., and Riedmiller, M. Playing atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602 , 2013. Ng, A. Y. and Russell, S. J. Algorithms for inverse rein-forcement learning. In Proceedings of the Seventeenth International Conference on Machine Learning (ICML) ,pp. 663–670, 2000. Pitis, S., Chan, H., Zhao, S., Stadie, B., and Ba, J. Maxi-mum entropy gain exploration for long horizon multi-goal reinforcement learning. In International conference on machine learning , pp. 7750–7761. PMLR, 2020. Pong, V. H., Dalal, M., Lin, S., Nair, A., Bahl, S., and Levine, S. Skew-fit: State-covering self-supervised re-inforcement learning. arXiv preprint arXiv:1903.03698 ,2019. Portelas, R., Colas, C., Weng, L., Hofmann, K., and Oudeyer, P.-Y. Automatic curriculum learning for deep rl: A short survey. arXiv preprint arXiv:2003.04664 , 2020. Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., et al. Learning transferable visual models from natural language supervision. In International conference on machine learning , pp. 8748–8763. PmLR, 2021. Ren, Z., Dong, K., Zhou, Y., Liu, Q., and Peng, J. Explo-ration via hindsight goal generation. Advances in Neural Information Processing Systems , 32, 2019. Schaul, T., Horgan, D., Gregor, K., and Silver, D. Universal value function approximators. In International conference on machine learning , pp. 1312–1320. PMLR, 2015. Sigaud, O., Baldassarre, G., Colas, C., Doncieux, S., Duro, R., Oudeyer, P.-Y., Perrin-Gilbert, N., and Santucci, V. G. A definition of open-ended learning problems for goal-conditioned agents. arXiv preprint arXiv:2311.00344 ,2023. Tassa, Y., Doron, Y., Muldal, A., Erez, T., Li, Y., Casas, D. d. L., Budden, D., Abdolmaleki, A., Merel, J., Lefrancq, A., et al. Deepmind control suite. arXiv preprint arXiv:1801.00690 , 2018. Touati, A. and Ollivier, Y. Learning one representation to optimize all rewards. Advances in Neural Information Processing Systems , 34:13–23, 2021. Touati, A., Rapin, J., and Ollivier, Y. Does zero-shot reinforcement learning exist? arXiv preprint arXiv:2209.14935 , 2022. Wei, J., Bosma, M., Zhao, V. Y., Guu, K., Yu, A. W., Lester, B., Du, N., Dai, A. M., and Le, Q. V. Finetuned lan-guage models are zero-shot learners. arXiv preprint arXiv:2109.01652 , 2021. Wulfmeier, M., Ondruska, P., and Posner, I. Deep maximum entropy inverse reinforcement learning. arXiv preprint arXiv:1507.04888 , 2015. URL https://doi.org/ 10.48550/arxiv.1507.04888 .Yarats, D., Brandfonbrener, D., Liu, H., Laskin, M., Abbeel, P., Lazaric, A., and Pinto, L. Don’t change the algorithm, change the data: Exploratory data for offline reinforce-ment learning. arXiv preprint arXiv:2201.13425 , 2022. Yu, W., Gileadi, N., Fu, C., Kirmani, S., Lee, K.-H., Are-nas, M. G., Chiang, H.-T. L., Erez, T., Hasenclever, L., Humplik, J., et al. Language to rewards for robotic skill synthesis. arXiv preprint arXiv:2306.08647 , 2023. Ziebart, B. D., Maas, A. L., Bagnell, J. A., Dey, A. K., et al. Maximum entropy inverse reinforcement learning. In 
+
+Aaai , volume 8, pp. 1433–1438. Chicago, IL, USA, 2008. 10 Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+## A. Proof of Proposition 4.1 
+
+Proof. For a fixed task z, the variance of the returns is determined by the projection of the task vector onto the directions of variance in the behavioral space: 
+
+Var π (J(π, z )) = Var π
+
+ (ψπ )⊤z (18) 
+
+= Eπ
+
+h (ψπ − ¯ψ)⊤z2i
+
+(19) 
+
+= Eπ
+
+z⊤(ψπ − ¯ψ)( ψπ − ¯ψ)⊤z (20) 
+
+= z⊤  Eπ
+
+(ψπ − ¯ψ)( ψπ − ¯ψ)⊤ z (21) 
+
+= z⊤ΣΨz. (22) Now consider the expectation over the task distribution z. Using Tr( ABC ) = Tr( BCA ) and linearity of expectation: 
+
+Ez
+
+z⊤ΣΨz = Ez
+
+Tr( z⊤ΣΨz) (23) 
+
+= Ez
+
+Tr(Σ Ψzz ⊤) (24) 
+
+= Tr  ΣΨ Ez [zz ⊤] . (25) For a uniform random vector on the unit hypersphere Sd−1,
+
+Ez [zz ⊤] = 1
+
+d Id.
+
+Substituting yields 
+
+Ez [Var π (J(π, z ))] = 1
+
+d Tr(Σ Ψ) = 1
+
+d
+
+> d
+
+X
+
+> i=1
+
+λi. (26) The goal is to prove that this converges to 0 as the dimension d grows. The set of all possible behaviors (feature occupancies) is constrained by the environment’s dynamics (e.g., gravity, collision limits, transition probabilities). Consequently, the variance of the valid behaviors is concentrated in a limited number of effective dimensions. As we increase d, we add new dimensions that capture finer details of the behavioral space. However, because the total information content of the MDP is finite, the variance contributed by these additional dimensions must eventually vanish. Formally, this implies that the sequence of eigenvalues {λi}∞ 
+
+> i=1
+
+satisfy: 
+
+lim  
+
+> i→∞
+
+λi = 0 . (27) This condition allows the total variance to grow, provided the incremental variance added by each new dimension diminishes. Using Cauchy’s Limit Theorem :
+
+lim  
+
+> i→∞
+
+λi = 0 = ⇒ lim 
+
+> d→∞
+
+1
+
+d
+
+> d
+
+X
+
+> i=1
+
+λi = 0 . (28) This completes the proof. 11 Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+## B. Method details 
+
+B.1. Architecture 
+
+We maintain consistent network architectures across all evaluated methods: • The successor feature network ϕ(s) and backward representation B(s) are implemented as feedforward networks with three 256-unit hidden layers that output L2-normalized embeddings. We enforce the orthonormality of learned features through a regularization term. • Our policy employs a TD3-based architecture (Fujimoto et al., 2018) with task-conditioned networks: the actor π(s, z )
+
+uses parallel preprocessing streams (one for state features, another for task-conditioned states) with LayerNorm-Tanh initialization followed by ReLU activations, converging through a shared trunk network with Tanh output activation and truncated normal exploration ( σ = 0 .2). The critic uses twin Q-networks with analogous two-stream preprocessing of (s, a, z ) tuples for stable value estimation. 
+
+B.2. Training the State Encoder 
+
+The state encoder ϕ(s) is trained using one of several representation learning objectives (see Appendix D). The training process for FB representations is slightly different from the other methods. Although the FB objective simultaneously learns a backward embedding B(s) and a policy π, we do not use them directly. Instead, to maintain a unified framework across all experimental baselines, we define the final state encoder as ϕ(s) = E[BB ⊤]−1B(s) and train a new conditional policy from scratch using the reward Rz (s) = ϕ(s)⊤z. We found that this approach does not hurt the performance of FB. Rather, it slightly improves it in the experiments, probably because the policy is trained on a fixed state representation, rather than a non-stationary one as in standard FB. 
+
+B.3. Training the Policy 
+
+During policy training, instead of sampling 2048 tuples (st, a t, s t+1 , z ), we first sample 32 task vectors and then sample 64 transitions (st, a t, s t+1 ) per task. This was more efficient in our experiments, as sampling multiple transitions per reward function allows the critic to more rapidly capture the structure of each reward landscape. 
+
+B.4. Hyperparameters 
+
+12 Improving Zero-Shot Offline RL via Behavioral Task Sampling  
+
+> Table 1. Hyperparameters for Dataset, Representation Learning, and Policy Training
+
+Category Parameter Value Dataset Total Transitions 10 7
+
+Number of Trajectories 10 4
+
+Trajectory Length 10 3
+
+Replay Buffer Size 5 × 10 6 (10 × 10 6 for maze) 
+
+SF Training Gradient Updates 10 5
+
+Batch Size 1024 
+
+Learning Rate 10 −4
+
+Target Update Rate ( τ ) 0.01 
+
+Discount Factor ( γ) 0.99 
+
+Orthonormality Weight 1
+
+Optimizer Adam 
+
+FB Training Gradient Updates 2 × 10 6
+
+Batch Size 1024 
+
+Learning Rate 10 −4
+
+Target Momentum 0.99 
+
+Orthonormality Weight 1
+
+Optimizer Adam 
+
+Policy (TD3) Gradient Updates 10 6
+
+Batch Size 2048 
+
+Actor Learning Rate 10 −4
+
+Critic Learning Rate 10 −4
+
+Target Update Rate ( τ ) 0.01 
+
+Discount Factor ( γ) 0.99 
+
+Exploration Noise ( σ) 0.2
+
+Policy Smoothing Truncation 0.3
+
+Optimizer Adam 
+
+## C. Environment details 
+
+This section details the physical dimensions and reward objectives for the continuous control environments used in our evaluations. All the environments considered in this paper are based on the DeepMind Control Suite (Tassa et al., 2018): 
+
+Walker Walker is a planar bipedal robot. The 24-dimensional state vector contains joint positions and velocities. Actions are 6-dimensional vectors. We evaluate performance across four distinct tasks at test time: • Stand: Reward is a weighted combination of terms that encourage an upright torso orientation and maintain a minimum torso height. • Walk: Reward includes a component that encourages a minimum forward velocity, capped at 4 m /s.• Run: Reward includes a component that encourages a higher minimum forward velocity, capped at 10 m /s.• Flip: Reward includes a component that encourages the agent to achieve a minimum angular momentum. 
+
+Cheetah The Cheetah is a planar biped designed. The 17-dimensional state vector contains positions and velocities. Actions are 6-dimensional vectors. We consider four velocity-based tasks at test time: • Walk: Reward is linearly proportional to forward velocity, capped at 2 m /s.• Run: Reward is linearly proportional to forward velocity, capped at 10 m /s.13 Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+• Walk Backward: Reward is linearly proportional to backward velocity, capped at −2 m /s.• Run Backward: Reward is linearly proportional to backward velocity, capped at −10 m /s.
+
+Quadruped The Quadruped is a four-legged ant-like robot navigating in 3D space. The state and action spaces are 78-dimensional and 12-dimensional, respectively. We evaluate the following four tasks at test time: • Stand: Reward encourages maintaining an upright torso posture. • Walk: Reward includes a component that encourages a minimum forward torso velocity, capped at 0.5 m /s.• Run: Reward includes a component that encourages higher forward torso velocities, capped at 5 m /s.• Jump: Reward is proportional to the vertical displacement of the torso, it encourages the agent to maximize its peak height relative to the ground. Across all environments, we utilize datasets from the ExORL (Yarats et al., 2022) benchmark collected via Random Network Distillation (RND) (Burda et al., 2018). Each dataset consists of 10 7 total transitions, composed of 10 4 trajectories with a length of 10 3 steps each. 14 Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+## D. Baselines details 
+
+This section provides objective functions for all baseline representation learning methods used in our experiments: • Autoencoder (AEnc) (Chen & Guo, 2023) learns a compact representation ϕ(s) by minimizing the reconstruction error of the input state through an encoder-decoder architecture, capturing the most salient features of the state space. Here, ϕ is the encoder ϕ(s) and f is the decoder. 
+
+min  
+
+> f,ϕ
+
+Es∼D 
+
+(f (ϕ(st)) − s)2 .
+
+• Transition Model (Trans) learns representations by training a model to predict the next state st+1 given the current state-action pair (st, a t), thereby encoding the environment’s local dynamics into the latent space. Here, ϕ is the encoder ϕ(s) and f is the latent transition predictor. 
+
+min  
+
+> f,ϕ
+
+E(st,a t,s t+1 )∼D 
+
+(f (ϕ(st), a t) − st+1 )2 .
+
+• Lower-Rank Approximation of the transition probability (LRA P) (Touati et al., 2022) factorizes the one-step transition probability P (s′|s, a ) into a low-rank product f (s, a )⊤ϕ(s′), effectively performing a spectral decomposition of the transition operator. Here, f and ϕ represent the left and right singular vectors of the transition matrix. 
+
+min 
+
+> f,ϕ
+
+12 E(st,a t)∼D 
+
+> s′∼D
+
+h (f (st, a t)⊤ϕ(s′)) 2i
+
+− E(st,a t,s t+1 )∼D 
+
+f (st, a t)⊤ϕ(st+1 ) .
+
+• Lower-Rank Approximation of the successor measure (LRA SR) (Touati et al., 2022) learns a low-rank factorization of the successor measure M (s, s ′) using temporal difference learning. Here, f and ϕ are the learned factors that represent the state and its temporally extended features. 
+
+min  
+
+> f,ϕ
+
+E(st,s t+1 )∼D 
+
+> s′∼D
+
+h f (st)⊤ϕ(s′) − γf (st+1 )⊤ ¯ϕ(s′)2i
+
+− 2E(st,s t+1 )∼D 
+
+f (st)⊤ϕ(st+1 ) .
+
+• Bootstrap Your Own Latent (BYOL) (Grill et al., 2020) learns a latent space by predicting the next state representation from the current state-action pair using a predictor and a target network. Here, ϕ is the encoder and ψ is the online predictor. 
+
+min  
+
+> ϕ,ψ
+
+E(st,a t,s t+1 )∼D 
+
+∥ψ(ϕ(st), a t) − sg (ϕ(st+1 )) ∥22
+
+ .
+
+• Bootstrap Your Own Latent with Bidirectional Prediction (BYOL-γ) (Lawson et al., 2025) captures long-range temporal consistency by predicting future states at horizons sampled geometrically. Here, ψf is the forward predictor towards future states and ψb is the backward predictor towards past states. 
+
+min  
+
+> ϕ,ψ f,ψ b
+
+E (st,a )∼D 
+
+> k∼Geom (1 −γ)
+
+∥ψf (ϕ(st), a ) − sg (ϕ(st+k)) ∥22 + ∥ψb(sg (ϕ(st+k))) − ϕ(st)∥22
+
+ .
+
+• Forward-Backward Representations (FB) (Touati & Ollivier, 2021) jointly learns forward F (s, a, z ) and backward 
+
+B(s) representations to estimate successor measures for any arbitrary policy πz . Here, F predicts future behavior under a goal/task z, while B encodes state-specific features. 
+
+min  
+
+> F,B
+
+E(st,a t,s t+1 )∼D 
+
+> s′∼D
+
+h F (st, a t, z )⊤B(s′) − γF (st+1 , π z (st+1 ), z )⊤ ¯B(s′)2i
+
+−2E(st,a t,s t+1 )∼D 
+
+F (st, a t, z )⊤B(st+1 ) .
+
+## E. Additional Experiments: Ablation Study 
+
+This section presents a series of ablation studies designed to isolate and validate the key design choices underlying BTD-sampling. We investigate (1) whether performance gains arise from continuous density modeling rather than from heuristic task extraction, (2) empirically validate the signal-dilution phenomenon predicted in Proposition 4.1, (3) analyze the sensitivity to the number of mixture components, and (4) visualize the structure of the learned task space. 15 Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+Table 2. Ablation of task sampling strategies. Zero-shot test performance comparison of BTD against heuristic baselines. BTD-sampling outperforms (Subtraj) sampling by interpolating the task space, while (full traj) sampling fails, as full trajectories are dominated by failures where the useful signal is minority. Sampling Strategy Cheetah Walker Quadruped Uniform 464 ± 60 560 ± 42 634 ± 124 Full trajectory 482 ± 37 488 ± 11 421 ± 30 Subtrajectory 512 ± 24 579 ± 25 678 ± 43 
+
+BTD-sampling (ours) 579 ± 25 611 ± 23 704 ± 64 
+
+E.1. Comparison to Heuristic Task Sampling 
+
+This experiment investigates whether the gains observed with BTD-sampling stem from its continuous density modeling or merely from extracting tasks from the offline dataset through pdata . We compare BTD-sampling with two heuristic baselines: (i) Subtrajectory sampling , where tasks are directly sampled from pdata ; (ii) Full trajectory sampling , where task vectors are computed from entire trajectories. 
+
+Results: BTD-sampling consistently outperforms Subtrajectory sampling across all benchmarks (Table 2). Although both rely on pdata , BTD enables interpolation between tasks and yields more diverse tasks. In contrast, Full trajectory sampling performs poorly, particularly on Quadruped. As full trajectories contain multiple behaviors over time, they can produce task vectors where meaningful primitive behaviors are drowned into more noisy signal. In environments where recovery from failure is difficult, such as Quadruped, the resulting task vectors are dominated by failure and provide poor training reward functions. 
+
+E.2. Empirical Validation of Signal Dilution 5 10 50 100 500 1000                 
+
+> Latent task dimension d
+> 0.0
+> 0.1
+> 0.2
+> 0.3
+> 0.4
+> 1
+> d Tr(  )
+> Cheetah
+> 510 50 100 500 1000
+> Latent task dimension d
+> 0.00
+> 0.05
+> 0.10
+> 0.15
+> 0.20
+> 0.25
+> Walker
+> 510 50 100 500 1000
+> Latent task dimension d
+> 0.00
+> 0.05
+> 0.10
+> 0.15
+> 0.20
+> 0.25
+> 0.30
+> 0.35
+> 0.40
+> Quadruped
+> AEnv Trans LRA-P LRA-SR BYOL BYOL-FB
+
+Figure 5. Signal dilution under increasing feature dimension. The normalized trace of the empirical feature-occupancy covariance 
+
+(1 /d )Tr(Σ Ψ) decays rapidly as the feature dimension d increases across environments and baselines. 
+
+Proposition 4.1 characterizes the decay of the expected return variance when the tasks are uniformly sampled. The theoretical quantity Ψ represents the set of all possible feature occupancies under the MDP, which is not directly observable. We therefore construct an empirical counterpart ˜Ψ from the offline dataset by sampling 100 , 000 random subtrajectories τ and computing their discounted feature occupancies: 
+
+˜Ψ = { ˜ψτ | τ ∈ D sub }, ˜ψτ = 
+
+> |τ|
+
+X
+
+> t=0
+
+γtϕ(st). (29) 16 Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+For each environment, each baseline method, and each feature dimension d ∈ { 5, 10 , 50 , 100 , 500 , 1000 }, we train the corresponding state representation ϕ(s). We then compute ˜Ψ and its covariance Σ ˜Ψ, and report the upper bound quantity 
+
+(1 /d )Tr(Σ ˜Ψ).
+
+Results: Figure 5 shows a rapid exponential decay of (1 /d )Tr(Σ ˜Ψ) as d increases, confirming the signal-dilution effect predicted by Proposition 4.1. This confirms that the vanishing variance is not an artifact of a specific representation or environment, but a fundamental consequence of uniform sampling. 
+
+E.3. Effect of number of components in the GMM 
+
+This ablation study examines the impact of the number of Gaussian Mixture Model (GMM) components on the test performance across the benchmark environments and all the baselines, across a range of 5 to 200 GMM components. 5 10 20 50 100 200                 
+
+> GMM components
+> 200
+> 300
+> 400
+> 500
+> 600
+> Test performance
+> Cheetah
+> 510 20 50 100 200
+> GMM components
+> 200
+> 300
+> 400
+> 500
+> 600
+> Walker
+> 510 20 50 100 200
+> GMM components
+> 300
+> 400
+> 500
+> 600
+> 700
+> 800
+> Quadruped
+> AEnc Trans LRA-P LRA-SR BYOL BYOL-FB
+
+Figure 6. Effect of the number of GMM components on test performance. Performance improves rapidly with more components up to about 20, after which gains generally plateau across environments and baselines. 
+
+Results: Across all environments and baseline methods, we observe a consistent trend: performance increases rapidly until approximately 20 components, after which gains diminish. This indicates that the behavioral task distribution can be effectively captured with a relatively small number of components ( 20 ), and the exact choice beyond this point is not critical. 
+
+E.4. Visualization of the Task Space 
+
+We use UMAP projections to visualize the alignment between the empirical task distribution ( z ∼ pdata ), extracted directly from the offline dataset, and the standard uniform prior ( z ∼ Unif (Sd−1)). By comparing these distributions, we evaluate whether the uniform task sampling effectively captures the behavioral task distribution. 6 4 2 0 2                  
+
+> UMAP-1
+> 18
+> 19
+> 20
+> 21
+> 22
+> 23
+> 24
+> 25
+> UMAP-2
+> Cheetah
+> 432101234
+> UMAP-1
+> 9
+> 8
+> 7
+> 6
+> 5
+> 4
+> 3
+> 2
+> UMAP-2
+> Walker
+> 1012345
+> UMAP-1
+> 21
+> 20
+> 19
+> 18
+> 17
+> 16
+> 15
+> 14
+> UMAP-2
+> Quadruped
+> zpdata zUnif( Sd1)
+
+Figure 7. UMAP visualization of task distributions. Comparison between empirical task vectors z ∼ pdata and uniformly sampled task vectors z ∼ Unif( S(d − 1) , showing limited overlap. 
+
+17 Improving Zero-Shot Offline RL via Behavioral Task Sampling 
+
+Results: The visualizations in Figure 7 reveal a distributional shift between the uniform prior and the data-driven task vectors. While the uniform prior theoretically spans the entire hypersphere, our results show only marginal overlap with the empirical task manifold. This shows that the behavioral task vectors reside in a small region of the hypersphere that cannot be efficiently recovered using uniform sampling. 18

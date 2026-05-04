@@ -6,101 +6,103 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-03
-- 运行时间：2026-05-03 19:52:33 UTC
+- 最新运行日期：2026-05-04
+- 运行时间：2026-05-04 21:05:11 UTC
 - 运行状态：成功
 - 本次总论文数：27
 - 精读区：16
 - 速读区：11
 
 ### 今日简报（AI）
-今日精选 27 篇前沿成果，深度复盘 LLM 智能体在强化学习与多样化并行探索（DPE
-- 详情：[/202605/03/README](/202605/03/README)
+今日深度解析 27 篇前沿成果，聚焦 LLM 后训练流水线组装与智能体并行探索的重大突破。
+满分论文 JigsawRL 与 DPEPO 分别定义了高效 RL 训练新范式及多样化探索策略，显著增强了模型对复杂任务的适应力。
+建议重点研读 LLM 智能体在动态 GUI 及多智能体决策中的落地应用，把握强化学习工程化的最新趋势。
+- 详情：[/202605/04/README](/202605/04/README)
 
 ### 精读区论文标签
-1. [DPEPO: Diverse Parallel Exploration Policy Optimization for LLM-based Agents](/202605/03/2604.24320v1-dpepo-diverse-parallel-exploration-policy-optimization-for-llm-based-agents)  
+1. [JigsawRL: Assembling RL Pipelines for Efficient LLM Post-Training](/202605/04/2604.23838v1-jigsawrl-assembling-rl-pipelines-for-efficient-llm-post-training)  
    标签：评分：10.0/10、query:ag-rl
-   evidence：针对基于LLM智能体的并行探索强化学习算法
-2. [Rethinking Agentic Reinforcement Learning In Large Language Models](/202605/03/2604.27859v1-rethinking-agentic-reinforcement-learning-in-large-language-models)  
+   evidence：高效智能体强化学习流水线与LLM后训练框架
+2. [DPEPO: Diverse Parallel Exploration Policy Optimization for LLM-based Agents](/202605/04/2604.24320v1-dpepo-diverse-parallel-exploration-policy-optimization-for-llm-based-agents)  
    标签：评分：10.0/10、query:ag-rl
-   evidence：基于大语言模型的代理强化学习结合了元推理等认知能力
-3. [Bridging Reasoning and Action: Hybrid LLM-RL Framework for Efficient Cross-Domain Task-Oriented Dialogue](/202605/03/2604.23345v1-bridging-reasoning-and-action-hybrid-llm-rl-framework-for-efficient-cross-domain-task-oriented-dialogue)  
+   evidence：提出DPEPO，一种用于大模型智能体并行探索的强化学习算法
+3. [Rethinking Agentic Reinforcement Learning In Large Language Models](/202605/04/2604.27859v1-rethinking-agentic-reinforcement-learning-in-large-language-models)  
+   标签：评分：10.0/10、query:ag-rl
+   evidence：大语言模型中向代理强化学习范式转变的最新综述与思考
+4. [GUI Agents with Reinforcement Learning: Toward Digital Inhabitants](/202605/04/2604.27955v1-gui-agents-with-reinforcement-learning-toward-digital-inhabitants)  
+   标签：评分：10.0/10、query:ag-rl
+   evidence：RL与GUI智能体交叉领域的全面综述
+5. [AEM: Adaptive Entropy Modulation for Multi-Turn Agentic Reinforcement Learning](/202605/04/2605.00425v1-aem-adaptive-entropy-modulation-for-multi-turn-agentic-reinforcement-learning)  
+   标签：评分：10.0/10、query:ag-rl
+   evidence：针对大语言模型智能体在多轮任务中的强化学习训练，采用自适应熵调制
+6. [BitRL: Reinforcement Learning with 1-bit Quantized Language Models for Resource-Constrained Edge Deployment](/202605/04/2604.24273v1-bitrl-reinforcement-learning-with-1-bit-quantized-language-models-for-resource-constrained-edge-deployment)  
    标签：评分：9.5/10、query:ag-rl
-   evidence：用于任务导向对话的混合LLM-RL框架
-4. [DLM: Unified Decision Language Models for Offline Multi-Agent Sequential Decision Making](/202605/03/2604.23557v1-dlm-unified-decision-language-models-for-offline-multi-agent-sequential-decision-making)  
+   evidence：使用1比特量化语言模型的强化学习智能体
+7. [JURY-RL: Votes Propose, Proofs Dispose for Label-Free RLVR](/202605/04/2604.25419v1-jury-rl-votes-propose-proofs-dispose-for-label-free-rlvr)  
    标签：评分：9.5/10、query:ag-rl
-   evidence：基于LLM的离线多智能体强化学习决策语言模型
-5. [EPM-RL: Reinforcement Learning for On-Premise Product Mapping in E-Commerce](/202605/03/2604.23993v1-epm-rl-reinforcement-learning-for-on-premise-product-mapping-in-e-commerce)  
-   标签：评分：9.5/10、query:ag-rl
-   evidence：电子商务中基于大模型智能体的强化学习框架
-6. [GUI Agents with Reinforcement Learning: Toward Digital Inhabitants](/202605/03/2604.27955v1-gui-agents-with-reinforcement-learning-toward-digital-inhabitants)  
-   标签：评分：9.5/10、query:ag-rl
-   evidence：强化学习与GUI智能体交叉领域的全面综述
-7. [Exploration Hacking: Can LLMs Learn to Resist RL Training?](/202605/03/2604.28182v1-exploration-hacking-can-llms-learn-to-resist-rl-training)  
-   标签：评分：9.5/10、query:ag-rl
-   evidence：LLM智能体能力在强化学习后训练中的探索欺骗行为研究
-8. [Discovering Agentic Safety Specifications from 1-Bit Danger Signals](/202605/03/2604.23210v1-discovering-agentic-safety-specifications-from-1-bit-danger-signals)  
+   evidence：增强大语言模型推理能力的无标签强化学习框架
+8. [GraphPlanner: Graph Memory-Augmented Agentic Routing for Multi-Agent LLMs](/202605/04/2604.23626v1-graphplanner-graph-memory-augmented-agentic-routing-for-multi-agent-llms)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：LLM智能体通过经验发现安全目标
-9. [GraphPlanner: Graph Memory-Augmented Agentic Routing for Multi-Agent LLMs](/202605/03/2604.23626v1-graphplanner-graph-memory-augmented-agentic-routing-for-multi-agent-llms)  
+   evidence：将多智能体大模型路由建模为马尔可夫决策过程(MDP)
+9. [Addressing Performance Saturation for LLM RL via Precise Entropy Curve Control](/202605/04/2604.26326v1-addressing-performance-saturation-for-llm-rl-via-precise-entropy-curve-control)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：将代理路由建模为马尔可夫决策过程
-10. [JigsawRL: Assembling RL Pipelines for Efficient LLM Post-Training](/202605/03/2604.23838v1-jigsawrl-assembling-rl-pipelines-for-efficient-llm-post-training)  
+   evidence：通过熵控制解决大模型强化学习中的性能饱和与探索问题
+10. [Lyapunov-Guided Self-Alignment: Test-Time Adaptation for Offline Safe Reinforcement Learning](/202605/04/2604.26516v1-lyapunov-guided-self-alignment-test-time-adaptation-for-offline-safe-reinforcement-learning)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：用于高效智能体强化学习流水线和LLM后训练的框架
-11. [BitRL: Reinforcement Learning with 1-bit Quantized Language Models for Resource-Constrained Edge Deployment](/202605/03/2604.24273v1-bitrl-reinforcement-learning-with-1-bit-quantized-language-models-for-resource-constrained-edge-deployment)  
+   evidence：离线安全强化学习中测试时自适应的Transformer框架
+11. [GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents](/202605/04/2604.26752v1-glm-5v-turbo-toward-a-native-foundation-model-for-multimodal-agents)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：使用量化语言模型构建强化学习智能体的框架
-12. [Frictive Policy Optimization for LLMs: Epistemic Intervention, Risk-Sensitive Control, and Reflective Alignment](/202605/03/2604.25136v1-frictive-policy-optimization-for-llms-epistemic-intervention-risk-sensitive-control-and-reflective-alignment)  
+   evidence：多模态基础模型中强化学习与智能体框架的集成
+12. [Kernelized Advantage Estimation: From Nonparametric Statistics to LLM Reasoning](/202605/04/2604.28005v1-kernelized-advantage-estimation-from-nonparametric-statistics-to-llm-reasoning)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：将语言模型策略学习作为风险敏感控制的框架
-13. [JURY-RL: Votes Propose, Proofs Dispose for Label-Free RLVR](/202605/03/2604.25419v1-jury-rl-votes-propose-proofs-dispose-for-label-free-rlvr)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：用于增强LLM推理的无标签强化学习框架
-14. [GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents](/202605/03/2604.26752v1-glm-5v-turbo-toward-a-native-foundation-model-for-multimodal-agents)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：使用强化学习的训练多模态智能体原生基础模型
-15. [Skills-Coach: A Self-Evolving Skill Optimizer via Training-Free GRPO](/202605/03/2604.27488v1-skills-coach-a-self-evolving-skill-optimizer-via-training-free-grpo)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：使用无需训练的GRPO（一种强化学习变体）来优化LLM智能体技能
-16. [RHyVE: Competence-Aware Verification and Phase-Aware Deployment for LLM-Generated Reward Hypotheses](/202605/03/2604.28056v1-rhyve-competence-aware-verification-and-phase-aware-deployment-for-llm-generated-reward-hypotheses)  
+   evidence：利用强化学习提升LLM推理能力
+13. [RHyVE: Competence-Aware Verification and Phase-Aware Deployment for LLM-Generated Reward Hypotheses](/202605/04/2604.28056v1-rhyve-competence-aware-verification-and-phase-aware-deployment-for-llm-generated-reward-hypotheses)  
    标签：评分：9.0/10、query:ag-rl
    evidence：用于强化学习策略优化的LLM生成奖励假设
+14. [LaST-R1: Reinforcing Action via Adaptive Physical Latent Reasoning for VLA Models](/202605/04/2604.28192v1-last-r1-reinforcing-action-via-adaptive-physical-latent-reasoning-for-vla-models)  
+   标签：评分：9.0/10、query:ag-rl
+   evidence：集成在线强化学习以优化物理推理的VLA框架
+15. [Odysseus: Scaling VLMs to 100+ Turn Decision-Making in Games via Reinforcement Learning](/202605/04/2605.00347v1-odysseus-scaling-vlms-to-100-turn-decision-making-in-games-via-reinforcement-learning)  
+   标签：评分：9.0/10、query:ag-rl
+   evidence：基于强化学习的视觉语言模型在长周期游戏决策中的训练
+16. [Learning How and What to Memorize: Cognition-Inspired Two-Stage Optimization for Evolving Memory](/202605/04/2605.00702v1-learning-how-and-what-to-memorize-cognition-inspired-two-stage-optimization-for-evolving-memory)  
+   标签：评分：9.0/10、query:ag-rl
+   evidence：用于LLM智能体演化记忆的基于强化学习的智能体
 
 ### 速读区论文标签
-1. [Process Supervision of Confidence Margin for Calibrated LLM Reasoning](/202605/03/2604.23333v1-process-supervision-of-confidence-margin-for-calibrated-llm-reasoning)  
+1. [DLM: Unified Decision Language Models for Offline Multi-Agent Sequential Decision Making](/202605/04/2604.23557v1-dlm-unified-decision-language-models-for-offline-multi-agent-sequential-decision-making)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：通过强化学习扩展测试时计算以提高大模型推理能力
-2. [Escher-Loop: Mutual Evolution by Closed-Loop Self-Referential Optimization](/202605/03/2604.23472v1-escher-loop-mutual-evolution-by-closed-loop-self-referential-optimization)  
+   evidence：基于大语言模型的多智能体决策建模为序列预测
+2. [Agent-Centric Visual Reinforcement Learning under Dynamic Perturbations](/202605/04/2604.24661v2-agent-centric-visual-reinforcement-learning-under-dynamic-perturbations)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：任务代理与优化代理共同进化的闭环框架
-3. [Rewarding the Scientific Process: Process-Level Reward Modeling for Agentic Data Analysis](/202605/03/2604.24198v1-rewarding-the-scientific-process-process-level-reward-modeling-for-agentic-data-analysis)  
+   evidence：动态扰动下的以智能体为中心的视觉强化学习。
+3. [Benchmarking and Improving GUI Agents in High-Dynamic Environments](/202605/04/2604.25380v1-benchmarking-and-improving-gui-agents-in-high-dynamic-environments)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：基于LLM的数据分析智能体的过程级奖励建模
-4. [Agent-Centric Visual Reinforcement Learning under Dynamic Perturbations](/202605/03/2604.24661v1-agent-centric-visual-reinforcement-learning-under-dynamic-perturbations)  
+   evidence：在动态环境中使用强化学习训练的GUI智能体
+4. [One Refiner to Unlock Them All: Inference-Time Reasoning Elicitation via Reinforcement Query Refinement](/202605/04/2604.25444v1-one-refiner-to-unlock-them-all-inference-time-reasoning-elicitation-via-reinforcement-query-refinement)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：动态扰动下的智能体视觉强化学习
-5. [Architecture Matters for Multi-Agent Security](/202605/03/2604.23459v1-architecture-matters-for-multi-agent-security)  
+   evidence：使用强化学习优化LLM推理的查询
+5. [Architecture Matters for Multi-Agent Security](/202605/04/2604.23459v1-architecture-matters-for-multi-agent-security)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：智能体环境下多智能体系统的架构决策研究
-6. [Leveraging Human Feedback for Semantically-Relevant Skill Discovery](/202605/03/2604.24127v1-leveraging-human-feedback-for-semantically-relevant-skill-discovery)  
+   evidence：多智能体代理环境中管理协调的架构决策
+6. [Latent Agents: A Post-Training Procedure for Internalized Multi-Agent Debate](/202605/04/2604.24881v1-latent-agents-a-post-training-procedure-for-internalized-multi-agent-debate)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：利用人类反馈在强化学习中进行技能发现
-7. [Skill Retrieval Augmentation for Agentic AI](/202605/03/2604.24594v1-skill-retrieval-augmentation-for-agentic-ai)  
+   evidence：利用奖励调度和微调将多智能体辩论集成到LLM中。
+7. [MultiHedge: Adaptive Coordination via Retrieval-Augmented Control](/202605/04/2604.24905v1-multihedge-adaptive-coordination-via-retrieval-augmented-control)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：针对智能体AI问题求解器的技能检索增强
-8. [FAMA: Failure-Aware Meta-Agentic Framework for Open-Source LLMs in Interactive Tool Use Environments](/202605/03/2604.25135v1-fama-failure-aware-meta-agentic-framework-for-open-source-llms-in-interactive-tool-use-environments)  
+   evidence：LLM生成结构化分配决策的混合架构
+8. [Improving Zero-Shot Offline RL via Behavioral Task Sampling](/202605/04/2604.25496v1-improving-zero-shot-offline-rl-via-behavioral-task-sampling)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：LLM作为交互式环境中自主智能体的决策核心
-9. [Active Inference: A method for Phenotyping Agency in AI systems?](/202605/03/2604.23278v1-active-inference-a-method-for-phenotyping-agency-in-ai-systems)  
+   evidence：通过行为任务采样改进零样本离线强化学习
+9. [An Analysis of the Coordination Gap between Joint and Modular Learning for Job Shop Scheduling with Transportation Resources](/202605/04/2604.24117v1-an-analysis-of-the-coordination-gap-between-joint-and-modular-learning-for-job-shop-scheduling-with-transportation-resources)  
    标签：评分：6.5/10、query:ag-rl
-   evidence：将代理性实例化为部分可观测马尔可夫决策过程(POMDP)
-10. [Breaking the Secret: Economic Interventions for Combating Collusion in Embodied Multi-Agent Systems](/202605/03/2604.23511v1-breaking-the-secret-economic-interventions-for-combating-collusion-in-embodied-multi-agent-systems)  
+   evidence：用于分散工厂组合调度的多智能体强化学习
+10. [AgentWard: A Lifecycle Security Architecture for Autonomous AI Agents](/202605/04/2604.24657v1-agentward-a-lifecycle-security-architecture-for-autonomous-ai-agents)  
    标签：评分：6.5/10、query:ag-rl
-   evidence：具身多智能体系统中的经济干预
-11. [Structural Enforcement of Goal Integrity in AI Agents via Separation-of-Powers Architecture](/202605/03/2604.23646v1-structural-enforcement-of-goal-integrity-in-ai-agents-via-separation-of-powers-architecture)  
+   evidence：涉及决策和执行的自主AI智能体生命周期安全架构
+11. [Zero Shot Coordination for Sparse Reward Tasks with Diverse Reward Shapings](/202605/04/2604.25076v1-zero-shot-coordination-for-sparse-reward-tasks-with-diverse-reward-shapings)  
    标签：评分：6.5/10、query:ag-rl
-   evidence：使用RLHF背景的智能体决策和目标完整性架构
+   evidence：多智能体强化学习，专注于稀疏奖励任务中的零样本协作。
 
 
 <div class="dpr-home-promo-card">

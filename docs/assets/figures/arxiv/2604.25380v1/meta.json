@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.25380v1/fig-001.webp",
+      "caption": "Figure 7: A representative comparison between DynamicUI (top) and traditional GUI agents (bottom) on DynamicGUIBench. DynamicUI captures the interstitial state𝐻𝑡 , identifies the task-critical prompt Cache Error, then click ‘Refresh’, and successfully completes the task. In contrast, traditional GUI agents miss this transient cue and get stuck repeatedly clicking the ‘Login’ button. The red boxes highlight task-critical hidden dynamics.",
+      "page": 6,
+      "index": 1,
+      "width": 1048,
+      "height": 669
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25380v1/fig-002.webp",
+      "caption": "Table 3: Comparison with state-of-the-art methods on the DynamicGUIBench. Abbreviations: Th. (Thunderbird), Multi. (MultiApps), Vs. (Visual Studio Code), Imp. (Impress), Wri. (Writer). The best scores are in bold.",
+      "page": 7,
+      "index": 2,
+      "width": 1052,
+      "height": 334
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25380v1/fig-003.webp",
+      "caption": "Table 1: Comparison of existing GUI benchmarks and our benchmark in terms of application diversity, task scale, evaluation setting (Mode), anomaly presence (An.), and dynamic tasks (Dyn.). ✓ and ✗ denote the presence and absence of anomaly or dynamic tasks, respectively.",
+      "page": 3,
+      "index": 3,
+      "width": 500,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25380v1/fig-004.webp",
+      "caption": "Table 5: Comparison with state-of-the-art methods on the OSWorld [37] benchmark. We use ‘*’ to denote the results evaluated by us (which will be updated if improved evaluation scripts become available).",
+      "page": 8,
+      "index": 4,
+      "width": 1062,
+      "height": 271
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25380v1/fig-005.webp",
+      "caption": "Figure 3: Representative cases from DynamicGUIBench. Each example illustrates a hidden interstitial state 𝐻𝑡 (marked by the red dashed box) arising between two consecutive observations, 𝑂𝑡 and 𝑂𝑡+1. Case 1: InterruptUI, interrupted by a blocking dialog. Case 2: EphemRef, dependent on short-lived interaction history. Case 3: DynList, dependent on relative ordering in a changing list. Case 4: ContentTrig, triggered by temporally localized semantic content.",
+      "page": 4,
+      "index": 5,
+      "width": 1056,
+      "height": 725
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25380v1/fig-006.webp",
+      "caption": "Figure 5: The overall architecture of DynamicUI. The system comprises three collaborative components: (1) Dynamic Perceiver utilizes a Visual Encoder and a Cluster Process to capture key dynamic visual information. (2) Reflection Module analyzes taskspecific screenshots and generate corrective thoughts when inconsistencies arise. (3) Refinement Strategy prunes redundant information and improves the accuracy of action execution. This closed-loop mechanism ensures precise GUI navigation by aligning visual perception with iterative logical reasoning through state transitions.",
+      "page": 5,
+      "index": 6,
+      "width": 1048,
+      "height": 344
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25380v1/fig-007.webp",
+      "caption": "Figure 6: Three failure modes of traditional GUI agents.",
+      "page": 5,
+      "index": 7,
+      "width": 502,
+      "height": 296
+    }
+  ]
+}

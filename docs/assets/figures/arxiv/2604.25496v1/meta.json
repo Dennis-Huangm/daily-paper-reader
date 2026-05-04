@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.25496v1/fig-001.webp",
+      "caption": "Figure 1. Zero-shot performance comparison across task sampling strategies. Results on Cheetah, Walker, and Quadruped for multiple representations show that BTD-sampling improves average performance and reduces sensitivity to representation choice. The horizontal red line indicates offline TD3 (oracle).",
+      "page": 6,
+      "index": 1,
+      "width": 1002,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25496v1/fig-002.webp",
+      "caption": "Figure 3. Test performance across a range of latent task dimensions d. Baseline performance drops in high dimensions as task vectors become increasingly orthogonal to the behavioral space, diluting the training signal. In contrast, BTD-sampling maintains robust performance by learning a task distribution that stays within the behavioral space, ensuring a consistent and informative training signal.",
+      "page": 7,
+      "index": 2,
+      "width": 998,
+      "height": 342
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25496v1/fig-003.webp",
+      "caption": "Table 1. Hyperparameters for Dataset, Representation Learning, and Policy Training",
+      "page": 13,
+      "index": 3,
+      "width": 650,
+      "height": 729
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25496v1/fig-004.webp",
+      "caption": "Figure 4. Test performance across Cheetah, Walker, and Quadruped as the interpolation parameter α varies from 0 (pure BTD-sampling) to 1 (pure uniform). Increasing the proportion of uniformly sampled tasks leads to performance degradation across almost all methods. This shows that uniform sampling dilutes the training signal rather than enhancing generalization. This confirms that aligning the task distribution with the behavioral space is essential for effective zero-shot transfer.",
+      "page": 8,
+      "index": 4,
+      "width": 999,
+      "height": 334
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25496v1/fig-005.webp",
+      "caption": "Figure 6. Effect of the number of GMM components on test performance. Performance improves rapidly with more components up to about 20, after which gains generally plateau across environments and baselines.",
+      "page": 17,
+      "index": 5,
+      "width": 999,
+      "height": 334
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25496v1/fig-006.webp",
+      "caption": "Figure 7. UMAP visualization of task distributions. Comparison between empirical task vectors z ∼ pdata and uniformly sampled task vectors z ∼ Unif(S(d− 1), showing limited overlap.",
+      "page": 17,
+      "index": 6,
+      "width": 1002,
+      "height": 274
+    },
+    {
+      "url": "assets/figures/arxiv/2604.25496v1/fig-007.webp",
+      "caption": "Figure 5. Signal dilution under increasing feature dimension. The normalized trace of the empirical feature-occupancy covariance (1/d)Tr(ΣΨ) decays rapidly as the feature dimension d increases across environments and baselines.",
+      "page": 16,
+      "index": 7,
+      "width": 998,
+      "height": 331
+    }
+  ]
+}
