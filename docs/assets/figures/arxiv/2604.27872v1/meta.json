@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.27872v1/fig-001.webp",
+      "caption": "Figure 3: Unease Area (UA, cumulative escalation pressure prior to escalation or over the full trajectory) across agent variants. First-order dynamics exhibit the largest accumulated unease, consistent with sustained concern that attenuates slowly. Second-order dynamics reduce cumulative unease relative to first-order integration while maintaining smooth accumulation. Error bars denote mean ± standard deviation.",
+      "page": 11,
+      "index": 1,
+      "width": 631,
+      "height": 469
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27872v1/fig-002.webp",
+      "caption": "Table 1: Summary of evaluation metrics ULT, UA, EJ reported with standard deviation",
+      "page": 10,
+      "index": 2,
+      "width": 900,
+      "height": 262
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27872v1/fig-003.webp",
+      "caption": "Figure 2: Unease Lead Time (ULT), measuring the delay between initial elevation of escalation pressure and escalation. Differences are shown for completeness; escalation timing itself is not a primary outcome of this study. Error bars denote mean ± standard deviation.",
+      "page": 10,
+      "index": 3,
+      "width": 591,
+      "height": 452
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27872v1/fig-004.webp",
+      "caption": "Figure 4: Escalation Jerk (EJ), defined as the maximum absolute change in escalation pressure between consecutive timesteps, across agent variants. Stateless agents exhibit the highest jerk, indicating abrupt reactive changes. Both stateful agents reduce jerk relative to the stateless baseline: first-order dynamics yield the lowest mean EJ, while second-order hysteretic dynamics show intermediate jerk with higher variability, consistent with inertial and asymmetric temporal updates. Error bars denote mean ± standard deviation across trajectories.",
+      "page": 12,
+      "index": 4,
+      "width": 633,
+      "height": 475
+    }
+  ]
+}
