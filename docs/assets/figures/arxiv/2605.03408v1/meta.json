@@ -1,0 +1,118 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-001.webp",
+      "caption": "Table 12: Observation features for the Panda tracking task.",
+      "page": 30,
+      "index": 1,
+      "width": 414,
+      "height": 460
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-002.webp",
+      "caption": "Figure 1: Overview of the LIMEN framework. The outer loop performs evolutionary search: LIMEN selects a parent interface from the MAP-Elites archive, mutates it via LLM-guided code generation, and evaluates the resulting interface by training an RL agent in the inner loop. The interface (ϕ,R) mediates between the raw simulator state and the agent, defining the observations and rewards that constitute the induced MDP. Fitness is measured by trajectory-level task success and fed back to update the archive.",
+      "page": 2,
+      "index": 2,
+      "width": 544,
+      "height": 243
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-003.webp",
+      "caption": "Figure 3: Evolution progress of LIMEN showing candidate interfaces, crash events, and improvements in the running best success rate across iterations.",
+      "page": 7,
+      "index": 3,
+      "width": 737,
+      "height": 419
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-004.webp",
+      "caption": "Table 6: Observation features for the Medium task.",
+      "page": 22,
+      "index": 4,
+      "width": 364,
+      "height": 394
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-005.webp",
+      "caption": "Table 1: PPO hyperparameters for XMinigrid environments.",
+      "page": 14,
+      "index": 5,
+      "width": 582,
+      "height": 368
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-006.webp",
+      "caption": "Table 2: PPO hyperparameters for MuJoCo tasks.",
+      "page": 14,
+      "index": 6,
+      "width": 436,
+      "height": 392
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-007.webp",
+      "caption": "Table 15: Runtime and LLM usage for ablation experiments.",
+      "page": 33,
+      "index": 7,
+      "width": 602,
+      "height": 310
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-008.webp",
+      "caption": "Figure 7: Evolution progress across five independent seeds per XLand-MiniGrid task. Each line shows the running best success rate over 30 iterations; faded dots show individual candidate evaluations.",
+      "page": 18,
+      "index": 8,
+      "width": 739,
+      "height": 238
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-009.webp",
+      "caption": "Table 11: Reward components for the GO1 task.",
+      "page": 28,
+      "index": 9,
+      "width": 486,
+      "height": 352
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-010.webp",
+      "caption": "Figure 4: Learning curves for LIMEN and ablations across five tasks. Success rate versus environment steps (millions), averaged over 10 seeds with shaded standard deviation. Joint interface discovery consistently achieves higher performance than observation-only, reward-only, and sparse baselines.",
+      "page": 8,
+      "index": 10,
+      "width": 737,
+      "height": 445
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-011.webp",
+      "caption": "Table 10: Observation features for the GO1 push-recovery task.",
+      "page": 27,
+      "index": 11,
+      "width": 382,
+      "height": 733
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-012.webp",
+      "caption": "Table 8: Observation features for the Hard task.",
+      "page": 24,
+      "index": 12,
+      "width": 352,
+      "height": 391
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-013.webp",
+      "caption": "Figure 5: Independent LLM samples (no evolution) versus the best interface found by LIMEN across four tasks. Each dot is a single interface sampled from the LLM with the same prompt and evaluated over 3 seeds with identical training budgets.",
+      "page": 9,
+      "index": 13,
+      "width": 572,
+      "height": 443
+    },
+    {
+      "url": "assets/figures/arxiv/2605.03408v1/fig-014.webp",
+      "caption": "Figure 6: Robustness under distribution shift for the Go1 push recovery and Panda tracking tasks.",
+      "page": 9,
+      "index": 14,
+      "width": 346,
+      "height": 357
+    }
+  ]
+}

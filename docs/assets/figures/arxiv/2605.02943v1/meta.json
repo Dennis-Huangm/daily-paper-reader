@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-001.webp",
+      "caption": "Table 5: Evaluation benchmark suite.",
+      "page": 21,
+      "index": 1,
+      "width": 818,
+      "height": 472
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-002.webp",
+      "caption": "Table 6: Safety violation taxonomy (5-level severity).",
+      "page": 21,
+      "index": 2,
+      "width": 826,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-003.webp",
+      "caption": "Table 1: Benchmark results across evaluation configurations, comprising 18 benchmarks and 4 evaluation conditions. Base (text) uses log-probability evaluation or answer extraction without tools. Base+AR uses the same multi-turn AgentRunner with 135 tools and 828K-passage KB as RL models, but without RL training—this isolates the tool/KB contribution from RL. GRPO and TT-OPD are RL-trained models evaluated via multi-turn AgentRunner. Results marked † derived from reference;",
+      "page": 7,
+      "index": 3,
+      "width": 827,
+      "height": 507
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-004.webp",
+      "caption": "Table 2: Medical domains in HEALTHCARE AI GYM with implementation details.",
+      "page": 14,
+      "index": 4,
+      "width": 819,
+      "height": 329
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-005.webp",
+      "caption": "Figure 3: Training dynamics comparison across 60 steps. (a) Both TT-OPD and GRPO converge non-monotonically; GRPO reaches a higher peak (62.0% at step 55) while TT-OPD achieves 61.1% at step 60 with more stable dynamics. (b) KL divergence grows continuously as student diverges from EMA teacher. (c) TT-OPD controls response length (5.7–9.3K tokens) vs. GRPO oscillation (7.7–10.8K) and unchecked explosion to Lmax without cosine reward. (d) Multi-turn structure is preserved by TT-OPD (7.0–7.4 turns) vs. monotonic decline with EMA-only distillation.",
+      "page": 8,
+      "index": 5,
+      "width": 829,
+      "height": 186
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-006.webp",
+      "caption": "Figure 1: Overview of the HEALTHCARE AI GYM Architecture. The framework is composed of four integrated layers designed for medical agent reinforcement learning.",
+      "page": 4,
+      "index": 6,
+      "width": 826,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-007.webp",
+      "caption": "Table 3: Tool inventory per domain. R=Read, W=Write, G=Generic (think, submit). All domains share 3 KnowledgeTools.",
+      "page": 17,
+      "index": 7,
+      "width": 806,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-008.webp",
+      "caption": "Figure 4: Ablation of distillation components across training.",
+      "page": 9,
+      "index": 8,
+      "width": 826,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-009.webp",
+      "caption": "Table 4: Training hyperparameters. It includes both vanilla GRPO baseline and TT-OPD on Qwen3.59B.",
+      "page": 20,
+      "index": 9,
+      "width": 640,
+      "height": 673
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02943v1/fig-010.webp",
+      "caption": "Figure 2: Overview of the HEALTHCARE AI GYM Architecture. The framework is composed of four integrated layers designed for medical agent reinforcement learning.",
+      "page": 5,
+      "index": 10,
+      "width": 826,
+      "height": 523
+    }
+  ]
+}

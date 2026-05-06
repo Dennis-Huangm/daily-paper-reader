@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.02964v1/fig-001.webp",
+      "caption": "Table 2. Frontier model performance and exploit rates on RHB.",
+      "page": 7,
+      "index": 1,
+      "width": 935,
+      "height": 316
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02964v1/fig-002.webp",
+      "caption": "Table 5. Exploit rates (%) on standard vs. hard task variants. Hard variants increase honest-solution complexity (more steps, larger data, tighter budgets) without changing the exploit surface. Even models with 0% standard exploit rates show measurable reward hacking on hard variants.",
+      "page": 10,
+      "index": 2,
+      "width": 402,
+      "height": 316
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02964v1/fig-003.webp",
+      "caption": "Figure 1. Reward hacking rate (%) by model and task family. RL-reasoning models (bottom rows) show elevated exploit rates across all families, while production-aligned models (top rows) exhibit near-zero rates. The Performance Optimization (PF) family elicits the highest exploit rates overall. Throughout the paper we use RL-reasoning models to denote models for which extended RL is the dominant post-training signal and explicit chain-of-thought is the primary inference mode (o1, o3, o3-mini, o4-mini, R1-Zero), versus production-aligned models for which RL is one component of a broader safety-and-helpfulness pipeline (Claude 4.5 series, GPT-4o, Gemini Flash). Some models (e.g., Claude 3.7 Sonnet) occupy an intermediate position with intermediate exploit rates, consistent with this framing.",
+      "page": 8,
+      "index": 3,
+      "width": 1017,
+      "height": 444
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02964v1/fig-004.webp",
+      "caption": "Figure 3. Distribution of exploit categories across all models and tasks. Sequence manipulation (31%) and tampering (19%) are the most common, together accounting for over half of observed exploits.",
+      "page": 17,
+      "index": 4,
+      "width": 492,
+      "height": 450
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02964v1/fig-005.webp",
+      "caption": "Figure 2. Reward hacking rate as a function of chain length across frontier models. Gray lines show 12 evaluated models; black line highlights o3 as a representative example. Reward hacking remains low for short chains (1–2 steps), increases moderately through chain length 4, then rises sharply at chain length 5.",
+      "page": 9,
+      "index": 5,
+      "width": 713,
+      "height": 365
+    }
+  ]
+}
