@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.04036v1/fig-001.webp",
+      "caption": "Table 1: Comparisons among our OpenSeeker and other ReAct-based search agents. ‘# Samples’ denotes the number of total training data samples; ‘Training’ denotes training techniques (CPT: continual pretraining, SFT: supervised fine-tuning, RL: reinforcement learning); ‘Academic’ denotes whether conducted by pure academic team (✓: Yes, ×: No); ‘BC-ZH’ denotes BrowseComp-ZH. Notably, with simple SFT only, OpenSeeker-v2-30B-SFT consistently outperforms models of comparable scale trained with more complex pipelines involving CPT, SFT, and RL. OpenSeeker-v2 comprehensively outperforms pure ReAct-based models of comparable scale.",
+      "page": 4,
+      "index": 1,
+      "width": 940,
+      "height": 576
+    }
+  ]
+}

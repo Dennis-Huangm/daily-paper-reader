@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.04984v1/fig-001.webp",
+      "caption": "Table 3: Credit-assignment ablation. Full SIOP and w/o turn-level advantage share the same SIOP per-turn process reward, and only the advantage construction differs. GRPO uses gold-answer EM with broadcast advantage as a gold-supervised outcome baseline (not bolded). Bold marks the better entry between the two SIOP-reward rows.",
+      "page": 10,
+      "index": 1,
+      "width": 822,
+      "height": 180
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04984v1/fig-002.webp",
+      "caption": "Figure 4: Case study of a SIOP rollout on a multi-hop question. The agent issues two search queries: the first to identify the director, the second to retrieve his birthday. The final answer matches the gold label.",
+      "page": 23,
+      "index": 2,
+      "width": 831,
+      "height": 413
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04984v1/fig-003.webp",
+      "caption": "Table 1: Main comparative results, reported as Exact Match and token-level F1 for 4B and 8B backbones. Gold-supervised baselines are shown in gray and are not bolded. TTRL, EMPO, and SIOP use no task-specific verifier. Bold marks the best verifier-free result within each metric block.",
+      "page": 8,
+      "index": 3,
+      "width": 822,
+      "height": 512
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04984v1/fig-004.webp",
+      "caption": "Figure 2: Training dynamics, including search turns, response length, response-length clip ratio, and generation entropy.",
+      "page": 8,
+      "index": 4,
+      "width": 829,
+      "height": 200
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04984v1/fig-005.webp",
+      "caption": "Figure 1: Overview of Self-Induced Outcome Potential (SIOP). For each query, the policy samples multiple agent rollouts, clusters their final answers into semantic outcome modes, and calibrates these modes into a reliability-weighted target distribution. SIOP then evaluates each prefix by its outcome potential, assigns turn rewards from potential differences, adds terminal outcome mass at the final answer turn, and updates the policy with turn-level advantages.",
+      "page": 4,
+      "index": 5,
+      "width": 829,
+      "height": 338
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04984v1/fig-006.webp",
+      "caption": "Figure 3: Task prompt template used for training and inference. All rollouts see an identical system message and a user message that combines the retrieval-augmented reasoning instructions with the query.",
+      "page": 19,
+      "index": 6,
+      "width": 832,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04984v1/fig-007.webp",
+      "caption": "Table 4: Core notation used in the method section.",
+      "page": 17,
+      "index": 7,
+      "width": 806,
+      "height": 631
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04984v1/fig-008.webp",
+      "caption": "Table 2: Component ablation. Each row removes one ingredient from Full SIOP: multireference cluster support, reliability calibration, both together, or the per-turn process reward. The agent loop, retriever, optimizer, and turn-level advantage construction are kept identical across rows, so each row isolates a single design choice. Bold marks the best entry in each column.",
+      "page": 9,
+      "index": 8,
+      "width": 822,
+      "height": 279
+    },
+    {
+      "url": "assets/figures/arxiv/2605.04984v1/fig-009.webp",
+      "caption": "Table 5: Key hyperparameters used for SIOP training. Values apply to all ablations and baselines unless otherwise noted.",
+      "page": 20,
+      "index": 9,
+      "width": 492,
+      "height": 688
+    }
+  ]
+}

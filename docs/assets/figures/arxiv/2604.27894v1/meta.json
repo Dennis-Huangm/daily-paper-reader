@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.27894v1/fig-001.webp",
+      "caption": "Figure 2. Gabor contrast discrimination task and descriptive statistics. (A) Gabor patch contrast discrimination trial sequence. Two Gabor patches differing in contrast were presented to participants, who were required to indicate whether they perceived the contrast of the left or the right Gabor patch as higher. The correct response yielded a reward of +1, the incorrect response a reward of +0. Rewards were presented immediately after the response for 1 second. (B) Average reward obtained by the group of n = 59 participants. On average, participants correctly classified and thus obtained a reward of +1 in 82.7% of the trials with a group standard deviation of 5.9%. (C) Group psychometric function. The group mean and standard deviation correspond to the proportion of “right” responses as a function of the normalized contrast difference. Negative normalized contrast differences correspond to a physically higher contrast of the left Gabor patch, positive normalized contrast difference correspond to a physically higher contrast of the right Gabor patch.",
+      "page": 11,
+      "index": 1,
+      "width": 751,
+      "height": 291
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27894v1/fig-002.webp",
+      "caption": "Figure 9. Model evaluation and post-hoc model validation of the symmetric bandit learning case study. (A) Group-cumulative BIC values, corresponding to the sums of the participant-specific BIC values for each ABM variant. Bar colors indicate the results from the experimental data and the simulated post-hoc validation data. Error bars indicate the standard deviation across post-hoc validation simulations. (B) PEPs for each ABM variant. As in (A), bar colors indicate the results from the experimental data and the simulated post hoc validation data. Error bars indicate the standard deviation across post-hoc validation simulations. (C), (D), (E) Parameter estimation and post-hoc recovery results for ABM variants indicated in the subpanel’s legend. Parameter estimates τ̂ and λ̂ based on the experimental data are displayed on the x-axes. The recovered average parameter estimates τ̂r and λ̂r and their standard deviations across post-hoc simulations are shown on the y-axes. (F) Group mean experimental data as in Figure 6D and posterior predictive average learning function.",
+      "page": 38,
+      "index": 2,
+      "width": 767,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27894v1/fig-003.webp",
+      "caption": "Figure 6. Symmetric bandit learning task and descriptive statistics. (A) Symmetric bandit task block mechanics. For each block, a probability state s was realized from a uniform distribution on [0, 1] and the leftwards cursor button endowed with a probability of s to yield a reward of +0 and a probability of 1− s to yield a reward of +1. Vice versa, the rightwards cursor button was endowed with a probability of 1−s to yield a reward of +0 and a probability of s to yield a reward of +1. Depending on whether s was realized in [0, 0.5[ or [0.5, 1] either cursor button could thus be associated with the higher probability for a reward of +1. (B) In each trial of each block, participants were prompted by a fixation cross to press one of the two cursor buttons, the respective reward distribution was sampled, and the sampled reward was presented for 1 sec. After completing 30 trials of a given block, participants were informed by an information screen that they could continue to the next block by pressing the space bar. (C) Mean fraction of maximizing actions and obtained reward across blocks for all individual participants. The shaded areas indicate the standard error of mean. (D) Mean fraction of maximizing actions and obtained reward across blocks and participants as a function of trial index. The shaded areas indicate the SEM.",
+      "page": 26,
+      "index": 3,
+      "width": 740,
+      "height": 609
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27894v1/fig-004.webp",
+      "caption": "Figure 7. Neurocognitive perspective of the symmetric Bandit Bayesian ABM.",
+      "page": 29,
+      "index": 4,
+      "width": 723,
+      "height": 425
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27894v1/fig-005.webp",
+      "caption": "Table 2. Intuitions, parameter constraints, and conditional log-likelihood functions of the ABM variants applied in the symmetric bandit learning case study.",
+      "page": 34,
+      "index": 5,
+      "width": 777,
+      "height": 186
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27894v1/fig-006.webp",
+      "caption": "Figure 8. Model validation for the symmetric bandit ABM. (A) Model face validity. The left subpanel visualizes the effect of varying the action noise parameter τ for ABM variant A1. The center and right subpanels visualize the effect of varying τ for ABM variant A2 for a low (λ = 0.1) and a high (λ = 0.9) learning rate parameter. (B) Model recovery. The left subpanel visualizes the PEP fractions attained by the data-analytical ABM variants A0, A1, and A2 for data generated by ABM variant A1 as a function of the action noise parameter τ . The right subpanel visualizes the PEP fractions attained by A0, A1, and A2 for data generated by A2 as a function of the generating model’s parameter configuration in pie chart form. (C) Recoverability of the action noise parameter τ for data generated by ABM variant A1. (D) Recoverability of the learning rate parameter λ as a function of τ for data generated by ABM variant A2 (left subpanel) and recoverability of τ as a function of λ for data generated by ABM variant A2 (right subpanel).",
+      "page": 35,
+      "index": 6,
+      "width": 764,
+      "height": 836
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27894v1/fig-007.webp",
+      "caption": "Table 1. Intuitions, parameter constraints, and conditional log-likelihood functions of the ABM variants applied in the Gabor contrast discrimination case study.",
+      "page": 17,
+      "index": 7,
+      "width": 775,
+      "height": 188
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27894v1/fig-008.webp",
+      "caption": "Figure 3. Neurocognitive perspective of the Gabor contrast discrimination ABM.",
+      "page": 12,
+      "index": 8,
+      "width": 723,
+      "height": 425
+    },
+    {
+      "url": "assets/figures/arxiv/2604.27894v1/fig-009.webp",
+      "caption": "Figure 5. Model evaluation and post-hoc model validation of the Gabor contrast discrimination case study. (A) Group-cumulative BIC values, corresponding to the sums of the participant-specific BIC values for each ABM variant. Bar colors indicate the results from the experimental data and the simulated post-hoc validation data. Error bars indicate the standard deviation across post-hoc validation simulations. (B) PEPs for each ABM variant. As in (A), bar colors indicate the results from the experimental data and the simulated post hoc validation data. Error bars indicate the standard deviation across post-hoc validation simulations. (C), (D), (E) Parameter estimation and post-hoc recovery results for ABM variants indicated in the subpanel’s legend. Parameter estimates σ̂, η̂, and τ̂ based on the experimental data are displayed on the x-axes. The recovered average parameter estimates σ̂r, η̂r, and τ̂r and their standard deviations across post-hoc simulations are shown on the y-axes. (F) Group mean experimental data as in Figure 2C and group mean posterior predictive psychometric function.",
+      "page": 24,
+      "index": 9,
+      "width": 767,
+      "height": 405
+    }
+  ]
+}
