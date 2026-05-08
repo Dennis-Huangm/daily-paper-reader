@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-001.webp",
+      "caption": "Table 2: Experimental setup across the three integration tiers. In Tier 1 the same 100 tasks are run twice (baseline and gated) with matched random seeds. In Tier 3 the trained policy weights are loaded back into the inference engine after every iteration.",
+      "page": 6,
+      "index": 1,
+      "width": 772,
+      "height": 203
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-002.webp",
+      "caption": "Table 12: Strong-baseline arm comparison on the same N=100 buffer; cut count, TP/FP composition, precision, rollout step-tokens saved, and GRPO advantage L2-norm preserved (ratio to no-gate). Random-cut at the same ∼23-cut budget destroys ∼12 pp of L2 because its FPs land on non-zerovariance groups whose advantages are real. Oracle (cut iff truly zero-variance) sets the upper bound at 23.1% saving; our single-axis gate dK < 0.12 recovers 51% of that at 96.7% L2-preservation. DAPO-oracle and OURS+DAPO save the same rollout step-tokens as their pre-DAPO counterparts because DAPO is a post-rollout filter that drops groups from the gradient batch only; it changes the training-phase cost (App. E.7), not the rollout-phase cost. The single-axis τK ≥ 0.90 clause on its own saves zero rollout compute because the groups it fires on have already terminated by step K.",
+      "page": 23,
+      "index": 2,
+      "width": 836,
+      "height": 215
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-003.webp",
+      "caption": "Table 5: Tier 3. On-policy GRPO training A/B with the gate (K = 10, dL = 0.12) on Qwen2.57B + LoRA, 60 iterations, 10 prompts/iter, G = 8, averaged over n = 4 seeds ({7, 13, 23, 42}). Held-out eval is greedy on 50 valid_seen ALFWorld tasks, never seen during training. Per-seed pre-training eval values are 38, 44, 38, 38% (mean 39.5±3.0%); per-seed held-out delta at iter 60 is +4,+6,−2,+2 pp. Standard deviations across the 4 seeds: total wall-clock ±187 / ±534 s; gradient L2 ±0.001 / ±0.008; held-out eval ±4.4 / ±7.1 pp.",
+      "page": 8,
+      "index": 3,
+      "width": 765,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-004.webp",
+      "caption": "Figure 4: On-policy GRPO A/B on Qwen2.5-7B + LoRA, gate CUTK=10,dL=0.12, averaged over n = 4 seeds {7, 13, 23, 42}; bands are ±1 std across seeds. Top-left: held-out success on 50 unseen tasks (every 10 iter). Top-right: cumulative wall-clock; gated runs 10.7% shorter at iter 60. Bottom-left: per-iter mean training reward (5-iter rolling), gated averaged over uncut groups only. Bottom-right: per-iter gate cut count (orange) vs. baseline zero-variance count (blue); the gate fires predominantly on the same groups the baseline arm later finds to be zero-variance.",
+      "page": 8,
+      "index": 4,
+      "width": 767,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-005.webp",
+      "caption": "Figure 2: Spearman ρ (left) and AUROC for non-zero-variance classification (right) for each (metric, K) cell, N=100, G=8. The single-axis signal peaks at K∈{10, 15} and degrades at the extremes.",
+      "page": 4,
+      "index": 5,
+      "width": 749,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-006.webp",
+      "caption": "Figure 5: Spearman ρ between mid-rollout divergence dK and final reward variance σ2 r , plotted as a function of the gate evaluation step K, for two group sizes (G=8 and G=16) on the same 100 ALFWorld tasks. The shape of the curve is the same in both group sizes; the peak value is slightly lower at G=16 (0.37 vs 0.42), which we explain in the text.",
+      "page": 19,
+      "index": 6,
+      "width": 551,
+      "height": 316
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-007.webp",
+      "caption": "Table 8: Per-task-type AUROC for the (binary) zero-variance vs non-zero-variance classification at the published gate’s evaluation step K=10. Global d10 AUROC is the metric the gate actually uses; Best AUROC is the maximum over (metric,K) tuned per task type, with the winning pair in parentheses. n = groups in that type; nzv = zero-variance groups (the positive class).",
+      "page": 19,
+      "index": 7,
+      "width": 862,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-008.webp",
+      "caption": "Figure 7: Mechanistic evolution across the 60-iteration on-policy GRPO training, averaged over n=4 seeds {7, 13, 23, 42}; shaded bands are ±1 std across seeds. Top-left: per-iter zv rate (5-iter rolling) drifts downward in the baseline as the policy learns; gated tracks closely on the uncut groups. Top-right: gate cut rate (orange) vs ground-truth zv rate (blue) per iter; per-iter recall averages 37.2%. Bottom-left: gradient L2 norm — gated runs 1.16× baseline on average (1.16± 0.07 across seeds), matching the dilution prediction (§4.4, Table 5). Bottom-right: zero-advantage-item rate in the train batch: baseline 40.6%, gated 25.1%, a −15.5 pp reduction which is the proximate mechanism for the held-out gain.",
+      "page": 24,
+      "index": 8,
+      "width": 767,
+      "height": 502
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-009.webp",
+      "caption": "Figure 6: 20-step off-policy GRPO training A/B on Qwen2.5-7B + LoRA. Top left: cumulative wall-clock; the gated arm finishes 32.2% faster end-to-end. Top right: per-step gradient L2-norm; the gated arm runs at about 114% of baseline. Bottom left: number of training items per step (one item = one trajectory × one action position; max 128 as explained above). The baseline arm always uses the maximum 128 items because no group is cut. The gated arm drops to between 64 and 128 items per step depending on how many groups the gate cut at that step. Bottom right: per-step training loss. Both arms sit in the same noisy band around zero. This is expected: by definition the GRPO advantages within a group sum to zero, so the population loss for the population gradient estimator is zero up to noise. A loss near zero in this plot does not mean the policy stopped learning; held-out evaluation in Tier 3 is the metric that captures policy quality.",
+      "page": 20,
+      "index": 9,
+      "width": 764,
+      "height": 477
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-010.webp",
+      "caption": "Figure 3: Distribution of dK=10 on the N = 100 buffer, coloured by the group’s final outcome (determined only after the full rollout completes, by inspecting the multiset of G final rewards). At dL=0.12 (red dashed line) the gate catches 7/14 all-succeed and 10/25 all-fail groups (the 17 true positives) plus 4/61 mixed groups (false positives). The high-dK tail of the all-fail cluster overlaps with the mixed cluster, so raising dL would break the precision floor (§5).",
+      "page": 5,
+      "index": 10,
+      "width": 618,
+      "height": 290
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05802v1/fig-011.webp",
+      "caption": "Table 6: Hyperparameters across the three integration tiers.",
+      "page": 16,
+      "index": 11,
+      "width": 826,
+      "height": 340
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.06078v1/fig-001.webp",
+      "caption": "Table 4. Hyperparameters. BEACON-specific parameters control milestone-anchored credit assignment; other parameters are shared across all group-based methods (GRPO, GiGPO, BEACON) for fair comparison. For environment-specific values, we report ALFWorld / WebShop / ScienceWorld.",
+      "page": 15,
+      "index": 1,
+      "width": 425,
+      "height": 504
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06078v1/fig-002.webp",
+      "caption": "Figure 1. BEACON overview and performance preview. Left: GRPO assigns uniform credit from terminal outcomes, penalizing correct early actions when later actions fail; BEACON partitions trajectories at milestones and estimates advantages at dual scales. Right: On ALFWorld, GRPO degrades sharply with task horizon while BEACON maintains robust performance across all horizons.",
+      "page": 2,
+      "index": 2,
+      "width": 975,
+      "height": 217
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06078v1/fig-003.webp",
+      "caption": "Figure 4. Sample Efficiency. Trajectory distribution during training on ALFWorld. Green: full successes; Orange: partial successes (complete ≥1 milestone but fail); Gray: complete failures.",
+      "page": 7,
+      "index": 3,
+      "width": 915,
+      "height": 183
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06078v1/fig-004.webp",
+      "caption": "Table 2. Ablation Study with Qwen2.5-1.5B-Instruct.",
+      "page": 7,
+      "index": 4,
+      "width": 475,
+      "height": 315
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06078v1/fig-005.webp",
+      "caption": "Table 3. ALFWorld Task-wise Results. Success rate (%) on each task type.",
+      "page": 14,
+      "index": 5,
+      "width": 969,
+      "height": 574
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06078v1/fig-006.webp",
+      "caption": "Figure 3. The BEACON framework. Top: Trajectory partitioning divides rollouts into segments at milestone boundaries; temporal reward decay (factor γ) assigns higher credit to actions closer to milestone completion. Bottom: Dual-scale advantage estimation computes trajectory-level advantages by comparing terminal outcomes (left), segment-level advantages by comparing returns within milestone-matched groups (middle), and combines both scales for final credit assignment (right).",
+      "page": 4,
+      "index": 6,
+      "width": 802,
+      "height": 394
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06078v1/fig-007.webp",
+      "caption": "Table 1. Main Results. Performance comparison across benchmarks. By utilizing structural milestones, BEACON achieves state-of-theart performance, showing particular robustness in Long-horizon tasks on ALFWorld.",
+      "page": 5,
+      "index": 7,
+      "width": 1003,
+      "height": 534
+    }
+  ]
+}

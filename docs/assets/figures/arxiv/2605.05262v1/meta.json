@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.05262v1/fig-001.webp",
+      "caption": "Figure 3: End-to-end walkthrough of the AIME 2025 problem discussed in Appendix G. Each internal node is annotated with its UUCB decomposition and, when available, its sibling advantage Asib. Green leaves indicate correct final answers and red leaves indicate incorrect ones.",
+      "page": 15,
+      "index": 1,
+      "width": 772,
+      "height": 802
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05262v1/fig-002.webp",
+      "caption": "Figure 1: End-to-end overview of INFOTREE. The header formalizes the RIFB problem and the collapse-persistence result. The five stages trace the pipeline from collapse (Stage 1) through the submodular informativeness objective and UUCB selector (Stages 2–3) to the Adaptive Budget Allocator (Stage 4) and hierarchical credit assignment (Stage 5). The receipt strip anchors each stage to a concrete empirical number, and the callout reports the wall-clock overhead reduction from 14.3% to 4.8%.",
+      "page": 2,
+      "index": 2,
+      "width": 906,
+      "height": 468
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05262v1/fig-003.webp",
+      "caption": "Figure 2: Empirical validation of Theorem 1 on 500 prompts from AIME 2024 and MATH-500. The dashed curve plots the theoretical non-collapse envelope 1− pB − (1− p)B . Flat GRPO saturates near 0.45 for B ≥ 8; the fixed-expansion tree baseline plateaus at ∼0.72; INFOTREE tracks the envelope within ±4 percentage points across the budget range. The arrow at B=16 marks the persistent-collapse gap that the submodular greedy selector closes.",
+      "page": 7,
+      "index": 3,
+      "width": 646,
+      "height": 412
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05262v1/fig-004.webp",
+      "caption": "Table 3: Summary of all hyperparameters used by INFOTREE. Values are held constant across benchmarks unless stated otherwise in the corresponding benchmark appendix.",
+      "page": 14,
+      "index": 4,
+      "width": 544,
+      "height": 465
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05262v1/fig-005.webp",
+      "caption": "Table 1: Head-to-head comparison under an identical rollout budget of 16 leaves per prompt. The upper block contains tree-free and GRPO-variant baselines, the middle block contains tree-based methods, and the lower block reports compositions that combine INFOTREE with orthogonal mechanisms.",
+      "page": 8,
+      "index": 5,
+      "width": 752,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2605.05262v1/fig-006.webp",
+      "caption": "Table 7: Generalization across nine benchmarks spanning mathematical reasoning, web-search, code-interpreter, and operating-system agent tasks.",
+      "page": 17,
+      "index": 6,
+      "width": 582,
+      "height": 235
+    }
+  ]
+}
