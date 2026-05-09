@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.06149v1/fig-001.webp",
+      "caption": "Table 11: SAC hyperparameters by task.",
+      "page": 22,
+      "index": 1,
+      "width": 598,
+      "height": 629
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06149v1/fig-002.webp",
+      "caption": "Table 12: PPO hyperparameters by task.",
+      "page": 22,
+      "index": 2,
+      "width": 792,
+      "height": 531
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06149v1/fig-003.webp",
+      "caption": "Table 6: Grid search of SAC and PPO with fixed γ.",
+      "page": 18,
+      "index": 3,
+      "width": 827,
+      "height": 401
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06149v1/fig-004.webp",
+      "caption": "Table 1: Test performance of fixed, adaptive, and AdaGamma variants on SafetyPointGoal1-v0, Humanoid-v4, and Ant-v4.",
+      "page": 8,
+      "index": 4,
+      "width": 636,
+      "height": 239
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06149v1/fig-005.webp",
+      "caption": "Figure 4: Learning reward curves of SAC-AdaGamma on SafetyPointGoal1-v0, Humanoid-v4 and Ant-v4",
+      "page": 19,
+      "index": 5,
+      "width": 827,
+      "height": 757
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06149v1/fig-006.webp",
+      "caption": "Table 4: Mean reward and cost, with standard deviation, for SAC-AdaGamma and PPO-AdaGamma with n ∈ {5, 10, 20}.",
+      "page": 17,
+      "index": 6,
+      "width": 746,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06149v1/fig-007.webp",
+      "caption": "Table 5: Performance of SAC and PPO with fixed γ around the mean value we learned.",
+      "page": 17,
+      "index": 7,
+      "width": 814,
+      "height": 280
+    }
+  ]
+}

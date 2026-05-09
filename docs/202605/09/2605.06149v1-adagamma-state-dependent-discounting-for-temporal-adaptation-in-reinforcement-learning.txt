@@ -1,0 +1,1258 @@
+Title: AdaGamma: State-Dependent Discounting for Temporal Adaptation in Reinforcement Learning
+
+URL Source: https://arxiv.org/pdf/2605.06149v1
+
+Published Time: Fri, 08 May 2026 01:26:58 GMT
+
+Number of Pages: 22
+
+Markdown Content:
+# AdaGamma: State-Dependent Discounting for Temporal Adaptation in Reinforcement Learning 
+
+Yaomin Wang 1,2, Jianting Pan 1, Ran Tian 2, Xiaoyang Li 2,Yu Zhang 2, Hengle Qin 2,∗
+
+, Tianshu YU 1,∗
+
+> 1
+
+School of Data Science, The Chinese University of Hong Kong, Shenzhen 
+
+> 2
+
+JD.com 
+
+{yaominwang, jiantingpan}@link.cuhk.edu.cn {tianran12, lixiaoyang1, zhangyu1496, qinhengle}@jd.com {yutianshu}@cuhk.edu.cn 
+
+Abstract 
+
+The discount factor in reinforcement learning controls both the effective planning horizon and the strength of bootstrapping, yet most deep RL methods use a single fixed value across all states. While state-dependent discounting is conceptually appealing, naive deep actor–critic implementations can become unstable and de-generate toward TD-error collapse. We propose AdaGamma , a practical deep actor–critic method for state-dependent discounting that learns a state-dependent discount function together with a return-consistency objective to regularize the induced backup structure. On the theory side, we analyze the Bellman operator induced by state-dependent discounting and establish its basic well-posedness properties under suitable conditions. Empirically, AdaGamma integrates into both SAC and PPO, yielding consistent improvements on continuous-control bench-marks, and achieves statistically significant gains in an online A/B test on the JD Logistics platform. These results suggest that state-dependent discounting can be made effective in deep RL when coupled with a return-consistency objective that prevents degenerate target manipulation. 
+
+1 Introduction 
+
+The discount factor is a central design choice in reinforcement learning, as it determines both the effective planning horizon and the strength of bootstrapping in value estimation [ 1, 2 , 3]. Despite its importance, most deep RL methods, including widely used value-based and actor–critic algorithms such as TD3 [ 4], TRPO [ 5] and DDPG [ 6], PPO [ 7], and SAC [ 8], use a single fixed discount factor across all states [ 9, 7, 8 ]. While simple and effective in many settings, this uniform choice can be restrictive in environments with heterogeneous temporal structure, where states may differ substantially in uncertainty, controllability, and sensitivity to long-horizon credit assignment [ 10 ,11 , 12 ]. In some states, propagating value farther into the future can improve decision quality; in others, aggressive bootstrapping may instead amplify noise, approximation error, or nonstationarity. Using one global discount factor therefore imposes the same temporal tradeoff on situations that may require different levels of target propagation. A natural alternative is to let the discount factor vary with the state. However, in deep actor–critic systems, a naive learned state-dependent discount can easily become an unconstrained modulation signal for the TD target, leading to unstable learning or degenerate behavior such as TD-error collapse. Thus, state-dependent discounting is not merely a modeling choice; it is also an implementation 
+
+> 1the corresponding author Preprint.
+> arXiv:2605.06149v1 [cs.LG] 7 May 2026
+
+challenge: the discount function must adapt temporal propagation without becoming a shortcut for manipulating TD targets. In this paper, we address this problem with AdaGamma , a practical deep actor–critic implementation of state-dependent discounting. AdaGamma learns a state-dependent discount function and regularizes it with a return-consistency objective, which constrains the induced backup structure and prevents trivial target manipulation. Under this view, the discount factor serves as a mechanism for adaptive bootstrapping: larger values support longer-horizon propagation when future information is reliable, while smaller values reduce reliance on noisy or unstable bootstrapped targets. The resulting method provides a form of temporal regularization that adapts target propagation to the local decision context. 
+
+From a theoretical perspective , our goal is to characterize the Bellman operator induced by state-dependent discounting, rather than to claim a full end-to-end convergence guarantee for deep RL with function approximation. We show that, under suitable conditions, the associated operator retains basic well-posedness properties that support its use in value-based bootstrapping. On the algorithmic side ,we instantiate AdaGamma in SAC and further adapt it to PPO through corresponding modifications to return estimation and optimization. Empirically, both variants achieve consistent gains on continuous-control benchmarks. Finally, we validate the SAC-based variant in a live recommender system on the JD Logistics platform, where AdaGamma yields statistically significant improvements over a standard SAC baseline in an online A/B test. In summary, our work makes the following contributions: • Method. We propose AdaGamma, a practical deep actor–critic implementation of state-dependent discounting with a return-consistency objective that prevents degenerate TD-target collapse. • Theory. We provide supporting theory by analyzing the Bellman operator induced by state-dependent discounting and establishing its basic well-posedness properties under suitable condi-tions. • Flexible integration. We instantiate AdaGamma in SAC and extend it to PPO through correspond-ing modifications to return estimation and optimization. • Real-world validation. We demonstrate the effectiveness of AdaGamma on standard continuous-control benchmarks and in a four-week online A/B test on the JD Logistics platform. 
+
+2 Related Work 
+
+Discounting beyond a fixed global factor. Most deep RL methods treat γ as a fixed hyperparameter [1 , 9, 8, 7], even though it strongly affects optimization stability, variance, and the effective planning horizon [ 10 , 13 , 14 , 15 ]. Prior work has shown that discounting also plays a regularization role [ 13 , 16 ], and that globally adjusting γ changes the trade-off between policy quality, robustness, and data efficiency [ 15 , 17 , 18 ]. These results motivate moving beyond a single global discount, but do not address how to realize state-dependent discounting reliably in modern deep actor–critic systems. 
+
+State-dependent and adaptive discounting. A natural extension is to allow discounting to vary across states, time steps, or training stages. Classical work studies MDPs with state-dependent discount factors and establishes general existence or convergence results [ 19 , 20 ]. Other work considers dynamic schedules, non-exponential discounting, or generalized return criteria [ 10 , 21 ,22 , 23 , 14 ]. More recent deep RL approaches adapt discount-related quantities using uncertainty, advantage, or policy feedback signals [ 24 , 25 ]. These studies demonstrate the potential benefit of flexible discounting, but typically rely on prescribed rules, time-varying schedules, or algorithm-specific adjustments, rather than learning a state-conditioned discount module that directly participates in standard deep actor–critic bootstrapping targets. 
+
+Our distinction from prior adaptive-discount methods. Our work is closest to prior studies of state-dependent and adaptive discounting, but differs in both problem formulation and solution. We do not present state-dependent discounting itself as a new modeling idea. Instead, we focus on a practical deep actor–critic implementation issue: when a neural discount module γϕ(s) is trained naively through bootstrapped TD objectives, it can become an unconstrained degree of freedom for manipulating the target, leading to degenerate learning behavior. AdaGamma addresses this failure mode with a return-consistency objective that regularizes the induced backup structure, making 2state-dependent discounting stable enough to integrate into both SAC and PPO. Beyond standard continuous-control benchmarks, we further validate this design in a real-world JD online deployment. Additional discussion of non-exponential discounting, long-horizon statistical issues, and connections to temporal abstraction is deferred to Appendix A. 
+
+3 Preliminaries 
+
+Notation We consider an infinite-horizon MDP (S, A, p, r ) with continuous state space S and action space A. The transition density is p : S × S × A → [0 , ∞), and the reward function 
+
+r : S × A → [rmin , r max ] is bounded. We use ρπ (st) and ρπ (st, a t) to denote the state and state-action marginals of the trajectory distribution induced by policy π(at|st).
+
+The Discount Factor’s Dual Role The discount factor γ serves two conceptually distinct functions: it defines the objective (the γ-discounted return) and it acts as a damping coefficient in the Bellman backup that controls how much bootstrapped future estimates influence current value updates. A low γ prioritizes short-term rewards and reduces variance at the cost of bias; a high γ encourages long-horizon planning but amplifies errors in value estimates. In standard algorithms, γ is fixed, typically to 0.99 or 0.995. 
+
+Soft Actor-Critic (SAC) SAC [8] maximizes the entropy-augmented objective:      
+
+> J(π) = Eπ
+> "∞X
+> t=0
+> γt(r(st, a t) + αH(π(·| st)))
+> #
+> .(1)
+
+The soft Q-function satisfies the Bellman equation:          
+
+> Qπ(st, a t) = r(st, a t) + γEst+1 ∼p[Vπ(st+1 )] ,(2)
+
+where V π (st) = Eat∼π [Qπ (st, a t) − α log π(at|st)] .
+
+PPO and Generalized Advantage Estimation PPO [ 7] uses GAE to compute advantage estimates. The standard GAE recursion with fixed γ and trace parameter λ is: 
+
+δt = rt + γV (st+1 ) − V (st), (3) 
+
+ˆAt = δt + γλ ˆAt+1 , ˆAT −1 = δT −1. (4) Expanding the recursion yields ˆAt = PT −1−tl=0 (γλ )lδt+l, a geometrically-weighted sum of TD residuals. 
+
+4 AdaGamma: Method and Theory 
+
+We present AdaGamma as a unified framework with three components: (i) the gamma network architecture(Section 4.1), (ii) algorithm-specific adapters that integrate γϕ(s) into bootstrapped value estimation(Section 4.2.1 and Section 4.2.2), and (iii) the training objective for the gamma network(Section 4.3). We then provide supporting theory for the state-dependent discount operator underlying the method. Our theoretical results characterize basic operator-level properties such as well-posedness, policy-evaluation behavior, and comparison bounds under suitable assumptions; they are not intended as a full end-to-end convergence guarantee for the complete deep RL algorithm with function approximation. Algorithm 1 in Appendix E.1 presents the full SAC-AdaGamma procedure, and Algorithm 2 in Appendix E.2 presents the PPO-AdaGamma variant. 
+
+4.1 Gamma Network Architecture 
+
+The gamma network is a small MLP gϕ : S → R whose output is passed through a sigmoid and rescaled to [γmin , γ max ]:
+
+γϕ(st) = γmin + ( γmax − γmin ) · σ(gϕ(st)) , (5) where σ(·) is the sigmoid function and γmin , γ max are hyperparameters (we use γmin = 0 .900 ,
+
+γmax = 0 .999 in experiments). This bounded parameterization ensures γϕ(s) ∈ [γmin , γ max ] ⊂ [0 , 1) 
+
+for all states, guaranteeing well-posedness of the discounted return. 3The gamma network is deliberately kept lightweight—a two-layer MLP with hidden dimension 256—to avoid overfitting and to ensure negligible computational overhead. It takes the same state representation as the policy and value networks but uses no shared parameters, preventing gradient interference. 
+
+4.2 The Common Interface: Bootstrapped Value Targets 
+
+Despite their differences, both SAC and PPO share one operation where γ appears: the bootstrapped target used in value estimation. AdaGamma interfaces with each algorithm at precisely this point, replacing the scalar γ with γϕ(st).
+
+4.2.1 Off-Policy Adapter (SAC) 
+
+For SAC, the soft Q-function with adaptive discount becomes: 
+
+Qπ (st, a t) = r(st, a t) + Est+1 ∼p
+
+γϕ(st) Eat+1 ∼π [Qπ (st+1 , a t+1 ) − α log π(at+1 |st+1 )]  . (6) 
+
+The practical target computation becomes: 
+
+ˆQ(st, a t) = rt + γϕ(st)(1 − dt)
+
+
+
+min  
+
+> i=1 ,2
+
+Q¯θi (st+1 , a ′
+
+> t+1
+
+) − α log πψ (a′
+
+> t+1
+
+|st+1 )
+
+
+
+, (7) 
+
+where a′ 
+
+> t+1
+
+∼ πψ (·| st+1 ) and dt ∈ { 0, 1} is the terminal flag. The policy update and entropy tuning are unchanged from standard SAC. 
+
+4.2.2 On-Policy Adapter (PPO): Modified GAE 
+
+Although the operator-level theory developed later is most directly aligned with Bellman-style updates and SAC-style soft policy iteration, the core idea of AdaGamma can also be incorporated into PPO. In this case, state-dependent discounting is introduced through return and advantage estimation, yielding an implementation-level extension of PPO motivated by the same adaptive-bootstrapping principle. We do not claim a parallel theoretical characterization for PPO-specific components such as clipping and generalized advantage estimation; instead, we provide the corresponding estimator and objective modifications in detail. For PPO, the state-dependent discount enters the TD residual and propagates through the GAE recursion. The modified TD residual is: 
+
+δt = rt + γϕ(st) V (st+1 ) − V (st), (8) and the modified GAE backward recursion becomes: 
+
+ˆAT −1 = δT −1, ˆAt = δt + γϕ(st) · λ · ˆAt+1 . (9) 
+
+Proposition 1. (Product-of-Gammas Weighting) Under state-dependent discounting, the GAE advan-tage estimate expands as 
+
+ˆAt = δt + 
+
+> T−1−t
+
+X
+
+> l=1
+> l−1
+
+Y
+
+> k=0
+
+γϕ(st+k)
+
+!
+
+λlδt+l. (10) 
+
+Proof. By induction on the recursion in Eq. (9) . The base case ˆAT −1 = δT −1 is immediate. For the inductive step, substitute the expansion for ˆAt+1 into ˆAt = δt + γϕ(st)λ ˆAt+1 and collect terms. See Appendix B.5 for details. 
+
+Remark 1 (Temporal Segmentation) . The product structure Ql−1 
+
+> k=0
+
+γϕ(st+k) has an important qualitative consequence: a single state st+j with low γϕ(st+j ) along the trajectory suppresses the contribution of all future TD residuals δt+l for l > j , effectively segmenting the trajectory. Conversely, stretches of high-γ states enable long-range credit assignment. This provides a natural, learned mechanism for temporal abstraction that is absent under fixed γ.
+
+Remark 2 (Value Function Targets) . If n-step return targets are used for the value function instead of GAE-based targets, the product-of-gammas structure applies analogously: 
+
+Vtarget (st) = 
+
+> n−1
+
+X
+
+> k=0
+> k−1
+
+Y
+
+> j=0
+
+γϕ(st+j )
+
+!
+
+rt+k +
+
+> n−1
+
+Y
+
+> j=0
+
+γϕ(st+j )
+
+!
+
+V (st+n). (11) 
+
+4Implementation detail: advantage normalization. State-dependent γ causes the magnitude of advantage estimates to vary across states: high-γ states accumulate more future TD residuals and tend to produce larger-magnitude advantages. This interacts with PPO’s fixed clipping threshold ϵ.We normalize advantages by subtracting the batch mean and dividing by the batch standard deviation, which absorbs most of the scale variation. 
+
+Frozen γ during PPO epochs. During PPO’s multiple optimization epochs on a single rollout, we hold γϕ(s) fixed (computed once from the rollout states). This prevents the gamma network from co-adapting with the policy within a single update cycle, which would violate PPO’s trust-region assumptions. 
+
+4.3 Training the Gamma Network 4.3.1 The Collapse Problem 
+
+A natural first attempt is to train γϕ by minimizing the squared TD error δ2 
+
+> t
+
+, since γϕ(st) appears in δt. However, this objective has a trivial optimum: pushing γϕ(s) → γmin everywhere makes the value function close to V (s) ≈ r(s, a )/(1 − γmin ), a near-constant that produces small TD errors regardless of state. The gamma network has a “shortcut” to reduce loss by collapsing the horizon rather than by finding informative state-dependent structure. 
+
+4.3.2 Return-Consistency Objective 
+
+We instead train the gamma network via a return-consistency objective. The idea is to use multi-step returns as a supervision signal that the gamma network cannot trivially game. For each transition (st, a t, r t, s t+1 ), compute two value estimates: 1. The one-step bootstrap under the learned γ: ˆV1(st) = rt + γϕ(st) V (st+1 ).2. An n-step Monte Carlo return under a reference discount ¯γ: G(n) 
+
+> t
+
+= Pn−1 
+
+> k=0
+
+¯γk rt+k +¯γn V (st+n), computed with stop-gradient on V .The gamma network is trained to minimize: 
+
+LRC  
+
+> γ
+
+(ϕ) = E(st,a t)∼D 
+
+
+
+rt + γϕ(st) sg [V (st+1 )] − sg [G(n) 
+
+> t
+
+]
+
+2
+
+, (12) where sg [·] denotes the stop-gradient operator. The gamma network learns to set γϕ(st) so that the local one-step bootstrap better matches a longer-horizon target, thereby adapting the degree of temporal propagation to the local state. In states where one-step bootstrapping provides a reliable summary of longer-horizon value, the learned discount tends to be larger. In states where immediate transitions are less predictive or more weakly aligned with longer-horizon outcomes, the learned discount tends to be smaller. Critically, pushing γ → 0 does not minimize this loss because the one-step estimate rt + 0 · V (st+1 ) = rt will generally not equal the multi-step return G(n) 
+
+> t
+
+.In its simplest form, ¯γ can be fixed to a constant such as 0.99 . In our SAC safety implementation, however, we use a slowly adaptive reference discount to better match the current training distribution. After warmup, every M episodes we sample a replay batch B, compute the replay-mean predicted discount Es∼B [γϕ(s)] , and update 
+
+¯γ ← (1 − τref )¯ γ + τref Es∼B [γϕ(s)] . (13) This keeps the n-step supervisory target smoother than using a fully state-dependent product inside 
+
+G(n) 
+
+> t
+
+, while allowing the effective reference horizon to track the replay distribution over the course of training. For off-policy algorithms, the n-step return is computed from sequences of transitions in the replay buffer. For on-policy algorithms, the rollout data naturally provides multi-step returns. For SAC, 
+
+V (st+1 ) denotes the sampled soft value min i Q¯θi (st+1 , a ′) − α log π(a′|st+1 ), with a′ ∼ π(·| st+1 ).For PPO, V is the learned state-value network. 54.3.3 Cross-Validated Variant 
+
+As an alternative (or complement), we propose a cross-validated training procedure. Split the batch into two halves, A and B. Update the value function on half A for one gradient step. Compute TD errors on half B using the updated value function. Train γϕ to minimize the TD errors on half B:
+
+LCV  
+
+> γ
+
+(ϕ) = E(st,a t)∈B
+
+h
+
+δ(A) 
+
+> t2
+
+i
+
+, (14) where δ(A) 
+
+> t
+
+denotes the TD error using the value function updated on split A. Since the value function was not optimized on the B transitions, pushing γ → 0 does not automatically reduce the loss, forcing the gamma network to find genuinely consistent γ values. 
+
+4.3.4 Full Training Objective 
+
+The complete gamma network loss combines the return-consistency objective with regularization: 
+
+Jγ (ϕ) = LRC  
+
+> γ
+
+(ϕ) + λdev Est∼D 
+
+(γϕ(st) − γtarget )2 + λvar Var st∼D [γϕ(st)] + λbound Lboundary , (15) where the deviation penalty anchors γϕ near γtarget , the variance penalty encourages smoothness, and 
+
+Lboundary discourages values near the boundaries: 
+
+Lboundary = Est∼D [ReLU (γmin + ϵb − γϕ(st)) + ReLU (γϕ(st) − γmax + ϵb)] . (16) 
+
+4.4 Operator-Level Analysis for State-Dependent Discounting 
+
+We now analyze the Bellman operator induced by state-dependent discounting in a soft policy iteration setting. Our purpose is not to establish a full convergence guarantee for the complete AdaGamma algorithm in deep RL, which would additionally involve function approximation, stochastic optimiza-tion, target networks, and alternating actor–critic updates. Instead, the results in this section should be interpreted as supporting theory at the operator level. For analytical clarity, we work in a tabular setting with finite actions. This allows us to isolate the effect of replacing a fixed discount factor by a state-dependent discount function and to study whether the resulting soft Bellman operator remains well-behaved. The analysis is most directly aligned with Bellman-style updates and SAC-style soft policy iteration, and does not directly characterize PPO-specific estimator properties such as generalized advantage estimation, clipping, or on-policy minibatch optimization. 
+
+4.4.1 Soft Policy Evaluation 
+
+Define the modified Bellman backup operator: 
+
+eT π Q(st, a t) ≜ r(st, a t) + γ(st) Est+1 ∼p[V (st+1 )] , (17) where V (st) = Eat∼π(·| st)[Q(st, a t) − α log π(at|st)] .
+
+Lemma 1. (Soft Policy Evaluation with Adaptive Discount) Consider the operator eT π in Eq. (17) 
+
+and a mapping Q0 : S × A → R with |A| < ∞. Assume β ≜ sup st∈S γ(st) < 1, and define 
+
+Qk+1 = eT π Qk. Then Qk converges to the unique soft Q-value function of π under γ(·) as k → ∞ .Proof. The operator eT π is a β-contraction in the sup-norm: ∥ eT π Q1 − eT π Q2∥∞ ≤ β∥Q1 − Q2∥∞.The result follows from the Banach fixed-point theorem. See Appendix B.1 for details. 
+
+4.4.2 Soft Policy Improvement 
+
+In the policy improvement step, we project onto the policy class Π:
+
+πnew = arg min  
+
+> π′∈Π
+
+DKL 
+
+
+
+π′(·| s) exp( Qπold (s, ·)/α )
+
+Zπold (s)
+
+
+
+. (18) 
+
+Lemma 2. (Soft Policy Improvement with Adaptive Discount) Let πold ∈ Π and let πnew be the optimizer of Eq 18. Assume γ(s) ∈ [0 , 1) for all s, with β = sup s γ(s) < 1. Then 
+
+Qπnew (s, a ) ≥ Qπold (s, a ), ∀(s, a ) ∈ S × A .
+
+6Proof. See Appendix B.2. 
+
+Theorem 1. (Soft Policy Iteration with Adaptive Discount) Repeated application of soft policy evaluation and soft policy improvement from any π ∈ Π converges to a policy π∗ such that 
+
+Qπ∗
+
+(st, a t) ≥ Qπ (st, a t) for all π ∈ Π and (st, a t) ∈ S × A , assuming |A| < ∞ and 
+
+β = sup st γ(st) < 1.Proof. See Appendix B.3. 
+
+4.4.3 Error Bound: Cost of Ignoring State-Dependent Structure 
+
+We quantify the gap between the Q-functions obtained under state-dependent γ(s) versus a fixed γ.
+
+Theorem 2. (Error Gap) Let Qπ 
+
+> 1
+
+and Qπ 
+
+> 2
+
+be the soft Q-functions under the same policy π and transition P , using state-dependent γ(s) and fixed γ respectively. Assume R := max s,a |r(s, a )| <
+
+∞, ϵ := min s,a π(a|s) > 0, and β := max s γ(s) < 1. Then:                   
+
+> ∥Qπ
+> 1−Qπ
+> 2∥∞≤max s∈S |γ(s)−γ|
+> (1 −β)(1 −γ)(R+αlog(1 /ϵ )) .(19)
+
+Proof. See Appendix B.4. The bound shows that the discrepancy scales linearly with the maximum deviation max s |γ(s) − γ|
+
+between the state-dependent and fixed-discount formulations. This suggests that when temporal sensitivity varies substantially across states, a single global discount factor may provide a coarse approximation to the induced value-propagation pattern, whereas a state-dependent discount function offers greater flexibility. 
+
+5 Numerical Experiments 
+
+5.1 Experimental Setup Algorithms and baselines. We instantiate AdaGamma in SAC [ 8] and PPO [ 7], using the same objective (Eq. (15) ) with algorithm-specific adapters (off-policy for SAC, on-policy for PPO). The gamma network is a two-layer MLP (hidden size 256) trained via the return-consistency objective of Section 4.3.2. Under a matched training budget, we compare against: fixed-γ SAC/PPO ( γ=0 .99 ), an uncertainty-rule adaptive-γ baseline (inspired by [ 24 ]; details in Appendix C), and a cross-validated adaptive-γ network. All methods use 5 seeds and are evaluated every 10 4 steps. For AdaGamma, we use 5-step returns, initialize γ and γref at 0.98 , warm up for 10 5 steps, and update γref every 5 episodes (EMA coefficient 0.1). 
+
+Environments. We evaluate AdaGamma in four settings: SafetyPointGoal1-v0 [26 ] for reward– cost tradeoffs and seed-shift generalization; Humanoid-v4 and Ant-v4 for high-dimensional con-tinuous control; classic Gymnasium tasks [ 27 ] for smaller-scale SAC/PPO comparisons; and a JD Logistics target-marketing deployment for real population-specific decision making. Unless otherwise stated, we report mean ± standard deviation over random seeds. Hyperparameter details are given in Appendix I; learning curves for SAC-AdaGamma and PPO-AdaGamma on SafetyPointGoal1-v0 , Humanoid-v4 , and Ant-v4 are shown in Appendix E.3. 
+
+5.2 Performance in SafetyPointGoal1-v0 
+
+We begin with SafetyPointGoal1-v0 , where the agent faces a reward–cost tradeoff with a non-trivial decision boundary. This makes the task sensitive to temporal credit assignment: some states favor shorter-horizon caution, while others require longer-horizon planning. Table 1 summarizes the resulting reward and cumulative cost. AdaGamma gives the strongest overall performance for both SAC and PPO. The uncertainty-based adaptive-γ baseline already improves on fixed-γ, which supports the need for temporal adaptation in this setting. AdaGamma further strengthens this effect, indicating that the key benefit is not only adapting the discount factor, but doing so in a state-dependent and training-stable way. 7Table 1: Test performance of fixed, adaptive, and AdaGamma variants on SafetyPointGoal1-v0 ,
+
+Humanoid-v4 , and Ant-v4 .Method Reward Cost Method Reward Cost                                                                                                                                 
+
+> SafetyPointGoal1-v0
+> SAC-Fixed-γ27 .82 ±0.91 52 .53 ±40 .75 PPO-Fixed-γ22 .58 ±1.34 51 .26 ±34 .51
+> SAC-CrossValidate 27 .34 ±1.05 45 .84 ±31 .14 PPO-CrossValidate 20 .62 ±5.81 54 .13 ±27 .09
+> SAC-Uncertainty 27 .47 ±1.24 37 .46 ±32 .93 PPO-Uncertainty 22 .59 ±1.35 51 .25 ±34 .51
+> SAC-AdaGamma 28 .25 ±1.05 29 .37 ±18 .59 PPO-AdaGamma 26 .31 ±0.90 41 .82 ±19 .42
+> Humanoid-v4
+> SAC-Fixed-γ5370.80 ±11.24 -PPO-Fixed-γ411.61 ±39.99 -SAC-CrossValidate 616.25 ±21.88 -PPO-CrossValidate 291.42 ±14.48 -SAC-Uncertainty 6606.08 ±59.69 -PPO-Uncertainty 434.32 ±98.70 -SAC-AdaGamma 6907.99 ±21.76 -PPO-AdaGamma 476.51 ±51.29 -
+> Ant-v4
+> SAC-Fixed-γ3101.48 ±748.16 -PPO-Fixed-γ989.57 ±113.71 -SAC-CrossValidate 1399.44 ±107.24 -PPO-CrossValidate 1036.33 ±110.85 -SAC-Uncertainty 3620.87 ±187.90 -PPO-Uncertainty 1018.51 ±222.44 -SAC-AdaGamma 4129.57 ±1155.08 -PPO-AdaGamma 1172.47 ±189.84 -01234
+> Week
+> 0%
+> 5%
+> 10%
+> 15%
+> 20%
+> 25%
+> 30%
+> 35%
+> 40%
+> Orders per user
+> increasing ratio
+> Results on JD logistics Target Marketing Task
+> SAC
+> SAC with adaptive-
+
+Figure 1: Four-week online A/B test on the JD Logistics target marketing task. The plotted metric is the increase ratio of average orders per user for standard SAC and SAC with AdaGamma. 
+
+5.3 High-Dimensional Control: Humanoid and Ant 
+
+We further evaluate AdaGamma on Humanoid-v4 and Ant-v4 , two high-dimensional MuJoCo locomotion tasks with different temporal characteristics. Results are shown in Table 1, with qualitative snapshots in Appendix H. AdaGamma attains the best test performance for both SAC and PPO on both tasks, with the largest gains appearing for SAC on Humanoid-v4 . The weak performance of the cross-validated baseline on Humanoid-v4 suggests that a single global discount is brittle, while the gains on Ant-v4 support the value of state-adaptive temporal weighting in contact-rich dynamics. These results indicate that AdaGamma scales well to high-dimensional continuous-control settings. 
+
+5.4 Online deployment on JD Logistics platform. 
+
+We further evaluate AdaGamma in a live recommender system on the JD Logistics platform through a controlled four-week online A/B test. We allocate 10% of production traffic to the experiment, split evenly between AdaGamma-enhanced SAC and a standard SAC baseline. Users are randomly assigned based on behavioral indicators, and pre-experiment statistics (order volume, coupon claiming volume, page views, click volume, and activity level) are balanced across groups under standard sig-nificance tests. During the experiment, the two groups are treated identically except for the deployed recommendation policy, allowing the observed difference to be attributed to the RL algorithm. Our primary metric is the uplift in recommendation-induced order volume. Each week, we measure the incremental improvement over the previous seven days relative to the initial state at group assignment. As shown in Figure 1, AdaGamma consistently outperforms standard SAC over four weeks with statistically significant gains. These results suggest that adaptive discounting captures user-state-dependent planning horizons beyond what a single global discount can model. 
+
+5.5 Analysis of Learned γϕ(s)
+
+Statewise structure. We analyze the learned discount on Ant-v4 using SAC-AdaGamma. Figure 2 visualizes γϕ(s) on two low-dimensional state projections based on torso height and planar velocity, and shows its empirical distribution. Since these plots are constructed from rollout states of a fixed trained policy, they reflect the visitation distribution rather than a uniform scan of the full state space. 8Together with the fixed-γ ablation in Table 5, they indicate that the gains are due to state dependence rather than a different average discount alone. 1 0 1 2 3 4 5 6                      
+
+> vx
+> 0.2
+> 0.3
+> 0.4
+> 0.5
+> 0.6
+> 0.7
+> 0.8
+> 0.9
+> 1.0
+> torso z
+> x-velocity vs height
+> 0.9725
+> 0.9750
+> 0.9775
+> 0.9800
+> 0.9825
+> 0.9850
+> 0.9875
+> (s)0123456
+> vxy =v2
+> x+v2
+> y
+> 0.2
+> 0.3
+> 0.4
+> 0.5
+> 0.6
+> 0.7
+> 0.8
+> 0.9
+> 1.0
+> torso z
+> Planar speed vs height
+> 0.972
+> 0.974
+> 0.976
+> 0.978
+> 0.980
+> 0.982
+> 0.984
+> 0.986
+> (s)0.970 0.975 0.980 0.985 0.990 0.995
+> (s)
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 120
+> density
+> Histogram of (s)
+> 0.970 0.975 0.980 0.985 0.990 0.995
+> (s)
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> ECDF
+> Empirical CDF of (s)
+
+Figure 2: Statewise heatmaps and empirical distribution γϕ(s) learned by SAC-AdaGamma on 
+
+Ant-v4 .
+
+Cross-algorithm consistency. Table 2 in Appendix D.1 reports the mean learned discount for SAC-AdaGamma and PPO-AdaGamma. The two methods are closely aligned on SafetyPointGoal1-v0 ,
+
+Humanoid-v4 , and Pendulum-v1 , suggesting that AdaGamma captures a task-level temporal scale that is stable across off-policy and on-policy learning. In Ant-v4 , where SAC learns a shorter average horizon than PPO, indicating stronger interactions between discount adaptation and policy optimization in contact-rich locomotion. Overall, the cross-algorithm agreement suggests that γϕ(s)
+
+reflects environment-level temporal structure rather than purely optimizer-specific artifacts. 
+
+5.6 Ablation Studies Training objective comparison. Sections 5.2 and 5.3 show that AdaGamma consistently outperforms the SAC and PPO baselines, and Section 5.5 analyzes the learned γ(st). Here we focus on the SAC variants. Table 3 in Appendix D.2 reports the mean learned γ(st). The fixed baseline stays at γ =0.99 , whereas the cross-validated baseline collapses to the minimum candidate in all environments, matching its weak performance. The uncertainty-based baseline chooses less extreme but still global discounts. In contrast, AdaGamma learns task-dependent average discounts, indicating that its gains come from adapting temporal weighting rather than uniformly increasing or decreasing γ.
+
+Comparison to fixed-γ. Table 2 compares the mean learned γϕ(s) under SAC and PPO. To test whether the gains simply reflect a better fixed discount, we set fixed γ to the corresponding learned mean and re-evaluate SAC and PPO on SafetyPointGoal1-v0 , Humanoid-v4 , and Ant-v4 ; results are given in Table 5 of Appendix D.5. In all cases, this matched fixed discount still underperforms AdaGamma. We also expand the fixed-γ grid on these tasks in Table 6 of Appendix D.5, where AdaGamma remains superior. Thus, the improvement stems from state-dependent discounting rather than a better global γ.
+
+Network architecture. We vary the hidden dimension of the gamma network over {8, 16, 32, 64, 128, 256, 512} on Ant-v4 . Performance improves with capacity and saturates around 256 hidden units (Figure 3 in Appendix D.3). Beyond this point, larger networks add computation with little gain, indicating that AdaGamma has low practical overhead. 
+
+Return horizon n. We vary the multi-step return length n ∈ { 5, 10 , 20 } in the return-consistency objective on SafetyPointGoal1-v0 for both SAC and PPO. As shown in Table 4 of Appendix D.4, 
+
+n = 5 gives the best overall reward–cost tradeoff, while longer horizons reduce stability, particularly for PPO. This suggests that the return-consistency target should balance temporal coverage against estimation noise; in this task, n = 5 provides the best tradeoff. 
+
+Additional experiments. Results on classic control tasks are reported in Appendix G. We also extend AdaGamma to DDPG [ 6] and TRPO [ 5 ], with results on SafetyPointGoal1-v0 ,
+
+Humanoid-v4 , and Ant-v4 reported in Appendix F. 
+
+6 Conclusion 
+
+AdaGamma provides a simple and unified way to learn state-dependent discount factors in deep reinforcement learning. By interfacing only through the bootstrapped value target, it integrates naturally with both SAC and PPO, while the return-consistency objective prevents the degenerate behavior that arises from naive discount learning. On the theory side, we establish operator-level 9convergence properties for soft policy iteration with a fixed state-dependent discount function under tabular assumptions, and characterize the value discrepancy incurred. Empirically, AdaGamma improves reward–cost tradeoffs in safety-constrained settings, scales to high-dimensional continuous control, remains competitive on classic control benchmarks, and shows stable discount patterns across algorithms. Its positive results in a four-week JD Logistics A/B test further suggest that state-adaptive temporal weighting is not only algorithmically useful, but also practical in real-world sequential decision making. 10 References 
+
+[1] R.S. Sutton and A.G. Barto. Reinforcement learning: An introduction. IEEE Transactions on Neural Networks , 9(5):1054–1054, 1998. [2] Richard S. Sutton and Andrew G. Barto. Reinforcement Learning: An Introduction . MIT Press, 2 edition, 2018. [3] Martin L. Puterman. Markov decision processes: Discrete stochastic dynamic programming. In 
+
+Wiley Series in Probability and Statistics , 1994. [4] Scott Fujimoto, Herke van Hoof, and David Meger. Addressing function approximation error in actor-critic methods, 2018. [5] John Schulman, Sergey Levine, Philipp Moritz, Michael I. Jordan, and Pieter Abbeel. Trust region policy optimization, 2017. [6] Timothy P. Lillicrap, Jonathan J. Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez, Yuval Tassa, David Silver, and Daan Wierstra. Continuous control with deep reinforcement learning, 2019. [7] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms, 2017. [8] Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, and Sergey Levine. Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor, 2018. [9] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei Rusu, Joel Veness, Marc Bellemare, Alex Graves, Martin Riedmiller, Andreas Fidjeland, Georg Ostrovski, Stig Petersen, Charles Beattie, Amir Sadik, Ioannis Antonoglou, Helen King, Dharshan Kumaran, Daan Wierstra, Shane Legg, and Demis Hassabis. Human-level control through deep reinforcement learning. 
+
+Nature , 518:529–33, 02 2015. [10] Vincent François-Lavet, Raphael Fonteneau, and Damien Ernst. How to discount deep rein-forcement learning: Towards new dynamic strategies, 2016. [11] Silviu Pitis. Rethinking the discount factor in reinforcement learning: A decision theoretic approach, 2019. [12] Hao Hu, Yiqin Yang, Qianchuan Zhao, and Chongjie Zhang. On the role of discount factor in offline reinforcement learning. In Kamalika Chaudhuri, Stefanie Jegelka, Le Song, Csaba Szepesvari, Gang Niu, and Sivan Sabato, editors, Proceedings of the 39th International Confer-ence on Machine Learning , volume 162 of Proceedings of Machine Learning Research , pages 9072–9098. PMLR, 2022. [13] Ron Amit, Ron Meir, and Kamil Ciosek. Discount factor as a regularizer in reinforcement learning. In Proceedings of the 37th International Conference on Machine Learning , ICML’20. JMLR.org, 2020. [14] Abhishek Naik, Roshan Shariff, Niko Yasui, Hengshuai Yao, and Richard S. Sutton. Discounted reinforcement learning is not an optimization problem, 2019. [15] Hao Hu, Yiqin Yang, Qianchuan Zhao, and Chongjie Zhang. On the role of discount factor in offline reinforcement learning, 2022. [16] Sarah Rathnam, Sonali Parbhoo, Siddharth Swaroop, Weiwei Pan, Susan A. Murphy, and Finale Doshi-Velez. Rethinking discount regularization: New interpretations, unintended consequences, and solutions for regularization in reinforcement learning. Journal of Machine Learning Research , 25(255):1–48, 2024. [17] Dylan J. Foster, Akshay Krishnamurthy, David Simchi-Levi, and Yunzong Xu. Offline rein-forcement learning: Fundamental barriers for value function approximation, 2022. [18] Wenhao Zhan, Baihe Huang, Audrey Huang, Nan Jiang, and Jason D. Lee. Offline reinforcement learning with realizability and single-policy concentrability, 2022. 11 [19] Qingda Wei and Xianping Guo. Markov decision processes with state-dependent discount factors and unbounded rewards/costs. Operations Research Letters , 39(5):369–374, 2011. [20] Naoto Yoshida, Eiji Uchibe, and Kenji Doya. Reinforcement learning with state-dependent discount factor. In 2013 IEEE Third Joint International Conference on Development and Learning and Epigenetic Robotics (ICDL) , pages 1–6, 2013. [21] Linjian Hou, Zhengming Wang, and Han Long. An improvement for value-based reinforce-ment learning method through increasing discount factor substitution. In 2021 IEEE 24th International Conference on Computational Science and Engineering (CSE) , pages 94–100, 2021. [22] Matthias Schultheis, Constantin A. Rothkopf, and Heinz Koeppl. Reinforcement learning with non-exponential discounting, 2022. [23] Silviu Pitis. Rethinking the discount factor in reinforcement learning: a decision theoretic approach. In Proceedings of the Thirty-Third AAAI Conference on Artificial Intelligence and Thirty-First Innovative Applications of Artificial Intelligence Conference and Ninth AAAI Symposium on Educational Advances in Artificial Intelligence , AAAI’19/IAAI’19/EAAI’19. AAAI Press, 2019. [24] MyeongSeop Kim, Jung-Su Kim, Myoung-Su Choi, and Jae-Han Park. Adaptive discount factor for deep reinforcement learning in continuing tasks with uncertainty. Sensors , 22(19), 2022. [25] Yang Gu, Yuhu Cheng, C. L. Philip Chen, and Xuesong Wang. Proximal policy optimiza-tion with policy feedback. IEEE Transactions on Systems, Man, and Cybernetics: Systems ,52(7):4600–4610, 2022. [26] Jiaming Ji, Borong Zhang, Jiayi Zhou, Xuehai Pan, Weidong Huang, Ruiyang Sun, Yiran Geng, Yifan Zhong, Josef Dai, and Yaodong Yang. Safety gymnasium: A unified safe reinforcement learning benchmark. In Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track , 2023. [27] Mark Towers, Ariel Kwiatkowski, Jordan Terry, John U Balis, Gianluca De Cola, Tristan Deleu, Manuel Goulão, Andreas Kallinteris, Markus Krimmel, Arjun KG, et al. Gymnasium: A standard interface for reinforcement learning environments. arXiv preprint arXiv:2407.17032 ,2024. [28] Alberto Maria Metelli, Mirco Mutti, and Marcello Restelli. A tale of sampling and estimation in discounted reinforcement learning, 2023. [29] Zeyu Jia, Alexander Rakhlin, Ayush Sekhari, and Chen-Yu Wei. Offline reinforcement learning: Role of state aggregation and trajectory data. CoRR , abs/2403.17091, 2024. [30] Doina Precup, Richard S. Sutton, and Satinder P. Singh. Eligibility traces for off-policy policy evaluation. In Proceedings of the Seventeenth International Conference on Machine Learning ,ICML ’00, page 759–766, San Francisco, CA, USA, 2000. Morgan Kaufmann Publishers Inc. [31] Pierre-Luc Bacon, Jean Harb, and Doina Precup. The option-critic architecture. In Proceedings of the Thirty-First AAAI Conference on Artificial Intelligence , AAAI’17, page 1726–1734. AAAI Press, 2017. [32] Anna Harutyunyan, Will Dabney, Diana Borsa, Nicolas Heess, Remi Munos, and Doina Precup. The termination critic. In Kamalika Chaudhuri and Masashi Sugiyama, editors, Proceedings of the Twenty-Second International Conference on Artificial Intelligence and Statistics , volume 89 of Proceedings of Machine Learning Research , pages 2231–2240. PMLR, 16–18 Apr 2019. 12 A Additional Related Work Discussion 
+
+Fixed discounting and discount as regularization. Most deep RL methods use a fixed discount factor [ 1 , 9, 8, 7], despite the fact that γ strongly influences the effective planning horizon, variance, and optimization behavior [ 10 , 13 , 14 , 15 ]. A growing line of work interprets discounting not only as a preference parameter, but also as a form of regularization [ 13 , 16 ]. In particular, [ 13 ] show that, for several TD-learning methods, reducing γ can be viewed as introducing an explicit regularization effect, while [ 16 ] show that globally shrinking γ may induce an undesirable non-uniform prior over transition dynamics. Related analyses in offline RL further show that γ jointly controls regularization and pessimism, affecting the trade-off between policy quality and data efficiency [ 15 , 17 , 18 ]. These results provide part of the motivation for adaptive discounting, although they do not directly address how to learn a state-dependent discount function in deep actor–critic training. 
+
+Flexible discounting: schedules and non-exponential variants. Another line of work studies discounting schemes that vary over training, over time, or beyond the standard exponential form. [ 10 ]discuss dynamic discount strategies, and [ 21 ] propose increasing discount factors over time steps to alleviate the underweighting of distant rewards. More generally, [ 22 ] study RL with non-exponential discount functions, and related work broadens the space of generalized return criteria [ 23 , 14 ]. These approaches enlarge the class of temporal preference models, but the discount rule is typically global, time-indexed, or fixed by design. Our setting is different: we focus on learned state-conditioned 
+
+discounting within a conventional bootstrapped actor–critic pipeline, where the main challenge is not defining a richer return criterion, but ensuring that the learned discount does not destabilize TD-based training. 
+
+State-dependent discounting and generalized RL objectives. A more expressive formulation allows the discount factor to depend on the state or state-action pair. [ 19 ] study MDPs with state-dependent discount factors and establish general existence and characterization results. [ 20 ] introduce state-dependent discounting in model-free RL and derive an ExQ-learning algorithm with convergence guarantees. From a broader decision-theoretic perspective, [ 11 ] argue that fixed discounting is only one special case in a larger class of sequential preference models, while [ 14 ] emphasize that discounting is a substantive modeling choice rather than a mere numerical convenience. These works establish that variable discounting is mathematically meaningful and behaviorally expressive, but they do not directly provide a practical implementation recipe for modern deep actor–critic methods with function approximation. 
+
+Adaptive discounting in deep RL. Several recent works study adaptive discounting more directly in deep RL. [ 24 ] propose an uncertainty- or advantage-driven adjustment rule for PPO and SAC, while [ 25 ] introduce a PPO variant with policy-feedback-dependent discounting. Related approaches also adapt horizon-related quantities through dynamic schedules, uncertainty signals, or return-design heuristics [ 10 , 24 , 25 ]. Compared with these methods, our approach learns an explicit state-conditioned neural module γϕ(s) and emphasizes a different algorithmic issue: the collapse behavior that can arise when such a module is trained naively through bootstrapped TD objectives. Our return-consistency objective is designed specifically to regularize this failure mode. 
+
+Long horizons, statistical fragility, and temporal abstraction. Large discount factors require reliable long-horizon estimation, which becomes difficult when data are noisy, sparse, or poorly mixed [ 10 , 14 , 28 ]. More generally, sample-complexity and offline-RL analyses show that discounted problems become statistically harder as the effective horizon grows or coverage deteriorates [ 17 , 15 ,29 , 18 ]. In particular, [ 28 ] study the γ-discounted mean estimation problem and derive lower bounds depending on both the discount factor and the mixing properties of the underlying Markov chain. This helps explain why a globally large γ can be statistically fragile, and why adapting bootstrap strength across states may be beneficial. State-dependent discounting is also related to temporal abstraction and termination. In the options framework, termination determines the duration of temporally extended behavior and thus implicitly controls an effective planning horizon [ 30 , 31 ]. More broadly, temporally extended actions modulate the scale of credit assignment and planning, and recent work shows benefits from decoupling behavior and target termination conditions [ 32 ]. Although our method does not introduce explicit options or termination policies, the product-of-gammas structure in our modified GAE recursion plays a related conceptual role: low-γ regions shorten the effective credit-assignment horizon, while high-13 γ regions preserve longer-range dependencies. In this sense, our approach is complementary to temporal-abstraction methods rather than a replacement for them. 
+
+B Proofs 
+
+B.1 Proof of Lemma 1 Lemma 1. (Soft Policy Evaluation with Adaptive Discount) Consider the operator eT π in Eq. (17) 
+
+and a mapping Q0 : S × A → R with |A| < ∞. Assume β ≜ sup st∈S γ(st) < 1, and define 
+
+Qk+1 = eT π Qk. Then Qk converges to the unique soft Q-value function of π under γ(·) as k → ∞ .Proof. Define the entropy-augmented reward rγπ (st, a t) ≜ r(st, a t) + γ(st) Est+1 ∼p[H(π(·| st+1 ))] ,and rewrite the update as: 
+
+Q(st, a t) ← rγπ (st, a t) + γ(st) Est+1 ∼p,a t+1 ∼π [Q(st+1 , a t+1 )] . (20) Take two arbitrary Q-functions Q1, Q 2:
+
+∥ eT π Q1 − eT π Q2∥∞ = γ(st) Est+1 ∼p
+
+Eat+1 ∼π [Q1(st+1 , a t+1 ) − Q2(st+1 , a t+1 )]  
+
+> ∞
+
+(21) 
+
+≤ sup 
+
+> st
+
+γ(st)∥Q1 − Q2∥∞ = β∥Q1 − Q2∥∞. (22) By the Banach fixed-point theorem, Qk converges to the unique fixed point. 
+
+B.2 Proof of Lemma 2 Lemma 2. (Soft Policy Improvement with Adaptive Discount) Let πold ∈ Π and let πnew be the optimizer of Eq 18. Assume γ(s) ∈ [0 , 1) for all s, with β = sup s γ(s) < 1. Then 
+
+Qπnew (s, a ) ≥ Qπold (s, a ), ∀(s, a ) ∈ S × A .
+
+Proof. Define 
+
+Jπold (π(·| s)) = Ea∼π(·| s) [Qπold (s, a ) − α log π(a|s)] . (23) Since πnew minimizes the KL divergence to the Boltzmann distribution induced by Qπold , and 
+
+πold ∈ Π is feasible, we have 
+
+Jπold (πnew (·| s)) ≥ Jπold (πold (·| s)) = V πold (s). (24) Using the soft Bellman equation with adaptive discount, 
+
+Qπold (s, a ) = r(s, a ) + γ(s)Es′∼p [V πold (s′)] 
+
+≤ r(s, a ) + γ(s)Es′∼pEa′∼πnew [Qπold (s′, a ′) − α log πnew (a′|s′)] = eT πnew Qπold (s, a ). (25) Iterating this inequality and using the contraction property from Lemma 1 gives 
+
+Qπold (s, a ) ≤ lim 
+
+> k→∞
+
+ eT πnew 
+
+k
+
+Qπold (s, a ) = Qπnew (s, a ). (26) 
+
+B.3 Proof of Theorem 1 Theorem 1. (Soft Policy Iteration with Adaptive Discount) Repeated application of soft pol-icy evaluation and soft policy improvement from any π ∈ Π converges to a policy π∗ such that Qπ∗
+
+(st, a t) ≥ Qπ (st, a t) for all π ∈ Π and (st, a t) ∈ S × A , assuming |A| < ∞ and 
+
+β = sup st γ(st) < 1.Proof. Let πi be the policy at iteration i. By Lemma 2, {Qπi } is monotonically increasing. Since 
+
+Qπ is bounded above for π ∈ Π (rewards are bounded, entropy is bounded below since |A| < ∞,and the geometric series with adaptive discount converges since β < 1), the sequence converges to some Qπ∗
+
+for policy π∗. At convergence, Jπ∗ (π∗(·| st)) ≥ Jπ∗ (π(·| st)) for all π ∈ Π, π̸ = π∗. By the same iterative argument as in Lemma 2, Qπ∗
+
+(st, a t) ≥ Qπ (st, a t) for all (st, a t).14 B.4 Proof of Theorem 2 Theorem 2. (Error Gap) Let Qπ 
+
+> 1
+
+and Qπ 
+
+> 2
+
+be the soft Q-functions under the same policy π and transition P , using state-dependent γ(s) and fixed γ respectively. Assume R := max s,a |r(s, a )| <
+
+∞, ϵ := min s,a π(a|s) > 0, and β := max s γ(s) < 1. Then: 
+
+∥Qπ 
+
+> 1
+
+− Qπ 
+
+> 2
+
+∥∞ ≤ max s∈S |γ(s) − γ|
+
+(1 − β)(1 − γ) (R + α log(1 /ϵ )) . (19) 
+
+Proof. Define ˜rπ (s, a ) = r(s, a ) − α log π(a|s) and Pπ (( s, a ), (s′, a ′)) = P (s′|s, a )π(a′|s′). In vector-matrix form: ˜Qπ 
+
+> 1
+
+= ( I − ΓPπ )−1 ˜rπ , ˜Qπ 
+
+> 2
+
+= ( I − γP π )−1 ˜rπ , (27) where Γ = diag (γ(s)) (s,a ). Then: 
+
+∥Q1 − Q2∥∞ = ∥ ˜Q1 − ˜Q2∥∞ = ∥(I − ΓPπ )−1(Γ − γI )Pπ (I − γP π )−1 ˜rπ ∥∞ (28) 
+
+≤ 11 − β · max  
+
+> s
+
+|γ(s) − γ| · 11 − γ · (R + α log 1
+
+ϵ )) . (29) 
+
+B.5 Proof of Proposition 1 Proposition 1. (Product-of-Gammas Weighting) Under state-dependent discounting, the GAE advantage estimate expands as 
+
+ˆAt = δt + 
+
+> T−1−t
+
+X
+
+> l=1
+> l−1
+
+Y
+
+> k=0
+
+γϕ(st+k)
+
+!
+
+λlδt+l. (10) 
+
+Proof. We prove the result by induction on T − 1 − t.
+
+Base case. For t = T − 1, we have ˆAT −1 = δT −1. The expansion also gives ˆAT −1 = δT −1, since the summation is empty. Thus the claim holds. 
+
+Inductive step. Assume that the expansion holds for ˆAt+1 , i.e., 
+
+ˆAt+1 = δt+1 + 
+
+> T−2−t
+
+X
+
+> l=1
+> l−1
+
+Y
+
+> k=0
+
+γϕ(st+1+ k)
+
+!
+
+λlδt+1+ l. (30) Then, using the recursion ˆAt = δt + γϕ(st)λ ˆAt+1 , we obtain 
+
+ˆAt = δt + γϕ(st)λ ˆAt+1 (31) 
+
+= δt + γϕ(st)λ
+
+"
+
+δt+1 + 
+
+> T−2−t
+
+X
+
+> l=1
+> l−1
+
+Y
+
+> k=0
+
+γϕ(st+1+ k)
+
+!
+
+λlδt+1+ l
+
+#
+
+(32) 
+
+= δt + γϕ(st)λ δ t+1 + 
+
+> T−2−t
+
+X
+
+> l=1
+
+γϕ(st)
+
+> l−1
+
+Y
+
+> k=0
+
+γϕ(st+1+ k)
+
+!
+
+λl+1 δt+1+ l (33) 
+
+= δt +
+
+> 0
+
+Y
+
+> k=0
+
+γϕ(st+k)
+
+!
+
+λδ t+1 + 
+
+> T−2−t
+
+X
+
+> l=1
+> l
+
+Y
+
+> k=0
+
+γϕ(st+k)
+
+!
+
+λl+1 δt+1+ l. (34) Now let m = l + 1 in the last summation. Then m ranges from 2 to T − 1 − t, and we have 
+
+ˆAt = δt +
+
+> 0
+
+Y
+
+> k=0
+
+γϕ(st+k)
+
+!
+
+λδ t+1 + 
+
+> T−1−t
+
+X
+
+> m=2
+> m−1
+
+Y
+
+> k=0
+
+γϕ(st+k)
+
+!
+
+λmδt+m (35) 
+
+= δt + 
+
+> T−1−t
+
+X
+
+> m=1
+> m−1
+
+Y
+
+> k=0
+
+γϕ(st+k)
+
+!
+
+λmδt+m. (36) This completes the induction. 15 C Details of Uncertainty-rule adaptive-γ baseline 
+
+Inspired by Kim et al. [ 24 ], who adapt the discount factor based on value-estimation uncertainty measured via ensemble disagreement, we implement an uncertainty-driven baseline within both the SAC and PPO frameworks. In SAC, we treat the absolute difference between the two Q-heads, 
+
+|Qθ1 (s, a ) − Qθ2 (s, a )|, as a lightweight uncertainty proxy. In PPO, which lacks a twin-critic architecture by default, we introduce an auxiliary value network Vϕ2 alongside the primary value network Vϕ1 and use their disagreement |Vϕ1 (s) − Vϕ2 (s)| as the analogous uncertainty signal. Crucially, the auxiliary Vϕ2 is used solely for computing the per-state discount factor; it does not participate in PPO’s standard operations such as advantage estimation (GAE) or the policy gradient objective, which continue to rely exclusively on the primary Vϕ1 . In both cases, a per-state discount is computed via 
+
+γ(s) = γmax − (γmax − γmin ) σ η · β · d(s), (37) where d(s) denotes the critic disagreement, β is a learnable scaling parameter, η is the uncertainty scale and σ is the sigmoid function. The intuition follows [ 24 ]: when the two critics disagree strongly (high uncertainty), the discount is pushed toward γmin to shorten the effective planning horizon and reduce reliance on unreliable bootstrapped targets; when they agree (low uncertainty), the discount approaches γmax to enable longer-horizon credit assignment. Compared with the original formulation in [ 24 ], which uses a larger ensemble and a different scaling rule, our variant is adapted to each algorithm’s native architecture—reusing SAC’s existing twin Q-networks and adding a minimal auxiliary value network for PPO—and grants the baseline additional flexibility through the learnable 
+
+β. This provides a competitive reference point that already incorporates state-dependent temporal adaptation, against which we isolate the additional benefit of AdaGamma’s return-consistency training objective. 
+
+D Experiment Results 
+
+D.1 Cross-algorithm consistency 
+
+Here we show the mean learned discount for SAC-AdaGamma and PPO-AdaGamma in Table 2. Table 2: Mean learned γϕ(s) for SAC-AdaGamma and PPO-AdaGamma. Method Variants SafetyPointGoal1-v0 Humanoid-v4 Ant-v4 Pendulum-v1 SAC-AdaGamma 0.9989 0.9860 0.9733 0.9908 PPO-AdaGamma 0.9988 0.9846 0.9990 0.9908 
+
+D.2 Training Objective Comparison 
+
+Here we show the learned discount patterns of SAC variants in Table 3. Table 3: Mean value of γ learned by different SAC variants. Method Variants SafetyPointGoal1-v0 Humanoid-v4 Ant-v4 SAC-fixed γ 0.9900 0.9900 0.9900 SAC-CrossValidate 0.9000 0.9000 0.9000 SAC-Uncertainty 0.9495 0.9745 0.9745 SAC-AdaGamma 0.9989 0.9860 0.9733 
+
+D.3 Network architecture 
+
+Here we show the performance curve of SAC-AdaGamma with hidden dimension of the gamma network over 8, 16, 32, 64, 128, 256, 512 on Ant-v4 in Figure. 3. 
+
+D.4 SAC/PPO with AdaGamma under different return horizon n 
+
+In Table 4, we show the rewards and Costs of SAC and PPO under different return horizon n. 16 816 32 64 128 256 512 
+
+> Hidden dim
+> 2000
+> 3000
+> 4000
+> 5000
+> Reward (mean ± std)
+
+Reward vs hidden dimension Figure 3: Performance(reward mean ± std) curve of SAC-AdaGamma with hidden-dim ∈{8, 16 , 32 , 64 , 128 , 256 , 512 }
+
+Table 4: Mean reward and cost, with standard deviation, for SAC-AdaGamma and PPO-AdaGamma with n ∈ { 5, 10 , 20 }.Method Variants SafetyPointGoal1-v0 Reward SafetyPointGoal1-v0 Cost SAC-AdaGamma(n=5) 28.254 ± 1.05 47.36 ± 30.58 
+
+SAC-AdaGamma(n=10) 27.75 ± 0.85 56.20 ± 36.93 SAC-AdaGamma(n=20) 27.71 ± 1.05 57.70 ± 48.42 PPO-AdaGamma(n=5) 26.30 ± 0.90 41.82 ± 19.42 
+
+PPO-AdaGamma(n=10) 25.92 ± 1.27 48.60 ± 32.44 PPO-AdaGamma(n=20) 16.06 ± 12.11 49.85 ± 36.39 
+
+D.5 Comparison to fixed-γ
+
+In this section we show the Performance of SAC and PPO with fixed γ around the mean value we learned in Table 5 and the grid search of fixed-γ value results of SAC and PPO in Table 6. Table 5: Performance of SAC and PPO with fixed γ around the mean value we learned. Method Reward Cost Method Reward Cost 
+
+SafetyPointGoal1-v0 
+
+SAC-Fixed-γ = 0 .9950 27.57 ± 0.81 51.25 ± 38.92 PPO-Fixed-γ = 0 .9950 25.36 ± 1.63 53.25 ± 32.13 SAC-Fixed-γ = 0 .9989 27.06 ± 4.55 53.20 ± 37.24 PPO-Fixed-γ = 0 .9988 23.86 ± 1.93 46.85 ± 27.73 SAC-Fixed-γ = 0 .9990 25.92 ± 1.34 50.20 ± 40.17 PPO-Fixed-γ = 0 .9990 25.71 ± 1.32 48.60 ± 29.07 SAC-AdaGamma 28 .25 ± 1.05 29 .37 ± 18 .59 PPO-AdaGamma 26 .31 ± 0.90 41 .82 ± 19 .42 
+
+Humanoid-v4 
+
+SAC-Fixed-γ = 0 .9850 6050.05 ± 22.50 - PPO-Fixed-γ = 0 .9950 456.19 ± 27.61 -SAC-Fixed-γ = 0 .9860 5830.34 ± 6.54 - PPO-Fixed-γ = 0 .9999 442.33 ± 17.78 -SAC-Fixed-γ = 0 .9990 5576.23 ± 17.84 - PPO-Fixed-γ = 0 .9990 447.99 ± 23.06 -SAC-AdaGamma 6907 .99 ± 21 .76 - PPO-AdaGamma 476 .51 ± 51 .29 -
+
+Ant-v4 
+
+SAC-Fixed-γ = 0 .9700 3601.58 ± 1812.92 - PPO-Fixed-γ = 0 .9980 1064.52 ± 193.92 -SAC-Fixed-γ = 0 .9733 3461.86 ± 1803.14 - PPO-Fixed-γ = 0 .9985 987.77 ± 234.11 -SAC-Fixed-γ = 0 .9750 3778.66 ± 644.60 - PPO-Fixed-γ = 0 .9990 1033.70 ± 192.00 -SAC-AdaGamma 4129 .57 ± 1155 .08 - PPO-AdaGamma 1172 .47 ± 189 .84 -
+
+E The algorithm framework under AdaGamma 
+
+In this section we show the algorithm variants of SAC and PPO with our AdaGamma. 
+
+E.1 SAC-AdaGamma 
+
+Here in Algorithm 1 we show the SAC-AdaGamma. 
+
+E.2 PPO-AdaGamma 
+
+Here in Algorithm 2 we show the PPO-AdaGamma. 17 Table 6: Grid search of SAC and PPO with fixed γ.Method Reward Cost Method Reward Cost                                                                                                                                                                                                                         
+
+> SafetyPointGoal1-v0
+> SAC-Fixed-γ= 0 .9000 27.13 ±1.09 53.30 ±40.87 PPO-Fixed-γ= 0 .9000 18.98 ±2.34 51.80 ±27.30 SAC-Fixed-γ= 0 .9500 27.88 ±1.23 49.45 ±34.19 PPO-Fixed-γ= 0 .9500 24.43 ±1.80 49.95 ±26.76 SAC-Fixed-γ= 0 .9700 27.32 ±1.30 51.65 ±33.76 PPO-Fixed-γ= 0 .9700 22.25 ±1.57 46.45 ±31.19 SAC-Fixed-γ= 0 .9800 27.96 ±1.12 46.45 ±35.90 PPO-Fixed-γ= 0 .9800 21.60 ±4.80 50.80 ±37.66 SAC-Fixed-γ= 0 .9990 25.92 ±1.34 50.20 ±40.17 PPO-Fixed-γ= 0 .9990 25.71 ±1.32 48.60 ±29.07 SAC-AdaGamma 28 .25 ±1.05 29 .37 ±18 .59 PPO-AdaGamma 26 .31 ±0.90 41 .82 ±19 .42
+> Humanoid-v4
+> SAC-Fixed-γ= 0 .9000 723.73 ±72.03 -PPO-Fixed-γ= 0 .9000 305.43 ±61.33 -SAC-Fixed-γ= 0 .9500 3280.41 ±1826.32 -PPO-Fixed-γ= 0 .9500 349.12 ±57.15 -SAC-Fixed-γ= 0 .9700 6185.12 ±29.35 -PPO-Fixed-γ= 0 .9700 315.13 ±19.90 -SAC-Fixed-γ= 0 .9800 6346.42 ±15.40 -PPO-Fixed-γ= 0 .9800 356.19 ±27.61 -SAC-Fixed-γ= 0 .9990 5576.23 ±17.84 -PPO-Fixed-γ= 0 .9990 447.99 ±23.06 -SAC-AdaGamma 6907 .99 ±21 .76 -PPO-AdaGamma 476 .51 ±51 .29 -
+> Ant-v4
+> SAC-Fixed-γ= 0 .9000 1223.375 ±137.70 -PPO-Fixed-γ= 0 .9000 750.41 ±70.57 -SAC-Fixed-γ= 0 .9500 3236.72 ±1868.49 -PPO-Fixed-γ= 0 .9500 823.30 ±120.42 -SAC-Fixed-γ= 0 .9700 3601.58 ±1812.92 -PPO-Fixed-γ= 0 .9700 893.34 ±141.93 -SAC-Fixed-γ= 0 .9800 3761.03 ±1692.59 -PPO-Fixed-γ= 0 .9800 994.73 ±187.78 -SAC-Fixed-γ= 0 .9990 918.32 ±17.68 -PPO-Fixed-γ= 0 .9990 1033.70 ±192.00 -SAC-AdaGamma 4129 .57 ±1155 .08 -PPO-AdaGamma 1172 .47 ±189 .84 -
+
+Algorithm 1 AdaGamma with SAC (Off-Policy Adapter) 
+
+1: Input: Policy πψ , Q-networks Qθ1 , Q θ2 , gamma network gϕ, replay buffer D
+
+2: for each iteration do 
+
+3: for each environment step do 
+
+4: at ∼ πψ (·| st), observe rt, s t+1 , d t
+
+5: D ← D ∪ { (st, a t, r t, s t+1 , d t)}
+
+6: end for 
+
+7: for each gradient step do 
+
+8: Sample mini-batch from D
+
+9: // Compute adaptive discount: 
+
+10: γϕ(st) = γmin + ( γmax − γmin ) · σ(gϕ(st)) 
+
+11: // Update Q-functions with adaptive target: 
+
+12: ˆQ = rt + γϕ(st)(1 − dt)[min i Q¯θi (st+1 , a ′) − α log πψ (a′|st+1 )] 
+
+13: θi ← θi − λQ∇θi JQ(θi)
+
+14: // Update policy and temperature (unchanged): 
+
+15: ψ ← ψ − λπ ∇ψ Jπ (ψ); α ← α − λα∇αJ(α)
+
+16: // Update gamma network (return-consistency): 
+
+17: Compute G(n) 
+
+> t
+
+with reference ¯γ (stop-gradient) 
+
+18: Optionally update ¯γ by EMA of replay-mean γϕ(s) after warmup 
+
+19: ϕ ← ϕ − λγ ∇ϕJγ (ϕ) (Eq. (15)) 
+
+20: // Soft-update target networks: 
+
+21: ¯θi ← τ θ i + (1 − τ )¯θi
+
+22: end for 
+
+23: end for E.3 Reward Curves 
+
+In this section we show the running reward curves of SAC and PPO, include AdaGamma and the baselines on SafetyPointGoal1-v0, Humanoid-v4 and Ant-v4 tasks. 
+
+F Generalization to TRPO and DDPG 
+
+To examine whether AdaGamma transfers beyond our primary SAC/PPO implementations, we evaluate integrated DDPG [ 6] and TRPO [ 5 ] agents on the same three benchmarks used in Section 5: the constrained navigation task SafetyPointGoal1-v0 (7), and the high-dimensional MuJoCo locomotion domains Humanoid-v4 (8) and Ant-v4 (9). We deliberately keep environments, seeds, horizons, evaluation protocol, and discount-related baselines aligned with the main experiments so that any differences can be attributed to the choice of base algorithm rather than task setup. 18 Algorithm 2 AdaGamma with PPO (On-Policy Adapter) 
+
+1: Input: Policy πψ , value network Vω , gamma network gϕ
+
+2: for each iteration do 
+
+3: // Collect rollout: 
+
+4: for t = 0 , . . . , T − 1 do 
+
+5: at ∼ πψ (·| st), observe rt, s t+1 
+
+6: end for 
+
+7: // Compute γϕ(st) for all rollout states (freeze): 
+
+8: {γt}T −1
+
+t=0 ← { γϕ(st)}T −1
+
+t=0 
+
+9: // Modified GAE with state-dependent γ:
+
+10: ˆAT −1 = rT −1 + γT −1V (sT ) − V (sT −1)
+
+11: for t = T − 2, . . . , 0 do 
+
+12: δt = rt + γt V (st+1 ) − V (st)
+
+13: ˆAt = δt + γt · λ · ˆAt+1 
+
+14: end for 
+
+15: Normalize: ˆAt ← ( ˆAt − mean )/std 
+
+16: // PPO epochs (frozen γ): 
+
+17: for epoch = 1 , . . . , K do 
+
+18: Update πψ via clipped surrogate with ˆAt
+
+19: Update Vω on value targets 
+
+20: end for 
+
+21: // Update gamma network: 
+
+22: Compute LRC 
+
+γ from rollout data (Eq. (12)) 
+
+23: ϕ ← ϕ − λγ ∇ϕJγ (ϕ)
+
+24: end for 0 200 400 600 800 1000              
+
+> Episode
+> 5
+> 0
+> 5
+> 10
+> 15
+> 20
+> 25
+> 30
+> Reward
+> SafetyPointGoal1-v0 SAC
+> AdaGamma
+> Uncertainty rule
+> Fixed
+> Cross-validated 02000 4000 6000 8000 10000 12000
+> Episode
+> 0
+> 1000
+> 2000
+> 3000
+> 4000
+> 5000
+> 6000
+> Reward
+> Humanoid-v4 SAC
+> AdaGamma
+> Uncertainty rule
+> Fixed
+> Cross-validated 0250 500 750 1000 1250 1500 1750
+> Episode
+> 0
+> 500
+> 1000
+> 1500
+> 2000
+> 2500
+> 3000
+> 3500
+> Reward
+> Ant-v4 SAC
+> AdaGamma
+> Uncertainty rule
+> Fixed
+> Cross-validated
+
+Figure 4: Learning reward curves of SAC-AdaGamma on SafetyPointGoal1-v0, Humanoid-v4 and Ant-v4 
+
+SafetyPointGoal1-v0 tests reward–cost tradeoffs under safety constraints, while Humanoid-v4 
+
+and Ant-v4 stress long-horizon coordination and contact-rich dynamics, respectively. Table 7: Performance in SafetyPointGoal1-v0 
+
+Method Variants Reward Cost Method Variants Reward Cost TRPO-Fixed-γ 24.48 ± 2.01 45.90 ± 28.90 DDPG-Fixed-γ 27.34 ± 1.18 51.45 ± 41.13 TRPO-CrossValidate 24.38 ± 7.11 46.35 ± 28.92 DDPG-CrossValidate 27.26 ± 1.23 53.85 ± 41.92 TRPO-Uncertainty 23.50 ± 1.90 64.55 ± 35.31 DDPG-Uncertainty 27.10 ± 0.70 52.70 ± 40.64 TRPO-AdaGamma 25.93 ± 1.46 49.40 ± 29.17 DDPG-AdaGamma 27.45 ± 1.40 46.15 ± 32.72 
+
+G Classic Control Results 
+
+To further assess whether state-dependent discounting is useful beyond the safety and high-dimensional locomotion settings, we evaluate AdaGamma on a set of standard Gymnasium con-trol benchmarks with both SAC and PPO. Table 10 shows that AdaGamma improves or matches the base algorithm on most classic-control tasks. On CartPole-v1 , both SAC–AdaGamma and PPO–AdaGamma reach the maximum score of 500 , reducing the residual variance observed in the fixed-discount baselines. On Pendulum-v1 , MountainCarContinuous-v0 , and Acrobot-v1 ,19 0 200 400 600 800 1000               
+
+> Episode
+> 0
+> 5
+> 10
+> 15
+> 20
+> 25
+> Reward
+> SafetyPointGoal1-v0 PPO
+> AdaGamma
+> Uncertainty rule
+> Fixed
+> Cross-validated 010000 20000 30000 40000 50000 60000 70000 80000
+> Episode
+> 100
+> 150
+> 200
+> 250
+> 300
+> 350
+> 400
+> 450
+> Reward
+> Humanoid-v4 PPO
+> AdaGamma
+> Uncertainty rule
+> Fixed
+> Cross-validated 0500 1000 1500 2000 2500 3000
+> Episode
+> 100
+> 0
+> 100
+> 200
+> 300
+> 400
+> 500
+> 600
+> 700
+> Reward
+> Ant-v4 PPO
+> AdaGamma
+> Uncertainty rule
+> Fixed
+> Cross-validated
+
+Figure 5: Learning reward curves of PPO-AdaGamma on SafetyPointGoal1-v0, Humanoid-v4 and Ant-v4 Table 8: Performance on Humanoid-v4 .Method Variants Reward Method Variants Reward TRPO-Fixed-γ 218.15 ± 11.33 DDPG-Fixed-γ 165.82 ± 5.67 TRPO-CrossValidate 221.10 ± 10.10 DDPG-CrossValidate 356.85 ± 18.47 TRPO-Uncertainty 250.65 ± 25.40 DDPG-Uncertainty 454.46 ± 13.18 TRPO-AdaGamma 284.49 ± 11.21 DDPG-AdaGamma 457.02 ± 45.58 
+
+performance remains below the task optimum and exhibits greater variability; even so, AdaGamma is often competitive with or modestly better than the fixed-discount baselines. 
+
+H Snapshots of Humanoid-v4 and Ant-v4 
+
+In this section we show the snapshots of the trained RL agent of SAC and PPO with AdaGamma on 
+
+Humanoid-v4 and Ant-v4 tasks. 
+
+Figure 6: Snapshots of SAC-AdaGamma on Humanoid-v4 
+
+I Hyperparameter Configurations J Limitations 
+
+While AdaGamma is broadly applicable, its advantages are most evident in environments with substantial state-dependent variation in effective planning horizon, where adaptive discounting can better capture heterogeneous temporal structure than a single global discount. As a result, its gains may appear more modest on temporally homogeneous tasks that are already well served by a fixed discount factor. 20 Table 9: Performance on Ant-v4 .Method Variants Reward Method Variants Reward TRPO-Fixed-γ 1326.83 ± 103.37 DDPG-Fixed-γ 3136.60 ± 1106.70 TRPO-CrossValidate 940.26 ± 457.39 DDPG-CrossValidate 1968.91 ± 687.19 TRPO-Uncertainty 940.26 ± 457.39 DDPG-Uncertainty 2915.64 ± 1179.86 TRPO-AdaGamma 1451.34 ± 243.90 DDPG-AdaGamma 3774.19 ± 458.63 
+
+Table 10: Test results of SAC and PPO with and without adaptive-γ.Test Results(rewards) SAC SAC-AdaGamma PPO PPO-AdaGamma CartPole-v1 483.20 ± 14.85 500.00 ± 0.00 481.90 ± 78.70 500.00 ± 0.00 
+
+Pendulum-v1 -64.832 ± 62.931 -58.557 ± 56.618 -212.27 ± 150.86 -198.12 ± 126.97 
+
+MountainCarContinuous-v0 94.47 ± 0.73 94.60 ± 0.60 84.72 ± 11.48 86.84 ± 3.24 
+
+Acrobot-v1 -82.91 ± 12.20 -82.61 ± 14.64 -95.34 ± 21.46 -115.186 ± 29.02 
+
+Figure 7: Snapshots of SAC-AdaGamma on Ant-v4 
+
+Figure 8: Snapshots of PPO-AdaGamma on Humanoid-v4 
+
+Figure 9: Snapshots of PPO-AdaGamma on Ant-v4 21 Table 11: SAC hyperparameters by task. SafetyPointGoal1-v0 Humanoid-v4 Ant-v4 
+
+Task / schedule 
+
+Max env steps 10 6 10 6 10 6
+
+Eval interval 10 4 steps 
+
+SAC backbone (shared Config )
+
+Actor/Critic LR 3 × 10 −4
+
+Target smoothing τ 5 × 10 −3
+
+Replay capacity 10 6
+
+Min buffer before train 5000 
+
+Batch size 256 
+
+Grad steps / env step 1
+
+Hidden dim (policy/Q) 256 
+
+Entropy coef. α 0.2 (automatic tuning) Max grad norm 1.0
+
+Episode horizon cap 1000 
+
+Safety constraint (SafetyPointGoal1 only) 
+
+Enabled / cost limit yes / 25 
+
+Lagrange LR / init 5 × 10 −3 / 10 −3
+
+Uncertainty-rule baseline ( β)
+
+βinit ; learnable; β LR 2.0; true; 10 −3
+
+Target γ (uncertainty_target ) — 0.99 0.99 
+
+CLI: uncertainty-scale = s ⇒ βinit = 2 s s = 1 in scripts 
+
+Fixed / RC / cross-validated (per script) 
+
+Warmup steps ( gamma-warmup-steps ) 10 5 10 5 10 5
+
+γ-net LR / hidden 10 −4 / 256 
+
+Clip [γmin , γ max ] [0 .9, 0.999] [0 .9, 0.999] [0 .97 , 0.999] 
+
+n-step n 5 5 5
+
+Fixed γ 0.99 0.99 0.99 
+
+RC: γdefault / γref init 0.98 / 0.98 0.98 / 0.98 0.98 / 0.98 
+
+RC: ref adaptive; after warmup true / true RC: EMA τ / update every (episodes) 0.1 / 5
+
+RC: train every ( gamma-update-freq steps) 20 20 20 
+
+λrc 1.0
+
+λdev /λ var /λ bound 0.005 / 0.012 / 0.05 
+
+CV: γ; Hcv ; loss weight — 0.98 ; 20 ; 1.0 0.98 ; 20 ;Uncertainty: gamma-base — 0.99 0.98 
+
+Table 12: PPO hyperparameters by task. Hyperparameter SafetyPointGoal1-v0 Humanoid-v4 Ant-v4 
+
+Task / schedule 
+
+Max env steps 10 6 3 × 10 6 10 6
+
+Eval interval 10 4 steps 
+
+PPO core 
+
+Actor LR / critic LR 3×10 −4 / 3×10 −4 10 −4 / 10 −4 3×10 −4 / 3×10 −4
+
+Policy clip ε 0.2
+
+GAE λ 0.95 
+
+PPO epochs 10 8 10 
+
+Rollout buffer size 4096 16384 4096 
+
+Mini-batch size 128 256 128 
+
+Entropy coef. 0.01 0.005 0.01 
+
+Max grad norm 0.5
+
+Action std (init / floor / decay ∆) 0.5 / 0.1 / 0.05 
+
+Action-std decay period (steps) 2 × 10 5 10 5 2 × 10 5
+
+Episode horizon cap 1000 
+
+γ network (AdaGamma / CV / RC branches) 
+
+Hidden dim / γ LR 256 / 3 × 10 −4
+
+Clip [γmin , γ max ] [0 .9, 0.999] 
+
+γ-net warmup (episodes) 200 (default; script unset) 500 200 (default; script unset) 
+
+Reg. λdev /λ var /λ bound /ϵ bound 0.01 / 0.005 / 0.05 / 0.005 
+
+Return-consistency (RC) — where used 
+
+Horizon n (rc-horizon ) {5, 10 , 20 } (separate runs) 10 10 
+
+λrc 1.0
+
+γref init / adaptive / after warmup 0.99 / true / true Ref EMA τ / update every (PPO upd.) 0.1 / 1 0.05 / 5 0.1 / 1
+
+Per-baseline settings (non-RC) 
+
+Fixed γ 0.99 0.99 0.99 
+
+Uncertainty( gamma-base , γmin , scale, num-q-ensembles ) 0.99 , 0.9, 1.0, 5 0.99 , 0.9, 1.0, 5 0.99 , 0.9, 1.0, 5
+
+Cross-validated (Hcv , λcv ) 10 , 1.0 10 , 1.0 10 , 1.0
+
+22
