@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.02011v1/fig-001.webp",
+      "caption": "Figure 1: An illustration of our proposed framework.",
+      "page": 3,
+      "index": 1,
+      "width": 1044,
+      "height": 313
+    },
+    {
+      "url": "assets/figures/arxiv/2605.02011v1/fig-002.webp",
+      "caption": "Table 2: Main experimental results. We report accuracy for Penalty (Prison and Fine terms), and Recall, Precision, and F1 scores for Convicting and Referencing tasks. For the Reasoning and Judgment sections, we use METEOR (MET.) and BERTScore (BERTS.) as metrics. The best results for each model are highlighted in bold.",
+      "page": 5,
+      "index": 2,
+      "width": 1056,
+      "height": 315
+    }
+  ]
+}

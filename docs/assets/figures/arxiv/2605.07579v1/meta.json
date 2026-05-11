@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-001.webp",
+      "caption": "Figure 2: Overview of POISE. Left: Probe features ϕ(x, y, π) combine hidden states with token entropy. Right: The value estimator predicts each rollout’s baseline from the other rollout’s features.",
+      "page": 6,
+      "index": 1,
+      "width": 829,
+      "height": 235
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-002.webp",
+      "caption": "Figure 8: Training dynamics of POISE on DeepSeek-R1-Distill-Qwen-1.5B. Although the smaller model exhibits noisier dynamics, the reward improves steadily and the estimated value follows the increasing reward scale after the initial phase. The online target MAE remains bounded, and the advantage variance ratio stays below one for most of training, indicating effective variance reduction.",
+      "page": 21,
+      "index": 2,
+      "width": 826,
+      "height": 375
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-003.webp",
+      "caption": "Figure 7: Training dynamics of POISE on Qwen3-4B. The reward and predicted value increase together as the policy improves. The online target MAE remains stable after the early phase, and the advantage variance ratio stays below one for most of training, indicating that the learned baseline reduces reward variance when forming advantages.",
+      "page": 21,
+      "index": 3,
+      "width": 826,
+      "height": 373
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-004.webp",
+      "caption": "Table 1: Performance comparison on olympiad level mathematical reasoning benchmarks. We report Avg@32 accuracy across various datasets. Our proposed internal state value estimation method (POISE) achieves competitive performance with the baseline models.",
+      "page": 7,
+      "index": 4,
+      "width": 822,
+      "height": 200
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-005.webp",
+      "caption": "Table 5: Key training hyperparameters used in POISE.",
+      "page": 18,
+      "index": 5,
+      "width": 682,
+      "height": 369
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-006.webp",
+      "caption": "Table 6: Key training hyperparameters used in DAPO with efficient dynamic sampling [41].",
+      "page": 18,
+      "index": 6,
+      "width": 682,
+      "height": 527
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-007.webp",
+      "caption": "Figure 9: Online value prediction for Qwen3-4B. The target at each checkpoint is the empirical Avg@8 score from the corresponding actor checkpoint.",
+      "page": 23,
+      "index": 7,
+      "width": 805,
+      "height": 191
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-008.webp",
+      "caption": "Figure 10: Online value prediction for DeepSeek-R1-Distill-Qwen-1.5B. The target at each checkpoint is the empirical Avg@8 score from the corresponding actor checkpoint.",
+      "page": 23,
+      "index": 8,
+      "width": 795,
+      "height": 193
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-009.webp",
+      "caption": "Figure 3: Comparison of training dynamics between POISE and DAPO on Deepseek-Distill-Qwen1.5B. Left: wall-clock time per training step. Right: gradient norm at each step.",
+      "page": 8,
+      "index": 9,
+      "width": 826,
+      "height": 220
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-010.webp",
+      "caption": "Figure 1: Comparing value prediction between our internal state probe and a separately trained critic model. Predictions are compared against empirical Avg@8 scores. Our probe achieves higher Pearson correlation (r) and lower MAE, indicating that the policy’s own internal representations provide an effective low-cost signal for value estimation.",
+      "page": 4,
+      "index": 10,
+      "width": 601,
+      "height": 292
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-011.webp",
+      "caption": "Table 4: Hyperparameters for the hidden-state value estimator. Here, dmodel denotes the hidden-state dimension of each policy backbone.",
+      "page": 17,
+      "index": 11,
+      "width": 732,
+      "height": 297
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07579v1/fig-012.webp",
+      "caption": "Table 7: Full value-prediction results across policy backbones and verifiable-reward domains. We compare our internal state estimator against a separately trained critic and report MAE and Pearson correlation r.",
+      "page": 24,
+      "index": 12,
+      "width": 830,
+      "height": 490
+    }
+  ]
+}

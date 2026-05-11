@@ -1,0 +1,126 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-001.webp",
+      "caption": "Figure 5: Anytime comparison under cumulative LLM-token budget on PFSP and MKP. Lower is better. The x-axis makes explicit whether a better endpoint is purchased by substantially more LLM budget.",
+      "page": 15,
+      "index": 1,
+      "width": 732,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-002.webp",
+      "caption": "Figure 6: PCA projection of the behavior descriptors produced by evaluated heuristics on four tasks. Colors indicate fitness. The point clouds show whether the search occupies a narrow band of related behaviors or a broader set of behaviorally distinct niches.",
+      "page": 15,
+      "index": 2,
+      "width": 826,
+      "height": 193
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-003.webp",
+      "caption": "Figure 1: Architectural progression of LLM-based solvers for COPs. (1) Fixed Evolutionary Search: The LLM acts merely as a generation module within a rigid, human-crafted global loop. (2) Autonomous Single-Agent Evolution: A monolithic agent executes all cognitive operations sequentially, which inevitably leads to cognitive entanglement. (3) Homogeneous Multi-Agent Evolution: Homogeneous agents explore in parallel with a shared memory, but still lack specialized cognitive focus. (4) Heterogeneous Multi-Agent Evolution: By decoupling problem-solving into specialized, interactive roles, it robustly eliminates role interference and enables systematic, diversified exploration.",
+      "page": 2,
+      "index": 3,
+      "width": 826,
+      "height": 352
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-004.webp",
+      "caption": "Table 1: Results of constructive and improvement heuristics on TSP. Methods marked with ∗ are evaluated by the authors using GPT-5.4.",
+      "page": 7,
+      "index": 4,
+      "width": 830,
+      "height": 282
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-005.webp",
+      "caption": "Figure 4: Best-so-far trajectories over generations for four tasks. Lower is better in all panels. The comparison highlights that HMACE changes the search dynamics even when the final winner remains task dependent.",
+      "page": 14,
+      "index": 5,
+      "width": 826,
+      "height": 212
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-006.webp",
+      "caption": "Table 6: Sanitized illustrative TSPLIB EUC_2D subset table for HMACE.",
+      "page": 14,
+      "index": 6,
+      "width": 829,
+      "height": 560
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-007.webp",
+      "caption": "Table 3: Comparisons of TSP and Online BPP. Methods marked with ∗ are evaluated using GPT-5.4. For TSP, Obj. (%) reports the average optimality gap over the 50-, 100-, 200-, 500-, and 1000-city settings in Table 1; for Online BPP, Obj. (%) reports the average over the Weibull-5k rows in Table 2. Gap (%) is computed relative to the best GPT-5.4 row within each matched task block. Time (s) and Tokens report the available runtime and token logs.",
+      "page": 8,
+      "index": 7,
+      "width": 826,
+      "height": 196
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-008.webp",
+      "caption": "Table 2: Results on Online BPP. Methods marked with ∗ are evaluated by GPT-5.4.",
+      "page": 8,
+      "index": 8,
+      "width": 829,
+      "height": 345
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-009.webp",
+      "caption": "Figure 2: The overview of the HMACE framework. The proposer conditions on parent heuristics and diverse exemplars retrieved from the archive to draft strategy candidates; the generator translates each candidate into executable code; the evaluator scores candidate heuristics on the training set; and the reflector maintains an archive-backed memory, retrieves diverse exemplars from different behavioral cells, and updates each cell with the best-performing candidate.",
+      "page": 4,
+      "index": 9,
+      "width": 829,
+      "height": 473
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-010.webp",
+      "caption": "Figure 9: Estimated cost–quality scatter on PFSP, MKP, and CVRP. Lower is better on the y-axis. The figure highlights whether HMACE introduces low-cost operating points that the single-agent baseline does not reach.",
+      "page": 17,
+      "index": 10,
+      "width": 829,
+      "height": 240
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-011.webp",
+      "caption": "Figure 10: Total LLM tokens at matched evaluator budget on PFSP, MKP, and CVRP. Lower is better. Error bars visualize run-to-run variability across seeds.",
+      "page": 17,
+      "index": 11,
+      "width": 598,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-012.webp",
+      "caption": "Table 4: Ablation results on BP-online and TSP-construct. Lower is better in all columns.",
+      "page": 9,
+      "index": 12,
+      "width": 834,
+      "height": 811
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-013.webp",
+      "caption": "Table 7: Task metadata fields exposed to HMACE prompts across the four benchmark families.",
+      "page": 20,
+      "index": 13,
+      "width": 829,
+      "height": 1316
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-014.webp",
+      "caption": "Figure 8: Visual summary of the ablation study from Table 4. Lower is better in both panels. The figure shows which variants purchase objective quality at the price of heavier prompting or weaker budget control.",
+      "page": 16,
+      "index": 14,
+      "width": 779,
+      "height": 281
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07214v1/fig-015.webp",
+      "caption": "Figure 7: Archive-cell coverage over generations for the CVT-MAP-Elites memory. Higher is better. The curves show how quickly each task fills behaviorally distinct niches before reaching a task-specific plateau.",
+      "page": 16,
+      "index": 15,
+      "width": 598,
+      "height": 336
+    }
+  ]
+}

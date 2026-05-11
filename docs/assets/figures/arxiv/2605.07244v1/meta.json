@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.07244v1/fig-001.webp",
+      "caption": "Figure 10: Value-level sharing preserves the GRPO stability profile across model pools. Averaged validation MATH reward@1 for Standalone GRPO vs. XGRPO across three pools. The overlapping curves show that pooled scalar reward sharing remains a low-coupling intervention as pool size and heterogeneity increase.",
+      "page": 26,
+      "index": 1,
+      "width": 611,
+      "height": 215
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07244v1/fig-002.webp",
+      "caption": "Table 3: Long-context alignment error on heterogeneous Qwen3-1.7B-Base → Phi-4-miniInstruct. Relative mean absolute error (%) between source per-token log-probabilities and the target-aligned tensor, as a function of target response length. THL stays below 0.03% across all four lengths, while the position-copy baseline incurs roughly 95–105% relative error.",
+      "page": 30,
+      "index": 2,
+      "width": 827,
+      "height": 606
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07244v1/fig-003.webp",
+      "caption": "Figure 7: System sanity check on single-policy GRPO. Comparison between a reference VERL implementation and our VERL-based mutual-RL stack on Qwen2.5-Math-1.5B trained on MATH. Panels show (top-left) test accuracy (MATH reward@1), (top-right) training reward, (bottom-left) training throughput on non-evaluation steps, and (bottom-right) policy-gradient loss as a function of training step. The curves remain well aligned across all metrics, indicating that our system faithfully reproduces the baseline GRPO dynamics while introducing only minor variations attributable to stochasticity.",
+      "page": 23,
+      "index": 3,
+      "width": 572,
+      "height": 283
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07244v1/fig-004.webp",
+      "caption": "Figure 12: Outcome-level transfer extends beyond the main MATH comparison. Per-task test accuracy on MATH and six commonsense/scientific QA benchmarks for SGT compared with Standalone GRPO across four policy pools (3Qwen, 4Qwen, Llama-Mist, Qwen-Phi4). Top row groups the four datasets on which SGT adds support across pools (HellaSwag, OpenBookQA, PIQA, BoolQ); bottom row groups the remaining datasets where SGT either matches GRPO at the verifiergrounded MATH task or contributes its largest absolute heterogeneous-pool gains on ARC and SocialIQa. The Llama-Mist pool consistently shows the largest SGT gains, consistent with rescue-set transfer between policies that traverse disjoint regions of the solution space.",
+      "page": 28,
+      "index": 4,
+      "width": 772,
+      "height": 413
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07244v1/fig-005.webp",
+      "caption": "Figure 4: Outcome-level sharing gives the best stability-support point in the two-model math comparison. Validation MATH reward@1 (top) and training reward (bottom) for standalone GRPO, data-level sharing (PRP), value-level sharing (XGRPO), and outcome-level sharing (SGT). SGT achieves the strongest average performance and faster early-to-mid training progress; PRP exposes the sensitivity of direct rollout sharing to policy mismatch; XGRPO remains a stable low-coupling baseline. For training reward, PRP is omitted from per-model panels because its pooling mechanism mixes training rewards for one model; it is shown only in the averaged view.",
+      "page": 8,
+      "index": 5,
+      "width": 777,
+      "height": 329
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07244v1/fig-006.webp",
+      "caption": "Figure 5: The regimes have distinct optimization signatures. Entropy loss, PPO KL coefficient, and KL loss show that SGT preserves entropy comparable to or higher than GRPO while maintaining low KL, PRP produces larger KL and lower entropy under direct rollout sharing, and XGRPO remains close to GRPO because it leaves actor sampling on-policy.",
+      "page": 9,
+      "index": 6,
+      "width": 776,
+      "height": 311
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07244v1/fig-007.webp",
+      "caption": "Figure 2: The system decouples resource placement, experience exchange, and tokenizer alignment. MWRA assigns devices to policy workers; each policy publishes typed experience D(m) into SEE; subscribed peer fields are retokenized or trace-aligned by THL before the learner constructs its own update.",
+      "page": 5,
+      "index": 7,
+      "width": 522,
+      "height": 297
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.07123v1/fig-001.webp",
+      "caption": "Figure 1: Learned parameters and element-wise learning progress. In (a), P and Q are shown as elementwise means over 10 seeds, and each matrix is normalized by its maximum absolute entry. In (b), shaded regions denote standard errors across 10 seeds.",
+      "page": 9,
+      "index": 1,
+      "width": 805,
+      "height": 234
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07123v1/fig-002.webp",
+      "caption": "Table 1: Hyperparameters and training details",
+      "page": 30,
+      "index": 2,
+      "width": 740,
+      "height": 650
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07123v1/fig-003.webp",
+      "caption": "Figure 2: Boyan’s chain topology with nonzero transitions. Adapted from Wang et al. [2025a].",
+      "page": 29,
+      "index": 3,
+      "width": 828,
+      "height": 700
+    }
+  ]
+}

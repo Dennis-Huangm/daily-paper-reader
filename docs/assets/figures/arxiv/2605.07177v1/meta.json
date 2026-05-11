@@ -1,0 +1,158 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-001.webp",
+      "caption": "Figure 4: Comparison of three search paradigms under controlled conditions. (a, b) Accuracy and average tool-call turns based on Qwen3-VL-30B-A3B. (c, d) Accuracy and average tool-call turns based on Qwen3-VL-235B-A22B. The \"Avg\" column denotes the mean across the six benchmarks.",
+      "page": 25,
+      "index": 1,
+      "width": 788,
+      "height": 455
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-002.webp",
+      "caption": "Figure 1: Comparison between conventional multimodal search agents and HyperEyes. While conventional agents suffer from redundant interaction rounds to process multiple entities, HyperEyes achieves high efficiency by grounding and searching multiple entities concurrently in a single turn.",
+      "page": 2,
+      "index": 2,
+      "width": 824,
+      "height": 418
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-003.webp",
+      "caption": "Figure 3: Overview of the IMEB benchmark, including domain distribution (N = 300), entity count statistics for each domain, and an example question-answer pair.",
+      "page": 7,
+      "index": 3,
+      "width": 822,
+      "height": 285
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-004.webp",
+      "caption": "Table 18: Prompt template of the LLM-as-a-judge used for benchmark accuracy evaluation.",
+      "page": 29,
+      "index": 4,
+      "width": 829,
+      "height": 647
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-005.webp",
+      "caption": "Table 17: System prompt of the Code-Crop variant, in which the model grounds target regions by generating Python cropping code (executed in a Jupyter kernel) before performing image_search on the produced sub-images.",
+      "page": 29,
+      "index": 5,
+      "width": 829,
+      "height": 531
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-006.webp",
+      "caption": "Table 9: Hyperparameters for the SFT stage of HyperEyes (LoRA fine-tuning of Qwen3-VL backbones). Single-value rows apply to both variants; two-value rows report per-variant settings.",
+      "page": 22,
+      "index": 6,
+      "width": 846,
+      "height": 917
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-007.webp",
+      "caption": "Table 5: Ablation on the Dual-Grained Efficiency-Aware RL (Accuracy % / Avg. Tool-Call Turns). Direct RL denotes applying TRACE + OPD directly on the vanilla Qwen3-VL-30B-Instruct backbone without the SFT cold-start. For the OPD teacher: † uses the off-the-shelf Qwen3-VL-235B-Instruct, while ∗ (our default) uses the RL-trained HyperEyes-235B (RL).",
+      "page": 10,
+      "index": 7,
+      "width": 787,
+      "height": 269
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-008.webp",
+      "caption": "Figure 2: Overview of the HyperEyes training framework. The framework consists of two main phases: (1) a Parallel-Amenable Data Synthesis pipeline that constructs multi-entity QA pairs and curates efficient trajectories, and (2) a Dual-Grained Efficiency-Aware RL algorithm that optimizes parallel search behavior through trajectory-level efficiency rewards and token-level distillation.",
+      "page": 3,
+      "index": 8,
+      "width": 824,
+      "height": 397
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-009.webp",
+      "caption": "Table 10: Hyperparameters for the RL stage of HyperEyes-30B (RL) and HyperEyes-235B (RL). Single-value rows apply to both variants; two-value rows report per-variant settings.",
+      "page": 23,
+      "index": 9,
+      "width": 896,
+      "height": 1186
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-010.webp",
+      "caption": "Table 16: System prompt of the LLM-Crop variant, where the model localizes target regions through a language-prompted crop_image tool before performing image_search on the cropped output.",
+      "page": 28,
+      "index": 10,
+      "width": 829,
+      "height": 1052
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-011.webp",
+      "caption": "Table 2: Main results (accuracy %) on six multimodal search benchmarks. Bold = best, underline = second-best. ∆ rows show absolute improvement of HyperEyes over the second-best open-source model under the Agentic Workflow setting. \"–\" denotes unreported results. For brevity, we abbreviate HyperEyes as HE in the table. Accuracy numbers are taken from the original papers, while tool-call turns and metrics missing from the original papers are obtained via local deployment and inference of their open-source models.",
+      "page": 8,
+      "index": 11,
+      "width": 830,
+      "height": 664
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-012.webp",
+      "caption": "Table 1: Composition of the training dataset.",
+      "page": 4,
+      "index": 12,
+      "width": 790,
+      "height": 323
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-013.webp",
+      "caption": "Table 7: Comparison of evaluation environments and tool configurations across different baseline agents. Discrepancies in search APIs, parsing modules, and checkpoint availability significantly impact direct performance comparisons.",
+      "page": 19,
+      "index": 13,
+      "width": 764,
+      "height": 308
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-014.webp",
+      "caption": "Table 15: System prompt of HyperEyes for unified grounded search, which allows the model to perform region-level grounded retrieval by passing one or multiple normalized bounding boxes within a single image_search call",
+      "page": 27,
+      "index": 14,
+      "width": 829,
+      "height": 615
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-015.webp",
+      "caption": "Table 11: Robustness of HyperEyes-30B (RL) to the RL random seed. Mean ± std across N = 3 independent RL runs from the same SFT checkpoint (seeds ∈ {42, 1234, 2026}). “Reported” denotes the single-seed number in Table 2 (seed=42). Acc is benchmark accuracy (%); Turns is the average number of tool calls per query.",
+      "page": 24,
+      "index": 15,
+      "width": 548,
+      "height": 236
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-016.webp",
+      "caption": "Table 12: Per-seed evaluation of HyperEyes-30B (RL). Each cell reports accuracy (%)/average tool turns.",
+      "page": 24,
+      "index": 16,
+      "width": 668,
+      "height": 203
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-017.webp",
+      "caption": "Table 3: Comparison of different methods on BCVL and IMEB benchmarks.",
+      "page": 9,
+      "index": 17,
+      "width": 746,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-018.webp",
+      "caption": "Figure 5: Comparison between the representative serial agent DeepEyes-V2 and our parallel groundedsearch framework HyperEyes on a multi-person visual reasoning task. DeepEyes-V2 follows an inefficient crop-then-search pipeline that processes one person at a time, whereas HyperEyes issues a single unified grounded search over all individuals in parallel, followed by a targeted text search to confirm the answer.",
+      "page": 31,
+      "index": 18,
+      "width": 829,
+      "height": 1027
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07177v1/fig-019.webp",
+      "caption": "Table 8: Evaluation hyperparameters and environment configurations.",
+      "page": 20,
+      "index": 19,
+      "width": 598,
+      "height": 344
+    }
+  ]
+}

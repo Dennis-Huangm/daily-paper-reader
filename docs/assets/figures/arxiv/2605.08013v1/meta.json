@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-001.webp",
+      "caption": "Table 8: Secondary evaluation scores (%) grouped by task type. The table reports LLM Judge accuracy for STRING tasks, line-level file-change recall for FILES tasks, and their combination for HYBRID tasks.",
+      "page": 21,
+      "index": 1,
+      "width": 823,
+      "height": 258
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-002.webp",
+      "caption": "Table 9: ShellOps-Pro σ-Reveal accuracy in percent for every baseline across Hmax∈{6, 7, 8, 9, 10}. Each cell reports EMσ-Reveal (+∆), where ∆ = EMσ-Reveal−EMVanilla is computed against the same method and horizon under the vanilla harness. Accuracy is the macro-average exact match over the three ShellOps-Pro task types.",
+      "page": 21,
+      "index": 2,
+      "width": 822,
+      "height": 338
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-003.webp",
+      "caption": "Figure 1: Overview of the verifiable CLI task workflow. (a) ShellOps task instance with a natural language query, an initial workspace file tree, a verifiable gold bash solution, and the expected post execution workspace or standard output. (b) ShellOps and ShellOps-Pro coverage across file extensions and four task axes (Lookup, Aggregate, Edit, Mixed). (c) Unified verifiable loop with workspace observation, shell action generation, sandbox execution, and schema based scoring.",
+      "page": 2,
+      "index": 3,
+      "width": 734,
+      "height": 506
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-004.webp",
+      "caption": "Table 1: Exact match scores (%) grouped by task type.",
+      "page": 7,
+      "index": 4,
+      "width": 823,
+      "height": 263
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-005.webp",
+      "caption": "Table 2: Pass@k scores (%) across six benchmarks. Each cell reports Pass@3 / Pass@5.",
+      "page": 7,
+      "index": 5,
+      "width": 744,
+      "height": 233
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-006.webp",
+      "caption": "Figure 6: ShellOps-Pro task workspace profile across 150 tasks. Panel A ranks file extensions by file count and byte volume. Panel B reports content category composition by task type. Panel C shows file size dispersion on a log scale axis. Panel D places each task by file count and byte volume. The internal harness directory is excluded.",
+      "page": 17,
+      "index": 6,
+      "width": 816,
+      "height": 517
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-007.webp",
+      "caption": "Figure 4: Ablation and efficiency diagnostics for A3. (a) Advantage-component magnitudes and training-mean contribution shares after fusion weighting. (b) ShellOps accuracy-cost Pareto view, using macro exact match and per-step advantage cost, with dashed non-A3 RL SOTA and annotated A3 with σ-Reveal gain.",
+      "page": 9,
+      "index": 7,
+      "width": 749,
+      "height": 319
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-008.webp",
+      "caption": "Table 5: Agentic efficiency under the Qwen3-14B mixed benchmark setting. Training columns report rollout cost per token and advantage cost. Inference columns report turns and input / output tokens per turn. Dashes mark inference-only baselines. For A3, inference columns report Vanilla / σ-Reveal, with σ-Reveal as an inference-time harness. Arrows indicate the preferred direction for cost columns.",
+      "page": 9,
+      "index": 8,
+      "width": 744,
+      "height": 262
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-009.webp",
+      "caption": "Table 7: Wall clock cost of the three AST similarity passes underlying A3, averaged over a forward rollout batch at group size M = 4. |P| counts σ-pair evaluations entering each pass. The turn-level and episode-level passes together feed the turn-level action sub-chain residual Aintent of (6). The tree-level pass feeds the tree advantage Atree of (7).",
+      "page": 20,
+      "index": 9,
+      "width": 694,
+      "height": 196
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-010.webp",
+      "caption": "Figure 2: Schematic overview of the algorithm. An AST comparison for a pair of shell commands is shown on the left. σ-Reveal context injection for workspace-oriented information extraction is depicted on the above. Episode-level normalization, turn-level action structure credit, and tree-level bucket abstracted history credit are fused into the per-turn advantage for policy optimization.",
+      "page": 5,
+      "index": 10,
+      "width": 814,
+      "height": 452
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08013v1/fig-011.webp",
+      "caption": "Figure 5: ShellOps standard corpus task workspace profile across 1624 tasks. Panel A ranks file extensions by file count and byte volume. Panel B reports content category composition by task type. Panel C shows file size dispersion on a log scale axis. Panel D places each task by file count and byte volume. The internal harness directory is excluded.",
+      "page": 16,
+      "index": 11,
+      "width": 816,
+      "height": 517
+    }
+  ]
+}
