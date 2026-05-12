@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-001.webp",
+      "caption": "Table 7: Existing assets used in this work.",
+      "page": 21,
+      "index": 1,
+      "width": 863,
+      "height": 340
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-002.webp",
+      "caption": "Figure 2: The prompt of Long-horizon Planning Reward.",
+      "page": 21,
+      "index": 2,
+      "width": 826,
+      "height": 475
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-003.webp",
+      "caption": "Figure 4: Verify Model System Prompt.",
+      "page": 22,
+      "index": 3,
+      "width": 820,
+      "height": 467
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-004.webp",
+      "caption": "Figure 3: GUI Model System Prompt.",
+      "page": 22,
+      "index": 4,
+      "width": 820,
+      "height": 516
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-005.webp",
+      "caption": "Figure 1: Overview of Lite-GUI. The framework consists of: (a) an automated GUI trajectory generation module for producing action trajectories for GUI tasks; (b) an OPD & RL data construction module for generating training data, with a particular focus on multi-solution annotations for OPD and RL; and (c) the proposed two-stage training paradigm, comprising Guided On-policy Distillation and Multi-solution Dual-level GRPO. Details of the framework can refer to Appendix A.7.",
+      "page": 3,
+      "index": 5,
+      "width": 822,
+      "height": 510
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-006.webp",
+      "caption": "Figure 5: System requirements Prompt.",
+      "page": 23,
+      "index": 6,
+      "width": 820,
+      "height": 506
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-007.webp",
+      "caption": "Figure 6: Key command note Prompt.",
+      "page": 23,
+      "index": 7,
+      "width": 823,
+      "height": 646
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-008.webp",
+      "caption": "Table 1: Performance comparison on ScreenSpot-Pro.",
+      "page": 8,
+      "index": 8,
+      "width": 822,
+      "height": 525
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-009.webp",
+      "caption": "Figure 7: Action and Solution Format And Ground-truth solutions.",
+      "page": 24,
+      "index": 9,
+      "width": 826,
+      "height": 375
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-010.webp",
+      "caption": "Table 4: Ablations on different post-training approaches.",
+      "page": 9,
+      "index": 10,
+      "width": 799,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-011.webp",
+      "caption": "Table 2: Performance comparison on OS-World.",
+      "page": 9,
+      "index": 11,
+      "width": 606,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-012.webp",
+      "caption": "Table 5: Main hyperparameters for the GKD stage. TP, PP, EP, and CP denote tensor, pipeline, expert, and context parallelism.",
+      "page": 16,
+      "index": 12,
+      "width": 672,
+      "height": 360
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07505v1/fig-013.webp",
+      "caption": "Table 6: Main hyperparameters for the GRPO stage. The 2B GRPO run uses a two-stage schedule in which the second stage resumes from the latest checkpoint of the first stage.",
+      "page": 16,
+      "index": 13,
+      "width": 632,
+      "height": 421
+    }
+  ]
+}

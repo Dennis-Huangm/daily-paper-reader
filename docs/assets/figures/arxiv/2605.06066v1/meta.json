@@ -1,0 +1,118 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-001.webp",
+      "caption": "Table 3: Headline learned-agent results per player deck. Win rates are means over the in-distribution opponent pool and paired seeds; 95% CIs are percentile-bootstrap intervals over pooled per-opponent seed rates (10k resamples). ns is the number of paired seeds available; ∆ is the per-deck mean win rate of the test agent minus the reference agent; pboot and pHolm are the raw and Holm-Bonferroni adjusted paired-bootstrap p-values within the headline learned-agent comparison family.",
+      "page": 6,
+      "index": 1,
+      "width": 736,
+      "height": 299
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-002.webp",
+      "caption": "Figure 2: Headline benchmark comparison by player deck. Each panel reports overall win rate against the in-distribution opponent pool with 95% percentile-bootstrap CIs over pooled per-seed rates; PPO and CGFA-PPO are paired across seeds. Random and heuristic policies are shown as reference anchors for benchmark difficulty.",
+      "page": 6,
+      "index": 2,
+      "width": 826,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-003.webp",
+      "caption": "Table 9: Overall win rate (mean and 95% percentile bootstrap CI on pooled seed-level rates, 10k resamples).",
+      "page": 21,
+      "index": 3,
+      "width": 748,
+      "height": 459
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-004.webp",
+      "caption": "Figure 3: Ablation suite on the Mono-Red Aggro diagnostic slice: mean overall win rate per ablation variant against the in-distribution opponent pool, with 95% paired-bootstrap CIs. The variants disentangle parameter count, factor-aligned critics, the residual gate, and intervention calibration.",
+      "page": 7,
+      "index": 4,
+      "width": 682,
+      "height": 337
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-005.webp",
+      "caption": "Table 6: Hyperparameters for the PPO, Causal Agent, and CGFA-PPO baselines.",
+      "page": 14,
+      "index": 5,
+      "width": 772,
+      "height": 912
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-006.webp",
+      "caption": "Table 1: MTG-Causal-RL benchmark configuration.",
+      "page": 3,
+      "index": 6,
+      "width": 806,
+      "height": 212
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-007.webp",
+      "caption": "Figure 8: CGFA-PPO case study on a single deterministic Mono-Red Aggro player-deck episode against Azorius Control. (a) Mean stacked per-factor critic Vk(s) by turn, showing how each causal factor contributes to the value estimate. (b) Mean stacked per-factor advantage Ak(s, a) by turn, showing how chosen actions are credited across factors. (c) The intervention-calibration target εk(s, a) overlaid as a line trace on top of Ak for all factors, providing a turn-level visual check that the per-factor heads track the SCM’s intervention prediction.",
+      "page": 18,
+      "index": 7,
+      "width": 788,
+      "height": 558
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-008.webp",
+      "caption": "Figure 7: Headline benchmark diagnostics: per-matchup win-rate heatmap across agents, player decks, and in-distribution opponents.",
+      "page": 18,
+      "index": 8,
+      "width": 826,
+      "height": 408
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-009.webp",
+      "caption": "Table 5: Action space layout for MTG-Causal-RL (478 actions across 16 categories). Index ranges are fixed by the benchmark specification.",
+      "page": 13,
+      "index": 9,
+      "width": 768,
+      "height": 400
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-010.webp",
+      "caption": "Figure 4: Cross-archetype transfer: in-distribution versus held-out mean win rate per agent, aggregated over paired seed-by-fold observations. The generalisation gap is the dependent variable for the peragent test against zero (Table 4); negative values indicate that the held-out opponent mix was easier.",
+      "page": 8,
+      "index": 10,
+      "width": 746,
+      "height": 308
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-011.webp",
+      "caption": "Figure 5: CGFA-PPO calibration trajectory for the Mono-Red Aggro player deck. (a) Per-factor Pearson correlation between Ak and the SCM-predicted εk. (b) Per-factor credit share as a stacked area. (c) Residual gate g(s) mean (line) with per-state min/max envelope (shaded).",
+      "page": 8,
+      "index": 11,
+      "width": 826,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-012.webp",
+      "caption": "Table 2: Causal variables in the MTG-Causal-RL SCM. Variables are organised by causal layer; the six parents of WinProb define the benchmark’s strategic causal factors.",
+      "page": 4,
+      "index": 12,
+      "width": 668,
+      "height": 434
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-013.webp",
+      "caption": "Figure 1: Hand-designed structural causal model for MTG-Causal-RL. Variables are organised in four layers: resources (blue), board state (orange), strategic position (green), and outcome (red). Edges denote causal dependence as enforced by the structural equations (Appendix B). The six parents of WinProb form the benchmark’s strategic causal factors.",
+      "page": 4,
+      "index": 13,
+      "width": 820,
+      "height": 446
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06066v1/fig-014.webp",
+      "caption": "Table 8: Overall win rate (mean and 95% percentile bootstrap CI on pooled seed-level rates, 10k resamples).",
+      "page": 20,
+      "index": 14,
+      "width": 772,
+      "height": 1003
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-001.webp",
+      "caption": "Table 1: Performance comparison of Qwen3 teacher and student across 4 benchmarks. The best results are in bold, and the second-best results are underlined. We report average@32 over 5 runs.",
+      "page": 6,
+      "index": 1,
+      "width": 682,
+      "height": 450
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-002.webp",
+      "caption": "Table 5: Comparison of naive OPD vs. OPD on the 1.7B student model.",
+      "page": 21,
+      "index": 2,
+      "width": 706,
+      "height": 184
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-003.webp",
+      "caption": "Figure 1: The motivation of SOD. (a) Student-teacher divergence dk across reasoning steps, sampled from 800 trajectories: in TIR, erroneous tool calls cause divergence to accelerate sharply, unlike the gradual drift in text-only reasoning. (b) Teacher entropy statistics over 800 sampled trajectories: on erroneous trajectories, both the mean entropy change (bars) and the standard deviation (dashed lines) grow rapidly at later steps, indicating increasingly unreliable teacher supervision. Please refer to Appendix F for detailed cases. (c) Radar chart comparing methods on four benchmarks.",
+      "page": 2,
+      "index": 3,
+      "width": 826,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-004.webp",
+      "caption": "Table 2: Ablation study on key components of SOD. Results are evaluated on 1.7B student model.",
+      "page": 7,
+      "index": 4,
+      "width": 810,
+      "height": 446
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-005.webp",
+      "caption": "Figure 4: Training dynamics across methods on 0.6B and 1.7B student models. We track accuracy on AIME2025 (left), policy entropy (middle), and mean tool-calling turns (right) throughout training.",
+      "page": 8,
+      "index": 5,
+      "width": 815,
+      "height": 421
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-006.webp",
+      "caption": "Figure 3: Scalability of SOD across different student-teacher configurations.",
+      "page": 8,
+      "index": 6,
+      "width": 826,
+      "height": 232
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-007.webp",
+      "caption": "Table 4: Training cost comparison. All runs use 8×H20 96GB GPUs with identical configurations.",
+      "page": 19,
+      "index": 7,
+      "width": 572,
+      "height": 233
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-008.webp",
+      "caption": "Table 3: Summary of the training datasets used in our experiments.",
+      "page": 17,
+      "index": 8,
+      "width": 826,
+      "height": 463
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-009.webp",
+      "caption": "Figure 5: Three distillation patterns of SOD.",
+      "page": 9,
+      "index": 9,
+      "width": 826,
+      "height": 313
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-010.webp",
+      "caption": "Figure 6: Distribution of three distillation patterns over training steps. At each step, all rollout trajectories are classified into Stable, Recovery, or Erroneous based on their adaptive weight dynamics, and the proportion of each pattern is reported (smoothed with a 9-step moving average).",
+      "page": 20,
+      "index": 10,
+      "width": 809,
+      "height": 289
+    },
+    {
+      "url": "assets/figures/arxiv/2605.07725v1/fig-011.webp",
+      "caption": "Figure 2: The overview of SOD. (a) The student generates multi-step trajectories where erroneous tool calls propagate across steps, degrading teacher supervision reliability. (b) Student-teacher distributions drift apart as errors accumulate. (c) Step-level divergence dk quantifies this drift. (d) SOD adaptively attenuates distillation weights in high-divergence steps, unlike vanilla OPD which applies uniform weights. Please refer to Section 5.6 for more characteristics of SOD.",
+      "page": 5,
+      "index": 11,
+      "width": 826,
+      "height": 364
+    }
+  ]
+}

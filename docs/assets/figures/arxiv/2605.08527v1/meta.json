@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.08527v1/fig-001.webp",
+      "caption": "Figure 1: Scaling RLVR to 10 concurrent LoRA tasks. MARLAAS maintains stable reward improvements under high multi-tenant load, demonstrating superior scalability to single-disaggregated baselines over one epoch.",
+      "page": 1,
+      "index": 1,
+      "width": 458,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08527v1/fig-002.webp",
+      "caption": "Figure 5: MARLAAS system architecture. The system consists of a decoupled rollout engine, training engine, and a centralized multi-task manager. Each task maintains independent LoRA parameters and optimizer states. The design enables asynchronous execution while enforcing strict per-task policy versioning.",
+      "page": 6,
+      "index": 2,
+      "width": 854,
+      "height": 440
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08527v1/fig-003.webp",
+      "caption": "Figure 6: Scaling behavior of MARLAAS under increasing task concurrency. We sweep the number of concurrent RLVR tasks (training GSM8K on QWEN3-0.6B) from 1 to 32. MARLAAS sustains higher utilization and throughput while limiting idle time compared to sequential and synchronous multi-LoRA baselines, demonstrating improved scalability under multi-tenant RLVR workloads.",
+      "page": 8,
+      "index": 3,
+      "width": 950,
+      "height": 194
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08527v1/fig-004.webp",
+      "caption": "Figure 3: Execution timeline of MARLAAS compared to a Single-Disaggregated baseline for three-task RL fine tuning. We present a graphic that demonstrates training 3 Qwen3-0.6B models on an agentic search workload. Training (warm colors), rollout (cool colors), and environment tool calling (green) phases are shown assuming all tasks are submitted at t = 0. By enabling asynchronous phase transitions and batching rollouts across heterogeneous tasks, MARLAAS reduces pipeline bubbles and idle GPU time.",
+      "page": 4,
+      "index": 4,
+      "width": 854,
+      "height": 421
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08527v1/fig-005.webp",
+      "caption": "Figure 7: User-facing latency metrics under increasing concurrency. We compare MARLAAS against sequential and synchronous multi-LoRA baselines as the number of concurrent training tasks increases. We report job scheduling delay (TTFS; time-to-first-step), which captures how quickly a training job begins execution after submission, and training step latency (TPTS; time-per-training-step), which measures per-step iteration latency once training is underway.",
+      "page": 9,
+      "index": 5,
+      "width": 667,
+      "height": 240
+    }
+  ]
+}
