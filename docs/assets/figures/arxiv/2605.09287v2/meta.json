@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.09287v2/fig-001.webp",
+      "caption": "Figure 7: this case study presents a successful reasoning trajectory in which the intermediate reasoning and retrieval steps consistently align with the golden process, leading to a correct final answer. In such cases, PiCA assigns high positive rewards to each informative step, reflecting the consistency between the reasoning trajectory and the target solution path.",
+      "page": 21,
+      "index": 1,
+      "width": 652,
+      "height": 606
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09287v2/fig-002.webp",
+      "caption": "Table 1: Exact Match (EM) results on seven QA benchmarks. In-domain tasks include NQ and HotpotQA; out-of-domain tasks include TriviaQA, PopQA, 2WikiMultiHopQA, MuSiQue, and Bamboogle.",
+      "page": 7,
+      "index": 2,
+      "width": 812,
+      "height": 507
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09287v2/fig-003.webp",
+      "caption": "Table 4: Hyperparameter settings for Reward Model.",
+      "page": 18,
+      "index": 3,
+      "width": 450,
+      "height": 504
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09287v2/fig-004.webp",
+      "caption": "Table 2: F1 scores on seven QA benchmarks. In-domain tasks include NQ and HotpotQA; out-ofdomain tasks include TriviaQA, PopQA, 2WikiMultiHopQA, MuSiQue, and Bamboogle.",
+      "page": 8,
+      "index": 4,
+      "width": 812,
+      "height": 309
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09287v2/fig-005.webp",
+      "caption": "Figure 3: Comparison of PiCA with different rewards",
+      "page": 8,
+      "index": 5,
+      "width": 812,
+      "height": 503
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09287v2/fig-006.webp",
+      "caption": "Figure 1: Overview of PiCA. Stage 1 is training a PiCA model on annotated pivot steps (Section 4.1). Stage 2 is policy optimization with PiCA (Section 4.2). The model generates trajectories with a frozen PiCA model assigning dense rewards based on relative success gain g(t) derived from the success probability f(t). The total reward integrates these step-wise gains, efficiency penalties, and final task outcomes, while retrieved content is masked during training.",
+      "page": 4,
+      "index": 6,
+      "width": 824,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09287v2/fig-007.webp",
+      "caption": "Table 5: Hyperparameter settings for RL training.",
+      "page": 19,
+      "index": 7,
+      "width": 702,
+      "height": 1106
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09287v2/fig-008.webp",
+      "caption": "Figure 4: Evaluation results of PPO vs. PiCA",
+      "page": 9,
+      "index": 8,
+      "width": 826,
+      "height": 389
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09287v2/fig-009.webp",
+      "caption": "Figure 6: this case study presents a failed trajectory with an incorrect final answer. Although the overall result is wrong, some intermediate steps still align with the golden reasoning process. PiCA assigns high positive rewards to these informative steps, while giving lower or negative rewards to redundant or misleading steps that lead to the incorrect answer.",
+      "page": 20,
+      "index": 9,
+      "width": 654,
+      "height": 471
+    }
+  ]
+}

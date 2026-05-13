@@ -1,0 +1,1775 @@
+Title: 2605.06746v1.pdf
+
+URL Source: https://arxiv.org/pdf/2605.06746v1
+
+Published Time: Mon, 11 May 2026 00:03:11 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+© 2026 [AUTHORS' NAMES]. Published under a 
+
+Creative Commons Attribution 4.0 International (CC 
+
+BY 4.0) license. 
+
+# The Causally Emergent Alignment Hypothesis: Causal Emergence Aligns with and 
+
+# Predicts Final Reward in Reinforcement Learning Agents 
+
+# Federico Pigozzi 1 and Michael Levin 1,2
+
+> 1
+
+Allen Discovery Center, Tufts University , USA 
+
+> 2
+
+Wyss Institute for Biologically Inspired Engineering , Harvard University, USA 
+
+Author for correspondence: michael.levin@allencenter.tufts.edu 
+
+Abstract 
+
+A hallmark of life on Earth is the ability of agents to exert 
+
+causal power and be drivers of subsequent events. This is key 
+
+to cognition at all scales . Causal emergence, measuring the 
+
+degree to which an agent exerts unique predictive power on its 
+
+future, is one consequence of causal power. Indeed, r ecent 
+
+discoveries have shown that biological agents, even minimal 
+
+ones, increase their causal emergence after learning new 
+
+memories . However , there is a major knowledge gap regarding 
+
+how causally emergent artificial agents are . We focused on 
+
+Reinforcement Learning (RL) of neural -network agents across 
+
+an array of environmental conditions, encompassing different 
+
+algorithms, agent architectures, and six environments arranged 
+
+on a complexity spectrum. For consistency , we computed the 
+
+causal emergence of their latent -space representations over 
+
+their lifetime s. We us ed the recently proposed  Φ𝐼𝐷  to estimate 
+
+causal emergence and tested how it related to learning 
+
+performance. Our results suggested a Causally Emergent 
+
+Alignment Hypothesis : successful agents exhibited causal 
+
+emergence that was consistently predictive of final reward 
+
+early in training and whose representational dynamics aligned 
+
+with reward improvement in most tasks. This idea suggests that 
+
+causal emergence may be a previously undisclosed axis of 
+
+reorganization of neural representations in RL agents, with the 
+
+potential to establish causa l relationships and interventions that 
+
+will lead to better RL agents. Our work also highlights the 
+
+alignment between causal emergence and learning as another 
+
+way biological and artificial creatures compare. 
+
+Submission type: Full Paper 
+
+Data/Code available a t: 
+
+https://github.com/pigozzif/PhiRL 
+
+# Introduction and Related Work 
+
+A key component of living beings is their ability to act as 
+
+causal agents: they exert causal power , the ability of a 
+
+composite system (like a living organism made of cells and 
+
+organ s) to be a driver of subsequent events  (Vernon et al. 
+
+2015) . It is a key aspect of cognition, from brainy animals 
+
+down to minimal substrates , t hat enables context -sensitive, 
+
+goal -driven behavior in ways that distinguish them from 
+
+their env ironment (Krakauer et al. 2020) .
+
+Causal emergence of an agent is one symptom of causal 
+
+power. The c ausal emergence of a system measures the 
+
+degree to which the whole is greater than the sum of the 
+
+parts  (Hoel, Albantakis, and Tononi 2013) . Consider the 
+
+conceptual analogy of an ant colony: if all the ants come 
+
+from the same colony, they’ll have a higher causal 
+
+emergence than if the ants came from different colonies ,
+
+because of their ability to coordinate through pheromone 
+
+marks and be an emergent “self” (Watson et al. 2026) .
+
+Figure 1. The schematic of our approach to computing 
+
+causal emergence alignment with the reward in RL agents. 
+
+Alignment is measured by whether causal emergence 
+
+proceeded in the direction of increasing reward or not. We 
+
+found that causal emergence had strong alignment s cores 
+
+across all tasks. 
+
+Among the different embodiments of causal emergence, 
+
+we adopted the Φ𝐼𝐷 decomposition (Mediano et al. 2025) 
+
+because it applies specifically to multivariate time series ,
+
+such as our latent -space trajectories. For a temporal system, 
+
+Φ𝐼𝐷 outputs a measure known as Φ𝑟 : expressed in natural 
+
+units, the higher it is, the more causally emergent the 
+
+system is (Rosas et al. 2020; Rosas et al. 2019) . Different 
+
+from part of the literature, we do not employ Φ𝐼𝐷 as a 
+
+hallmark of consciousness; rather, as a measure of 
+
+“selfhood” or agent integration. Neuroscience studies have 
+
+shown that it captures the reduction in “awareness” 
+
+experienced by patients (Luppi et al. 2023) .
+
+Our recent study (Pigozzi, Goldstein, and Levin 2026) 
+
+showed that Φ𝐼𝐷 captures the reaction to learning in a 
+
+minimal substrate, computational models of gene 
+
+regulatory networks: indeed, these biological networks were found to increase their causal emergence after 
+
+Pavlovian conditioning had induce d associative memories 
+
+(Biswas, Clawson, and Levin 2023) . Th is suggest ed a
+
+feedback loop between agent learning and causal 
+
+emergence. 
+
+This raises the question: can the same phenomenon occur 
+
+in artificial agents? The field of diverse intelligence seeks 
+
+to adopt tools from neuroscience and the behavioral 
+
+sciences (conventionally used for brainy animals) in 
+
+unconventional contexts, envisioning a continuum of 
+
+cognitive abilities from active matter to conventionally 
+
+intelligent agents  (McMillen and Levin 2024) . Artificial 
+
+intelligence s also sit on this continuum. Like cells or 
+
+animals, they process information, learn, and pursue goals, 
+
+potentially spanning the entire spectrum  (Levin 2019) .
+
+Reinforcement Learning (RL) agents are one notable class 
+
+in this sense, since they learn from experiencing and 
+
+interacting with an environment. 
+
+Previous research at the intersection of RL and causal 
+
+emergence found that integrated information (measured 
+
+with Tononi’s Φ (Tononi et al. 2016) ) correlates with 
+
+fitness  (Edlund et al. 2011) , but limited their experiments 
+
+to one task, making it hard to draw generalizable 
+
+conclusions. Recent studies have also found that 
+
+empowerment (a re lated but distinct measure of agent 
+
+causal power ) (Klyubin, Polani, and Nehaniv 2005) 
+
+improves the efficiency of pretraining neural cellular 
+
+automata  (Grasso and Bongard 2023) . Similar results have 
+
+been found with an inf ormation bottleneck perspective (He 
+
+et al. 2024) . To th e best of our knowledge , there has been 
+
+no extensive, definitive study across multiple conditions .
+
+We trained RL agents across a wide range of conditions, 
+
+encompassing two RL algorithms, two agent architectures, 
+
+and six environments distributed across a complexity 
+
+spectrum (from Pendulum to Crafter). In this way, we 
+
+ensured that the observe d phenomena were robust to the 
+
+experimental setup and reflected general properties of 
+
+learning. The latent space of the neural network policy was 
+
+used as a substrate because it is consistent across all 
+
+environments and provides a sufficiently rich 
+
+represen tation. If we go back to the ant colony analogy, the 
+
+“parts” are the dimensions of the latent space (hidden layer 
+
+neurons), while the “whole” is the latent space 
+
+representation itself. We present a schematic of our 
+
+pipeline in Figure 1. 
+
+Our analyses showed that causal emergence strongly 
+
+align ed with the long -term (though not short -term) reward, 
+
+suggesting that it provided a slow directional signal to 
+
+behavior improvement . Chiefly, causal emergence from    
+
+> 1Williams, P.L. and Beer, R.D., 2010. Nonnegative
+> decomposition of multivariate information. arXiv preprint
+> arXiv:1004.2515 .
+
+early on in training predicted final reward better than a set 
+
+of standard representational metrics, meaning that it was 
+
+also an early indicator of performance. Taken together, we 
+
+frame these phenomena as the Causal Emergence 
+
+Alignment Hypothesis : successful agents are those with 
+
+causally emergent representations that reorganize in 
+
+directions that, in most tasks, align with reward and are 
+
+always predictive of final learning outcomes. 
+
+In the future, we envision these findings as a basis for 
+
+revealing causal emergence as a new inter ventional 
+
+approach for RL agents. Our results also suggest parallels 
+
+between biological and artificial systems, thus highlighting 
+
+how in silico experimentation complement s the study of in 
+
+vivo systems. 
+
+# Materials and Methods 
+
+We present the methods relevant to this study. 
+
+## Causal Emergence 
+
+Information Decomposition 
+
+Information theory, originally introduced to study the 
+
+transmission capacity of communication channels, has 
+
+emerged as a principled language for evaluat ing 
+
+dependencies in complex systems, including artificial and 
+
+biological systems . The basic object of study is Shannon’s 
+
+entropy: 
+
+𝐻 (𝑋 ) = −Σ𝑥 𝑝 (𝑥 ) ln 𝑝 (𝑥 )
+
+Where the summation is over the support of 𝑋 , and it 
+
+quantifies the amount of uncertainty about a random 
+
+va riable 𝑋 . We can then define , for a process consisting of 
+
+a “source” variable 𝑋 and a “target” variable 𝑌 , the mutual 
+
+information as the uncertainty that is left on 𝑌 after 
+
+observing 𝑋 , i.e., how much information observing 𝑋 
+
+discloses about 𝑌 .
+
+But w hat if there is more than one source variable, as in 
+
+complex systems like RL neural network policies? We 
+
+must then consider all the different directions in which 
+
+information can flow in a system . Intuitively, let us 
+
+consider the c ase of stereoscopic vision in humans: with 
+
+one eye open, we perceive a unique set of visual features 
+
+for each eye , a s well as redundant features captured by both 
+
+eyes . Depth perception, which can only be captured if both 
+
+eyes are open simultaneously, corresponds instead to 
+
+synergistic information. The seminal work on Partial 
+
+Information Decomposition (PID 1) provides a framework 
+
+for partitioning mutual information into these three 
+
+information atoms (redundant, unique, and synergistic). Causal Emergence 
+
+Our latent space trajectories are multivariate, consisting of 
+
+the activations of several neurons. We relied on the recent 
+
+framework of Integrated Information Decomposition Φ𝐼𝐷 ,
+
+which is the PID’s extension to multivariate data (Mediano 
+
+et al. 2025) . According to general assumptions outlined in 
+
+(Rosas et al. 2020) , a system’s capacity to display 
+
+emergence depends on how much information the whole 
+
+provides about the future evolution that cannot be inferred 
+
+by any subse t of parts. The Φ𝐼𝐷 formal apparatus then tells 
+
+us that we can decompose this capacity as the sum of two 
+
+terms: 
+
+1) Downward causation : the amount of information that 
+
+the whole predicts about the future of the single 
+
+components. 
+
+2) Synergy : the amount of information that the whole 
+
+predicts about the future of the whole. 
+
+We illustrate the definition in Figure 2 for a generic system 
+
+made of 𝑛 parts. This definition previously appeared to 
+
+quantify the reduction in emergence capacity between 
+
+healthy and brain -injured patients (Luppi et al. 2023) and 
+
+reaction to learning in simulated gene regulatory networks 
+
+(Pigozzi, Goldstein, and Levin 2026) ; we chose it as our 
+
+measure of causal emergence because it accounts for all 
+
+types of influences a system can have on its future. 
+
+Figure 2. Causal emergence is the sum of the amount of 
+
+information that the whole predicts about the future of the 
+
+single components (synergy) and the amount of 
+
+information that the whole predicts about the future of the 
+
+whole (causal decoupling) .
+
+Other m easures of agent integration exist, such as total 
+
+correlation and co -information. But, they are instantaneous 
+
+measures; they fail to capture the temporal and causal 
+
+aspects of information dependencies up to and including all 
+
+future time steps, a crucial aspect for dynamical systems 
+
+that evolve over time (Mediano et al. 2025) , such as our 
+
+latent -space trajectories .
+
+Gaussian Information  Theory 
+
+Information theory was originally defined for discrete 
+
+random variables , but our representations , being neural 
+
+network activations, are continuous -valued . Hence, w e
+
+used the continuous generalization of Shannon’s entropy, 
+
+the differential entropy: 
+
+𝐻 (𝑋 ) = ∫𝑝 (𝑥 )
+
+> 𝑥
+
+ln 𝑝 (𝑥 ) 𝑑𝑥 
+
+This integral is general ly hard to compute because it 
+
+requires estimating 𝑝 (𝑥 ). But if we assume that 𝑝 (𝑥 )
+
+follows a Gaussian distribution , we can leverage closed -
+
+form estimators for the entropy and, as a result, all the other 
+
+information measures (Barrett 2015) . Indeed, the bivariate 
+
+mutual information (in natural units) becomes: 
+
+𝐼 (𝑋 , 𝑌 ) = − (1 − ρ2)
+
+2
+
+Where ρ is the Pearson correlation coefficient between 𝑋 
+
+and 𝑌 .
+
+Most practical computations of causal emergence converge 
+
+on the same simple form for Gaussian continuous variables 
+
+that we adopted here. We first computed the lag -1 mutual 
+
+information matrix for al l node pair s in the system using 
+
+the equation above (Blackiston et al. 2025) . Since we 
+
+cannot handle systems with many parts du e to the 
+
+combinatori al complexity (Kitazono, Kanai, and Oizumi 
+
+2018) , we reduced the dimensionality using the minimum -
+
+information bipartitio n (Toker and Sommer 2019) . Th is 
+
+bipartition bisects the system into two components by 
+
+approximating the bisection through the Fiedler vector (the 
+
+eigenvector of the graph Laplacian corresponding to the 
+
+smallest non -zero eigenvalue). After bisecting the graph 
+
+with the Fiedler vec tor, we averaged within each 
+
+component and compared the dynamics of the two parts to 
+
+the whole. In essence, we sliced a watermelon along its 
+
+longest axis and measured how well the average number of 
+
+seeds in one half predicted the average number of seeds in 
+
+the other half . Finally, we solved a linear system of 
+
+equations relating the mutual information to the atoms in 
+
+which the Φ𝐼𝐷 is decomposed , including the downward 
+
+causation and causal decoupling; their sum is our measure 
+
+of causal emergence .
+
+## Reinforcement Learning and 𝚽 𝒓 substrate 
+
+RL  (Sutton and Barto 2018)  provides a framework for 
+
+train ing an agent to solve a task through trial and error, akin 
+
+to how animals learn in the real world (Neftci and 
+
+Averbeck 2019) . Agents are neural network policies that 
+
+receive the state of the world as input and output the agent’s 
+
+action for that time step. A reward signal from the 
+
+environment measures the quality of the action taken and 
+
+is used to update the policy’s weights and biases, enabling 
+
+the agent to successfully learn a task. We adopted the standard agent architecture from the 
+
+literature. At each time step 𝑡 , a feature extractor 𝑓 maps 
+
+the input state 𝑠 𝑡 to a latent representation 𝑓 (𝑠 𝑡 ) = 𝑧 𝑡 ∈
+
+ℝ𝕕 latent . 𝑧 𝑡 is then fed to a policy head π to obtain the action 
+
+𝑎 𝑡 = 𝜋 (𝑧 𝑡 ). We used stable -baselines3 as our RL 
+
+framework (Raffin et al. 2021) .
+
+Causal emergence computes the agent integration within a 
+
+system, but what counts as the system in our case? We 
+
+want ed a system representation that is: 
+
+• Low -dimensional enough to make the Φ𝐼𝐷 
+
+computation trac table and not noisy; 
+
+• Dynamically rich enough to show meaningful 
+
+variation; 
+
+• Consistent across environments and architectures. 
+
+With these desiderata in mind, we found the latent 𝑧 𝑡 to be 
+
+the best candidate. Indeed, a fter preliminary experiments 
+
+and relying on canonical values in the literature, we found 
+
+𝑑 latent = 64 to provide sufficient representational capacity 
+
+without making the Φ𝐼𝐷 estimation noisy, while remaining 
+
+consistent across all experimental conditions be cause of 
+
+the architecture definition (the action distribution, for 
+
+example, changes according to the environment) .
+
+In the following, we computed causal emergence on the 
+
+latent representation trajectories 𝑍 = [𝑧 0, 𝑧 1, … , 𝑧 𝑇 ] for an 
+
+agent episode that lasted 𝑇 time steps (before being 
+
+truncated or terminated according to the environment’s 
+
+meaning ). 
+
+## Data Preprocessing 
+
+Gaussian Information Theory assumes that the variables 
+
+are jointly Gaussian. Since this is hardly ever true for 
+
+neural activations, we applied a copula -based 
+
+Gaussianization (rank -normal transform) to ensure 
+
+approximate marginal normality. After this transformation, 
+
+only a minority of all units (28.53%) reject ed the normality 
+
+hypothesis (D’Agostino K 2 test, p<0.05) . Subsequently, we 
+
+z-scored the data to standardize it (Blackiston et al. 2025; 
+
+Pigozzi, Goldstein, and Levin 2026) .
+
+## Environments 
+
+We ran all the experimental combinations across six 
+
+OpenAI Gymnasium 2 environments (except 
+
+CrafterReward, which comes in its own library 3), as shown 
+
+in Figure 3. Our environments spanned a complexity 
+
+spectrum, from least to most complex: 
+
+• Pendulum -v1 : The agent applies the torque to 
+
+keep the pole in an upright position. It is a classic 
+
+task with minimal state and action dimensions.  
+
+> 2https://github.com/farama -foundation/gymnasium
+
+• Lunar -Lander -v2 : The agent turns the engines on 
+
+or off to land as close as possible to a landing pad. 
+
+It is a more complex control task, with more 
+
+actions and states. 
+
+• BipedalWalker -v4 : The agent control s a bipedal 
+
+2D robot to walk upright as far as possible. It has 
+
+a high -dimensional state space. 
+
+• Walker2D -v4 : The agent controls a bipedal r obot 
+
+3D consisting of seven body parts. It is embodied, 
+
+with continuous states, actions, and non -trivial 
+
+body dynamics. 
+
+• Ant -v4: The agent controls a four -legged 3D ant 
+
+consisting of nine body parts. It is embodied, with 
+
+continuous states, actions, and non -trivial body 
+
+dynamics. 
+
+• CrafterReward -v1 : In the 2D version of 
+
+Minecraft, the agent must survive as long as 
+
+possible while gathering resources and fending 
+
+off enemies. It requires long -term planning and 
+
+exploration skills. 
+
+Figure 3: The six environments . From top to bottom, left to 
+
+right : Pendulum, LunarLander, BipedalWalker, 
+
+Walker2D, Ant, and CrafterReward. 
+
+## Architectures and Algorithms 
+
+To experiment with a broad range of conditions, we tested 
+
+two architectures and two RL algorithms across all 
+
+environments. As architectures, we used a f eed -forward 
+
+(MLP) and a r ecurrent neural network (GRU) because they 
+
+impose different inductive biases on representations (static 
+
+vs. temporally dependent), allowing us to isolate the effect 
+
+of architectural ind uctive biases (memory vs. non -
+
+memory). 
+
+We implemented the MLP using the default stable -
+
+baselines3 policy architecture. For the sake of fairness, we 
+
+implemented the GRU variant using the same architecture 
+
+as the MLP, but with a GRU block added on top of the 
+
+feature extractor . This resulted in slightly different 
+
+parameter counts for the two variants, but our focus was 
+
+how causal emergence behaved across different  
+
+> 3https://github.com/danijar/crafter
+
+architectural classes (memory vs. memoryless) rather than 
+
+performance or capacity equivalence. We also remark that 
+
+for CrafterReward, whose state space consists of images, 
+
+we replaced the feed -forward feature extractor with the 
+
+same convolutional backbone used in (Mnih et al. 2015) ,
+
+as is usually do ne for such environments . For all 
+
+architectures, we coded their blocks in PyTorch using the 
+
+library’s default parameters. 
+
+As algorithms, we employed Proximal Policy Optimization 
+
+(PPO 4) and Soft Actor -Critic (SAC ) (Haarnoja et al. 2018) ,
+
+both of which are among the most established methods 
+
+from two significantly different families (on -policy vs. off -
+
+policy; deterministic vs. entropy -regularized). In this way ,
+
+we verified if the observed phenomena were robust to the 
+
+specific algorithm. We remark that for CrafterReward and 
+
+LunarLander, which have discrete rather than continuous 
+
+actions, we replaced SAC with Deep Q -Network (DQN) 
+
+(Mnih et al. 2015) , the established off -policy method for 
+
+these spaces. 
+
+## Experimental Parameters 
+
+For each environment × algorithm × architecture 
+
+combinatio n, we performed 10 runs with different random 
+
+seeds for reproducibility. Every 5 × 10 3 time steps, we 
+
+froze the policy’s weights and biases and checkpointed its 
+
+activations across 10 test episodes (with different random 
+
+seeds) to reduce noise and chiefly, ensure statistically 
+
+reliable estimates of causal emergence . In total, this yielded 
+
+6 × 2 × 2 × 10 × 21 × 10 = 50,400 episodes. 
+
+For each episode, we computed the causal emergence 
+
+trajectory over the simulation’s history of latent -space 
+
+activations and aggregated it with the median to have a 
+
+robust summary, as previously done in (Pigozzi, Goldstein, 
+
+and Levin 2026) .
+
+Each run lasted 10 6 environment steps; we found this 
+
+number sufficient for most runs to solve the tasks and 
+
+plateau. All other parameters were kept at their default 
+
+stable -baselines3 values to isolate the representation effect 
+
+from tuning and report the results for off -the -shelf, widely 
+
+used settings. 
+
+We coded all experiments and analys es in Python and 
+
+made them publicly available at 
+
+https://github.com/pigozzif/PhiRL .
+
+# Results 
+
+To understand how causal emergence reacted to lear ning, 
+
+we answered the following Research Questions (RQ):    
+
+> 4Schulman, J., Wolski, F., Dhariwal, P., Radford, A. and
+> Klimov, O., 2017. Proximal policy optimization
+> algorithms. arXiv preprint arXiv:1707.06347 .
+
+• RQ0: Does causal emergence capture novel 
+
+information? In other words, does it overlap with 
+
+known representation metrics? 
+
+• RQ1: Does causal mergence align and move with 
+
+the reward? 
+
+• RQ 2: Does causal emergence predict learning 
+
+outcomes? 
+
+This transition gradually deepened our task from 
+
+descriptive to functional , and then to predictive. 
+
+## RQ0: Did causal emergence correlate with known 
+
+## representation metrics? 
+
+To ensure our causal emergence approach captured a novel 
+
+axis of representation shift , we tested whether it was 
+
+uncorrelated with other established neural representation 
+
+metrics. Our metrics were standard measures from 
+
+information theory and dynamical syst ems: entropy, 
+
+Shannon mutual information, autocorrelation, effective 
+
+dimension, and magnitude of the latent representations. 
+
+For each run of every experimental combination, we 
+
+computed Spearman’s ρ rho between each metric and 
+
+causal emergence . We reported the results in Figure 4 as 
+
+the % of significant (p<0.05) runs for each experimental 
+
+combination. As suggested by the deep purple color of the 
+
+array, no environment -metric pair had a significant fraction 
+
+higher than 6%, with the vast majority hovering around 
+
+0%. These numbers mean t that causal emergence did not 
+
+merely co -fluctuate with other underlying variables. 
+
+Contrarily, it captured a novel axi s, justifying our next 
+
+experiments. 
+
+Figure 4: % of runs that had a significant (p<0.05) 
+
+Spearman’s ρ between standard neural representation 
+
+metrics (x -axis labels) and causal emergence , for each environment (y -axis). Deep purple dominates the array, 
+
+with a maximum value of only 6% for 
+
+Autocorrelation+Pendu lum, meaning that causal 
+
+emergence did not generally correlate with established 
+
+representation metrics of neural latents. 
+
+## RQ1: Did causal emergence align with the 
+
+## reward? 
+
+Having established that causal emergence did not overlap 
+
+with existing representation metrics, we investigated 
+
+whether its changes were oriented toward improving 
+
+performance. Concretely, we computed the reward 
+
+alignment of a trajectory τ ∈ ℝ𝑇 (e.g., causal emergence or 
+
+other representation metric s) and reward signal 𝑟 ∈ ℝ𝑇 ,
+
+where 𝑇 is the length of the RL episode, as follows: 
+
+1) Embed the trajectory using PCA to have a low -
+
+dimensional embedding 𝑒 ∈ ℝ𝑚 ;
+
+2) Fit a linear model with coefficients 𝑤 ∈ ℝ𝑇 to 
+
+predict 𝑟 from 𝑒 ;
+
+3) Interpret the coefficients 𝑤 as a reward gradient 
+
+in the embedding space; 
+
+4) Compute the cosine similarity between 𝑤 and the 
+
+global direction ( i.e., end minus start, for global 
+
+reward alignment) or the mean of the 
+
+instantaneous directions (for local reward 
+
+alignment): 
+
+𝐺𝑙𝑜𝑏𝑎𝑙 𝑅𝑒𝑤𝑎𝑟𝑑 𝐴𝑙𝑖𝑔𝑛𝑚𝑒𝑛𝑡 
+
+= ⟨𝑤 , 𝑒 𝑇 − 𝑒 0⟩
+
+||𝑤 ||||𝑒 𝑇 − 𝑒 0||
+
+𝐿𝑜𝑐𝑎𝑙 𝑅𝑒𝑤𝑎𝑟𝑑 𝐴𝑙𝑖𝑔𝑛𝑚𝑒𝑛𝑡 
+
+= 1
+
+(𝑇 − 1) ∑ ⟨𝑤 , 𝑒 𝑡 +1 − 𝑒 𝑡 ⟩
+
+||𝑤 ||||𝑒 𝑡 +1 − 𝑒 𝑡 ||
+
+> 𝑇 −1
+> 𝑡 =0
+
+Both scores took values in [−1,1]. A high alignment mean t
+
+that the representation metric under consideration 
+
+proceed ed in the direction of increasing reward , linking 
+
+representational dynamics to functional improvement. 
+
+Reward alignment measure d directional consistency 
+
+between representational change and performa nce 
+
+improvement. Other measures, such as statistical 
+
+correlation s and regression coefficients, capture 
+
+association but not the trajectory over time . Similarly, 
+
+distance metrics ignore whether the change is useful for 
+
+reward. In other words, reward alignment evaluate d if the 
+
+metric’s path was effectively goal -directed and linked to 
+
+behavior. 
+
+To embed a causal emergence trajectory , we described it 
+
+with seven “behavior” descriptors that were found to be the 
+
+most expressive and compact at the same time (Pigozzi, 
+
+Goldstein, and Levin 2026) :
+
+1) Standard deviation : a measure of dispersion. 
+
+2)  Trend : the slope of the least squares fit of the 
+
+trajectory. A positive slope  indicate d an 
+
+increasing trend, while a negative slope indicate d
+
+a decreasing trend. 
+
+3) Monotonicity : the Kendall’s tau coefficient 
+
+between the trajectory and the sequence of its time 
+
+stamps. Kendall’s tau is a standard statistic to 
+
+measure ordinal association between two 
+
+quantities, and in our case, it was the highest for a 
+
+perfectly monotonically increasing trajectory, and 
+
+the lowest for a perfectly monotonically 
+
+decreasing one, with values around zero 
+
+corresponding to the trajectory fluctuating 
+
+independently of the t ime axis. 
+
+4) Flatness : how flat the trajectory was and d id not 
+
+locally deviate from the mean. We divided the 
+
+trajectory into consecutive intervals and 
+
+approximated it with the mean of each interval. 
+
+We computed flatness as the R-squared 
+
+coefficient of this ap proximation: the higher the 
+
+coefficient, the better the fit of the local means, 
+
+indicating that the trajectory was locally flat 
+
+(though jumps may have occurred at the interval 
+
+boundaries). After preliminary experiments, we 
+
+found an interval size of 100 to be sufficient to 
+
+capture the intuition behind a trajectory's flatness. 
+
+5) Number of peaks : the number of local minima and 
+
+maxima of the trajectory. 
+
+6) Average distance among peaks : the average 
+
+distance among all the peaks from 4) (or 0 if there 
+
+were none). 
+
+7) Average difference among peaks : the average 
+
+difference in causal emergence value of the peaks 
+
+from 4) (or 0 if there were none). 
+
+8) Range : the difference in causal emerge nce value 
+
+between the maximum and the minimum peaks. 
+
+For step 1), we tested 𝑚 = 2,3, … ,8 for the PCA 
+
+embedding dimension and found the results to be robust; in 
+
+the following, we reported them with 𝑚 = 2 for simplicity. 
+
+Before fitting the linear model, we residualized both the 
+
+embedding and the reward with respect to time by 
+
+regressing each on time (i.e., time step index) and using the 
+
+residuals for subsequent analyses . In this way, we excluded 
+
+the confounding that both may have been trivially drifting 
+
+toge ther over time. We found the results without time 
+
+residualization to be comparable to those with time 
+
+residualization, demonstrating their robustness; in the 
+
+following, we repor ted results with time residualization for 
+
+completeness. 
+
+Table 1 shows the globa l and local alignment scores for 
+
+causal emergence . The global alignment scores were of 
+
+large magnitude, indicating that causal emergence aligned 
+
+strongly with the same (or opposite) direction as reward 
+
+improvement . Also, the sign was positive in a majority (5/6) of environments , meaning the same direction, 
+
+whereas negative in CrafterReward, which may be linked 
+
+to more time spent on early exploration for that task .
+
+Contrarily, the local alignment scores were approximately 
+
+zero. This mean t that causal emergen ce captured the 
+
+agent's long -term “representation shift” or behavioral 
+
+adaptation, but not the step -by -step improvements in
+
+reward , which were noisy or cancel ed each other out. 
+
+Global Reward 
+
+Alignment 
+
+Local Reward 
+
+Alignment 
+
+Pendulum  0.99  0.00 
+
+LunarLander  1.00  0.00 
+
+BipedalWalker  0.8 6 0.00 
+
+Walker2D  0. 35  0.03 
+
+Ant  0.4 9 0.02 
+
+CrafterR eward  -0.9 5 0.00 
+
+Table 1: global and local reward alignment scores for 
+
+causal emergence , across all six environments. Reward 
+
+alignment measure d the degree to which the trajectory in 
+
+embedding space aligned with the direction that increase d
+
+reward; global was for the whole trajectory, while local 
+
+was the mean of the instantaneous angles. Global 
+
+alignment was strong in magnitude, while the local 
+
+al ignment was negligible. While short -term changes (local) 
+
+were unrelated to reward, long -term changes (global) were 
+
+strongly aligned with reward, indicating a slow 
+
+representational drift relating to learning .
+
+We found the global alignment scores of causal emergence 
+
+to be significantly greater than those obtained with random 
+
+projections (Mann -Whitney U test, p<0.05). At the same 
+
+time, the scores were not significantly different from th ose 
+
+of the standard representational metrics for RQ0. It mean t
+
+that causal emergence did not capture a quantitatively 
+
+different direction but instead summarized information 
+
+scattered across many (weaker and heterogeneous) signals. 
+
+We verified whether the reward alignment changed with 
+
+the architecture and the algorithm. We found no significant 
+
+differences in scores between MLP and GRU, and between 
+
+PPO and SAC/DQN, thus excluding effects related to the 
+
+experimental configuration. 
+
+## RQ 2: Did causal emergence predict the final 
+
+## reward performance, and how d id it compare to 
+
+## the baselines? 
+
+Correlation alone does not prove if a measure is relevant 
+
+for learning. Hence, we move d to a predictive setting, 
+
+asking whether early measurements of these predictors 
+
+foreshadow ed final performance. This reframe d the 
+
+question to understand if it capture d information that 
+
+matter ed for learning outcomes. 
+
+To answer this question, we trained a machine learning 
+
+model to predict the reward at the last time step (taken as 
+
+the median over the last 10 test episodes ), using as input 
+
+the representation metrics from the first 2 × 10 5 time steps 
+
+(i.e., the first 20% of each run) . As a machine learning 
+
+model, we used random forest, since it is not sensitive to 
+
+hyperparameter choices, but we found other methods 
+
+(linear reg ression and MLPs) to achieve qualitatively 
+
+similar results. We tested causal emergence as input 
+
+against the representation metrics from RQ0 (as baselines ).
+
+Prediction scores were obtained using 5-fold cross -
+
+validation. 
+
+Figure 5 shows the results, one plot per environment, with 
+
+Spearman’s  𝜌  between the ground -truth and the predicted 
+
+values (the higher, the better the prediction performance). 
+
+The baseline boxes report the performance for the best 
+
+predictor among the baselines. We found the differences 
+
+betwee n causal emergence and the baselines to be 
+
+statistically significant acro ss all environments (Mann -
+
+Whitney U test , p<0.05) . It meant that , across all 
+
+considered environments , causal emergence was a better 
+
+predictor of the final learning outcome than established 
+
+representation metrics. 
+
+Figure 5: Prediction performance of a random forest 
+
+regressor, measured as Spearman’s 𝜌 between the ground -
+
+truth and the predicted values. For each run, the regressor 
+
+was trained to predict the reward at the final time step, 
+
+using the metric on the x-axis (causal emergence 
+
+descriptors or baseline representation metrics) as input. For 
+
+the bas eline boxes, we reported the best performance 
+
+across all metrics. In all environments, causal emergence 
+
+achieved superior prediction performance. 
+
+To push our analysis one step further, we repeated the 
+
+experiment, using all baselines together as predictors for 
+
+the same model ( rather than one at a time and reporting the 
+
+best ), and then repeated the experiment with the addi tion 
+
+of causal emergence descriptors . We reported the results in 
+
+Figure 6, using the same syntax as Figure 5.
+
+The plots and the significanc e tests (with Mann -
+
+Whitney) revealed that this time, causal emergence was 
+
+worse in 4/6 environments, the same in 1/6, and better in 
+
+1/6. Con verse ly, adding causal emergence to the baselines did not worsen performance in 3/6 environments and 
+
+improved it in the other 3 .
+
+Figure 6: Prediction performance of a random forest 
+
+regressor, measured as Spearman’s 𝜌 between the ground -
+
+truth and the predicted values. For each run, the regressor 
+
+was tra ined to predict the reward at the final time step ,
+
+given the measure on the x-axis (causal emergence 
+
+descriptors , all the baselines , or both ) as input. Causal 
+
+emergence alone did not outperform the combined baseline 
+
+metrics. But adding it to them significantly increased 
+
+performance in 3/6 environments and did not worsen 
+
+performance in the other 3/6. 
+
+# Discussion 
+
+Causal emergence trajectories had very strong global but 
+
+near -zero local reward alignment across all environments. 
+
+Reward alignment captured the degree to which the 
+
+changes in the representation metric aligned with the 
+
+direction that improved learning. Thi s suggest ed that 
+
+learning induced a slow, long -term representational 
+
+reorganization that was captured by causal emergence, 
+
+whereas local changes were noisy or canceled out. 
+
+Complementing this result, we found that causal 
+
+emergence was a better predictor of final learning 
+
+performance than standard representational metrics like 
+
+entropy, Shannon mutual information, autocorrelation, 
+
+effective dimension, and magnitude. This meant that the 
+
+captured aspects of representation reorganization were 
+
+functionally releva nt for downstream learning, beyond 
+
+standard metrics. Together, these results suggested that 
+
+causal emergence provided a directional signal and an early 
+
+indicator of final performance. 
+
+Notably, causal emergence was a better predictor when the 
+
+baselines were considered separately. This suggested that 
+
+causal emergence was not “the best predictor of all,” but 
+
+rather a low -dimensional summary of several 
+
+representational metrics; in other words, it did not 
+
+redundantly overlap with them but instead compresse d
+
+distributed, weaker signals into a single geometric object ,
+
+in line with recent discoveries for manifold learning 
+
+(Varley et al. 2025) .
+
+We conclude d that successful RL agents have causally 
+
+emergent representations that reorganize in directions th at 
+
+align with reward and are always predictive of final 
+
+learning outcomes. This is consistent with a prior proposal 
+
+in which an agent 's border is determined by the size of its 
+
+goals ; like cells adapting to reach homeostasis, RL agents 
+
+reach a preferred state and e stablish selves, which is what 
+
+causal emergence may be capturing (Levin 2019) . But f or 
+
+the moment, our results cannot establish causality or 
+
+whether causal emergence drives learning progress .
+
+In the future, we will investigate whether predicting 
+
+learning also implies causality; in other words, if 
+
+intervention in the causal emergence space affect s learning 
+
+in a directed manner. If this held true, causal emergence 
+
+would potentially spur advances in RL algorithms. We also 
+
+look forward to testing not only the causal emergence of an 
+
+agent, but also the interactions between the agent and its 
+
+environment, possibly drawing on the active inference 
+
+(Fields, Goldst ein, and Sandved -Smith 2024) , curiosity 
+
+search (Gottlieb et al. 2013) , and skill discovery 
+
+communities (Etcheverry et al. 2025) .
+
+In addition to these experiments, we will address the main 
+
+limitation of this work: that any conclusions we draw are 
+
+limited by the array of experimental conditions we 
+
+considered. We will extend our analyses to more complex 
+
+architectures, like world models (Ha and Schmidhuber 
+
+2018; Gao et al. 2025) . As for the environments, we will 
+
+also investigate more complex embodied (Savva et al. 
+
+2019) and procedurally generated tasks (Mohanty et al. 
+
+2020) . The latter will allow us to test the intriguing 
+
+hypothesis that causal emergence predicts , or is causal ly 
+
+related to, generalization to novel environments, an all -
+
+important topic in RL (Ghosh et al. 2021) . Finally, it will 
+
+be intriguing to link our findings to the broader theory of 
+
+representations in deep learning, such as the information 
+
+bottleneck principle (Tishby and Zaslavsky 2015) .
+
+When considered in the conte xt of the biological literature, 
+
+our results demonstrate a new parallel between biological 
+
+and artificial creatures. Indeed, biological substrates such 
+
+as gene regulatory networks have been found to exhibit 
+
+similar causal emergence in response to learning (Pigozzi, 
+
+Goldstein, and Levin 2026) . To the extent that significant 
+
+symmetries link all agents, regardless of their composition, 
+
+origin story, scale, or problem space (Levin 2022; Clawson 
+
+and Levin 2023; Tok, Powell, and Guellaï 2025) , studies 
+
+using tools from computational neu roscience in synthetic 
+
+models are poised to advance the field s of diverse 
+
+intelligence, AI, cognitive science, evolutionary biology, 
+
+and engineering. 
+
+# Acknowledgements 
+
+We thank Patrick McMillen for the ant colony analogy to 
+
+explain causal emergence , and Astonishing Labs for their support via a sponsored research agreement. 
+
+# References 
+
+Barrett, A. B. 2015. 'Exploration of synergistic and redundant 
+
+information sharing in static and dynamical Gaussian 
+
+systems', Physical Review E , 91. 
+
+Biswas, S., W. Clawson, and M. Levin. 2023. 'Learning in 
+
+Transcriptional Network Models: Computational 
+
+Disc overy of Pathway -Level Memory and Effective 
+
+Interventions', International Journal of Molecular 
+
+Sciences , 24. 
+
+Blackiston, D., H. Dromiack, C. Grasso, T. F. Varley, D. G. 
+
+Moore, K. K. Srinivasan, O. Sporns, J. Bongard, M. 
+
+Levin, and S. Walker. 2025. 'Reveali ng non -trivial 
+
+information structures in aneural biological tissues via 
+
+functional connectivity', Plos Computational Biology ,
+
+21. 
+
+Clawson, W. P., and M. Levin. 2023. 'Endless forms most 
+
+beautiful 2.0: teleonomy and the bioengineering of 
+
+chimaeric and synth etic organisms', Biological Journal 
+
+of the Linnean Society , 139: 457 -86. 
+
+Edlund, J. A., N. Chaumont, A. Hintze, C. Koch, G. Tononi, and 
+
+C. Adami. 2011. 'Integrated Information Increases with 
+
+Fitness in the Evolution of Animats', Plos 
+
+Computational Biology , 7. 
+
+Etcheverry, M., C. Moulin -Frier, P. Y. Oudeyer, and M. Levin. 
+
+2025. 'AI -driven automated discovery tools reveal 
+
+diverse behavioral competencies of biological 
+
+networks', Elife , 13. 
+
+Fields, C., A. Goldstein, and L. Sandved -Smith. 2024. 'Making 
+
+the Thermo dynamic Cost of Active Inference Explicit', 
+
+Entropy , 26. 
+
+Gao, H. C., T. R. Xu, T. R. Zhang, Y. Q. Guo, C. J. Zhao, J. S. 
+
+Ren, Y. Z. Jiang, S. Q. Guo, and F. Chen. 2025. 'Causal 
+
+dreamer for partially observable model -based 
+
+reinforcement learning', Neurocomputing , 652. 
+
+Ghosh, D., J. Rahme, A. Kumar, A. Zhang, R. P. Adams, and S. 
+
+Levine. 2021. 'Why Generalization in RL is Difficult: 
+
+Epistemic POMDPs and Implicit Partial Observability', 
+
+Advances in Neural Information Processing Systems 34 
+
+(Neurips 2021 ).
+
+Gottlieb, J., P. Y. Oudeyer, M. Lopes, and A. Baranes. 2013. 
+
+'Information -seeking, curiosity, and attention: 
+
+computational and neural mechanisms', Trends in 
+
+Cognitive Sciences , 17: 585 -93. 
+
+Grasso, C., and J. Bongard. 2023. 'Selection for short -term 
+
+empo werment accelerates the evolution of homeostatic 
+
+neural cellular automata', Proceedings of the 2023 
+
+Genetic and Evolutionary Computation Conference, 
+
+Gecco 2023 : 147 -55. 
+
+Ha, D., and J. Schmidhuber. 2018. 'Recurrent World Models 
+
+Facilitate Policy Evolution', Advances in Neural 
+
+Information Processing Systems 31 (Nips 2018) , 31. 
+
+Haarnoja, T., A. Zhou, P. Abbeel, and S. Levine. 2018. 'Soft 
+
+Actor -Critic: Off -Policy Maximum Entropy Deep 
+
+Reinforcement Learning with a Stochastic Actor', 
+
+International Conference on M achine Learning, Vol 
+
+80 , 80. 
+
+He, H. R., P. L. Wu, C. J. Bai, H. Lai, L. X. Wang, L. Pan, X. L. 
+
+Hu, and W. N. Zhang. 2024. 'Bridging the Sim -to -Real 
+
+Gap from the Information Bottleneck Perspective', 
+
+Conference on Robot Learning , 270. 
+
+Hoel, E. P., L. Albanta kis, and G. Tononi. 2013. 'Quantifying 
+
+causal emergence shows that macro can beat micro', 
+
+Proceedings of the National Academy of Sciences of the 
+
+United States of America , 110: 19790 -95. 
+
+Kitazono, J., R. Kanai, and M. Oizumi. 2018. 'Efficient 
+
+Algorithms for Searching the Minimum Information 
+
+Partition in Integrated Information Theory', Entropy ,
+
+20. 
+
+Klyubin, A. S., D. Polani, and C. L. Nehaniv. 2005. 
+
+'Empowerment: A universal agent -centric measure of 
+
+control', 2005 Ieee Congress on Evolutionary 
+
+Computation, Vo ls 1 -3, Proceedings : 128 -35. 
+
+Krakauer, D., N. Bertschinger, E. Olbrich, J. C. Flack, and N. Ay. 
+
+2020. 'The information theory of individuality', Theory 
+
+in Biosciences , 139: 209 -23. 
+
+Levin, M. 2019. 'The Computational Boundary of a "Self": 
+
+Developmental Bioe lectricity Drives Multicellularity 
+
+and Scale -Free Cognition', Frontiers in Psychology , 10. 
+
+Levin, M . 2022. 'Technological Approach to Mind Everywhere: 
+
+An Experimentally -Grounded Framework for 
+
+Understanding Diverse Bodies and Minds', Frontiers in 
+
+Systems Ne uroscience , 16. 
+
+Luppi, A. I., P. A. M. Mediano, F. E. Rosas, J. Allanson, J. D. 
+
+Pickard, G. B. Williams, M. M. Craig, P. Finoia, A. R. 
+
+D. Peattie, P. Coppola, D. K. Menon, D. Bor, and E. A. 
+
+Stamatakis. 2023. 'Reduced emergent character of 
+
+neural dynamics in patients with a disrupted 
+
+connectome', Neuroimage , 269. 
+
+McMillen, P., and M. Levin. 2024. 'Collective intelligence: A 
+
+unifying concept for integrating biology across scales 
+
+and substrates', Communications Biology , 7. 
+
+Mediano, P. A. M., F. E. Rosas, A. I. Luppi, R. L. Carhart -Harris, 
+
+D. Bor, A. K. Seth, and A. B. Barrett. 2025. 'Toward a 
+
+unified taxonomy of information dynamics via 
+
+Integrated Information Decomposition', Proceedings of 
+
+the National Academy of Sciences of the United States 
+
+of America , 122. 
+
+Mnih, V., K. Kavukcuoglu, D. Silver, A. A. Rusu, J. Veness, M. 
+
+G. Bellemare, A. Graves, M. Riedmiller, A. K. 
+
+Fidjeland, G. Ostrovski, S. Petersen, C. Beattie, A. 
+
+Sadik, I. Antonoglou, H. King, D. Kumaran, D. 
+
+Wierstra, S. Legg, and D. Hassabis. 2015. 'Human -level 
+
+control through deep reinforcement learning', Nature ,
+
+518: 529 -33. 
+
+Mohanty, S., J. Poonganam, A. Gaidon, A. Kolobov, B. Wulfe, 
+
+D. Chakraborty, G. Semetulskis, J. Schapke, J. 
+
+Kubilius, J. Paükonis, L. Klimas, M. Hausknecht, P. 
+
+MacAlpine, Q. N. Tran, T . Tumiel, X. C. Tang, X. W. 
+
+Chen, C. Hesse, J. Hilton, W. H. Guss, S. Genc, J. 
+
+Schulman, and K. Cobbe. 2020. 'Measuring Sample 
+
+Efficiency and Generalization in Reinforcement 
+
+Learning Benchmarks: NeurIPS 2020 Procgen Benchmark', Neurips 2020 Competition and 
+
+Demonstration Track, Vol 133 , 133: 361 -95. 
+
+Neftci, E. O., and B. B. Averbeck. 2019. 'Reinforcement learning 
+
+in artificial and biological systems', Nature Machine 
+
+Intelligence , 1: 133 -43. 
+
+Pigozzi, F., A. Goldstein, and M. Levin. 2026. 'Associative 
+
+conditioning in gene regulatory network models 
+
+increases integrative causal emergence (vol 8, 1027, 
+
+2025)', Communications Biology , 9. 
+
+Raffin, A., A. Hi, A. Gleave, A. Kanervisto, M. Ernestus, and N. 
+
+Dormann. 2021. 'Stable -Baselines3: Reliable 
+
+Reinforcement Learning Implementations', Journal of 
+
+Machine Learning Research , 22: 1 -8. 
+
+Rosas, F. E., P. A. M. Mediano, M. Gastpar, and H. J. Jensen. 
+
+2019. 'Quantifying high -order interdependencies via 
+
+multiv ariate extensions of the mutual information', 
+
+Physical Review E , 100. 
+
+Rosas, F. E., P. A. M. Mediano, H. J. Jensen, A. K. Seth, A. B. 
+
+Barrett, R. L. Carhart -Harris, and D. Bor. 2020. 
+
+'Reconciling emergences: An information -theoretic 
+
+approach to identify ca usal emergence in multivariate 
+
+data', Plos Computational Biology , 16. 
+
+Savva, M., A. Kadian, O. Maksymets, Y. L. Zhao, E. Wijmans, 
+
+B. Jain, J. Straub, J. Liu, V. Koltun, J. Malik, D. Parikh, 
+
+and D. Batra. 2019. 'Habitat: A Platform for Embodied 
+
+AI Research' , 2019 Ieee/Cvf International Conference 
+
+on Computer Vision (Iccv 2019) : 9338 -46. 
+
+Sutton, Richard S., and Andrew G. Barto. 2018. Reinforcement 
+
+learning : an introduction (The MIT Press: Cambridge, 
+
+Massachusetts). 
+
+Tishby, N., and N. Zaslavsky. 2015. 'Deep L earning and the 
+
+Information Bottleneck Principle', 2015 Ieee 
+
+Information Theory Workshop (Itw) .
+
+Tok, A. Y. F., N. L. Powell, and B. Guellaï. 2025. 'A systematic 
+
+review of moral agency in artificial agents', Discover 
+
+Psychology , 6. 
+
+Toker, D., and F. T. Somm er. 2019. 'Information integration in 
+
+large brain networks', Plos Computational Biology , 15. 
+
+Tononi, G., M. Boly, M. Massimini, and C. Koch. 2016. 
+
+'Integrated information theory: from consciousness to 
+
+its physical substrate', Nature Reviews Neuroscience ,
+
+17: 450 -61. 
+
+Varley, T. F., P. A. M. Mediano, A. Patania, and J. Bongard. 
+
+2025. 'The topology of synergy: Linking topological 
+
+and information -theoretic approaches to higher -order 
+
+interactions in complex systems', Plos Computational 
+
+Biology , 21. 
+
+Vernon, D., R . Lowe, S. Thill, and T. Ziemke. 2015. 'Embodied 
+
+cognition and circular causality: on the role of 
+
+constitutive autonomy in the reciprocal coupling of 
+
+perception and action', Frontiers in Psychology , 6. 
+
+Watson, J. R., A. Maier, A. Novillo, I. Echegoyen, R. Resta, R. 
+
+L. del Campo, and J. M. Buldú. 2026. 'Information 
+
+integration and the latent consciousness of human 
+
+groups', Chaos Solitons & Fractals , 203.

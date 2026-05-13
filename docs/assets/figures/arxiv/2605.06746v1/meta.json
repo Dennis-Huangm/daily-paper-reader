@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.06746v1/fig-001.webp",
+      "caption": "Figure 1. The schematic of our approach to computing causal emergence alignment with the reward in RL agents. Alignment is measured by whether causal emergence proceeded in the direction of increasing reward or not. We found that causal emergence had strong alignment scores across all tasks.",
+      "page": 1,
+      "index": 1,
+      "width": 520,
+      "height": 285
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06746v1/fig-002.webp",
+      "caption": "Figure 2. Causal emergence is the sum of the amount of information that the whole predicts about the future of the single components (synergy) and the amount of information that the whole predicts about the future of the whole (causal decoupling).",
+      "page": 3,
+      "index": 2,
+      "width": 485,
+      "height": 294
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06746v1/fig-003.webp",
+      "caption": "Figure 6: Prediction performance of a random forest regressor, measured as Spearman’s 𝜌 between the groundtruth and the predicted values. For each run, the regressor was trained to predict the reward at the final time step, given the measure on the x-axis (causal emergence descriptors, all the baselines, or both) as input. Causal emergence alone did not outperform the combined baseline metrics. But adding it to them significantly increased performance in 3/6 environments and did not worsen performance in the other 3/6.",
+      "page": 8,
+      "index": 3,
+      "width": 529,
+      "height": 269
+    },
+    {
+      "url": "assets/figures/arxiv/2605.06746v1/fig-004.webp",
+      "caption": "Figure 4: % of runs that had a significant (p<0.05) Spearman’s ρ between standard neural representation metrics (x-axis labels) and causal emergence, for each",
+      "page": 5,
+      "index": 4,
+      "width": 435,
+      "height": 369
+    }
+  ]
+}

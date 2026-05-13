@@ -1,0 +1,134 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-001.webp",
+      "caption": "Figure 2: Exact old-logit acquisition in asynchronous RL. The top-left panel shows the original mismatch problem. The remaining panels show snapshot-based version tracking, a dedicated old-logit model, and synchronization via partial rollout interruption.",
+      "page": 6,
+      "index": 1,
+      "width": 752,
+      "height": 345
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-002.webp",
+      "caption": "Figure 5: Training curves for the reparameterized no-interpolation baseline and the log-linear interpolation proxy. The two curves are nearly indistinguishable over training, consistent with the derivation that log-linear interpolation mainly changes the ratio parameterization.",
+      "page": 15,
+      "index": 2,
+      "width": 622,
+      "height": 278
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-003.webp",
+      "caption": "Figure 1: Synchronous versus asynchronous RL. In synchronous RL, the old logits used during training correspond to the same policy version that generated the rollout. In asynchronous RL, delayed updates and partial rollouts can make this version unavailable, which creates an old-logit mismatch and breaks the intended separation between training–inference discrepancy repair and policy-staleness correction.",
+      "page": 2,
+      "index": 3,
+      "width": 794,
+      "height": 190
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-004.webp",
+      "caption": "Table 4: Effective thresholds on the total ratio rθ = πθ/µold induced by interpolation-based proxies. The first block corresponds to the thresholds used in our experiment. For version gap n, we set the behavior-policy weight α = 1/(n+ 1).",
+      "page": 14,
+      "index": 4,
+      "width": 706,
+      "height": 672
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-005.webp",
+      "caption": "Figure 8: Additional threshold comparison: snap1002_1003 vs. snap1002_1002. Under the strictest discrepancy threshold, the retained signal is smaller and learning is slower, but the training trajectory is more stable.",
+      "page": 18,
+      "index": 5,
+      "width": 589,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-006.webp",
+      "caption": "Figure 9: Additional interaction example: snap1004_1004 vs. snap1004_1003. The discrepancy mask and PPO-CLIP activation change together even though the exact old logits are available.",
+      "page": 18,
+      "index": 6,
+      "width": 589,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-007.webp",
+      "caption": "Table 2: Main results on the held-out Agentic benchmark suite for the dense Qwen3-4B model and the Qwen3-30B-A3B MoE model. VitaBench is separated into in-store and delivery splits. Snapshot† denotes an idealized setting where exact old logits are available. The best performance among practical methods (first three rows) is bolded.",
+      "page": 8,
+      "index": 7,
+      "width": 822,
+      "height": 220
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-008.webp",
+      "caption": "Figure 11: PPO-EWMA threshold interaction for β = 0.4 and β = 0.5. Looser Train-Infer Mask or PPO-CLIP ratio thresholds can improve early progress, but they also admit more noisy off-policy updates and may cause a mid-training success drop. The coupled mask and clip dynamics can later recover part of the trajectory by filtering or capping the problematic updates.",
+      "page": 19,
+      "index": 8,
+      "width": 789,
+      "height": 239
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-009.webp",
+      "caption": "Figure 10: PPO-EWMA decay comparison. A large decay can accumulate stale reference history and collapse the Train-Infer Mask, while the staleness-aware decay gives faster early Task success.",
+      "page": 19,
+      "index": 9,
+      "width": 783,
+      "height": 269
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-010.webp",
+      "caption": "Figure 6: Additional threshold comparison: snap1005_1006 vs. snap1005_1004. The two runs share the same discrepancy threshold and differ only in stale-policy control. The looser stale-policy threshold gives a faster early trajectory, while the stricter setting catches up more smoothly later.",
+      "page": 17,
+      "index": 10,
+      "width": 589,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-011.webp",
+      "caption": "Figure 7: Additional threshold comparison: snap1003_1004 vs. snap1003_1003. The same earlyspeed and late-stability trade-off appears under a stricter discrepancy threshold.",
+      "page": 17,
+      "index": 11,
+      "width": 589,
+      "height": 326
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-012.webp",
+      "caption": "Figure 4: Effect of automatic reset for β = 0.75. Resetting the EWMA reference when the Train-Infer Mask becomes too low prevents late-stage collapse. Vertical lines mark reset events.",
+      "page": 9,
+      "index": 12,
+      "width": 789,
+      "height": 203
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-013.webp",
+      "caption": "Figure 3: Exact-old-logit threshold analysis. Each label reports the discrepancy and stale-policy thresholds.",
+      "page": 9,
+      "index": 13,
+      "width": 807,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-014.webp",
+      "caption": "Table 6: Detailed overhead from snapshot-based old-logit computation. The dominant cost is the additional historical-model forward pass used to reconstruct old logits. Snapshot retention also adds substantial resident storage pressure, especially for the 30B-A3B model.",
+      "page": 20,
+      "index": 14,
+      "width": 568,
+      "height": 330
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-015.webp",
+      "caption": "Table 1: Summarization of PPO variants under a unified Masked Importance Sampling (MIS) view.",
+      "page": 5,
+      "index": 15,
+      "width": 818,
+      "height": 462
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12070v1/fig-016.webp",
+      "caption": "Table 5: Expanded comparison of PPO variants and proxy-policy corrections. The columns A+ and A− show the active regions for positive and negative advantages, respectively.",
+      "page": 16,
+      "index": 16,
+      "width": 822,
+      "height": 693
+    }
+  ]
+}
