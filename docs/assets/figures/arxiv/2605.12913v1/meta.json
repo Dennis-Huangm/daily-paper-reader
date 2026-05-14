@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.12913v1/fig-001.webp",
+      "caption": "Table 3: Main results on SWE-Gym Holdout and SWE-Bench Verified. The upper block compares post-training methods under matched student initialization and training scaffold. The lower block reports published SWE-Bench Verified results from representative SWE-agent systems. We report task-resolution rate; higher is better. The best and second-best scores within each backbone block are emphasized in bold and underlined, respectively.",
+      "page": 7,
+      "index": 1,
+      "width": 844,
+      "height": 822
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12913v1/fig-002.webp",
+      "caption": "Table 5: Training configurations for the post-training methods.",
+      "page": 18,
+      "index": 2,
+      "width": 830,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12913v1/fig-003.webp",
+      "caption": "Figure 1: Scaling performance with effective training samples for the 4B student model. We compare Ours (DAgger-style), Ours (AggreVaTe-style), SFT, and on-policy distillation on SWE-Gym Holdout and SWE-Bench Verified-100.",
+      "page": 8,
+      "index": 3,
+      "width": 538,
+      "height": 233
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12913v1/fig-004.webp",
+      "caption": "Table 4: Qualitative failure analysis on SWE-bench Verified. We use an LLM-as-a-judge protocol to assign one primary failure mode to each unresolved trajectory. Resolve and submission rates are computed over all 466 instances, while fine-grained failure rates are computed within their corresponding unresolved subsets.",
+      "page": 8,
+      "index": 4,
+      "width": 840,
+      "height": 188
+    },
+    {
+      "url": "assets/figures/arxiv/2605.12913v1/fig-005.webp",
+      "caption": "Table 2: Unified viewpoint of post-training methods. Specifically, we differentiate each method based on how they choose ps, pa, and w(s, a).",
+      "page": 5,
+      "index": 5,
+      "width": 718,
+      "height": 204
+    }
+  ]
+}
