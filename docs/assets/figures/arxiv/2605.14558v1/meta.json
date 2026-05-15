@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-001.webp",
+      "caption": "Table 2: PPO final-step results across four environments at two capability levels. Success rate (%) is reported at step 200 for Sokoban, FrozenLake, and Sudoku, and at step 100 for WebShop. WebShop reports both purchase rate and strict success. Peak values are reported in Table 5. Best results are bolded.",
+      "page": 6,
+      "index": 1,
+      "width": 827,
+      "height": 182
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-002.webp",
+      "caption": "Figure 1: Action Bottleneck in agentic reinforcement learning. Left: A real response from a trajectory, where reasoning tokens far outnumber action tokens. Middle: Action tokens constitute only 4% of model-generated tokens; our token-level reweighting redirects gradient mass towards them. Right: Training signal concentrates in action spans. Results are from Sokoban 3B.",
+      "page": 2,
+      "index": 2,
+      "width": 829,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-003.webp",
+      "caption": "Figure 4: PPO response length across training steps on FrozenLake 3B, Sudoku 1.5B, Sokoban 3B, and WebShop 3B. Shaded curves denote per-step response length.",
+      "page": 7,
+      "index": 3,
+      "width": 829,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-004.webp",
+      "caption": "Figure 3: PPO success rate across training steps on FrozenLake 3B, Sudoku 1.5B, Sokoban 3B, and WebShop 3B. Shaded curves denote per-step training success.",
+      "page": 7,
+      "index": 4,
+      "width": 829,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-005.webp",
+      "caption": "Table 3: Summary of notation used in the paper.",
+      "page": 14,
+      "index": 5,
+      "width": 668,
+      "height": 875
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-006.webp",
+      "caption": "Figure 5: GRPO success rate across training steps on FrozenLake 3B, Sudoku 1.5B, Sokoban 3B, and WebShop 3B. Shaded curves denote per-step training success.",
+      "page": 8,
+      "index": 6,
+      "width": 829,
+      "height": 207
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-007.webp",
+      "caption": "Figure 6: GRPO response length across training steps on FrozenLake 3B, Sudoku 1.5B, Sokoban 3B, and WebShop 3B. Shaded curves denote per-step response length.",
+      "page": 8,
+      "index": 7,
+      "width": 829,
+      "height": 199
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-008.webp",
+      "caption": "Table 1: Action token fraction in inference-only rollouts before RL training. The imbalance is consistent across environments and model scales.",
+      "page": 4,
+      "index": 8,
+      "width": 828,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-009.webp",
+      "caption": "Table 5: PPO and GRPO peak performance across four environments. Values are success/purchase rate (%); deltas are relative to Uniform. WebShop reports both purchase rate and strict success. Best results are bolded.",
+      "page": 19,
+      "index": 9,
+      "width": 827,
+      "height": 272
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-010.webp",
+      "caption": "Figure 7: Effect of α on training dynamics.",
+      "page": 9,
+      "index": 10,
+      "width": 829,
+      "height": 329
+    },
+    {
+      "url": "assets/figures/arxiv/2605.14558v1/fig-011.webp",
+      "caption": "Figure 2: Detailed energy–reward diagnostic behind Figure 1. We measure the Spearman correlation between mean frozen-reference token energy and group reward variance σg on Sokoban 3B over three token subsets. Only the action-token energy shows a significant positive correlation (ρ = +0.537, p < 10−30); full-response and reasoning-only energy are indistinguishable from noise.",
+      "page": 5,
+      "index": 11,
+      "width": 829,
+      "height": 186
+    }
+  ]
+}

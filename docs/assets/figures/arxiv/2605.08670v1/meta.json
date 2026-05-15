@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-001.webp",
+      "caption": "Figure 6: Paired skills from the same training task (302c169_1). Net contribution = test tasks flipped from fail to pass minus pass to fail, relative to the no-skill baseline. Both skills encode the same",
+      "page": 15,
+      "index": 1,
+      "width": 822,
+      "height": 419
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-002.webp",
+      "caption": "Table 1: Main results on AppWorld and BFCL-v3. All methods use Qwen3.5-122B-A10B for inference. Bold indicates the best and underline indicates the second-best result per group.",
+      "page": 7,
+      "index": 2,
+      "width": 806,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-003.webp",
+      "caption": "Figure 5: (a) ACE encodes the solution of training task 60d0b5b as a five-step recipe ( blue : memorized steps); its trigger is a near-verbatim paraphrase of the task instruction. (b) Trace2Skill misplaces",
+      "page": 14,
+      "index": 3,
+      "width": 829,
+      "height": 687
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-004.webp",
+      "caption": "Figure 9: Five-axis rubric prompt with GT-leakage counterfactual. The overall score is gated on GT-independence to prevent overfit skills from masquerading as actionable.",
+      "page": 18,
+      "index": 4,
+      "width": 829,
+      "height": 448
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-005.webp",
+      "caption": "Figure 10: Trajectory reconstruction judge prompt. Scores procedural alignment rather than literal text match; tolerates step-count and variable-name differences as long as API-family sequence and control flow agree.",
+      "page": 18,
+      "index": 5,
+      "width": 829,
+      "height": 283
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-006.webp",
+      "caption": "Figure 2: Performance at each iteration and the effect of varying the number of retrieved skills on AppWorld. Columns 1–2: TGC and SGC over iterations on Normal (top) and Challenge (bottom). Column 3: TGC and SGC across K, with both splits per panel. Bars (left axis) report the aggregate; lines (right axis) report per-difficulty accuracy.",
+      "page": 8,
+      "index": 6,
+      "width": 813,
+      "height": 377
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-007.webp",
+      "caption": "Figure 1: Overview of MIND-Skill. The induction agentAI (with optimizable prompt PI ) abstracts a successful trajectory τ into a structured skill document. The deduction agent AD (with frozen prompt PD) then attempts to reconstruct the trajectory by following only the induced skill and the task specification in a live environment. Three textual losses assess the quality of the generated skill: the reconstruction loss measures procedural alignment between τ and τ̂ , the outcome loss evaluates the outcome correctness of τ̂ against the environment, and the rubric loss assesses the documentation quality and regularizes the abstraction level of the skill itself. The text-based optimizer aggregates their textual feedback to update the induction prompt PI via TextGrad. Task specification t is omitted from the figure for visual clarity.",
+      "page": 4,
+      "index": 7,
+      "width": 809,
+      "height": 437
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-008.webp",
+      "caption": "Figure 12: Optimizer LLM prompt receives the current prompt and gradient feedback.",
+      "page": 19,
+      "index": 8,
+      "width": 829,
+      "height": 281
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-009.webp",
+      "caption": "Figure 11: Gradient LLM prompt. The LLM receives low-quality and high-quality rollout cases and produces a textual diagnosis. It is explicitly instructed to reject the naive fix of leaking ground-truth details into skills.",
+      "page": 19,
+      "index": 9,
+      "width": 829,
+      "height": 407
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-010.webp",
+      "caption": "Figure 8: Abbreviated structure of the deduction agent’s prompt template. Skills enter through a single {{skills}} slot; the only difference between training and evaluation is the number of injected skills (1 vs. K).",
+      "page": 17,
+      "index": 10,
+      "width": 829,
+      "height": 409
+    },
+    {
+      "url": "assets/figures/arxiv/2605.08670v1/fig-011.webp",
+      "caption": "Figure 7: The induction agent’s system prompt is the sole variable optimized by TextGrad. (a) The universal initial promptP(0) I used for all training tasks. (b) The optimized promptP∗ I after 4 TextGrad",
+      "page": 16,
+      "index": 11,
+      "width": 822,
+      "height": 423
+    }
+  ]
+}

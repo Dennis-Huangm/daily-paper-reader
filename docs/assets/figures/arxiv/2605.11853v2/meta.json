@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.11853v2/fig-001.webp",
+      "caption": "Figure 2: Frequency of top-20 tokens with normalized reverse-KL > 0.1 in 100 sampled math trajectories.",
+      "page": 15,
+      "index": 1,
+      "width": 664,
+      "height": 412
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11853v2/fig-002.webp",
+      "caption": "Figure 3: Token-level visualization results of normalized KL divergence and normalized entropy.",
+      "page": 15,
+      "index": 2,
+      "width": 706,
+      "height": 311
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11853v2/fig-003.webp",
+      "caption": "Table 1: Performance (%) on agentic tool-use and mathematical reasoning benchmarks. Agent: TS-M = ToolSandbox Multi-Tool, BFCL Avg. = average over BFCL Parallel-Multiple / Parallel / Multiple, ACE-E = ACEBench End-to-End accuracy, ACE-P = ACEBench Process accuracy. Math: Test(in domain), A24 = AIME24, A25 = AIME25, M500 = MATH500, GSM = GSM8K, MH = MATH. Best results are bolded.",
+      "page": 8,
+      "index": 3,
+      "width": 788,
+      "height": 460
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11853v2/fig-004.webp",
+      "caption": "Table 2: Ablation study of GEAR. We evaluate the contribution of each component and the sensitivity to key hyperparameters. The default hyperparameter values are λH = 1.5, α = 0.2, and λKL = 0.1.",
+      "page": 9,
+      "index": 4,
+      "width": 398,
+      "height": 348
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11853v2/fig-005.webp",
+      "caption": "Figure 1: Illustration of GEAR for fine-grained credit assignment in agent RL. (a) GRPO assigns the same trajectory-level advantage to all tokens. (b) GEAR preserves this trajectory-level advantage while redistributing credit at a finer granularity. It computes token-wise reverse KL divergence between the student and a groundtruth–conditioned teacher, then uses KL peaks to identify segment onsets and entropy to determine segment extent. Within each divergent segment, all tokens share the onset credit, propagating a localized discrepancy signal over coherent spans. For consistent regions with low KL, token-level reverse KL is used directly. The resulting signals are then modulated by a sign-aware weighting function to produce the final token-level credit.",
+      "page": 5,
+      "index": 5,
+      "width": 810,
+      "height": 324
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11853v2/fig-006.webp",
+      "caption": "Figure 4: Training curves of GRPO, GEAR and its variants. The left panel shows the mean training reward, while the right panel illustrates the policy entropy. GEAR achieves the highest training reward while maintaining higher policy entropy compared to the GRPO baseline and other ablated versions.",
+      "page": 16,
+      "index": 6,
+      "width": 829,
+      "height": 285
+    }
+  ]
+}

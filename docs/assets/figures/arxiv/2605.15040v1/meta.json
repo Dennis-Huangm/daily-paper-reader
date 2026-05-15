@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.15040v1/fig-001.webp",
+      "caption": "Table 12: Composition of the Orchard-GUI training dataset. The Full Set is the pool of seed tasks for which we collected rollouts. SFT Trajectories are the judge-passing rollouts used for supervised fine-tuning, and RL Tasks are seed prompts used to bootstrap rollout-based optimization. Tasks are classified by whether all rollouts succeeded (All Succ.), all failed (All Failed), or the outcome was mixed. The last column reports the number of tasks (restricted to those with at least one successful rollout) whose start URL falls on a SimilarWeb Top-100 site.",
+      "page": 25,
+      "index": 1,
+      "width": 794,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2605.15040v1/fig-002.webp",
+      "caption": "Table 11: Browser action space: 13 atomic tools grouped by family. Full argument signatures are listed in Appendix C.",
+      "page": 21,
+      "index": 2,
+      "width": 822,
+      "height": 378
+    },
+    {
+      "url": "assets/figures/arxiv/2605.15040v1/fig-003.webp",
+      "caption": "Table 1: Environment and training systems for agentic training, based on public documentation as of April 2026. Scope: the system’s primary design scope. Self-host.: an open-source server/control-plane stack exists that researchers can deploy on their own infrastructure. Mgd. default: the system’s primary product is offered as a managed/hosted service. Thin env service: environment management is exposed as a narrow, standalone service boundary independent of agent harness, training loop, and inference backend (operational definition above). Rel. cost: normalized to Daytona for a 2-vCPU, 8-GiB sandbox; “—” indicates no publicly comparable pricing. See Appendix B for methodology.",
+      "page": 7,
+      "index": 3,
+      "width": 752,
+      "height": 229
+    },
+    {
+      "url": "assets/figures/arxiv/2605.15040v1/fig-004.webp",
+      "caption": "Table 13: GUI-agent success rates (%) across three open-web benchmarks. * marks numbers reported in FARA (Awadallah et al., 2025); † marks numbers reported in MolmoWeb (Gupta et al., 2026).",
+      "page": 27,
+      "index": 4,
+      "width": 802,
+      "height": 530
+    },
+    {
+      "url": "assets/figures/arxiv/2605.15040v1/fig-005.webp",
+      "caption": "Table 14: Claw-agent performance on Claw-Eval. We use the general domain (0408) for evaluation. * marks numbers reported by Ye et al. (2026).",
+      "page": 31,
+      "index": 5,
+      "width": 714,
+      "height": 392
+    },
+    {
+      "url": "assets/figures/arxiv/2605.15040v1/fig-006.webp",
+      "caption": "Figure 3: Orchard Env architecture. A Python client SDK (synchronous or asynchronous) issues REST calls to a FastAPI orchestrator, which manages sandbox lifecycle in a Kubernetes cluster. Pod creation and deletion (cold path) go through the Kubernetes API server, while all execution, file, and health requests (hot path) are dispatched directly to each sandbox pod’s in-pod agent via Pod IP, bypassing the API server and avoiding kubectl exec/WebSocket setup overhead.",
+      "page": 5,
+      "index": 6,
+      "width": 779,
+      "height": 222
+    },
+    {
+      "url": "assets/figures/arxiv/2605.15040v1/fig-007.webp",
+      "caption": "Table 7: Resolve rates (%) on SWE-bench Verified. We compare Orchard-SWE against open-source SWE-agent recipes, organized by base-model family. Within each section, rows are sorted by reported resolve rate. Orchard-SWE rows are bolded. For broader context, frontier proprietary systems (Claude Opus 4.5, GPT-5.2, Gemini 3, etc.) reach 71–77% on this benchmark.",
+      "page": 16,
+      "index": 7,
+      "width": 822,
+      "height": 783
+    }
+  ]
+}
