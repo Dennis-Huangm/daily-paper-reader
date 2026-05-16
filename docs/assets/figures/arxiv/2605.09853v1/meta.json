@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.09853v1/fig-001.webp",
+      "caption": "Figure 3: Test-time scaling performance of EDO on GSM8K, MATH and s1K datasets. Skywork-PRM-1.5B and Qwen2.5-Math-PRM-7B represent RMs with BoN.",
+      "page": 11,
+      "index": 1,
+      "width": 464,
+      "height": 263
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09853v1/fig-002.webp",
+      "caption": "Table 5: Comprehensive comparison of test-time scaling strategies on GSM8K, Math and s1K. Accuracy (%) is used as the evaluation metric. For GSM8K and Math, we evaluate on each dataset’s official evaluation split using models trained on its corresponding training split. For s1K, evaluation is conducted on both the indistribution set s1Keval and five out-of-distribution datasets: AIME24, AIME25, MATH500, Minerva Math, and Olympiad Bench, using models trained on the s1K training set. Here, Qwen-BoN refers to the BoN strategy using Qwen2.5-Math-PRM-7B as the RM, while Skywork-BoN uses Skywork-PRM-1.5B as the RM.",
+      "page": 25,
+      "index": 2,
+      "width": 968,
+      "height": 262
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09853v1/fig-003.webp",
+      "caption": "Table 2: Out-of-distribution evaluation results on five math reasoning datasets. We use the supervised fine-tuned Qwen2.5-7B-Instruct and LLaMA3.1-8B-Instruct models on s1K as our base models. For all datasets, we employ the same prompt as in s1k.",
+      "page": 10,
+      "index": 3,
+      "width": 975,
+      "height": 673
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09853v1/fig-004.webp",
+      "caption": "Figure 6: Case study of EDO on the MATH dataset. For the given question, the iterative online DPO-trained model consistently produces homogeneous solutions, leading to incorrect answers even when combined with test-time scaling methods. In contrast, the model trained with ED-iDPO generates significantly more diverse solutions, ultimately yielding the correct answer. For visualization purposes, we display only 3 candidate solutions.",
+      "page": 13,
+      "index": 4,
+      "width": 968,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09853v1/fig-005.webp",
+      "caption": "Figure 4: Evolution of policy entropy during training on GSM8K and Math datasets.",
+      "page": 12,
+      "index": 5,
+      "width": 314,
+      "height": 386
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09853v1/fig-006.webp",
+      "caption": "Table 4: Sensitivity to the exploration coefficient α on Math. We report BoN@10 and Dist-4.",
+      "page": 24,
+      "index": 6,
+      "width": 960,
+      "height": 217
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09853v1/fig-007.webp",
+      "caption": "Table 3: BoN@10 and Dist-4 over three training seeds. We report mean ± standard deviation across seeds.",
+      "page": 24,
+      "index": 7,
+      "width": 964,
+      "height": 195
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09853v1/fig-008.webp",
+      "caption": "Table 1: In-distribution performance across multiple reasoning benchmarks. For s1K, we use the supervised fine-tuned Qwen2.5-7B-Instruct and LLaMA3.1-8B-Instruct models as our base models. For Math and GSM8K, we use the vanilla Qwen2.5-7B-Instruct and LLaMA3-8B-Instruct models as the respective bases. The s1K results are reported on the curated s1Keval split. We highlight the best score in bold and the second-best with an underline. All methods employ both Chain-of-Thought (Wei et al., 2022) and Self-Consistency (Wang et al., 2022) during inference.",
+      "page": 9,
+      "index": 8,
+      "width": 975,
+      "height": 333
+    }
+  ]
+}
