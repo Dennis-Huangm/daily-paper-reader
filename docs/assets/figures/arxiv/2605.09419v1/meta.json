@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-001.webp",
+      "caption": "Figure 1. Illustration of the difference between human learning and reinforcement learning. Humans rapidly abstract behavioral effective patterns from limited experience, while reinforcement learning depends on extensive trial-and-error process.",
+      "page": 1,
+      "index": 1,
+      "width": 494,
+      "height": 692
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-002.webp",
+      "caption": "Table 2. Comparison of alternative experience replay strategies under DQN across different environment. We compare uniform experience replay (UER), prioritized experience replay (PER), combined experience replay (CER), n-step replay, and the proposed NSER. Performance, learning efficiency, and computational overhead are reported. All speedup ratios are defined as η = TUER/TNSER, where η > 1 indicates faster training than UER. Bold values denote the best result for each metric within the same environment.",
+      "page": 6,
+      "index": 2,
+      "width": 900,
+      "height": 792
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-003.webp",
+      "caption": "Figure 6. Progressive rule discovery in Taxi-v3. Training snapshots at epochs 0, 50, 200, 500, 1000, and 2000 showing (top) environment states with agent (triangle), passenger (circle), and destination (star), and (bottom) discovered rules with natural language and FOL representations.",
+      "page": 15,
+      "index": 3,
+      "width": 917,
+      "height": 356
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-004.webp",
+      "caption": "Figure 3. Ablation studies of NSER across various design configurations. Results report the final episodic returns, demonstrating that simplifying or removing individual components consistently degrades performance. These findings highlight the critical contributions of language-based rule induction, neuro-symbolic grounding, and behavior-guided sampling to the overall framework efficacy.",
+      "page": 7,
+      "index": 4,
+      "width": 1009,
+      "height": 228
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-005.webp",
+      "caption": "Table 3. Performance of different experience replay strategies across various game environments. All speedup values (η) are reported as training-time ratios relative to uniform experience replay (UER). Bold indicates the best result in each column per environment.",
+      "page": 14,
+      "index": 5,
+      "width": 1000,
+      "height": 567
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-006.webp",
+      "caption": "Figure 2. Overview of the NSER framework. Starting from the environment interaction, raw trajectories are stored in a replay buffer. Stage i involves active rule induction, where an LLM distills behavioral logic from serialized experiences. Stage ii represents neuro-symbolic grounding, converting these insights into logical rules and differentiable predicates. Stage iii shows knowledge-guided sampling, where satisfaction scores reshape the replay distribution to prioritize semantically significant data for policy optimization.",
+      "page": 3,
+      "index": 6,
+      "width": 967,
+      "height": 650
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-007.webp",
+      "caption": "Figure 4. Temporal evolution of the induced rule set in the FrozenLake-v1 environment. NSER initially explores without prior rules, then incrementally adds and revises behavioral rules based on accumulated experience. Over training, the rule set converges to a stable configuration that encodes meaningful action constraints and safety preferences, resulting in consistent and robust policy behavior.",
+      "page": 8,
+      "index": 7,
+      "width": 917,
+      "height": 338
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-008.webp",
+      "caption": "Figure 5. Screen shots from six benchmark environments: (from left to right, top to bottom) CartPole-v1, Acrobot-v1, FrozenLake-v1, Taxi-v3, Procgen-CoinRun, and Procgen-Maze.",
+      "page": 12,
+      "index": 8,
+      "width": 763,
+      "height": 490
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-009.webp",
+      "caption": "Table 1. Performance comparison between uniform experience replay (UER) and the proposed NSER across three off-policy algorithms (DQN, C51, and QR-DQN) evaluated on reactive, rule-based, and procedural environments. Results are reported as UER/NSER, where performance is measured by episodic return and area under the learning curve (AUC), efficiency by Steps-to-τ and Nconv, and computational cost by the relative speedup ratio η = TUER/TNSER. Bold values indicate the better result.",
+      "page": 5,
+      "index": 9,
+      "width": 987,
+      "height": 615
+    },
+    {
+      "url": "assets/figures/arxiv/2605.09419v1/fig-010.webp",
+      "caption": "Figure 7. Pattern learning in Procgen-CoinRun. Training progression at epochs 0, 100, 300, 600, 1200, and 2000 showing (top) level states with agent (triangle), coin (circle), obstacles (✕), and platforms (gray), and (bottom) behavioral patterns with NL and FOL.",
+      "page": 16,
+      "index": 10,
+      "width": 917,
+      "height": 329
+    }
+  ]
+}

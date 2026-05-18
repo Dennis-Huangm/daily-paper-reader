@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-001.webp",
+      "caption": "Figure 2 | Ablation study of entropy polarity branches. We retain exclusively positive or negative polarity tokens to compare training dynamics. Positive-polarity updates boost entropy but impair reward learning, whereas negative-polarity updates obtain significant reward improvements alongside unstable optimization and declining entropy.",
+      "page": 6,
+      "index": 1,
+      "width": 983,
+      "height": 248
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-002.webp",
+      "caption": "Figure 9 | Training dynamics on Qwen2.5-7B-Base (Math). (a) Reward, (b) entropy, and (c) polarity weights 𝜔 for all methods trained on DAPO-Math-17k. Trends are consistent with the 14B results in Figure 5.",
+      "page": 25,
+      "index": 2,
+      "width": 983,
+      "height": 313
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-003.webp",
+      "caption": "Figure 10 | Training dynamics on tool-call reasoning (Qwen2.5-14B-Instruct). (a) Reward, (b) entropy, and (c) polarity weights 𝜔. The adaptive weights consistently favor the contracting branch, reflecting the more constrained action space of structured tool-call generation.",
+      "page": 25,
+      "index": 3,
+      "width": 983,
+      "height": 317
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-004.webp",
+      "caption": "Figure 4 |Word clouds of positive and negative polarity branches with the high absolute ∥P∥ polarity values, respectively. The positive branch (P > 0) is enriched in connective and structural expressions, e.g., “and”, “that”, “first”, and “step”, consistent with more open local continuations; the negative branch (P < 0) instead concentrates on formulaic reasoning and answer-oriented expressions, e.g., “find”, “values”, “product”, and “final”, consistent with more constrained solution trajectories.",
+      "page": 7,
+      "index": 4,
+      "width": 983,
+      "height": 261
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-005.webp",
+      "caption": "Table 2 | Performance (%) on out-of-domain tasks.",
+      "page": 22,
+      "index": 5,
+      "width": 973,
+      "height": 256
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-006.webp",
+      "caption": "Figure 6 | Performance (%) on agentic tool-using benchmarks. Papo achieves the strongest overall performance. It consistently surpasses baselines across different evaluation settings, covering nonlive and live scenarios in BFCL, as well as English and Chinese tasks in ACEBench.",
+      "page": 10,
+      "index": 6,
+      "width": 887,
+      "height": 438
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-007.webp",
+      "caption": "Figure 7 | Effect of polarity-control strength 𝜔 on policy dynamics.",
+      "page": 10,
+      "index": 7,
+      "width": 512,
+      "height": 248
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-008.webp",
+      "caption": "Table 1 | Performance (%) on in-domain and out-of-domain benchmarks. Cells with deeper background color correspond to better performance within each model group.",
+      "page": 8,
+      "index": 8,
+      "width": 977,
+      "height": 438
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-009.webp",
+      "caption": "Figure 1 | (a) Correlation between polarity score P and measured entropy change ΔH . (b) Histograms for the two decomposed components derived from P. (c) Percentile curve of the polarity score.",
+      "page": 4,
+      "index": 9,
+      "width": 969,
+      "height": 293
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-010.webp",
+      "caption": "Figure 8 | Positional distribution of entropy polarity P. Shaded bands show the 10th–90th and 25th–75th percentile ranges; solid lines show mean (blue) and median (red). (a) Magnitude |P |: the mean remains flat while the median sits ∼1000× lower, reflecting heavy-tail sparsity at every position. (b) Signed P: the mean transitions from net contraction in early positions to net expansion in later positions, while the median remains at zero.",
+      "page": 24,
+      "index": 10,
+      "width": 963,
+      "height": 368
+    },
+    {
+      "url": "assets/figures/arxiv/2605.11775v1/fig-011.webp",
+      "caption": "Figure 5 | Training dynamics of PAPO. Reward (left), entropy (middle) and polarity weight (right) of Qwen2.5-14B-Base trained on DAPO-Math-17k. Papo delivers significant reward improvement while maintaining a healthier entropy dynamic, and its adaptive entropy modulation relaxes back to near-neutral weights after the transient collapse-recovery phase.",
+      "page": 9,
+      "index": 11,
+      "width": 983,
+      "height": 313
+    }
+  ]
+}

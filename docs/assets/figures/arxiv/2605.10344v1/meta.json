@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-001.webp",
+      "caption": "Figure 3. Sensitivity analysis of TMAS. Panels (a–b), (c–d), and (e–f) show the impacts of different exploration coefficient 𝜖, verification count, and parallel solution count, respectively.",
+      "page": 11,
+      "index": 1,
+      "width": 950,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-002.webp",
+      "caption": "Figure 6. Verification score dynamics across TTS iterations on IMO-AnswerBench-50. Problems are stratified into ever-correct and never-correct groups according to whether at least one correct solution is found across all iterations and rollouts. Left: base model. Right: RL-enhanced model under the TMAS framework. Faint dashed lines denote individual problem trajectories, shaded regions denote the interquartile range across problems within each group, and solid lines denote group means. In the base model, never-correct problems receive persistently higher verification scores than ever-correct problems, indicating a shared capability boundary between solution generation and verification. After TMAS-oriented RL training, both groups shift toward higher verification scores and become closer, but the verification signal remains weakly discriminative near the new capability frontier.",
+      "page": 21,
+      "index": 2,
+      "width": 854,
+      "height": 365
+    },
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-003.webp",
+      "caption": "Figure 7. Distribution of per-problem average verification scores on IMO-AnswerBench-50. Each point represents one problem, with the score averaged over all TTS iterations and rollouts. “Correct” denotes the ever-correct group, and “Wrong” denotes the never-correct group. Diamonds indicate group means, hollow circles indicate medians, and vertical bars indicate interquartile ranges. For the base model, never-correct problems receive significantly higher verification scores than ever-correct problems (Δ = +0.110, 𝑝 = 0.00622), showing that the hardest unsolved problems are also difficult for the verification agent to assess reliably. After TMAS-oriented RL training, the gap becomes smaller and statistically non-significant (Δ = +0.056, 𝑝 = 0.448), while both groups receive generally higher scores.",
+      "page": 22,
+      "index": 3,
+      "width": 808,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-004.webp",
+      "caption": "Table 2. Component ablation study on IMO-AnswerBench-50. “w/o guideline”, “w/o experience”, and “w/o both” denote TMAS without the guideline module, the experience module, and both modules, respectively. The best result in each iteration is shown in bold.",
+      "page": 10,
+      "index": 4,
+      "width": 925,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-005.webp",
+      "caption": "Figure 2. Effect of RL training on iterative test-time scaling. TMAS+Vanilla-RL means training solely with standard correctness reward, while TMAS+Hybrid-RL means training with our proposed hybrid reward system. Notably, TMAS+Hybrid-RL not only achieves superior performance from the early stages but also progressively improves as iterations increase, without exhibiting obvious saturation or degradation.",
+      "page": 10,
+      "index": 5,
+      "width": 950,
+      "height": 296
+    },
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-006.webp",
+      "caption": "Figure 8. Comparison of wrong solution pattern and correct solution pattern.",
+      "page": 23,
+      "index": 6,
+      "width": 950,
+      "height": 684
+    },
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-007.webp",
+      "caption": "Figure 1. Overview of the TMAS framework. For each problem, TMAS generates multiple solution trajectories in parallel, verifies each trajectory with independent verifier agents, and summarizes the feedback into rollout-level summaries. The experience agent extracts reusable low-level reasoning signals into the experience bank, while the guideline agent records previously explored high-level strategies in the guideline bank. These two memory banks are then used in subsequent iterations to support experience-based refinement and non-redundant exploration.",
+      "page": 4,
+      "index": 7,
+      "width": 927,
+      "height": 342
+    },
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-008.webp",
+      "caption": "Table 11. Key entries extracted into the TMAS experience bank. These entries transform one correct rollout into reusable problem-specific knowledge for later rollouts.",
+      "page": 24,
+      "index": 8,
+      "width": 923,
+      "height": 281
+    },
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-009.webp",
+      "caption": "Figure 4. Evaluation results on AIME26 and HMMT-25-Nov over 12 iterations.",
+      "page": 20,
+      "index": 9,
+      "width": 950,
+      "height": 321
+    },
+    {
+      "url": "assets/figures/arxiv/2605.10344v1/fig-010.webp",
+      "caption": "Figure 5. Relationship between the exploration coefficient and the total count of unique solution guidelines.",
+      "page": 20,
+      "index": 10,
+      "width": 571,
+      "height": 344
+    }
+  ]
+}
