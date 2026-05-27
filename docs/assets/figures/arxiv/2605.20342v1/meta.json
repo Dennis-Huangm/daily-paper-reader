@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-001.webp",
+      "caption": "Table 3: SFT data composition. “Tool” indicates whether the sample contains parallel crop_video calls.",
+      "page": 15,
+      "index": 1,
+      "width": 830,
+      "height": 190
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-002.webp",
+      "caption": "Figure 8: Training-time tool usage (rollout averages at τ=0.7, group size 8). (a) Early GRPO without intervention: tool usage drops from 2.5 to 0 by step 7 (reward hacking). (b) A no-penalty variant keeps tool calls but format stays low. (c) Under PARA-GRPO, κ stabilizes at 0.1–0.5 while fτ (green, right axis) climbs to 0.41.",
+      "page": 21,
+      "index": 2,
+      "width": 807,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-003.webp",
+      "caption": "Figure 1: Two Failure Modes of the Tool Prior Paradox. (a) Format Fragility: rollouts are wellformed under greedy decoding (sampling temperature τ=0, format reward ≈ 1); under temperature sampling within vanilla GRPO (τ=0.7), the policy reverts to the pretrained <tool_code> tag in place of <tool_call>, often drops closing tags, and stops emitting <answer> altogether (fτ≈0.1). (b) Tool Necessity Gap: tool-call count drops to near-zero within 7 steps while task accuracy oscillates between 0.45 and 0.74, as the policy converges on the shortcut of skipping tools.",
+      "page": 2,
+      "index": 3,
+      "width": 734,
+      "height": 377
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-004.webp",
+      "caption": "Figure 2: Cross-Model Evidence for the Tool Prior Paradox under Vanilla GRPO. Qwen3VL-8B (stronger tool prior) explores tool use but collapses on format, while Qwen2.5-VL-7B (weaker tool prior) stays format-perfect yet emits zero tool calls.",
+      "page": 2,
+      "index": 4,
+      "width": 400,
+      "height": 453
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-005.webp",
+      "caption": "Figure 9: Bidirectional tag reversion during RL. SFT with <tool_call>: RL also emits <tool_code> (3.6–3.9% of rollouts). SFT with <tool_code>: RL still emits <tool_call> more often (5.4%) than the SFT-trained tag (1.8%). Tag substitution does not remove Format Fragility.",
+      "page": 22,
+      "index": 5,
+      "width": 817,
+      "height": 409
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-006.webp",
+      "caption": "Figure 3: Framework Comparison. (a) Sequential Tool Calling: successive turns re-include the full context, accumulating visual-token overhead; a single mis-localized crop (✗) propagates errors with no peer to correct, yielding an error-amplified answer. (b) Parallel Tool Calling (Ours): one main agent dispatches K tool calls concurrently to K independent sub-agents (shown for K=3); mis-localized peers (✗) are outvoted by correct ones (✓), yielding an evidence-aggregated answer.",
+      "page": 4,
+      "index": 6,
+      "width": 725,
+      "height": 381
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-007.webp",
+      "caption": "Figure 5: End-to-end progression from Qwen3-VL-8B through the cold-started (step 500) checkpoint to PARA-GRPO across three 64f QA-style benchmarks (VideoMME w/o sub, VideoMME w/ sub, LongVideoBench). Numbers above each triplet are the base→PARA-GRPO delta. The cold start delivers the bulk of the eval headroom, and RL adds the training-time format and tool-use stability that transfers to deployment-time robustness (Figure 4).",
+      "page": 19,
+      "index": 7,
+      "width": 809,
+      "height": 502
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-008.webp",
+      "caption": "Figure 4: Training Dynamics across PARA-GRPO Components. Vanilla GRPO (red) stays flat at fτ≈0.13 while κ collapses to near zero; Exploration Anchoring (orange) lifts fτ but keeps κ moderate; nFrames Gating (green) pushes κ off-chart while leaving fτ low; only the full PARAGRPO (blue) stabilizes both axes.",
+      "page": 9,
+      "index": 8,
+      "width": 813,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-009.webp",
+      "caption": "Figure 6: Format↔eval correlation across 10 PARA-GRPO checkpoints. Training-time format reward (x) tracks greedy-eval VideoMME accuracy (y) at Pearson r=0.86 (p<0.01); the square marks the cold-started (step 500) pre-RL anchor.",
+      "page": 20,
+      "index": 9,
+      "width": 418,
+      "height": 470
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-010.webp",
+      "caption": "Figure 7: The Tool Prior Paradox (two-model trajectory). (a) Qwen3-VL’s format climbs from 0.13 to 0.41 under PARA-GRPO; Qwen2.5-VL stays near 0.85. (b) Qwen3-VL settles at a moderate tool-call rate (κ=0.21 calls per rollout); Qwen2.5-VL emits zero tool calls. Complements Figure 2.",
+      "page": 20,
+      "index": 10,
+      "width": 812,
+      "height": 390
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20342v1/fig-011.webp",
+      "caption": "Table 4: RL training hyperparameters.",
+      "page": 16,
+      "index": 11,
+      "width": 664,
+      "height": 529
+    }
+  ]
+}

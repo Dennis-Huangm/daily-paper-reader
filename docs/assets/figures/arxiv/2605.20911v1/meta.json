@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-001.webp",
+      "caption": "Fig. 3. Average episodic reward (top) and episode length (bottom) for the Separated (4-16) training run, as functions of number of training steps.",
+      "page": 6,
+      "index": 1,
+      "width": 714,
+      "height": 504
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-002.webp",
+      "caption": "Fig. 7. Distribution of combo choices as function of training time (measured in number of training episodes), for the Sequential Finetuning training run (including the original Separated (4-16) training run against Ryu in the first part). The vertical dashed lines indicate points in time where we switch to a new opponent character for training.",
+      "page": 11,
+      "index": 2,
+      "width": 714,
+      "height": 350
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-003.webp",
+      "caption": "Fig. 4. Distribution of frame-skip choices as function of the number of training episodes, for the Separated (4-16) training run.",
+      "page": 7,
+      "index": 3,
+      "width": 714,
+      "height": 350
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-004.webp",
+      "caption": "Fig. 5. Distribution of button choices as function of the number of training episodes, for the Separated (4-16) training run. Note that some actions (e.g., defense + light punch) correspond to multiple simultaneous button presses.",
+      "page": 7,
+      "index": 4,
+      "width": 714,
+      "height": 349
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-005.webp",
+      "caption": "Table 3. Win percentages over 20 evaluation games of the Separated (4-16) agent finetuned using two different finetuning strategies after original training against Ryu.",
+      "page": 10,
+      "index": 5,
+      "width": 704,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-006.webp",
+      "caption": "Fig. 1. Policy architecture with separate heads. There is one policy head for combinations of movement and attack actions, and another for the selection of frame-skip.",
+      "page": 3,
+      "index": 6,
+      "width": 725,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-007.webp",
+      "caption": "Fig. 6. Distribution of combo choices as function of the number of training episodes, for the Separated (4-16) training run.",
+      "page": 8,
+      "index": 7,
+      "width": 714,
+      "height": 350
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-008.webp",
+      "caption": "Fig. 2. Policy architecture with combined head. Every action is a combination of movement, attack type, and frame-skip value.",
+      "page": 4,
+      "index": 8,
+      "width": 725,
+      "height": 248
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-009.webp",
+      "caption": "Table 2. Win percentages against opponents not seen during training, over 20 evaluation games per matchup. Opponent characters (listed in increasing order of difficulty level): G = Guile (lvl1), K = Ken (lvl2), C = Chun-Li (lvl3), Z = Zangief (lvl5), D = Dhalsim (lvl6), E = E. Honda (lvl9), Bl = Blanka (lvl10), Ba = Balrog (lvl11), V = Vega (lvl13), S = Sagat (lvl14), Bi = Bison (lvl15).",
+      "page": 9,
+      "index": 9,
+      "width": 723,
+      "height": 313
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20911v1/fig-010.webp",
+      "caption": "Table 1. 95% Agresti-Coull confidence intervals for win percentages of trained agents against Ryu (built-in AI, cycling through star levels 1–8), over 100 evaluation games.",
+      "page": 5,
+      "index": 10,
+      "width": 525,
+      "height": 303
+    }
+  ]
+}

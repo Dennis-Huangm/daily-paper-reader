@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.20477v1/fig-001.webp",
+      "caption": "Figure 2: A single training step illustrated on an ALFWorld-Cool and Place example. A system prompt and its associated episode batch are sampled from the dataset and fed into the reflector, which generates multiple candidate system prompts. Each candidate is scored by replaying the same tasks with the frozen actor, and the resulting scores drive advantage estimation and parameter updates via GRPO.",
+      "page": 6,
+      "index": 1,
+      "width": 790,
+      "height": 277
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20477v1/fig-002.webp",
+      "caption": "Figure 1: The In-context Training (ICT) task. In each turn, the reflector model generates a new system prompt spi based on the previous performance of the actor model. The actor then interacts with a batch of unseen tasks using the newly generated prompt. The quality of the prompt is subsequently evaluated on a fixed held-out set of tasks. In our experiments, we fine-tune the reflector while keeping the actor model frozen.",
+      "page": 2,
+      "index": 2,
+      "width": 790,
+      "height": 365
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20477v1/fig-003.webp",
+      "caption": "Table 1: Average winning prompt success rates of our trained reflectors viz. Qwen2.5-7B-Instruct and the initial prompt (sp0), on held-out task types for varying batch sizes k. ± values indicate standard deviation across all random seeds. Our trained reflector shows better performance on the ICT task across nearly all task types in both benchmarks.",
+      "page": 7,
+      "index": 3,
+      "width": 830,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20477v1/fig-004.webp",
+      "caption": "Table 3: Hyperparameters for reflector training across all four settings.",
+      "page": 13,
+      "index": 4,
+      "width": 798,
+      "height": 309
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20477v1/fig-005.webp",
+      "caption": "Figure 4: Average winning prompt success rate up to each turn, aggregated across all tasks for each reflector. Shaded regions indicate standard deviation across all random seeds. The dashed vertical line marks turn 4, the end of the training horizon. Performance continues to improve beyond the number of steps seen during training.",
+      "page": 8,
+      "index": 5,
+      "width": 829,
+      "height": 251
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20477v1/fig-006.webp",
+      "caption": "Figure 3: Examples of our reflectors’ output on held-out task types. (Top) The reflector correctly deduces that the goal of MiniHack-Read environments is to find the item and read it, and generates a system prompt that guides the agent to do so. (Bottom) The reflector observes that the actor is struggling to understand how to cool the objects in the ALFWorld Cool and Place environments, and generates a system prompt that guides the agent to look for the fridge. There were no tasks requiring cooling or reading in the training data.",
+      "page": 8,
+      "index": 6,
+      "width": 829,
+      "height": 613
+    },
+    {
+      "url": "assets/figures/arxiv/2605.20477v1/fig-007.webp",
+      "caption": "Table 2: Cross-benchmark evaluation: average winning prompt success rate for MiniHack reflector evaluated on ALFWorld. ± values indicate standard deviation across all random seeds. Our trained k = 5 reflector was able to transfer its learning capabilities to substantially different task types.",
+      "page": 9,
+      "index": 7,
+      "width": 823,
+      "height": 199
+    }
+  ]
+}

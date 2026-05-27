@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.19151v1/fig-001.webp",
+      "caption": "Figure 2: Left: cumulative human queries, gateway versus always-escalate (Section 1). Right: a fixed probe action’s posterior approval probability tracks the drifting oracle and its abrupt reset (Section 6); the systematic gap is the Laplace-probit underconfidence noted in the text.",
+      "page": 7,
+      "index": 1,
+      "width": 956,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2605.19151v1/fig-002.webp",
+      "caption": "Figure 1: Left: the rolling policy mix. The allow share rises as the posterior concentrates (the ask band narrows), then collapses at the t = 750 trust changepoint and recovers, exactly the Section 5 and Section 6 dynamics. Right: correlated generalization (Section 7) to an action-context combination that was never queried.",
+      "page": 6,
+      "index": 2,
+      "width": 955,
+      "height": 365
+    },
+    {
+      "url": "assets/figures/arxiv/2605.19151v1/fig-003.webp",
+      "caption": "Table 2: Simulation results, mean ± std over 6 seeds. Bold marks the decisive cells: the GP gateway is far more accurate, safer, and better calibrated than a no-correlation contextual baseline. The baseline’s larger automated fraction is not a virtue (left unbolded): it automates more only by auto-deciding cases it gets wrong.",
+      "page": 6,
+      "index": 3,
+      "width": 798,
+      "height": 238
+    },
+    {
+      "url": "assets/figures/arxiv/2605.19151v1/fig-004.webp",
+      "caption": "Table 1: Structural correspondence between PBO and trust calibration.",
+      "page": 4,
+      "index": 4,
+      "width": 868,
+      "height": 225
+    }
+  ]
+}

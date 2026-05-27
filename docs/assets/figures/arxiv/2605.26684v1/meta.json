@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.26684v1/fig-001.webp",
+      "caption": "Figure 4. Training episode success rate versus steps for GraphGPO (red), GiGPO (green), and GRPO (blue) on the ALFWorld, WebShop, and Sokoban benchmarks. The lighter curves show the original curves, while the darker curves correspond to exponential moving average (EMA) smoothing with decay α = 0.95, highlighting the overall training trends.",
+      "page": 6,
+      "index": 1,
+      "width": 999,
+      "height": 240
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26684v1/fig-002.webp",
+      "caption": "Figure 6. Prompt template used for ALFWorld experiments.",
+      "page": 15,
+      "index": 2,
+      "width": 906,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26684v1/fig-003.webp",
+      "caption": "Figure 7. Prompt template used for WebShop experiments.",
+      "page": 15,
+      "index": 3,
+      "width": 906,
+      "height": 252
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26684v1/fig-004.webp",
+      "caption": "Table 1. The test performance on ALFWorld and WebShop. For ALFWorld, we report the average success rate (%) for each subtask as well as the overall result. For WebShop, we report the average task score and the average success rate (%). Most results are averaged over 3 random seeds during testing. The best performances are highlighted in bold.",
+      "page": 7,
+      "index": 4,
+      "width": 995,
+      "height": 546
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26684v1/fig-005.webp",
+      "caption": "Figure 2. Overview of group-based advantage estimation and existing issues, where squares represent states and circles represent actions. Top-left: Rollout trajectories (τ1 is a successful trajectory and τ2 is a failed trajectory), where blue squares denote identical states among themselves, yellow squares denote another set of identical states, and gray represents independent states with no shared states. Bottom-left: Trajectory-level and step-level advantage estimation. Right: Issues with credit assignment that relies solely on trajectory success in both successful and failed trajectories.",
+      "page": 3,
+      "index": 5,
+      "width": 1017,
+      "height": 413
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26684v1/fig-006.webp",
+      "caption": "Table 4. The test performance on AlfWorld with distance discount ω changes using the Qwen2.5-1.5B-Instruct. We report the average success rate (%). All results are averaged over 3 random seeds during testing. The best performances are highlighted in bold.",
+      "page": 18,
+      "index": 6,
+      "width": 1000,
+      "height": 206
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26684v1/fig-007.webp",
+      "caption": "Figure 3. Overview of GraphGPO. For simplicity, we assume all transition costs are unitary, i.e., c(s,a) = 1. Left: The aggregated state-transition graph constructed based on states from rollout trajectories, where identical states are merged (e.g., s1 = s21 = s12 = s41). Right: Graph-based advantage estimation, where the credit assignment relies on the the distance d(·) of the next state. Taking the initial state s1 as an example, the shortest path to the goal state ss is {(s1,a2 1, s2), (s2,a 1 5, ssucc)}, yielding d(s1) = 2. Moreover, the maximum shortest-step distance among all states that can reach the goal is dmax = 2.",
+      "page": 4,
+      "index": 7,
+      "width": 1017,
+      "height": 281
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26684v1/fig-008.webp",
+      "caption": "Figure 9. Validation episode success rate versus training steps for GraphGPO (red), GiGPO (green), and GRPO (blue) on the ALFWorld and WebShop benchmarks. The success rate is recorded every 10 training steps.",
+      "page": 17,
+      "index": 8,
+      "width": 993,
+      "height": 341
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26684v1/fig-009.webp",
+      "caption": "Figure 8. Prompt template used for Sokoban experiments.",
+      "page": 16,
+      "index": 9,
+      "width": 906,
+      "height": 473
+    }
+  ]
+}

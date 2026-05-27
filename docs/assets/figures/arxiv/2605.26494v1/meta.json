@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-001.webp",
+      "caption": "Table 3 | SFT benchmark at the M2 architecture scale: full attention baseline vs. hybrid SWA, covering general reasoning/knowledge and agentic tasks. General benchmarks: AIME 2025 (Mathematical Association of America, 2025), ARC-AGI-1 (Chollet, 2019), GPQA-Diamond (Rein et al., 2024), MMLUPro (Wang et al., 2024b), IFBench (Pyatkin et al., 2025). Agent benchmarks: SWE-verified (Jimenez et al., 2024), Terminal-Bench (Merrill et al., 2026), BrowseComp-zh (Zhou et al., 2025), GAIA103 (Mialon et al., 2024), XBench-ds (Chen et al., 2025), 𝜏2-Bench (Barres et al., 2025). Bold marks the highest score in each row.",
+      "page": 6,
+      "index": 1,
+      "width": 425,
+      "height": 463
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-002.webp",
+      "caption": "Figure 8 | (A) The Model Iteration System used to drive M2.7’s autonomous execution. (B) The dual-loop workflow used by our RL team.",
+      "page": 26,
+      "index": 2,
+      "width": 887,
+      "height": 479
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-003.webp",
+      "caption": "Figure 10 | Medal rate of M2.7 on MLE Bench Lite across iterative trials.",
+      "page": 30,
+      "index": 3,
+      "width": 717,
+      "height": 471
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-004.webp",
+      "caption": "Figure 2 | Multi-Token Prediction (MTP) module architecture used in M2.",
+      "page": 7,
+      "index": 4,
+      "width": 837,
+      "height": 454
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-005.webp",
+      "caption": "Figure 9 | Capability progression of the MiniMax-M2 series across eleven benchmarks. Each panel groups benchmarks by capability area, and within each benchmark the three bars correspond to the original M2 release, M2.5, and the current M2.7. AIME numbers in this figure refer to AIME 2025, the only AIME edition reported for all three checkpoints; the BrowseComp number for M2 is the Hugging Face official score. All eleven benchmarks improve across the three checkpoints, with the largest gains concentrated in the agentic deep-search, tool-use, and autonomous ML-engineering domains where the M2.5 / M2.7 data pipelines added new task families.",
+      "page": 29,
+      "index": 5,
+      "width": 973,
+      "height": 425
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-006.webp",
+      "caption": "Figure 5 | Windowed FIFO scheduling. The training scheduler only fetches completed trajectories within a sliding window of size𝑊 over the generation queue: within the window, completion order is free (mitigating head-of-line blocking); across window boundaries, strict FIFO is enforced (preserving distributional consistency).",
+      "page": 22,
+      "index": 6,
+      "width": 920,
+      "height": 347
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-007.webp",
+      "caption": "Figure 6 | Prefix tree merging. Completions that share a common prefix within a training batch are merged into a tree; the shared prefix is computed exactly once in the forward pass and the computation branches into individual response segments. The tree is deconstructed before the loss is computed independently per sample, so the procedure is mathematically equivalent to independent-sample training while eliminating redundant prefix recomputation.",
+      "page": 23,
+      "index": 7,
+      "width": 920,
+      "height": 430
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-008.webp",
+      "caption": "Table 4 | Performance of MiniMax-M2.7 versus closed-weight frontier baselines. The MiniMaxM2.5 column gives the previous public release for within-series comparison.",
+      "page": 28,
+      "index": 8,
+      "width": 596,
+      "height": 619
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-009.webp",
+      "caption": "Figure 3 | The agentic coding data pipelines for SWE and AppDev tasks.",
+      "page": 8,
+      "index": 9,
+      "width": 971,
+      "height": 577
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-010.webp",
+      "caption": "Table 1 | Ablation studies for the MoE Fine-Grained Experts design and the Multi-Token Prediction (MTP) module, evaluated on MATH (Hendrycks et al., 2021b), MMLU (Hendrycks et al., 2021a), ARC-Challenge (Clark et al., 2018), KorBench (Ma et al., 2025), and HumanEval (Chen et al., 2021). Bold marks the highest score in each row.",
+      "page": 4,
+      "index": 10,
+      "width": 717,
+      "height": 406
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-011.webp",
+      "caption": "Figure 4 | Overview of the Forge RL system. Three decoupledmodules—Agent Side, Training/Inference Side, and the middleware abstraction layer (Gateway Server, Data Pool)—communicate through standardized interfaces, allowing the agent and the training loop to scale independently.",
+      "page": 20,
+      "index": 11,
+      "width": 757,
+      "height": 602
+    },
+    {
+      "url": "assets/figures/arxiv/2605.26494v1/fig-012.webp",
+      "caption": "Table 2 | Pretraining evaluation at the M2 architecture scale: full attention baseline vs. hybrid SWA, covering general knowledge (MMLU (Hendrycks et al., 2021a), MATH (Hendrycks et al., 2021b)), long-context retrieval (HELMET (Yen et al., 2024), RULER (Hsieh et al., 2024)), and in-context translation (MTOB (Tanzer et al., 2024)). Bold marks the highest score in each row.",
+      "page": 5,
+      "index": 12,
+      "width": 433,
+      "height": 310
+    }
+  ]
+}

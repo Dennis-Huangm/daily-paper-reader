@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2605.19447v1/fig-001.webp",
+      "caption": "Figure 4: Training reward dynamics on agent environments. SERL, which combines GRPO with environmentfeedback-guided OPD, improves reward faster than pure RL baselines. Anchor-level feedback further accelerates convergence over step-level feedback by concentrating updates on semantically meaningful state changes.",
+      "page": 15,
+      "index": 1,
+      "width": 977,
+      "height": 555
+    },
+    {
+      "url": "assets/figures/arxiv/2605.19447v1/fig-002.webp",
+      "caption": "Table 1: Main comparison of SERL with representative baselines on ALFWorld and WebShop. For ALFWorld, we report the success rate (%) for each subtask and the average success rate across all subtasks. For WebShop, we report the average score and success rate (%). All self-distillation methods use immediate environment feedback 𝑟𝑡. † indicates results from prior reports.",
+      "page": 7,
+      "index": 2,
+      "width": 975,
+      "height": 359
+    },
+    {
+      "url": "assets/figures/arxiv/2605.19447v1/fig-003.webp",
+      "caption": "Table 2: Analysis of SERL with different feedback sources. We compare immediate environment feedback, next observations, future trajectories, successful trajectories, and their combinations.",
+      "page": 7,
+      "index": 3,
+      "width": 975,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2605.19447v1/fig-004.webp",
+      "caption": "Figure 1: Pipeline of environment-feedback guided agent RL. The upper part summarizes training-only hindsight sources and placement choices. The lower part shows SERL: placed feedback is exposed only to the teacher, which converts hindsight into reward-aligned action-level credit for GRPO.",
+      "page": 3,
+      "index": 4,
+      "width": 980,
+      "height": 398
+    },
+    {
+      "url": "assets/figures/arxiv/2605.19447v1/fig-005.webp",
+      "caption": "Table 3: Analysis of feedback granularity in SERL on WebShop. Step-level feedback applies distillation to every transition, whereas anchor-level feedback first groups semantically similar environment states before applying distillation.",
+      "page": 8,
+      "index": 5,
+      "width": 971,
+      "height": 336
+    },
+    {
+      "url": "assets/figures/arxiv/2605.19447v1/fig-006.webp",
+      "caption": "Figure 3: Effect of decaying the hindsight teacher signal during training. Left (a) shows reward score, Middle (b) shows policy entropy, and Right (c) shows response length. Decay uses dense teacher feedback early for credit assignment and gradually returns optimization control to reward-driven GRPO.",
+      "page": 9,
+      "index": 6,
+      "width": 508,
+      "height": 315
+    },
+    {
+      "url": "assets/figures/arxiv/2605.19447v1/fig-007.webp",
+      "caption": "Figure 2: Mechanism of SERL. A stop-gradient teacher conditioned on placed hindsight Φ(𝑡) produces a teacher–student likelihood gap. SERL signs this gap with the GRPO advantage, then clips, decays, and masks it to action tokens, so hindsight changes update magnitude and locality while reward determines direction.",
+      "page": 5,
+      "index": 7,
+      "width": 980,
+      "height": 203
+    }
+  ]
+}
