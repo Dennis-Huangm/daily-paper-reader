@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-01T22:50:54.354291+00:00",
-  "updated_date": "20260601",
+  "generated_at": "2026-07-02T21:33:32.327088+00:00",
+  "updated_date": "20260702",
   "carryover_days": 9,
   "tag_states": {
     "AG RL": {
-      "updated_date": "20260601",
+      "updated_date": "20260702",
       "carryover_days": 9,
       "items": []
     }
