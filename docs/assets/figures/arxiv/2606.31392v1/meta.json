@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-001.webp",
+      "caption": "Table 1: Main comparison on GTA and GAIA under a unified single-path, zero-verifier inference protocol. The default verifier-free ReGRPO (λval = 0) achieves the best performance among the evaluated open-source controllers on both benchmarks.",
+      "page": 11,
+      "index": 1,
+      "width": 725,
+      "height": 323
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-002.webp",
+      "caption": "Fig. 6: Input image for Case A1 (image_318.jpg): the menu the agent grounds and reads before solving the constrained selection.",
+      "page": 25,
+      "index": 2,
+      "width": 329,
+      "height": 981
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-003.webp",
+      "caption": "Fig. 5: Teacher-derived verifier subscores. At training time (sa, sg, sp) are computed deterministically from the teacher’s RoT metadata via tool/argument-signature matching, the replay success flag, and a grounded-reflection check (sg requires grounded evidence and sp > 0); no GPT-4o (or any LLM) is queried in the RL loop. The GPT-4o teacher is used only offline to synthesize the RoT reflections.",
+      "page": 21,
+      "index": 3,
+      "width": 725,
+      "height": 344
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-004.webp",
+      "caption": "Fig. 1: Pipeline of the Structured Reflective Data Engine. Given a task trajectory, we first induce a tool failure (for example, OCR on a face image returns empty text). A teacher model (GPT-4o by default) then generates a structured Reflection-of-Thought with explicit ErrorType, Evidence, and FixPlan, which explains the failure and proposes the next action (for example, switching to face detection). The agent executes the corrected action to recover and finish the task. This Error, Reflection, and Correction loop converts raw failures into grounded supervision for recovery.",
+      "page": 2,
+      "index": 4,
+      "width": 725,
+      "height": 377
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-005.webp",
+      "caption": "Table 11: Case B3 — InfoInsufficient (record 09ysaaTv_rot_s0_InfoInsufficient). A generic “what is shown” prompt returned only a scene description (no artist/year); the reflection rewrites the query to ask the tool for exactly the requested facts while keeping the correct image path.",
+      "page": 29,
+      "index": 5,
+      "width": 679,
+      "height": 206
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-006.webp",
+      "caption": "Table 12: Case B4 — GroundingDrift (record 0FLZe2lb_rot_s0_GroundingDrift). The reflection detects that the query drifted to the cutting board and utensils (“the smoothie glass is not described”) and re-anchors the visual question to the smoothie itself, so the extracted ingredients feed the actual calorie estimate.",
+      "page": 29,
+      "index": 6,
+      "width": 679,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-007.webp",
+      "caption": "Table 10: Case B2 — ToolMismatch (record 00_tFZUB_rot_s0_ToolMismatch). The reflection reads the tool’s own error (“does not access historical temperature records”), recognizes a capability mismatch, and switches from image_generator to ask_search_agent — a fact-retrieval goal routed to a search tool.",
+      "page": 28,
+      "index": 7,
+      "width": 679,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-008.webp",
+      "caption": "Fig. 4: Figure-level evidence for ReGRPO, instantiated on a verbatim synthesized RoT record (0FLZe2lb_rot_s0_GroundingDrift). (a) RoT augments the MAT SFT format with explicit reflective fields (a reflection triplet and a corrected_action). (b) The real (ErrorType, Evidence, FixPlan) reflection diagnoses a silent grounding failure—the tool answers about the cutting board rather than the smoothie—and prescribes a re-grounding fix. (c) Inference-path comparison contrasts a brittle baseline route that estimates calories from off-target items with a ReGRPO route where one confidence trigger opens a single local reflection– correction block that re-grounds to the smoothie.",
+      "page": 13,
+      "index": 8,
+      "width": 712,
+      "height": 1123
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-009.webp",
+      "caption": "Table 3: Default ReGRPO coefficients. In deployment we set λval = 0 and do not call external verifiers.",
+      "page": 19,
+      "index": 9,
+      "width": 725,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-010.webp",
+      "caption": "Table 9: Case B1 — ArgInvalid (record 00WXZu4s_rot_s2_ArgInvalid). The reflection notices the observation describes traffic signs (not the target image), traces the cause to a corrupted path (..._jpg with an extra underscore instead of ....jpg), and repairs the argument to the known-good path.",
+      "page": 27,
+      "index": 10,
+      "width": 679,
+      "height": 289
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-011.webp",
+      "caption": "Table 7: Case A1 (GTA, __pf2, id 137). Image grounding (reading the structured menu) followed by exact constrained optimization in code: the only pair summing to ≤ 10.9 is found correctly. Verified by the GTA substring rule.",
+      "page": 24,
+      "index": 11,
+      "width": 690,
+      "height": 188
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-012.webp",
+      "caption": "Fig. 3: Comparison of PPO [19], DPO [17], GRPO [20], and ReGRPO (ours). PPO and DPO optimize actions or preferences without treating reflection as a decision variable; GRPO reduces variance via group-relative rewards; ReGRPO further includes reflection in the optimized trajectory to provide stronger recovery-oriented supervision for failed steps.",
+      "page": 9,
+      "index": 12,
+      "width": 725,
+      "height": 367
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31392v1/fig-013.webp",
+      "caption": "Fig. 2: Overview of ReGRPO. (1) Structured Reflective Data Engine: from multimodal inputs and a successful action, synthesize a near-miss failure (wrong crop/tool/argument), execute it to obtain grounded failure observations (e.g., empty OCR or tool error), then use a teacher VLM (e.g., GPT-4o) to generate a structured Reflection-of-Thought triplet (ErrorType, Evidence, FixPlan). Pair the reflection with the corrected action to form reflective supervision (failure action, failure observation, reflection, corrected action), and warm-start SFT on these trajectories. (2) ReGRPO training: form groups of candidate local trajectories, including one-shot successes and reflection-based recoveries a(0)→o(0)→z→a(1)→o(1); combine execution success, an optional teacher-derived verifier score (training only, computed deterministically from the teacher’s RoT metadata with no in-loop LLM call), and reflection cost into a reward; compute group-relative advantages to update both reflection and correction tokens. (3) Zero-Verifier Inference Stage: single-path execution with a deterministic trigger that opens a local reflection-correction block only when failure evidence appears, enabling efficient recovery without external verifier calls.",
+      "page": 5,
+      "index": 13,
+      "width": 712,
+      "height": 406
+    }
+  ]
+}

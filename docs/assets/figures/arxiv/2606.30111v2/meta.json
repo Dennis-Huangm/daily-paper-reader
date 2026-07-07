@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.30111v2/fig-001.webp",
+      "caption": "Table 1: Yield across the 3×4 optimizer–executor matrix. Baseline/Best are raw SR mean±sd (%) over three post-selection passes; ∆ is the mean gain in percentage points. Small variance-overlapping gains are directional, not certified. † marks a leak-bearing SmartWay run excluded from deployable claims; ‡ marks the VoxPoser logging-fault diagnosis (§4.4).",
+      "page": 6,
+      "index": 1,
+      "width": 740,
+      "height": 402
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30111v2/fig-002.webp",
+      "caption": "Figure 1: Embodied Agent Architecture Search. (1) Four seed Executors emit per-episode traces. (2) ADAS/AFlow/KDLoop edit Executor code through a shared coding-agent harness and only the proposer differs. (3) The 3×4 ∆SR matrix shows several deployable or directional improvements plus one leak-bearing apparent gain, and surfaces three constraints of embodied AAS: evaluation noise, local edit basins, and partial credit assignment.",
+      "page": 2,
+      "index": 2,
+      "width": 810,
+      "height": 198
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30111v2/fig-003.webp",
+      "caption": "Table 2: Per-cell attempted intervention-axis counts. Bold marks the repeated edit family analyzed in §4.3. Counts include KDLoop–VoxPoser attempts before the injected logging fault was surfaced.",
+      "page": 7,
+      "index": 3,
+      "width": 802,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30111v2/fig-004.webp",
+      "caption": "Figure 3: Representative search trajectories. Each panel shows single-pass SR, best-so-far SR, the shared baseline, and the rerun-confirmed best iteration. The three cells illustrate improvement, plateau, and noisy best-selection; full trajectories are in Appendix B.",
+      "page": 7,
+      "index": 4,
+      "width": 811,
+      "height": 193
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30111v2/fig-005.webp",
+      "caption": "Figure 5: The AgentCanvas UI, for a human. The typed graph an Optimizer edits as JSON is, for a researcher, a node-and-wire canvas with an inspectable state panel (shown: the SmartWay-CE graph and its run state). The visual editor and the Optimizer’s edit/evaluate interface are two views of one artifact.",
+      "page": 13,
+      "index": 5,
+      "width": 826,
+      "height": 400
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30111v2/fig-006.webp",
+      "caption": "Figure 4: AgentCanvas as an embodied-AAS substrate. Left: an agent factors into typed nodes, typed-port wires, and shared state in a container reached by access grants (shown: the MapGPT-MP3D loop body; node colour = source nodeset; the loop is an iter out→iter in carry, not a back-edge; §A.2–§A.3). Right: the batch-eval optimisation (§A.4). Naive synchronous lock-step (top) stalls every worker on the slowest module, while AgentCanvas (bottom) decouples workers and batches whichever FM calls arrive within a short window (default 50 ms), so throughput tracks per-worker speed.",
+      "page": 12,
+      "index": 6,
+      "width": 809,
+      "height": 393
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30111v2/fig-007.webp",
+      "caption": "Figure 2: Top: AAS-method diagrams. Each variant differs in proposer logic and persistent memory. Bottom: the shared coding-agent harness. The outer loop invokes a proposer, implementer, and evaluator. Only the proposer is variant-specific, while implementation, evaluation, validation, and file access are shared.",
+      "page": 5,
+      "index": 7,
+      "width": 826,
+      "height": 490
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30111v2/fig-008.webp",
+      "caption": "Figure 6: Full 3 × 4 per-cell search trajectories (rows: optimizers, columns: executors), same conventions as Fig. 3: per-iter single-pass SR (light line + markers), best-so-far envelope (heavy line), shared baseline mean ± sd (dashed line + band), and three-pass rerun mean ± sd at the selected best iter (⋆). The success-rate axis is shared across all panels. The iteration axis is 0–20 for the ADAS / AFlow rows and 0–10 for KDLoop. In-cell shading marks the substrate-level findings: KDLoop detecting the episode-wise logging bug (green), ADAS / AFlow leaving it unfound (amber), and AFlow’s SmartWay gain riding on evaluation-information leakage (red). AFlow × SmartWay’s leak iters use dashed segments and open markers (§4.4).",
+      "page": 16,
+      "index": 8,
+      "width": 812,
+      "height": 484
+    }
+  ]
+}

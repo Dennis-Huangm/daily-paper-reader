@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-001.webp",
+      "caption": "Figure 5 | Integrated track, intensity, and motion characteristics of Tropical Cyclone Nargis (2008) produced by Agents-A1. (a) Best-track map of Nargis, with track-segment colors indicating intensity class and marker colors indicating maximum sustained wind speed; key stages are labeled A–E. (b) Temporal evolution of maximum sustained wind speed from USA/JTWC and WMO/IMD estimates, with orange shading indicating the 6 h pre-landfall period, red shading indicating the post-landfall period, and the red dashed line denoting landfall at 12:00 UTC on 2 May 2008. (c) Temporal evolution of latitude and longitude, shown on the left and right y-axes, respectively. (d) Translation speed as a function of time, with triangles marking significant acceleration and deceleration events. (e) Track heading as a function of time, with red annotations indicating rapid turning events. All times are in UTC.",
+      "page": 25,
+      "index": 1,
+      "width": 983,
+      "height": 623
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-002.webp",
+      "caption": "Table 8 | Evaluation results of Qwen3.5-35B-A3B and the tool-enhanced RL teacher on 𝜏2-bench and Vita-bench.",
+      "page": 22,
+      "index": 2,
+      "width": 964,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-003.webp",
+      "caption": "Table 1 | Our designed tool interface used by Agents-A1, according to the MLE agentic harness. The tools define a compact action space through which the model performs code authoring, execution, search-tree management, persistent memory, and delegated analysis.",
+      "page": 10,
+      "index": 3,
+      "width": 978,
+      "height": 796
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-004.webp",
+      "caption": "Table 9 | Comparison between Agents-A1 and 35B/1T-level models, where FS-O, FS-R, and MolBenchBind represent FrontierScience-Olympiad [8], FrontierScience-Research [8], and MolBench-binding affinity comparison [20]. For 35B model, we compare with recently released open-source 35B models. For 1T-level models, we compare with Kimi-K2.6 [1], DeepSeek-V4-Pro [5] with Max reasoning effort, and GPT-5.5 [2]. To ensure a fair comparison, we report the results from their original technical reports. If a model does not report the corresponding benchmark results, we evaluate it using the same evaluation protocol as our model. underline means the best result for 35B parameters, and Bold means the best overall result.",
+      "page": 23,
+      "index": 4,
+      "width": 919,
+      "height": 713
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-005.webp",
+      "caption": "Table 3 | Hyperparameters for supervised fine-tuning.",
+      "page": 13,
+      "index": 5,
+      "width": 483,
+      "height": 283
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-006.webp",
+      "caption": "Table 2 | Average token length per data source domain in the SFT dataset.",
+      "page": 13,
+      "index": 6,
+      "width": 650,
+      "height": 238
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-007.webp",
+      "caption": "Figure 2 | Overview of the three-stage training pipeline of Agents-A1. From multi-domain data to domain-specific teachers and multi-teacher on-policy distillation. First, Agents-A1 is trained with full-domain supervised fine-tuning on multi-domain long-horizon data, including search, scientific research, engineering, agentic tasks, and instruction following. Then, domain-specific teacher models are trained on each domain, and their expertise is transferred to the student model through domainrouted on-policy distillation with salient vocabulary alignment.",
+      "page": 4,
+      "index": 7,
+      "width": 983,
+      "height": 552
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-008.webp",
+      "caption": "Figure 4 | Optimization trajectory of Agents-A1 on the ICML 2013 Whale Challenge [39] over a 12-hour run. The curve shows the best validation AUC achieved over wall-clock time, with annotated breakthrough moments corresponding to distinct algorithmic improvements. The shaded band indicates run-to-run variance across independent seeds.",
+      "page": 24,
+      "index": 8,
+      "width": 983,
+      "height": 588
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-009.webp",
+      "caption": "Table 4 | Performance comparison of Qwen3.5-35B-A3B, Agents-A1-SFT, and Agents-A1.",
+      "page": 20,
+      "index": 9,
+      "width": 918,
+      "height": 725
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30616v1/fig-010.webp",
+      "caption": "Figure 3 | Overview of the knowledge-action infrastructure of Agents-A1. Heterogeneous corpora are decomposed into atomic abilities and organized into a knowledge-action graph (KAG) that records evidence, actions, observations, and verifier outcomes. A tool-augmented self-play loop expands the KAG into domain-specific sub-KAGs for downstream task construction.",
+      "page": 5,
+      "index": 10,
+      "width": 983,
+      "height": 502
+    }
+  ]
+}

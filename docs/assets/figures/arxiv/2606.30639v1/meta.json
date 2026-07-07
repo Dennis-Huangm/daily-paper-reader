@@ -1,0 +1,190 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-001.webp",
+      "caption": "Figure 1: Contrast of different world models. Frozen (a) and offline-tuned (b) world models supply predictions to the agent without revising from deployment-time interaction; self-evolving (c) world models accumulate realized transitions and evolve through mismatches between predicted and observed outcomes.",
+      "page": 1,
+      "index": 1,
+      "width": 434,
+      "height": 509
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-002.webp",
+      "caption": "Table 1: World model prediction accuracy on Word2World; higher is better for all metrics. w/o ME removes episodic memory, while w/o MS removes semantic memory. All memories Mt are initialized empty and updated online during interaction. Unless otherwise specified, WORLDEVOLVER here uses kME =5 and kMS =1.",
+      "page": 6,
+      "index": 2,
+      "width": 946,
+      "height": 553
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-003.webp",
+      "caption": "Figure 9: Heatmap of agent planning success rates (%) for GPT-5.4-mini across different world models, reported as best-of-5 performance on ALFWorld and ScienceWorld task types.",
+      "page": 15,
+      "index": 3,
+      "width": 873,
+      "height": 430
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-004.webp",
+      "caption": "Figure 10: Heatmap of agent planning success rates (%) for Gemma-4-26B-A4B across different world models, reported as best-of-5 performance on ALFWorld and ScienceWorld task types.",
+      "page": 15,
+      "index": 4,
+      "width": 873,
+      "height": 430
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-005.webp",
+      "caption": "Figure 8: Agent Planning Success Rate (%) by AgentBoard easy/hard split, reported as best-of-5.",
+      "page": 14,
+      "index": 5,
+      "width": 442,
+      "height": 693
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-006.webp",
+      "caption": "Figure 7: Trajectory-level world model prediction Exact Match (%) along the Word2World deployment order. We report macro Exact Match averaged over the prediction steps within each trajectory.",
+      "page": 14,
+      "index": 6,
+      "width": 924,
+      "height": 357
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-007.webp",
+      "caption": "Figure 19: Episodic Memory world model prompt, augmented with top-kME action-keyed transitions retrieved from ME via Jaccard similarity over actions and prepended as a grounding block.",
+      "page": 18,
+      "index": 7,
+      "width": 950,
+      "height": 358
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-008.webp",
+      "caption": "Figure 18: ITP-I world model prompt following the Imagine-then-Plan (Liu et al., 2026) inference, with horizon k fixed at 1 for World Model Prediction evaluation and selected by the model during Agent Planning.",
+      "page": 18,
+      "index": 8,
+      "width": 950,
+      "height": 318
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-009.webp",
+      "caption": "Figure 17: RAWM-ϕ (Yang et al., 2025) world model prompt, augmented with top-k transitions retrieved by cosine similarity over Qwen3-Embedding-8B embeddings of the live (st, at) query against the fixed Word2World corpus.",
+      "page": 18,
+      "index": 9,
+      "width": 950,
+      "height": 312
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-010.webp",
+      "caption": "Table 4: World model prediction runtime, reported as seconds per evaluated transition and total GPU hours across both environments on a single Nvidia H200 GPU.",
+      "page": 13,
+      "index": 10,
+      "width": 454,
+      "height": 398
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-011.webp",
+      "caption": "Figure 4: Cumulative best-of-L Agent Planning Success Rate on ALFWorld and ScienceWorld.",
+      "page": 8,
+      "index": 11,
+      "width": 935,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-012.webp",
+      "caption": "Figure 5: Relative gains from memory hyperparameters for world model prediction, reported as ∆EM. kMS varies semantic-memory batch size relative to 1, while kME varies episodic-memory retrieval size relative to 5.",
+      "page": 8,
+      "index": 12,
+      "width": 442,
+      "height": 380
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-013.webp",
+      "caption": "Figure 3: Overview of WORLDEVOLVER. A frozen world model produces action-conditioned predictions using Episodic Memory for exploitation through retrieval-based simulation over previous action transitions and Semantic Memory for exploration through persistent heuristic-rule discovery from prediction-observation mismatches. Selective Foresight filters the prediction before it conditions the frozen agent.",
+      "page": 4,
+      "index": 13,
+      "width": 929,
+      "height": 333
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-014.webp",
+      "caption": "Figure 22: Observation factorizer prompt, converting predicted and gold observations into factorized triples whose set difference determines whether Semantic Memory identifies a mismatch.",
+      "page": 19,
+      "index": 14,
+      "width": 950,
+      "height": 375
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-015.webp",
+      "caption": "Figure 20: Semantic Memory world model prompt, grounded by mismatch-derived persistence rules from MS rendered as frame axioms and ranked by accumulated evidence score.",
+      "page": 19,
+      "index": 15,
+      "width": 950,
+      "height": 337
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-016.webp",
+      "caption": "Figure 21: WORLDEVOLVER world model prompt combining Episodic and Semantic Memory grounding blocks, with foresight-based confidence filtering applied post-generation without modifying the prompt.",
+      "page": 19,
+      "index": 16,
+      "width": 950,
+      "height": 412
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-017.webp",
+      "caption": "Figure 15: ReflAct agent prompt for ScienceWorld, inheriting the six ScienceWorld command groups.",
+      "page": 17,
+      "index": 17,
+      "width": 950,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-018.webp",
+      "caption": "Figure 14: ReAct agent prompt for ScienceWorld, enumerating six command groups (Manipulation, Inspection, Device Operations, Movement, Miscellaneous, Information) and a per-turn Thought/Action response format.",
+      "page": 17,
+      "index": 18,
+      "width": 950,
+      "height": 458
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-019.webp",
+      "caption": "Figure 16: Zero-Shot world model prompt.",
+      "page": 17,
+      "index": 19,
+      "width": 950,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-020.webp",
+      "caption": "Figure 23: Preservation-rule extractor prompt, processing a batch of kMS mismatches per Semantic Memory update and returning a JSON rule list appended to MS for use in WORLDEVOLVER grounding.",
+      "page": 20,
+      "index": 20,
+      "width": 950,
+      "height": 764
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-021.webp",
+      "caption": "Figure 12: ReAct agent prompt for ALFWorld, with placeholders for available actions and the response format.",
+      "page": 16,
+      "index": 21,
+      "width": 950,
+      "height": 439
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-022.webp",
+      "caption": "Figure 13: ReflAct agent prompt for ALFWorld, replacing the ReAct Thought with Reflection.",
+      "page": 16,
+      "index": 22,
+      "width": 950,
+      "height": 321
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30639v1/fig-023.webp",
+      "caption": "Figure 11: Selective foresight confidence calibration, measured as Exact Match on the top-confidence prefix.",
+      "page": 16,
+      "index": 23,
+      "width": 921,
+      "height": 358
+    }
+  ]
+}

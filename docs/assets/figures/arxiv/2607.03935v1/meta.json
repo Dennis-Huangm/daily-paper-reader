@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.03935v1/fig-001.webp",
+      "caption": "Figure 3: Heilbronn Triangles evaluator alignment trajectory for co-evolved vs. frozen policy runs. The exploit gap (shaded red) is closed rapidly once the evaluator is hardened. Under frozen weights, performance plateaus, whereas co-evolution allows the policy to internalize constraints and improve.",
+      "page": 6,
+      "index": 1,
+      "width": 851,
+      "height": 332
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03935v1/fig-002.webp",
+      "caption": "Figure 1: The overall pipeline of the HASE method and comparison with other methods. HASE differs from pipeline-style harness search: there is no external powerful coding proposer. The same Qwen3-8B policy proposes task solutions and harness edits; a deterministic phase-level controller only validates, reviews, and commits patches emitted by that policy.",
+      "page": 3,
+      "index": 2,
+      "width": 923,
+      "height": 525
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03935v1/fig-003.webp",
+      "caption": "Figure 5: Point configuration visualizer in the containing equilateral triangle. (A) Phase 0 exploit placement: out-of-bounds points (red crosses) cheat the weak evaluator to get a proxy score of 0.02708 (oracle score 0.0000). (B) Phase 8 valid placement: all points (green dots) are strictly inside, with bottleneck minimum area highlighted in yellow.",
+      "page": 13,
+      "index": 3,
+      "width": 730,
+      "height": 373
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03935v1/fig-004.webp",
+      "caption": "Figure 4: Alpha-mining guidance-harness evolution in pseudo-code. HASE evolves the prompt priors and factorpool view from recency-only context to IC-ranked retrieval.",
+      "page": 8,
+      "index": 4,
+      "width": 923,
+      "height": 225
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03935v1/fig-005.webp",
+      "caption": "Table 3: Performance comparison between HASE (8B) and baseline methods on the CSI300 (10-day horizon). Baseline values are referenced from CogAlpha (Liu et al., 2026).",
+      "page": 8,
+      "index": 5,
+      "width": 825,
+      "height": 257
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03935v1/fig-006.webp",
+      "caption": "Figure 2: Circle-packing evaluator repair. (a) Co-evolution alignment dynamics (log scale): the evaluator is exploited twice (proxy score high while the oracle returns 0, red markers); HASE detects each divergence and repairs the evaluator twice, and the eventual score improves to 2.635983, matching the AlphaEvolve state of the art. (b) The staged validator code that causes those two dips: the initial evaluator omits the boundary and overlap guards (exploit at Phases 0–1); the first patch adds both guards but leaves the overlap tolerance at 10−8. The second patch updates the tolerance to the task-specified 10−12 and keeps proxy and oracle aligned thereafter.",
+      "page": 5,
+      "index": 6,
+      "width": 927,
+      "height": 333
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.29758v1/fig-001.webp",
+      "caption": "Figure 2. Efficiency of PS-PPO: PS-PPO matches baseline performance while reducing training-time compute. We report reward versus wall-clock time, training time per step, peak GPU memory, and loss-applied versus backpropagated tokens. Here, training time denotes the time spent on the gradient-update stage (including computing ξ1:T and the forward/backward passes), excluding rollout/generation. All methods use the same number of training steps with K=8 rollouts per prompt and are trained for 3 epochs.",
+      "page": 6,
+      "index": 1,
+      "width": 1006,
+      "height": 192
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29758v1/fig-002.webp",
+      "caption": "Figure 3. Understanding the effect of cutoff strategies. (a) Reward versus wall-clock time under a matched backpropagation budget (B=512, T=1024). PS-PPO (Optimized) reaches the plateau earlier than alternative cutoff strategies. (b) Training time per step (excluding rollout/generation) with a breakdown into forward/backward, cutoff-probability (ξ) computation, and other costs. Prompt-conditioned cutoffs (Optimized/Heuristic) incur additional ξ-computation overhead, but achieve faster progress in wall-clock time.",
+      "page": 8,
+      "index": 2,
+      "width": 473,
+      "height": 537
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29758v1/fig-003.webp",
+      "caption": "Table 7. Results on generation tasks measured by average reward. All values are averaged over three independent runs. (Bold: best, underlined: second best).",
+      "page": 19,
+      "index": 3,
+      "width": 854,
+      "height": 416
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29758v1/fig-004.webp",
+      "caption": "Table 8. Efficiency–performance trade-off on continuous-reward text generation tasks. Total training time and peak GPU memory are reported together with average reward. All values are averaged over three independent runs.",
+      "page": 19,
+      "index": 4,
+      "width": 754,
+      "height": 184
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29758v1/fig-005.webp",
+      "caption": "Figure 4. Token-wise correlation between the output-head score norm ∥∇θout log πθ(ot | st)∥ (x-axis) and the full score norm ∥∇θ log πθ(ot | st)∥ (y-axis) on Qwen2.5-Math-7B (log–log scale). We plot tokens with numerically non-negligible score norms for visual clarity. The strong correlation supports using the output-head term as a lightweight proxy.",
+      "page": 20,
+      "index": 5,
+      "width": 418,
+      "height": 315
+    }
+  ]
+}

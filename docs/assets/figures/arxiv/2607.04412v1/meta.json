@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.04412v1/fig-001.webp",
+      "caption": "Figure 4: Qualitative example: defining humanistic techniques and walking through the five named methods is a task on which the policy’s base rollouts saturate at the ceiling (σbase = 0). Once the constraint asks each technique’s originator to be named, the rollouts hallucinate to differing degrees: Rollout A misattributes some methods but keeps correct anchors such as Gattegno for the Silent Way, while Rollout B fabricates throughout and compounds the error by attributing Suggestopedia to Ivan Pavlov inside a contribution sentence.",
+      "page": 26,
+      "index": 1,
+      "width": 813,
+      "height": 535
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04412v1/fig-002.webp",
+      "caption": "Figure 1: Overview of LLM-as-a-Tutor: when the policy’s answers to a prompt are indistinguishable in quality, a tutor LLM adds a constraint to make the prompt more challenging. (Left) Static RL training corpora contain prompts that are non-challenging for the current policy and provide little learning signal. (Right) The tutor examines a pair of policy rollouts; if their quality is indistinguishable, it appends a constraint that turns the non-challenging prompt into a challenging one and elicits variance among the new rollouts.",
+      "page": 2,
+      "index": 2,
+      "width": 802,
+      "height": 411
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04412v1/fig-003.webp",
+      "caption": "Figure 7: Qualitative example: producing the alien-gestalt narrative from the writing prompt is a task on which every base rollout scores at the ceiling (µbase = 99.6, σbase = 0.4). Requiring an actionable transformation mechanism stresses the original second-human-explainer frame. Rollout A channels the mechanism through her dialogue and keeps the frame intact, whereas Rollout B collapses into first-person technical exposition in which no second human ever arrives.",
+      "page": 29,
+      "index": 3,
+      "width": 813,
+      "height": 744
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04412v1/fig-004.webp",
+      "caption": "Table 4: Training hyperparameters.",
+      "page": 14,
+      "index": 4,
+      "width": 382,
+      "height": 380
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04412v1/fig-005.webp",
+      "caption": "Figure 5: Qualitative example: the original rollouts score consistently high on formatting the citation. Once the constraint asks for an explicit statement of the italicisation rules, the rollouts diverge on which components they italicise. Rollout A keeps italics on the title and journal name, matching standard OSCOLA practice. Rollout B instead italicises every component, including the author and date that OSCOLA does not italicise, and rewrites the footnote as an invented [Author, Date] form. By eliciting this OSCOLA violation, the constraint pinpoints a formatting weakness in the policy that the original prompt left hidden.",
+      "page": 27,
+      "index": 5,
+      "width": 813,
+      "height": 636
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04412v1/fig-006.webp",
+      "caption": "Figure 3: A single atomic constraint reinstates discriminative reward signal on a non-challenging prompt. Before adding a constraint c, all rollouts score 100 (std = 0); after, reward mean drops to 92.5 with std 14.9. Rollout A explicitly cites a named policy (satisfying c); Rollout B deflects to “consult your supervisor” without naming one.",
+      "page": 9,
+      "index": 6,
+      "width": 814,
+      "height": 555
+    }
+  ]
+}

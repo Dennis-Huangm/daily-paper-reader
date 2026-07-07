@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.02846v1/fig-001.webp",
+      "caption": "Figure 1: Upper left: Isolated skills resemble scattered manuals whose assumed tools and parts are potentially inconsistent. Upper right: Monolithic symbolic world models resemble an overcomplicated machine that attempts to model all transitions. Bottom: OCM standardizes objects and mechanisms first, then grounds procedural knowledge in this shared object model, making experience easier to organize, verify, and reuse.",
+      "page": 1,
+      "index": 1,
+      "width": 456,
+      "height": 425
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02846v1/fig-002.webp",
+      "caption": "Table 1: Performance and Average Ranking Comparison. Results are reported on ScienceWorld, ALFWorld, and PlanCraft. SR means Success Rate. The best and second-best performances are highlighted in Bold and Underline.",
+      "page": 6,
+      "index": 2,
+      "width": 937,
+      "height": 294
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02846v1/fig-003.webp",
+      "caption": "Figure 6: Excerpt of the object knowledge used by the melting-point procedure. The full object_knowledge.py contains additional unrelated methods; here we retain the state, temperature, focus, inventory, and containeraccessibility interfaces needed for this case.",
+      "page": 15,
+      "index": 3,
+      "width": 950,
+      "height": 931
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02846v1/fig-004.webp",
+      "caption": "Figure 4: Analysis of OCM across ScienceWorld and PlanCraft. (a) Cumulative performance over the online evaluation sequence, measured by reward on ScienceWorld and success rate on PlanCraft. (b) Paired win/loss comparisons between OCM and each baseline on the same task instances. Bars to the right indicate tasks solved by OCM but not the baseline, while bars to the left indicate the opposite. (c) Growth of OCM’s environment knowledge over time. Object and procedural entries both expand throughout evaluation, showing that OCM accumulates reusable environment structure rather than relying only on per-task reflection.",
+      "page": 7,
+      "index": 4,
+      "width": 925,
+      "height": 575
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02846v1/fig-005.webp",
+      "caption": "Table 4: Evidence that OCM reuses previously learned procedural knowledge on a later ScienceWorld task where all baselines fail.",
+      "page": 14,
+      "index": 5,
+      "width": 928,
+      "height": 372
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02846v1/fig-006.webp",
+      "caption": "Figure 5: Example of Object-Centric Knowledge Update. From a successful PlanCraft trajectory for crafting pink_glazed_terracotta, OCM extracts object knowledge for the intermediate pink_terracotta recipe.",
+      "page": 8,
+      "index": 6,
+      "width": 946,
+      "height": 256
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02846v1/fig-007.webp",
+      "caption": "Figure 2: Overview of OCM. (a) During an episode, the agent uses progressive knowledge disclosure: it first observes signatures of learned object and procedure codes, then selectively inspects relevant source code before choosing an environment action. (b) After each episode, OCM converts the trajectory into an object-centric update plan, generates new candidate object and procedure code, and commits the update only after verification, where all procedure files must execute successfully against the updated object code. By grounding procedure knowledge in shared object knowledge, OCM maintains an executable and auditable environment model for future interactions.",
+      "page": 4,
+      "index": 7,
+      "width": 946,
+      "height": 463
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02846v1/fig-008.webp",
+      "caption": "Figure 7: Excerpt of the learned procedural code used by OCM for measuring and sorting a substance by melting point. The full procedure contains longer docstrings and additional comments; this excerpt preserves the executable control flow and calls into the object interface in Figure 6.",
+      "page": 16,
+      "index": 8,
+      "width": 950,
+      "height": 1246
+    }
+  ]
+}

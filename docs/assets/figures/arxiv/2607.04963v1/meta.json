@@ -1,0 +1,134 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-001.webp",
+      "caption": "Table 1: Performance on ALFWorld and WebShop. Results are averaged over 3 random seeds. For ALFWorld, we report the average success rate (%) for each subtask as well as the overall result. For WebShop, we report both the average score and the average success rate (%). The best and second-best results are bold and underlined. Methods highlighted in gray are our implemented results. The remaining results are adopted from GiGPO (Feng et al., 2025) and EMPG (Wang et al., 2025a).",
+      "page": 6,
+      "index": 1,
+      "width": 941,
+      "height": 521
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-002.webp",
+      "caption": "Figure 7: Sensitivity analysis of weighting coefficients α and γ on WebShop, under the constraint α = γ. The standard global KL penalty coefficient is fixed at β = 0.01.",
+      "page": 15,
+      "index": 2,
+      "width": 461,
+      "height": 307
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-003.webp",
+      "caption": "Figure 12: The complete prompt template of ALFWorld agents.",
+      "page": 21,
+      "index": 3,
+      "width": 937,
+      "height": 346
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-004.webp",
+      "caption": "Figure 14: The complete prompt template of WebShop agents.",
+      "page": 21,
+      "index": 4,
+      "width": 937,
+      "height": 375
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-005.webp",
+      "caption": "Figure 13: The trajectory-blind prompt template of ALFWorld agents.",
+      "page": 21,
+      "index": 5,
+      "width": 937,
+      "height": 292
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-006.webp",
+      "caption": "Table 2: Performance on search-augmented QA tasks. STAPO is trained on NQ and HotpotQA. † and ⋆ indicate in-domain and out-of-domain datasets, respectively. The best and second-best results are bold and underlined. Methods highlighted in gray are our implemented results. The remaining results are adopted from GiGPO (Feng et al., 2025).",
+      "page": 7,
+      "index": 6,
+      "width": 939,
+      "height": 364
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-007.webp",
+      "caption": "Figure 15: The trajectory-blind prompt template of WebShop agents.",
+      "page": 22,
+      "index": 7,
+      "width": 937,
+      "height": 319
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-008.webp",
+      "caption": "Figure 16: The complete prompt template of Search agents.",
+      "page": 22,
+      "index": 8,
+      "width": 937,
+      "height": 458
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-009.webp",
+      "caption": "Figure 17: The trajectory-blind prompt template of Search agents.",
+      "page": 22,
+      "index": 9,
+      "width": 937,
+      "height": 348
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-010.webp",
+      "caption": "Figure 8: Illustration of task goal neglect in multi-turn interactions.",
+      "page": 18,
+      "index": 10,
+      "width": 937,
+      "height": 1181
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-011.webp",
+      "caption": "Figure 4: Ablation study of localization sensitivity. “All” means non-selective.",
+      "page": 8,
+      "index": 11,
+      "width": 457,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-012.webp",
+      "caption": "Figure 6: Training dynamics on WebShop using LLaMA-3.1-8B-Instruct. Solid lines denote exponential moving averages. “TA” refers to Trajectory-Aware.",
+      "page": 8,
+      "index": 12,
+      "width": 458,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-013.webp",
+      "caption": "Figure 9: Illustration of interaction history neglect in multi-turn interactions.",
+      "page": 19,
+      "index": 13,
+      "width": 937,
+      "height": 1039
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-014.webp",
+      "caption": "Figure 11: Illustration of normalized entropy reducing false negatives in states with a small action space.",
+      "page": 20,
+      "index": 14,
+      "width": 937,
+      "height": 454
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-015.webp",
+      "caption": "Figure 10: Illustration of normalized entropy avoiding false positives in states with a large action space.",
+      "page": 20,
+      "index": 15,
+      "width": 937,
+      "height": 821
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04963v1/fig-016.webp",
+      "caption": "Figure 3: The framework of STAPO. It dynamically locates outlier steps utilizing normalized entropy statistics and optimizes them via a joint mechanism of trajectory-aware reward and trajectory-independent penalty.",
+      "page": 5,
+      "index": 16,
+      "width": 925,
+      "height": 440
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.30072v1/fig-001.webp",
+      "caption": "Figure 5: Ablation Results for Agent-Chaining",
+      "page": 11,
+      "index": 1,
+      "width": 817,
+      "height": 180
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30072v1/fig-002.webp",
+      "caption": "Figure 1: Value Network Architecture for the PPO instantiation of ACPO (ACPPO) with N = 3 agents. Each agent’s value function V (i) takes the state augmented with preceding belief estimates as input. TD residuals chain across Agent 1, Agent 2, and Agent 3.",
+      "page": 7,
+      "index": 2,
+      "width": 826,
+      "height": 206
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30072v1/fig-003.webp",
+      "caption": "Figure 2: Policy architecture for ACPO under (a) fully observable settings (MMDP) and (b) partially observable settings (Dec-POMDP). In the MMDP case, φ⃗<it is computed exactly by querying preceding agents’ networks with the shared state st. In the Dec-POMDP case, each agent learns an action belief network π̂(j) to approximate φ(j) t from its own history.",
+      "page": 8,
+      "index": 3,
+      "width": 818,
+      "height": 322
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30072v1/fig-004.webp",
+      "caption": "Table 1: A 3x3 Matrix Game and converged policy values when initialized to π(1)(A) = π(2)(A) = 0.6. ACPO (Ours) converges to the optimal joint policy which selects (C,C) regardless of the initialization.",
+      "page": 4,
+      "index": 4,
+      "width": 827,
+      "height": 219
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30072v1/fig-005.webp",
+      "caption": "Figure 3: Return for Multi-Robot Warehouse (RWARE) where return is the number of items collected and delivered successfully. The mean and standard error over 10 seeds are reported for all tasks. The performance advantage of ACPPO grows significantly as the number of agents increase and the map becomes smaller, where agents need higher levels of coordination being crowded in a tight space.",
+      "page": 9,
+      "index": 5,
+      "width": 827,
+      "height": 329
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.29863v1/fig-001.webp",
+      "caption": "Figure 1: KbPO vs. KbSD across the four knowledgeboundary quadrants. KbPO supplies only a terminal reward, whereas KbSD adds dense token-level supervision at each reasoning step with quadrant-adaptive KL objectives: reverse KL for Q1, bidirectional KL for Q2/Q4, and forward KL for Q3.",
+      "page": 1,
+      "index": 1,
+      "width": 500,
+      "height": 374
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29863v1/fig-002.webp",
+      "caption": "Figure 2: Overview of KBSD. We first synthesize boundary-challenging queries, then estimate each query’s knowledge state using parametric certainty, semantic stability, and retrieval quality, and assign it to one of four behavioral quadrants. Based on these signals, a privileged hinted teacher generates calibrated reasoning demonstrations, which are distilled into a hint-free student with quadrant-adaptive objectives jointly optimized with GRPO. In this way, KBSD combines dense process-level supervision with sparse reward optimization.",
+      "page": 3,
+      "index": 2,
+      "width": 1054,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29863v1/fig-003.webp",
+      "caption": "Table 1: Comparison of Unreliability Rate (%) (Lower is Better) across multi-hop and open-domain benchmarks. Score = F1 + Refusal Rate; Unreliability Rate = 1− Score.",
+      "page": 7,
+      "index": 3,
+      "width": 1044,
+      "height": 663
+    }
+  ]
+}

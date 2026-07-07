@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.04763v1/fig-001.webp",
+      "caption": "Table 4: Distillation on search. Each student is trained and evaluated in the search environment on general-QA and multi-hop-QA benchmarks († in-domain, ∗ out-of-domain). The teacher stays in the same Qwen3-4B family and remains reliable on student-induced histories, so the student-occupancy shift dominates and ReOPD essentially matches student-on-policy OPD. The better of OPD and ReOPD in each column is in bold; GRPO is the teacher’s own RL result, shown for reference.",
+      "page": 15,
+      "index": 1,
+      "width": 902,
+      "height": 348
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04763v1/fig-002.webp",
+      "caption": "Figure 2: Comparison between OPD and ReOPD for agentic tasks. Up: OPD with online environment. The environment is always alive during training. And all steps equally contribute to the loss. Down: ReOPD with offline environment. The environment is only alive for collecting the teacher’s trajectories, which can happen during the training of the teacher agent by using RL, like GRPO. Afterwards, the environment is not needed for the training of the student agent. The earlier steps contribute more to the loss.",
+      "page": 2,
+      "index": 2,
+      "width": 956,
+      "height": 466
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04763v1/fig-003.webp",
+      "caption": "Figure 4: Step index is a strong proxy for the likelihood-ratio weight. For each supervised position we compute the per-position weight r̂t = ∏ s<t πθold(as)/πT (as) – the student-to-teacher likelihood ratio along the teacher prefix – and plot it against the step index t. The empirical weight decays with depth, because each factor compares the student’s and teacher’s probability of the teacher’s own recorded action and is typically below one, so the product shrinks as the prefix lengthens. This makes step index a cheap proxy for the expensive prefix-level ratio and motivates replacing the explicit ratio with the one-parameter step-decay schedule ω(t) = κt introduced below.",
+      "page": 10,
+      "index": 3,
+      "width": 569,
+      "height": 309
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04763v1/fig-004.webp",
+      "caption": "Table 3: Distillation on mathematical reasoning. Each student is trained and evaluated in the math (Python-tool) environment on six competition benchmarks, under teachers of increasing scale. Across teacher scales, ReOPD improves over student-on-policy OPD on mathematical reasoning – the teacher-reliability regime of Section 3 – and stays close to OPD when the gap is small. The better of OPD and ReOPD in each column is in bold; GRPO is the teacher’s own RL result, shown for reference.",
+      "page": 14,
+      "index": 4,
+      "width": 798,
+      "height": 590
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04763v1/fig-005.webp",
+      "caption": "Figure 3: Training a shared student agent on multiple heterogeneous environments with OPD and ReOPD. Left: With an increasing number of environments, the operational complexity grows for OPD due to the heavy deployment of the environments. Right: ReOPD doesn’t require the deployment of all environments at the same time. The teacher’s trajectories can be collected separately for different environments, and then be merged into a unified pool for the later training of the student agent without any online environment.",
+      "page": 3,
+      "index": 5,
+      "width": 954,
+      "height": 429
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04763v1/fig-006.webp",
+      "caption": "Figure 6: Prefix source: the teacher’s own model gives the best prefixes, not a stronger generator. Teacher Qwen3-8B, student Qwen3-4B-Instruct-2507; we fix the distillation target to the teacher and vary only the prefix generator. Performance peaks when prefixes come from the teacher itself and degrades with larger or stronger generators – a direct test of the teacher-reliability view: the teacher’s conditional is trustworthy only on prefixes within its own support.",
+      "page": 18,
+      "index": 6,
+      "width": 963,
+      "height": 311
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04763v1/fig-007.webp",
+      "caption": "Table 1: Training parameters for different methods. GRPO is only used to train the teacher model. And the teacher’s rollouts for GRPO are reused for ReOPD.",
+      "page": 13,
+      "index": 7,
+      "width": 922,
+      "height": 321
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04763v1/fig-008.webp",
+      "caption": "Figure 5: Favoring early, low-shift steps improves distillation. Both panels use ReOPD’s sampling implementation and put more training mass on early interaction steps, where the student stays close to the teacher and the two-sided shift is small. (a) Sampling by chunk : drawing supervised positions from early chunks yields the best student, and pushing mass to later chunks degrades it. (b) Sampling with decay κ: applying the step-decay κt as the sampling probability, a moderate decay outperforms uniform sampling (κ=1) and tracks the same trend. Final performance is governed by how strongly early steps are favored, validating the step-decay of Section 4. The student model is Qwen3-4B-Instruct-2507, and the models in the legends are teacher model.",
+      "page": 17,
+      "index": 8,
+      "width": 932,
+      "height": 343
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04763v1/fig-009.webp",
+      "caption": "Table 5: Multi-environment distillation: one student for both domains. A single Qwen3-4B student is trained jointly across the math and search environments and evaluated on both – unlike the singleenvironment results (Tables 3 and 4), where a separate student is trained per domain. The teacher, by contrast, is not shared across domains: each environment has its own RL-trained Qwen3-4B teacher, so the GRPO reference columns for math and search are two different models. Distilled from its environment’s teacher, the single joint student stays on par with student-on-policy OPD in each domain, showing that ReOPD’s reliability-aware schedule carries over to joint training. Benchmarks are rows and methods are columns († in-domain, ∗ out-of-domain); the student base model is Qwen3-4B-Instruct-2507, and GRPO is the teacher’s own RL result for reference. For each benchmark the better of OPD and ReOPD is in bold.",
+      "page": 16,
+      "index": 9,
+      "width": 706,
+      "height": 423
+    }
+  ]
+}

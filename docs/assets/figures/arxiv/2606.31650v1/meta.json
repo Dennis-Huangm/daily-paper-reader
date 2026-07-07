@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.31650v1/fig-001.webp",
+      "caption": "Figure 3: Overview of ECHO. ECHO stores completed turns as source-indexed memories, selects useful memories for bounded context reconstruction, and reuses the same source trace for credit assignment.",
+      "page": 6,
+      "index": 1,
+      "width": 925,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31650v1/fig-002.webp",
+      "caption": "Figure 6: Existing context reconstruction strategies reduce context length but often lose full traceability. ECHO uses source-indexed selective memory to preserve evidence traceability for outcome-credit routing.",
+      "page": 14,
+      "index": 2,
+      "width": 921,
+      "height": 321
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31650v1/fig-003.webp",
+      "caption": "Figure 4: Ablation study on BrowseComp-Plus. (a) Learned source selection in ECHO outperforms semantic top-k retrieval, while compact last-turn findings perform comparably to full observations under the same retrieval rule. (b) Removing traceable credit routing reduces accuracy and stability, while turn-level IS further induces rapid turn growth and lower accuracy.",
+      "page": 8,
+      "index": 3,
+      "width": 900,
+      "height": 577
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31650v1/fig-004.webp",
+      "caption": "Table 1: Context-managed rollout strategies under the (M,Φ) interface. Traceability indicates whether reconstructed context remains addressable at the level of original environment turns.",
+      "page": 4,
+      "index": 4,
+      "width": 917,
+      "height": 293
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31650v1/fig-005.webp",
+      "caption": "Table 2: Zero-shot generalization results across various benchmarks. Bold denotes the best performance and underlined denotes the second-best. CA denotes credit assignment, Traceable CA denotes source-indexed credit routing, and Turn-level IS denotes importance-sampling ratios aggregated at the turn level.",
+      "page": 9,
+      "index": 5,
+      "width": 937,
+      "height": 294
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31650v1/fig-006.webp",
+      "caption": "Figure 5: Training dynamics on BrowseComp-Plus with the Qwen3-30B-A3B-Instruct MoE backbone. SUPO is shown up to step 50, where the run enters a collapsed regime with sharply degraded accuracy and inflated average turns and trajectory volume.",
+      "page": 9,
+      "index": 6,
+      "width": 919,
+      "height": 251
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31650v1/fig-007.webp",
+      "caption": "Figure 2: Training diagnostics on long-horizon search. Summarization-based context management enables longer rollouts, but leads to turn proliferation, longer responses, higher generation time, and increased trajectory volume.",
+      "page": 5,
+      "index": 7,
+      "width": 924,
+      "height": 197
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.30420v1/fig-001.webp",
+      "caption": "Figure 2. Sensitivity analysis of the resampling threshold τ . (a) AIME’24 performance (Mean@32) under different values of τ , reporting the best performance achieved during training. (b) Evolution of the resampled ratio across training steps, representing the proportion of resampled tokens within the experience-augmented responses. (c) Accuracy of experience-augmented responses across training steps, reflecting the quality of experience injection.",
+      "page": 6,
+      "index": 1,
+      "width": 1017,
+      "height": 210
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30420v1/fig-002.webp",
+      "caption": "Figure 3. Influence of experience granularity and filtering strategy. (a) AIME’24 performance (Mean@32) comparison between token-level (Tokens, Pos-Only) and trajectory-level (Trajectory, Pos-Only) experience. Following (Zhan et al., 2025; Liu et al., 2025), we consider only positive samples in this comparison, where positive samples refer to trajectories whose final predictions are correct. (b) KL divergence to the RL-optimized experience model πRL, measuring the distributional distance between the learned policy and the experience model under different experience designs. (c) AIME’24 performance (Mean@32) comparison between positive-only (Tokens, Pos-Only) and all (Tokens, Pos & Neg) token-level experience, illustrating the effect of different experience filtering strategies.",
+      "page": 6,
+      "index": 2,
+      "width": 1017,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30420v1/fig-003.webp",
+      "caption": "Table 1. Performance on math reasoning benchmarks. Comparison of RLVR strategies on in-domain math reasoning benchmarks, including AIME’24, AIME’25, and AMC. Due to time constraints and computational cost on the Qwen3-8B-Base model, Trajectory Replay and EAPO w/o sIS are only evaluated on the 7B models. Results are calculated over 32 runs, reported as proportions %.",
+      "page": 7,
+      "index": 3,
+      "width": 933,
+      "height": 367
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30420v1/fig-004.webp",
+      "caption": "Table 2. Performance on general science benchmarks. Comparison of different RLVR strategies on out-of-distribution reasoning benchmarks, including GPQA and MMLU-Pro. All results are averaged over 8 runs, reported as proportions (%).",
+      "page": 7,
+      "index": 4,
+      "width": 477,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30420v1/fig-005.webp",
+      "caption": "Figure 1. Overview of experience-augmented reinforcement learning. (a) Standard reinforcement learning with verifiable rewards (RLVR) optimizes a base policy πBase into an RL-optimized policy πRL through iterative rollouts and policy updates. (b) Instead of training from scratch, EAPO leverages experience from a prior RL-optimized policy πRL during rollout of the current policy by resampling actions at critical decision points, introducing experience that adapts to the evolving policy. (c) Empirical comparisons on AIME’24 show that incorporating experience from πRL significantly accelerates exploration and improves accuracy compared to DAPO (Yu et al., 2025), across various base models (Qwen-2.5-7B-Math (Yang et al., 2024b) and Qwen-3-8B (Yang et al., 2025)).",
+      "page": 2,
+      "index": 5,
+      "width": 962,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30420v1/fig-006.webp",
+      "caption": "Figure 4. Additional ablation results. Left: impact of experience annealing steps. Right: complementary effects of EAPO components.",
+      "page": 11,
+      "index": 6,
+      "width": 918,
+      "height": 480
+    }
+  ]
+}

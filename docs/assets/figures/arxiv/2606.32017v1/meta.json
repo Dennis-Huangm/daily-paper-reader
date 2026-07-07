@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-001.webp",
+      "caption": "Table 16: Trajectory W3 (WebShop, failure via early wrong commitment): hand role, justification, and Qwen3-8B-thinking judge label (judge agreement 8/11).",
+      "page": 21,
+      "index": 1,
+      "width": 677,
+      "height": 361
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-002.webp",
+      "caption": "Figure 1: Core results. Across two policy models and three agentic benchmarks (ALFWorld, SearchQA, WebShop), TRIAGE consistently improves over the GRPO baseline (dashed line). Bar labels report mean success rate; vertical axes are truncated per panel to make differences visible.",
+      "page": 2,
+      "index": 2,
+      "width": 826,
+      "height": 336
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-003.webp",
+      "caption": "Table 3: Main results: success rate (%). ALFWorld and WebShop entries with ± are mean ± sample standard deviation over ten independent training-and-evaluation runs. Search-QA is reported as a single run because the retrieval-augmented rollout loop makes repeated full training runs substantially more expensive. The “no evidence” rows use the same Qwen3-8B-thinking judge but with a prompt that does not ask for a per-segment evidence string and only requests the role label (see Appendix H for the full default prompt that does require evidence).",
+      "page": 7,
+      "index": 3,
+      "width": 802,
+      "height": 215
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-004.webp",
+      "caption": "Figure 2: Overview of TRIAGE. Rollouts are split into environment-facing segments, a structured judge assigns semantic roles, and role-conditioned process rewards adjust segment-level GRPO advantages.",
+      "page": 3,
+      "index": 4,
+      "width": 826,
+      "height": 201
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-005.webp",
+      "caption": "Table 12: Trajectory A2 (ALFWorld, success with extensive redundancy), all 22 steps; hand role, justification, and Qwen3-8B-thinking judge label (judge agreement 16/22).",
+      "page": 18,
+      "index": 5,
+      "width": 677,
+      "height": 500
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-006.webp",
+      "caption": "Table 18: Search-QA audit summary. Label sequences are ordered by environment-facing segment; Sm→A denotes m search turns followed by one answer turn.",
+      "page": 23,
+      "index": 6,
+      "width": 798,
+      "height": 358
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-007.webp",
+      "caption": "Table 4: Qwen3 role judge F1 (%) across 135 labeled segments, split by hand-labeled role and trajectory outcome. Column counts give the number of positive examples in each cell.",
+      "page": 8,
+      "index": 7,
+      "width": 865,
+      "height": 184
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-008.webp",
+      "caption": "Table 2: Role taxonomy",
+      "page": 4,
+      "index": 8,
+      "width": 802,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-009.webp",
+      "caption": "Table 13: Trajectory A3 (ALFWorld, pathological loop followed by lucky recovery), all 34 steps; hand role, justification, and Qwen3-8B-thinking judge label (judge agreement 27/34).",
+      "page": 19,
+      "index": 9,
+      "width": 677,
+      "height": 755
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-010.webp",
+      "caption": "Table 14: Trajectory W1 (WebShop, clean success): hand role, justification, and Qwen3-8B-thinking judge label (judge agreement 3/6).",
+      "page": 19,
+      "index": 10,
+      "width": 668,
+      "height": 183
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-011.webp",
+      "caption": "Table 11: Trajectory A1 (ALFWorld, clean success): per-segment hand role, justification, and Qwen38B-thinking judge label (judge agreement 4/6). Roles: D = decisive progress, E = useful exploration, N = no-progress, R = regression.",
+      "page": 17,
+      "index": 11,
+      "width": 668,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2606.32017v1/fig-012.webp",
+      "caption": "Table 15: Trajectory W2 (WebShop, success with redundant attribute clicks): hand role, justification, and Qwen3-8B-thinking judge label (judge agreement 6/13).",
+      "page": 20,
+      "index": 12,
+      "width": 677,
+      "height": 321
+    }
+  ]
+}

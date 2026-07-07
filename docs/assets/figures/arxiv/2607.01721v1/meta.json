@@ -1,0 +1,158 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-001.webp",
+      "caption": "Table 1. Comparison of final success rate and episode reward across ten tasks",
+      "page": 6,
+      "index": 1,
+      "width": 1021,
+      "height": 288
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-002.webp",
+      "caption": "Figure 3. Learning curves on ten robotic manipulation tasks as measured by success rate and episode reward. The solid line and shaded regions represent the mean and standard deviation, respectively. Each task runs three times using different seeds.",
+      "page": 6,
+      "index": 2,
+      "width": 1002,
+      "height": 395
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-003.webp",
+      "caption": "Table 15. The prompt template for reward info of CoRe.",
+      "page": 25,
+      "index": 3,
+      "width": 1006,
+      "height": 1371
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-004.webp",
+      "caption": "Table 6. Task descriptions of CoRe.",
+      "page": 15,
+      "index": 4,
+      "width": 1000,
+      "height": 379
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-005.webp",
+      "caption": "Figure 1. Illustration of CoRe. CoRe decomposes the RL reward into a formal reward (FRM) and a residual reward (RRM). FRM leverages LLMs together with VLM-based preferences to iteratively generate and refine code-based rewards, facilitating effective RRM exploration, high-quality preference labeling, and stable training. RRM incorporates video-level preferences and state-importance from VLMs to complement FRM and ensure alignment with human intent. By integrating these complementary signals, CoRe enables feedback-efficient and preference-aligned policy learning without human involvement.",
+      "page": 2,
+      "index": 5,
+      "width": 810,
+      "height": 573
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-006.webp",
+      "caption": "Figure 4. Measure the accuracy of VLMs in terms of image-level preference (I) and video-level preference (V) with task completion. Correct Labeling indicates that VLMs favor the image or video with higher task completion. Incorrect Labeling denotes that VLMs fail to identify the option with higher task completion. No Preference indicates that VLMs cannot provide a preference.",
+      "page": 7,
+      "index": 6,
+      "width": 482,
+      "height": 257
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-007.webp",
+      "caption": "Table 2. Comparison of final success rate and episode reward across ten tasks in ablation experiments",
+      "page": 7,
+      "index": 7,
+      "width": 1013,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-008.webp",
+      "caption": "Table 12. An example of a formal reward function for Sweep Into.",
+      "page": 22,
+      "index": 8,
+      "width": 1006,
+      "height": 1067
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-009.webp",
+      "caption": "Figure 8. Five real-world tasks. Execution sequence of policy on the real-world UR5 robotic arm.",
+      "page": 14,
+      "index": 9,
+      "width": 933,
+      "height": 619
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-010.webp",
+      "caption": "Table 13. The prompt template for the preference label of CoRe.",
+      "page": 23,
+      "index": 10,
+      "width": 1006,
+      "height": 1156
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-011.webp",
+      "caption": "Figure 7. Ten simulation tasks. The first seven images depict rigid and articulated object manipulation tasks from MetaWorld. The next three images illustrate deformable object manipulation tasks from SoftGym.",
+      "page": 13,
+      "index": 11,
+      "width": 783,
+      "height": 372
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-012.webp",
+      "caption": "Figure 5. The alignment of learned rewards and task progress on the expert trajectory. The learned rewards are averaged over three trained reward models with different seeds, and the shaded region represents the standard deviation.",
+      "page": 8,
+      "index": 12,
+      "width": 487,
+      "height": 247
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-013.webp",
+      "caption": "Table 5. Simulation and real-world results on five tasks.",
+      "page": 8,
+      "index": 13,
+      "width": 504,
+      "height": 264
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-014.webp",
+      "caption": "Table 9. Stronger models performance in Hammer",
+      "page": 19,
+      "index": 14,
+      "width": 675,
+      "height": 183
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-015.webp",
+      "caption": "Table 8. Hyperparameters for policy learning.",
+      "page": 17,
+      "index": 15,
+      "width": 1017,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-016.webp",
+      "caption": "Table 14. The prompt template for formal reward generation of CoRe.",
+      "page": 24,
+      "index": 16,
+      "width": 1006,
+      "height": 1302
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-017.webp",
+      "caption": "Figure 12. An example of a video-level preference label for Sweep Into.",
+      "page": 20,
+      "index": 17,
+      "width": 591,
+      "height": 382
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-018.webp",
+      "caption": "Figure 11. The goal images for the 10 simulation tasks.",
+      "page": 20,
+      "index": 18,
+      "width": 783,
+      "height": 373
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01721v1/fig-019.webp",
+      "caption": "Figure 10. The start images for the 10 simulation tasks.",
+      "page": 20,
+      "index": 19,
+      "width": 783,
+      "height": 369
+    }
+  ]
+}

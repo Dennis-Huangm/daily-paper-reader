@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.02686v1/fig-001.webp",
+      "caption": "Table 2 ASK+ prompt ablation across the three environments (we keep 𝜏 fixed accross prompt strategies for consistency).",
+      "page": 6,
+      "index": 1,
+      "width": 944,
+      "height": 310
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02686v1/fig-002.webp",
+      "caption": "Figure 2: Threshold 𝜏 for reward and IR effects, with the selected 𝜏 for each model marked with a line.",
+      "page": 7,
+      "index": 2,
+      "width": 742,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02686v1/fig-003.webp",
+      "caption": "Table 1",
+      "page": 5,
+      "index": 3,
+      "width": 944,
+      "height": 242
+    }
+  ]
+}

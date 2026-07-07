@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.05378v1/fig-001.webp",
+      "caption": "Figure 1: Left: Context compaction allows execution to continue under a fixed context window by initiating a new trace from a compressed summary once the context budget is exhausted. Without compaction, execution terminates upon exhaustion of the context budget. Right: CompactionRL consistently outperforms baseline models on SWE-bench Verified and Terminal-Bench 2.0 under compaction evaluation at both GLM-4.7-Flash(30B-A3B) and GLM-4.5-Air(106B-A30B) scales.",
+      "page": 2,
+      "index": 1,
+      "width": 792,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05378v1/fig-002.webp",
+      "caption": "Table 2: Main results on SWE-bench Verified and Terminal-Bench 2.0. We report Pass@1 accuracy (%). We compare the base models, standard PPO without compaction, and CompactionRL. Peak Length denotes the maximum working context length available. For each setting, training and evaluation are conducted under the same peak length. Single(×1) evaluation disables compaction and uses one Peak-Length context window as the budget, while compacted (×4) evaluation allows up to three compaction operations, yielding an effective budget of 4× Peak Length.",
+      "page": 7,
+      "index": 2,
+      "width": 826,
+      "height": 568
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05378v1/fig-003.webp",
+      "caption": "Figure 4: Training dynamics of GLM-4.5-Air CompactionRL. (a) Summary optimization leads to increasingly longer and more detailed summaries. (b) CompactionRL increases reasoning tokens per turn. (c) Policy entropy.",
+      "page": 10,
+      "index": 3,
+      "width": 806,
+      "height": 224
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05378v1/fig-004.webp",
+      "caption": "Table 3: Ablation study on context compaction and summary training. We report Pass@1 accuracy (%) on SWE-bench Verified and Terminal-Bench 2.0. Each row corresponds to one training configuration, where Train Budget denotes the effective context budget used during RL training and Summary Train indicates whether summary responses are included in the RL loss. Single(×1) disables compaction, Comp.(×4) enables up to three compaction operations, and Long uses a larger non-compacted context window as a reference.",
+      "page": 8,
+      "index": 4,
+      "width": 826,
+      "height": 425
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05378v1/fig-005.webp",
+      "caption": "Figure 2: Overview of CompactionRL. During rollout collection, the agent interacts with the environment under a fixed context budget. When the remaining context budget falls below a compaction threshold Tcomp, the policy generates a summary and resumes from the summary and recent turns. All execution and summary segments are optimized and share the trajectory reward R. During training, we propagate this reward across segment boundaries by correcting the local GAE advantage Aloc s,i with the number of optimized tokens in subsequent segments, N>s, yielding the cross-trajectory advantage Âs,i. Standard RL without compaction optimizes each rollout as a single execution segment.",
+      "page": 4,
+      "index": 5,
+      "width": 824,
+      "height": 397
+    }
+  ]
+}

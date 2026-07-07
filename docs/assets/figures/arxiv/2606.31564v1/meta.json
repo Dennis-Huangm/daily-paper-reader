@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.31564v1/fig-001.webp",
+      "caption": "Table 1 | The comparison between the proposed ACE and context management baseline methods, including no context management, truncation and summarization, based on the ReAct Framework.",
+      "page": 6,
+      "index": 1,
+      "width": 940,
+      "height": 336
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31564v1/fig-002.webp",
+      "caption": "Table 2 | The performance of adapting the proposed ACE to the DeepAgent.",
+      "page": 6,
+      "index": 2,
+      "width": 940,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31564v1/fig-003.webp",
+      "caption": "Table 4 | The performance of adapting the proposed ACE to the MiroFlow.",
+      "page": 7,
+      "index": 3,
+      "width": 768,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31564v1/fig-004.webp",
+      "caption": "Table 3 | The performance of adapting the proposed ACE to the WebThinker.",
+      "page": 7,
+      "index": 4,
+      "width": 936,
+      "height": 244
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31564v1/fig-005.webp",
+      "caption": "Table 5 | Ablation study on the elastic type compositions under the setting of adapting ACE to ReAct.",
+      "page": 10,
+      "index": 5,
+      "width": 460,
+      "height": 336
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31564v1/fig-006.webp",
+      "caption": "Figure 2 | The analysis on the average per-step input token length using Gemini-3.1-flash-lite-preview as the main LLM on the GAIA benchmark by setting the max action steps as 50 and 100 across 4 settings, including ReAct, ReAct with truncation, ReAct with summarization, and ReAct with the proposed ACE.",
+      "page": 8,
+      "index": 6,
+      "width": 968,
+      "height": 311
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31564v1/fig-007.webp",
+      "caption": "Figure 1 | Overview of the proposed Adaptive Context Elasticizer (ACE). ACE comprises a message maintenance layer and a context orchestration layer. At each decision step, ACE performs per-step elastic context orchestration by feeding historical abstractions as input, thereby constructing the actual context for the current step. Upon completion of the current action, the newly generated raw messages and compressed abstractions are fed back into the message maintenance layer for lossless storage.",
+      "page": 4,
+      "index": 7,
+      "width": 859,
+      "height": 406
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31564v1/fig-008.webp",
+      "caption": "Figure 3 | Visualization of the elastic type evolution of historical steps under the setting where ACE is adapted to the ReAct framework with Gemini-3.1-flash-lite-preview as the main LLM, based on one task selected from GAIA and one from HLE, respectively.",
+      "page": 9,
+      "index": 8,
+      "width": 943,
+      "height": 479
+    }
+  ]
+}

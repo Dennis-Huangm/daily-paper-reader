@@ -1,0 +1,134 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-001.webp",
+      "caption": "Fig. 3: Correlation between VLA generation confidence and task success rate. Analysis of 2, 000 OpenVLA-OFT rollouts on LIBERO suites reveals that higher mean log-probabilities consistently correlate with execution success, validating internal confidence as a reliable foundation for autonomous self-bootstrapping.",
+      "page": 6,
+      "index": 1,
+      "width": 679,
+      "height": 289
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-002.webp",
+      "caption": "Table 1: Main Results on the LIBERO Benchmark. Success rates (%) are reported. ∆ indicates the absolute improvement over the baseline.",
+      "page": 11,
+      "index": 2,
+      "width": 712,
+      "height": 513
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-003.webp",
+      "caption": "Table 5: Applicability under Challenging Settings. Success rates (%) under limited demonstrations and world-model-generated interactions. The degradation on the Long suite highlights the minimum prior required for successful self-bootstrapping.",
+      "page": 15,
+      "index": 3,
+      "width": 725,
+      "height": 219
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-004.webp",
+      "caption": "Fig. 11: Ablation of the Dual Expert mechanism on the LIBERO-Goal (traj1) benchmark. The plot contrasts the evaluation success rates of the Local Expert Only (orange) and Global Expert Only (green) configurations against our synergistic Dual Expert approach (blue). The initial SFT baseline is denoted by the dashed gray line. The dynamic weighting effectively combines the responsiveness of the local expert with the stability of the global expert to achieve better performance.",
+      "page": 30,
+      "index": 4,
+      "width": 719,
+      "height": 264
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-005.webp",
+      "caption": "Fig. 1: Comparison of VLA Reinforcement Learning Paradigms. (a) Conventional VLA RL relies on explicitly supervised RL, where policy updates are driven by external reward signals from simulators, human annotators, or external LLMs. (b) T2VLA (Ours) introduces a self-bootstrapping RL approach. By leveraging a modelinternal signal, T2VLA derives rewards to drive continuous policy adaptation without external reward supervision.",
+      "page": 2,
+      "index": 5,
+      "width": 725,
+      "height": 240
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-006.webp",
+      "caption": "Fig. 10: Learning dynamics on the LIBERO-Goal (traj1) benchmark. The plot tracks the success rates of exploratory training rollouts (orange) and periodic evaluations (blue). T2VLA steadily improves the policy from an initial 59.6% to a peak of 83.0% using exclusively intrinsic rewards, with environment signals reserved strictly for monitoring.",
+      "page": 29,
+      "index": 6,
+      "width": 718,
+      "height": 264
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-007.webp",
+      "caption": "Fig. 6: Generalization of confidence–success relationships. (a) OpenVLA-OFT on LIBERO-Spatial, LIBERO-Object, and the low-success-rate LIBERO-10 setting. (b) OpenVLA-OFT interacting with observations synthesized by an OpenSora world model. (c) StarVLA on LIBERO-Spatial. Across these discrete-action VLA settings, trajectories with higher generation confidence generally achieve higher task success rates.",
+      "page": 22,
+      "index": 7,
+      "width": 678,
+      "height": 204
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-008.webp",
+      "caption": "Fig. 5: Trajectory alignment comparison. In-situ training trajectories projected onto the principal action axis. (a) Rigid Euclidean matching yields high residual errors under temporal shifts. (b) DTW dynamically warps the time axis to map structurally similar states, recovering a robust spatial similarity measure.",
+      "page": 14,
+      "index": 8,
+      "width": 715,
+      "height": 241
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-009.webp",
+      "caption": "Fig. 7: Expert election with the continuous-action GR00T policy on LIBERO-Object. (a) Relationship between denoising confidence and task success. (b) Relationship between DTW similarity to the elected experts and task success. The elected high-confidence experts achieve a 96% success rate, and similarity to these experts provides an informative reward signal.",
+      "page": 23,
+      "index": 9,
+      "width": 674,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-010.webp",
+      "caption": "Fig. 9: Empirical analysis of pure confidence-based rewards on the LIBERO-Long benchmark. The curves demonstrate that confidence-driven optimization initially boosts the evaluation performance (blue) to around 90%. However, it eventually plateaus and degrades below the 86.5% baseline, remaining consistently below the training success rate (orange). This dynamic suggests that a single scalar metric lacks sufficient signal for sustained optimization, highlighting the need for trajectory-level physical rewards.",
+      "page": 28,
+      "index": 10,
+      "width": 711,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-011.webp",
+      "caption": "Fig. 12: Exploratory rollouts in a high-competence regime (base success rate 86.5%). The initial policy ensures all 8 rollouts cover the full task horizon without early termination. The framework selects a structurally complete expert (red line), providing valid anchors for stable policy refinement.",
+      "page": 32,
+      "index": 11,
+      "width": 725,
+      "height": 327
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-012.webp",
+      "caption": "Fig. 13: A failure case visualizing the bootstrapping threshold on the LIBERO-Long suite (1-shot setting). The framework evaluates 8 exploratory rollouts generated by a weak initial model and assigns the highest confidence (Reward = 1.000) to a spatially truncated trajectory (Expert, red line). Trajectories attempting to explore further (e.g., blue, purple) receive lower scores. Bootstrapping from such incomplete anchors illustrates the optimization challenges in excessively low-competence regimes.",
+      "page": 32,
+      "index": 12,
+      "width": 725,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-013.webp",
+      "caption": "Table 2: Results on RoboTwin 2.0. Success rates (%) using OpenVLA-OFT. Tasks are categorized by execution horizon length.",
+      "page": 12,
+      "index": 13,
+      "width": 725,
+      "height": 286
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-014.webp",
+      "caption": "Fig. 8: Confidence–success relationship during policy optimization.",
+      "page": 24,
+      "index": 14,
+      "width": 632,
+      "height": 301
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-015.webp",
+      "caption": "Table 7: Hyperparameters for RL with OpenVLA-OFT.",
+      "page": 31,
+      "index": 15,
+      "width": 725,
+      "height": 376
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29892v1/fig-016.webp",
+      "caption": "Fig. 2: Overview of the T2VLA Framework. Our pipeline autonomously mines behavioral anchors by identifying a Local Pseudo-Expert from exploratory rollouts and maintaining a Global Expert Pool. These references are integrated via a DTW-based Hybrid Similarity Reward to compute advantages, enabling continuous policy optimization without external reward signals.",
+      "page": 5,
+      "index": 16,
+      "width": 721,
+      "height": 253
+    }
+  ]
+}

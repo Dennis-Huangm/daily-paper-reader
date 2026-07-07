@@ -1,0 +1,142 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-001.webp",
+      "caption": "Figure 5: Learning curves of all evaluated methods across tasks. The x-axis represents training timesteps. The y-axis denotes episode rewards measured by the ground-truth dense reward. Results are averaged over 3 random seeds with 5 evaluation episodes per checkpoint. Shaded regions indicate standard error.",
+      "page": 6,
+      "index": 1,
+      "width": 1052,
+      "height": 675
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-002.webp",
+      "caption": "Table 4: Details of the VLMs we benchmarked on an RTX 3090 (float16, batch = 1, prompt S1).",
+      "page": 11,
+      "index": 2,
+      "width": 510,
+      "height": 467
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-003.webp",
+      "caption": "Figure 9: Ablation studies of temporal offset k.",
+      "page": 15,
+      "index": 3,
+      "width": 408,
+      "height": 362
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-004.webp",
+      "caption": "Figure 10: Ablation studies of weighting coefficient alpha.",
+      "page": 15,
+      "index": 4,
+      "width": 510,
+      "height": 319
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-005.webp",
+      "caption": "Figure 2: RingWorld environment and reward comparison. Left: Illustration of the RingWorld task, where the agent is required to move clockwise along a closed loop. Right: Learning curves for agents trained with absolute or relative reward, showing that absolute reward fails under the cyclic state ordering, whereas relative reward enables successful learning.",
+      "page": 2,
+      "index": 5,
+      "width": 508,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-006.webp",
+      "caption": "Figure 8: Ablation studies of absolute and relative rewards.",
+      "page": 7,
+      "index": 6,
+      "width": 508,
+      "height": 448
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-007.webp",
+      "caption": "Figure 6: Ablation results with different vision-language models.",
+      "page": 7,
+      "index": 7,
+      "width": 510,
+      "height": 458
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-008.webp",
+      "caption": "Figure 7: Ablation studies of the relative reward architecture across all experiments, using Phi-3.5 as the VLM.",
+      "page": 7,
+      "index": 8,
+      "width": 508,
+      "height": 452
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-009.webp",
+      "caption": "Table 11: Shaped dense ground-truth reward for each task (1[·] is the indicator).",
+      "page": 14,
+      "index": 9,
+      "width": 510,
+      "height": 362
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-010.webp",
+      "caption": "Table 13: Meaning of the variables used in dense-reward formulas.",
+      "page": 14,
+      "index": 10,
+      "width": 458,
+      "height": 433
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-011.webp",
+      "caption": "Table 14: Success criteria and sparse-reward scale λsuccess.",
+      "page": 14,
+      "index": 11,
+      "width": 466,
+      "height": 290
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-012.webp",
+      "caption": "Figure 3: Overview of the VLM-AR3L framework. During reward model training (blue path), observation pairs are sampled from the agent’s replay buffer and evaluated by a VLM to determine which observation better aligns with the task goal. The resulting preference labels are used to supervise both absolute and relative reward models. During policy learning (purple path), the trained absolute model evaluates individual observations, while the relative model compares the agent’s current and previous observations to provide complementary absolute and relative reward signals.",
+      "page": 3,
+      "index": 12,
+      "width": 1052,
+      "height": 367
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-013.webp",
+      "caption": "Table 8: Observation modalities, action spaces, and episode horizons for all evaluated tasks.",
+      "page": 13,
+      "index": 13,
+      "width": 508,
+      "height": 769
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-014.webp",
+      "caption": "Table 10: ResNet-18 backbone used in RL-VLM-F baselines.",
+      "page": 13,
+      "index": 14,
+      "width": 539,
+      "height": 338
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-015.webp",
+      "caption": "Figure 4: Environments and tasks used in our experiments, spanning structured control (Gym, SoftGym, MetaWorld) and open-ended visual domains (MineDojo).",
+      "page": 4,
+      "index": 15,
+      "width": 510,
+      "height": 289
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-016.webp",
+      "caption": "Figure 12: Ablation studies of absolute and relative rewards.",
+      "page": 16,
+      "index": 16,
+      "width": 790,
+      "height": 548
+    },
+    {
+      "url": "assets/figures/arxiv/2607.00483v1/fig-017.webp",
+      "caption": "Figure 11: Ablation results with different vision-language models.",
+      "page": 16,
+      "index": 17,
+      "width": 790,
+      "height": 515
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.04713v1/fig-001.webp",
+      "caption": "Figure 1: Schematic illustration of the difference between RSPO and baselines. When training with outcome rewards, the trajectories sampled by the model are confined within the behavioral space guided by outcome rewards. In contrast, when training with dense rewards, the interaction-generated trajectories can break out of this space, yielding more diverse trajectories to facilitate model training.",
+      "page": 2,
+      "index": 1,
+      "width": 676,
+      "height": 286
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04713v1/fig-002.webp",
+      "caption": "Table 1: Performance on ALFWorld and WebShop (%). Results are averaged over 3 random seeds: 0, 200, 400. SR: Success Rate.",
+      "page": 7,
+      "index": 2,
+      "width": 822,
+      "height": 363
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04713v1/fig-003.webp",
+      "caption": "Figure 2: Overview of RSPO. n and m represent the number of on-policy and off-policy data, respectively. First, Agent A is trained using dense process rewards for k steps to yield Agent B. Subsequently, Agent B interacts with the environment to generate a batch of trajectories, which are stored in a replay buffer with their rewards reverted to the task’s outcome rewards. Next, Agent A is updated using outcome rewards; specifically, during this process, a subset of trajectories is sampled from the replay buffer to perform off-policy updates for Agent A. This cyclic training regime ensures that the final Agent A is consistently optimized using the task’s outcome rewards, while simultaneously exposing it to more diverse trajectories, thereby expanding its exploration space.",
+      "page": 4,
+      "index": 3,
+      "width": 793,
+      "height": 333
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04713v1/fig-004.webp",
+      "caption": "Figure 3: Experimental results of training exclusively with dense rewards. The blue curve represents the task success rate, while the green curve indicates the average dense rewards during training.",
+      "page": 9,
+      "index": 4,
+      "width": 664,
+      "height": 331
+    }
+  ]
+}

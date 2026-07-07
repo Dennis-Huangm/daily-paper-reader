@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.29867v1/fig-001.webp",
+      "caption": "Fig. 2. Smoothed training reward curves for DQN, PPO, and SAC on LunarLander-v2/Continuous-v2.",
+      "page": 6,
+      "index": 1,
+      "width": 520,
+      "height": 342
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29867v1/fig-002.webp",
+      "caption": "Fig. 3. Smoothed training reward curves for DQN, PPO, and SAC on Highway-v0.",
+      "page": 6,
+      "index": 2,
+      "width": 520,
+      "height": 342
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29867v1/fig-003.webp",
+      "caption": "TABLE I COMPARISON OF ROAD-RL WITH EXISTING ADVERSARIAL ROBUSTNESS LIBRARIES AND DRL ROBUSTNESS REPOSITORIES. UNLIKE PRIOR FRAMEWORKS, ROAD-RL PROVIDES A UNIFIED DRL-FOCUSED BENCHMARK PIPELINE WITH ATTACKS, DEFENSES, METRICS, REPRODUCIBILITY SUPPORT, STABLE-BASELINES3 INTEGRATION, GYMNASIUM COMPATIBILITY, AND BOTH CLI- AND PYTHON-BASED EXECUTION.",
+      "page": 4,
+      "index": 3,
+      "width": 1098,
+      "height": 584
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29867v1/fig-004.webp",
+      "caption": "TABLE III NORMALISED AUC–ε ACROSS ALL ATTACK × DEFENSE COMBINATIONS (AUC OF ATTACKED RUN ÷ AUC OF CLEAN UNATTACKED RUN; 1.0 = CLEAN BASELINE). VALUES > 1 INDICATE DEFENSE RAISES ABOVE-BASELINE PERFORMANCE; VALUES < 0 INDICATE DEFENSE ALONE DEGRADES MORE THAN ANY ATTACK. ‡: LUNAR PPO OPERATES NEAR A RANDOM BASELINE; BEST DEFENSE PER ROW IN BOLD.",
+      "page": 7,
+      "index": 4,
+      "width": 1076,
+      "height": 639
+    },
+    {
+      "url": "assets/figures/arxiv/2606.29867v1/fig-005.webp",
+      "caption": "Fig. 1. Overview of the proposed RoAd-RL framework. The workflow consists of three stages: policy training, attack-defense composition, and robustness evaluation. The modular architecture enables reproducible benchmarking across reinforcement learning algorithms, adversarial attacks, defense mechanisms, and evaluation metrics.",
+      "page": 2,
+      "index": 5,
+      "width": 1076,
+      "height": 539
+    }
+  ]
+}

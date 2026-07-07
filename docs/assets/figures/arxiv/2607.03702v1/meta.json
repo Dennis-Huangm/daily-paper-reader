@@ -1,0 +1,142 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-001.webp",
+      "caption": "Table 2: Pass@3 performance on search-augmented QA tasks with Qwen3-4B. Models are trained on NQ and HotpotQA. † and ⋆ indicate in-domain and out-of-domain datasets, respectively. The best",
+      "page": 6,
+      "index": 1,
+      "width": 840,
+      "height": 444
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-002.webp",
+      "caption": "Figure 15: Case: ALFWorld Example (Pivotal Retry)25",
+      "page": 25,
+      "index": 2,
+      "width": 829,
+      "height": 1371
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-003.webp",
+      "caption": "Figure 16: Case: SearchQA Example (Pivotal Retry)",
+      "page": 26,
+      "index": 3,
+      "width": 829,
+      "height": 1183
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-004.webp",
+      "caption": "Table 5: Notation used in this paper. Summary of key variables and operations in PivoARL. The Definition column indicates where each symbol first appears in the main text.",
+      "page": 15,
+      "index": 4,
+      "width": 725,
+      "height": 509
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-005.webp",
+      "caption": "Figure 11: The pivotal reflection prompt template for the ALFRED embodied agent.",
+      "page": 21,
+      "index": 5,
+      "width": 829,
+      "height": 579
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-006.webp",
+      "caption": "Figure 10: The play prompt template for the ALFRED embodied agent.",
+      "page": 21,
+      "index": 6,
+      "width": 829,
+      "height": 596
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-007.webp",
+      "caption": "Figure 1: The Pivotal-Aware Self-Feedback Retry (PivoARL) framework. The agent identifies pivotal errors via structured self-reflection, retries from the pivotal state with the correct prefix reused, and updates the LLM through pivotal-isolated cross-episode credit assignment.",
+      "page": 2,
+      "index": 7,
+      "width": 808,
+      "height": 248
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-008.webp",
+      "caption": "Figure 4: Training curves across four agent benchmarks on Qwen3-4B. The top, middle, and bottom rows show Success@1, Success@2, and Success@3, respectively, plotted against training steps. We compare GiGPO (gray, dotted), MetaRL (blue, dashed), PivoARL (blue, dashed).",
+      "page": 7,
+      "index": 8,
+      "width": 827,
+      "height": 489
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-009.webp",
+      "caption": "Figure 12: The play prompt template for the SearchQA agent.",
+      "page": 22,
+      "index": 9,
+      "width": 829,
+      "height": 683
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-010.webp",
+      "caption": "Table 4: Hyperparameters and configurations for different environments. This table summarizes the specific settings used for training and evaluation across different task domains.",
+      "page": 14,
+      "index": 10,
+      "width": 748,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-011.webp",
+      "caption": "Figure 13: The pivotal reflect prompt template for the SearchQA agent.",
+      "page": 23,
+      "index": 11,
+      "width": 829,
+      "height": 966
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-012.webp",
+      "caption": "Figure 6: Performance and efficiency comparison on MineSweeper. We evaluate PivoARL, its ablated variant (w/o Credit Assignment with Pivotal Isolation (CAPI)), MetaRL, and the Baseline across three metrics: (a) Reflection Success Rate, (b) Average Retry Ratio, and (c) Prompt Length.",
+      "page": 8,
+      "index": 12,
+      "width": 824,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-013.webp",
+      "caption": "Figure 3: Information gain (IG) analysis of experience guidance. (a) Per-turn IG density: our method concentrates IG in high-signal turns. (b) Signal Quality: Peak IG and percentage of high-IG turns. (c) Cumulative IG over turns: showing a characteristic leap at turn k for our method.",
+      "page": 4,
+      "index": 13,
+      "width": 800,
+      "height": 187
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-014.webp",
+      "caption": "Figure 14: Case: Minesweeper (Pivotal Retry)",
+      "page": 24,
+      "index": 14,
+      "width": 829,
+      "height": 1392
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-015.webp",
+      "caption": "Figure 7: Analysis of the PivoARL mechanism. We examine its impact through (a) dynamic preference-group counts, (b) test-time scalability, and (c) scaling with training episodes.",
+      "page": 9,
+      "index": 15,
+      "width": 821,
+      "height": 224
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-016.webp",
+      "caption": "Figure 8: The system prompt template for the Minesweeper agent.",
+      "page": 20,
+      "index": 16,
+      "width": 829,
+      "height": 631
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03702v1/fig-017.webp",
+      "caption": "Figure 9: The pivotal reflection prompt template for the Minesweeper agent.",
+      "page": 20,
+      "index": 17,
+      "width": 829,
+      "height": 579
+    }
+  ]
+}

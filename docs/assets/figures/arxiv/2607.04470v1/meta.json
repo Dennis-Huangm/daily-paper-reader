@@ -1,0 +1,142 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-001.webp",
+      "caption": "Figure 2: Diagnostic EMA α-ablation landscape on Simple Spread. Left: best and final success rates. Right: the composite ranking statistic used only for within-sweep model selection. The landscape is non-monotonic; α = 0.2 (red marker) is jointly best on peak success, final success, return, and composite score.",
+      "page": 11,
+      "index": 1,
+      "width": 928,
+      "height": 332
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-002.webp",
+      "caption": "Figure 3: Main results: evaluation success rate (Simple Spread, LBF) and win rate (SMAC 3m) for all four conditions, five-seed mean with ±1σ error bars (QMIX, n = 5 seeds). Exact values in Table A.8, Appendix Appendix A.",
+      "page": 11,
+      "index": 2,
+      "width": 920,
+      "height": 372
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-003.webp",
+      "caption": "Figure 9: Cross-environment comparison underlying the regime taxonomy (QMIX, n = 5 seeds). Bars show mean ±1σ; the annotated deltas give the best stabilised gain over the unshaped baseline in each regime.",
+      "page": 15,
+      "index": 3,
+      "width": 920,
+      "height": 343
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-004.webp",
+      "caption": "Table A.10: Per-seed results (%) for all environments and methods (seeds 42/101/123/456/999). SR for Spread/LBF, WR for SMAC.",
+      "page": 21,
+      "index": 4,
+      "width": 800,
+      "height": 448
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-005.webp",
+      "caption": "Table A.8: Five-seed comparison across all three environments (QMIX, n = 5, seeds 42/101/123/456/999; mean±std). Eval success rate (%) for Simple Spread and LBF, win rate (%) for SMAC 3m. Best method per environment in bold.",
+      "page": 21,
+      "index": 5,
+      "width": 815,
+      "height": 211
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-006.webp",
+      "caption": "Table A.9: Pairwise Welch t-tests on Simple Spread (n = 5 seeds per condition). Here t is the Welch test statistic, df the Welch–Satterthwaite degrees of freedom, p the two-sided p-value, and ∆ the difference in mean success rate in percentage points (pp). The Welch test is used because the collapsed Dynamic LLM variance is incommensurable with the stabilised methods’.",
+      "page": 21,
+      "index": 6,
+      "width": 969,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-007.webp",
+      "caption": "Figure 1: The provider-aware two-tier Language-to-Reward pipeline. Phase A (training, offline): a naturallanguage instruction is translated by the LLM runtime into a JSON weight vector that parameterises the PBRS potential Φ, which shapes rewards for the QMIX backbone and yields a frozen checkpoint — no gradient flows back to the LLM. Phase B (evaluation, online): the frozen policy is rolled out and an interpretability stack (EpisodeCollector → MomentDetector → BehaviorExplainer) produces natural-language audit narratives for a human operator.",
+      "page": 7,
+      "index": 7,
+      "width": 929,
+      "height": 1310
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-008.webp",
+      "caption": "Table 4: The three evaluated environments span the full range of baseline competence.",
+      "page": 10,
+      "index": 8,
+      "width": 867,
+      "height": 332
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-009.webp",
+      "caption": "Table 5: Diagnostic EMA α ablation on Simple Spread (single seed, 100k episodes). Best row in bold.",
+      "page": 10,
+      "index": 9,
+      "width": 819,
+      "height": 240
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-010.webp",
+      "caption": "Table 3: Canonical LLM (Reward Architect) configuration.",
+      "page": 10,
+      "index": 10,
+      "width": 556,
+      "height": 272
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-011.webp",
+      "caption": "Figure 8: Per-seed evaluation outcomes for every environment and method (seeds 42/101/123/456/999); each dot is one seed and the horizontal bar the five-seed mean. Numerical values in Table A.10, Appendix Appendix A.",
+      "page": 14,
+      "index": 11,
+      "width": 920,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-012.webp",
+      "caption": "Figure 7: SMAC 3m training curves, shown with a zoomed 80–100% y-axis to expose post-convergence volatility; note that the truncated axis visually magnifies differences that are small in absolute terms. Win rates are nearceiling; Dynamic LLM shows the largest fluctuations.",
+      "page": 14,
+      "index": 12,
+      "width": 780,
+      "height": 473
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-013.webp",
+      "caption": "Figure 6: LBF 8×8-3p-2f training curves, five seeds. The unshaped baseline never discovers joint-load success; all three shaping variants unlock the task.",
+      "page": 13,
+      "index": 13,
+      "width": 787,
+      "height": 473
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-014.webp",
+      "caption": "Figure 4: Simple Spread training curves, five seeds. Shaded bands denote ±1σ. Dynamic LLM (per-episode updates) collapses, whereas EMA and Freeze-Schedule both exceed the unshaped baseline.",
+      "page": 12,
+      "index": 14,
+      "width": 787,
+      "height": 473
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-015.webp",
+      "caption": "Figure 5: Pairwise Welch t-test outcomes on Simple Spread (n = 5 seeds per condition). Bars give the difference in mean success rate; blue marks significant gains, red the significant collapse, and grey a non-significant difference. Full test statistics in Table A.9, Appendix Appendix A.",
+      "page": 12,
+      "index": 15,
+      "width": 816,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-016.webp",
+      "caption": "Table 2: Canonical QMIX configuration (shared across all conditions).",
+      "page": 9,
+      "index": 16,
+      "width": 573,
+      "height": 451
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04470v1/fig-017.webp",
+      "caption": "Table 6: Cross-environment explainability profile (n = 100 episodes per environment).",
+      "page": 16,
+      "index": 17,
+      "width": 817,
+      "height": 272
+    }
+  ]
+}
