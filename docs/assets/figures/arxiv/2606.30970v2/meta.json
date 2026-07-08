@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.30970v2/fig-001.webp",
+      "caption": "Figure 3: High-level AgentBound architecture. Agent-generated actions are evaluated by a governance engine that combines delegated authorization, behavioral constitutions, and site action contracts before execution. Governance outcomes and provenance records are persisted through cryptographically verifiable governance receipts and an audit service.",
+      "page": 6,
+      "index": 1,
+      "width": 976,
+      "height": 617
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30970v2/fig-002.webp",
+      "caption": "Figure 1: The paradigm shift from access authorization to verifiable behavioral governance. Existing systems resolve agent identity and resource entitlements but leave a critical execution blind spot regarding context suitability. AgentBound introduces a non-bypassable behavioral governance layer between authorization and execution, synthesizing multi-authority policies into a deterministic verdict accompanied by a cryptographically signed governance receipt.",
+      "page": 2,
+      "index": 2,
+      "width": 976,
+      "height": 467
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30970v2/fig-003.webp",
+      "caption": "Figure 4: Governance receipt lifecycle in AgentBound. A governance receipt is generated after action evaluation, signed by both the agent and the AgentBound governance service, persisted for accountability, and later independently verified through replay using referenced governance artifacts and public verification keys.",
+      "page": 7,
+      "index": 3,
+      "width": 976,
+      "height": 595
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30970v2/fig-004.webp",
+      "caption": "Figure 6: AgentBound-Bench evaluation framework. Each benchmark scenario combines a canonical action, delegation context, behavioral constitution, and site action contract. Governance outcomes are compared against ground truth to evaluate enforcement correctness, authority composition behavior, receipt verification, and operational performance.",
+      "page": 10,
+      "index": 4,
+      "width": 979,
+      "height": 654
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30970v2/fig-005.webp",
+      "caption": "Figure 5: The AgentBound standing delegation model. A long-lived standing delegation authorizes the creation of short-lived task delegations for each execution cycle. Before every cycle, the Constitution Service provides the latest active constitution, ensuring that periodic agents automatically operate under current governance policies while maintaining revocability and limited exposure.",
+      "page": 9,
+      "index": 5,
+      "width": 976,
+      "height": 585
+    },
+    {
+      "url": "assets/figures/arxiv/2606.30970v2/fig-006.webp",
+      "caption": "Figure 2: Governance evaluation flow in AgentBound. A proposed action is independently evaluated by three authorities: delegated authorization, behavioral constitution, and site action contract. Their judgments are conservatively composed to produce a final governance outcome, associated obligations, and a signed governance receipt.",
+      "page": 5,
+      "index": 6,
+      "width": 976,
+      "height": 492
+    }
+  ]
+}

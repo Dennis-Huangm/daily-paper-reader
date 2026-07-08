@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.06140v1/fig-001.webp",
+      "caption": "Figure 5: Effect of the cost weight λ on averaged performance and curated training scale on three benchmarks.",
+      "page": 11,
+      "index": 1,
+      "width": 746,
+      "height": 552
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06140v1/fig-002.webp",
+      "caption": "Figure 1: Two limitations of existing agentic post-training data curation methods. Curation Neglect denotes overlooking the curation operation like filter and refine, mixing low quality data. Adaption Rigidity denotes the curation process is fixed, which cannot be adapted to different applications flexibly.",
+      "page": 2,
+      "index": 2,
+      "width": 358,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06140v1/fig-003.webp",
+      "caption": "Table 1: Main experimental results. CURATEEVO reports the mean and standard deviation over 3 runs. The best result under each setting is marked in bold.",
+      "page": 7,
+      "index": 3,
+      "width": 825,
+      "height": 289
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06140v1/fig-004.webp",
+      "caption": "Figure 4: Averaged performance and curated training scale across evolution epochs on three benchmarks.",
+      "page": 10,
+      "index": 4,
+      "width": 746,
+      "height": 543
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06140v1/fig-005.webp",
+      "caption": "Table 2: Ablation study of CURATEEVO. Operation ablations remove the effectiveness- or efficiency-oriented revision in curation evolution. Data ablations remove one curated resource.",
+      "page": 8,
+      "index": 5,
+      "width": 490,
+      "height": 269
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06140v1/fig-006.webp",
+      "caption": "Figure 2: Overview of CURATEEVO. At evolution epoch e, the executable curation strategy ρe transforms the fixed raw corpus into an SFT dataset, an RL dataset, and an inference-time memory bank. Starting from the same base model, we train an agent using a fixed SFT+GRPO recipe and evaluate it on a held-out dev set. An LLM-based code-evolution agent diagnoses recurring failure modes from failed dev trajectories, first revises ρe through data augmentation, filtering, and refinement to improve effectiveness, and then removes and refines low-utility training turns to improve efficiency.",
+      "page": 4,
+      "index": 6,
+      "width": 826,
+      "height": 385
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06140v1/fig-007.webp",
+      "caption": "Figure 7: The prompt to optimize curation code based on failed points and existing training data.",
+      "page": 17,
+      "index": 7,
+      "width": 829,
+      "height": 738
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06140v1/fig-008.webp",
+      "caption": "Figure 3: Averaged token and wall-clock overhead of each curation method per 1K retained training turns on three benchmarks.",
+      "page": 9,
+      "index": 8,
+      "width": 711,
+      "height": 597
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06140v1/fig-009.webp",
+      "caption": "Figure 6: The prompt to transfer failed trajectories into failed points.",
+      "page": 16,
+      "index": 9,
+      "width": 829,
+      "height": 306
+    }
+  ]
+}

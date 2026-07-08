@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.06223v1/fig-001.webp",
+      "caption": "Figure 1: Illustration of different rollout patterns. Red nodes represent unpromising or even misleading states, green nodes represent informative states, and gray nodes represent other intermediate states. Left: both chain-based and existing tree-based methods may still allocate exploration budget to unpromising nodes. Right: our method adopts information gain-based rollout allocation, preferentially expanding informative nodes and reducing exploration over unpromising branches.",
+      "page": 2,
+      "index": 1,
+      "width": 829,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06223v1/fig-002.webp",
+      "caption": "Table 1: Performance on seven search-augmented QA tasks (%). The best results are highlighted in bold, and the runner-up results are underlined. † and ⋆ indicate in-domain and out-of-domain datasets, respectively. Avg. denotes the test-size-weighted average over the evaluation datasets.",
+      "page": 8,
+      "index": 2,
+      "width": 822,
+      "height": 406
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06223v1/fig-003.webp",
+      "caption": "Figure 2: Overview of IGRPO. Left: During rollout, the expansion budget is adaptively allocated according to node-level informativeness, so that more informative nodes are expanded with higher probability, thereby inducing a distribution µθ that biases sampling toward more promising trajectories. Right: the expansion process between tree-level 1 and tree-level 2 is governed by an informativenessaware strategy, where each active node is selected for expansion with probability p(·) ∝ exp(γ val(·)).",
+      "page": 4,
+      "index": 3,
+      "width": 829,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06223v1/fig-004.webp",
+      "caption": "Figure 8: Case study of the overall tree-structured rollout behaviors of IGRPO. The number on each edge indicates the information gain obtained by the corresponding search step. The three numbered nodes are further analyzed in detail.",
+      "page": 19,
+      "index": 4,
+      "width": 829,
+      "height": 563
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06223v1/fig-005.webp",
+      "caption": "Figure 9: Detailed analysis of the three highlighted nodes in the case study. Node 1 issues an ambiguous query and fails to target the key entity. Node 2 uses the correct subject and retrieves useful evidence, while its child, Node 3, further verifies the answer and confirms the Conn Smythe Trophy.",
+      "page": 19,
+      "index": 5,
+      "width": 829,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06223v1/fig-006.webp",
+      "caption": "Figure 7: Training dynamics of IGRPO-3B and IGPO-3B. Dashed vertical lines indicate the steps where the per-node expansion budget is reduced, where yellow denotes reducing the budget at step 100 and red denotes reducing the budget at step 150. The figure shows the entropy loss during training.",
+      "page": 17,
+      "index": 6,
+      "width": 829,
+      "height": 519
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06223v1/fig-007.webp",
+      "caption": "Figure 6: Prompt template for the search agent.",
+      "page": 16,
+      "index": 7,
+      "width": 829,
+      "height": 431
+    }
+  ]
+}

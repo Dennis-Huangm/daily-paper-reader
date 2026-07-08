@@ -1,0 +1,126 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-001.webp",
+      "caption": "Table 4 | Synthesis-edit and parametric-edit success by task category. Each score-bearing submit transition compares the submitted policy source bundle (policy.py and reachable local Python modules). A synthesis edit introduces a previously unseen AST topology after numeric constants are stripped; a parametric edit changes the source bundle while preserving the immediately previous stripped topology. Rollback topologies and byte-identical retests are excluded. An edit succeeds if it raises the validation best-so-far.",
+      "page": 11,
+      "index": 1,
+      "width": 644,
+      "height": 308
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-002.webp",
+      "caption": "Table 9 | Per-task agent stream token accounting for the main-128 Core16 runs. Values are parsed from agent stream logs and reported in millions; model subcolumns are non-cached input (In), cache read plus cache creation (Cache), and output including Codex reasoning output (Out). For Codex streams, In subtracts cached_input_tokens from input_tokens; Claude Code streams already report cache read/creation in separate fields. Dashes mark missing stream logs. These diagnostic columns are not used in the leaderboard rank score.",
+      "page": 21,
+      "index": 2,
+      "width": 527,
+      "height": 473
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-003.webp",
+      "caption": "Figure 8 | Observed association between policy edit size and improvement probability across adjacent submissions. Edit bins are computed from checkpoint code diffs; circle size indicates the number of transitions in each bin. The plot is diagnostic: large edits can represent useful mechanism synthesis, destructive rewrites, or interface repair depending on the surrounding run context.",
+      "page": 21,
+      "index": 3,
+      "width": 704,
+      "height": 351
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-004.webp",
+      "caption": "Table 1 | Core16 final held-out scores for each environment. Each cell is the validation-selected policy’s mean return on that environment’s held-out episodes, reported on the environment’s native reward scale; values are comparable within an environment but not across environments. The uniform random-policy reference is evaluated on the same held-out pools. Best values are bolded, second-best values are underlined, and rows are sorted by Core16 aggregate rank score.",
+      "page": 7,
+      "index": 4,
+      "width": 900,
+      "height": 423
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-005.webp",
+      "caption": "Figure 9 | GPT-5.5 CarRacing visible diagnostics saved by the agent during the run. Panels A–B show how structuralsynthesis edits turn pixel observations into road-geometry control signals: yellow points mark sampled road evidence, cyan/magenta lines mark guide estimates, and action bars/log text summarize the agent’s own rollout diagnostics. Panel C shows a later visible candidate comparison after a parametric-tuning edit. These images are qualitative evidence only and do not expose hidden-validation or held-out cases.",
+      "page": 22,
+      "index": 5,
+      "width": 886,
+      "height": 691
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-006.webp",
+      "caption": "Table 3 | Realized computational structure in validation-selected policies. Values are group means over the same synthesis/tuning split as Figure 4. Columns report deterministic AST features of the selected policy source bundle (policy.py plus reachable local Python modules).",
+      "page": 10,
+      "index": 6,
+      "width": 594,
+      "height": 224
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-007.webp",
+      "caption": "Figure 4 | Relative held-out performance under different dominant task demands. Scores are macro means over synthesis-dominant and tuning-dominant environments, using the random-to-best normalization described in the text. Each row follows the same model and harness identity as the main leaderboard. Per-environment values are reported in Appendix Table 8.",
+      "page": 10,
+      "index": 7,
+      "width": 862,
+      "height": 282
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-008.webp",
+      "caption": "Table 5 | Implemented EvoPolicyGym scenarios used in the 128-episode Core16 suite.",
+      "page": 18,
+      "index": 8,
+      "width": 900,
+      "height": 360
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-009.webp",
+      "caption": "Figure 7 | CarRacing feedback-utilization traces. Each row links evidence, attribution, policy revision, and outcome across agents. The submit column reports the submission index (s00k denotes the k-th submission) and the cumulative episode budget consumed prior to that submission. Labels are derived from logs, feedback summaries, and checkpoint diffs. The figure provides qualitative evidence of how feedback is translated into policy updates and is not an aggregate metric.",
+      "page": 13,
+      "index": 9,
+      "width": 863,
+      "height": 471
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-010.webp",
+      "caption": "Figure 3 | Score evolution over each run’s episode-budget trajectory. Each curve tracks the post-hoc best-so-far hidden-validation score across candidate evaluations. Vertical jumps indicate improvements in the selected policy, while plateaus correspond to budget spent without improvement.",
+      "page": 8,
+      "index": 10,
+      "width": 866,
+      "height": 578
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-011.webp",
+      "caption": "Figure 1 | EvoPolicyGym framework. (a) Interaction loop: agents edit policies, submit episodic rollouts under a finite budget, and receive platform-mediated feedback. (b) Visibility boundary: training feedback is visible, while validation-based checkpoint selection and held-out evaluation are hidden. (c) Environment suite: a unified interface spanning control, navigation, driving, and robotics tasks under a shared evaluation protocol. (d) Measured aspects: feedback utilization, budget efficiency, and policy improvement dynamics, captured via the evolution of best-so-far performance over time.",
+      "page": 4,
+      "index": 11,
+      "width": 834,
+      "height": 521
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-012.webp",
+      "caption": "Figure 5 | CarRacing code-phase timeline. Phase bands are inferred mechanically from the same policy source-bundle rule as Table 4: synthesis-edit phases denote new AST topologies after numeric constants are stripped, and parametricedit phases denote changed source bundles under the same topology. Symbols mark validation outcomes and candidatemanagement events; rollback/retest are event types, not additional edit types.",
+      "page": 12,
+      "index": 12,
+      "width": 872,
+      "height": 399
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-013.webp",
+      "caption": "Figure 6 | Bipedal code-phase timeline, rendered with the same synthesis-edit and parametric-edit phase rules as Figure 5. The environment is tuning-dominant, but successful tuning still depends on first reaching a viable gait topology; same-topology source-bundle edits then expose whether an agent can improve that structure by adjusting constants and thresholds.",
+      "page": 12,
+      "index": 13,
+      "width": 872,
+      "height": 398
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-014.webp",
+      "caption": "Table 8 | Per-environment values behind Figure 4. Scores are scaled between a random policy (0) and the best evaluated agent performance on that environment (1), with random anchors measured on the same held-out pools.",
+      "page": 20,
+      "index": 14,
+      "width": 627,
+      "height": 474
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02440v1/fig-015.webp",
+      "caption": "Figure 2 | Minimal runtime boundary for one EvoPolicyGym episode. The server owns the Gymnasium-style environment, which maps actions to observations and rewards. The submitted policy system maps observations to actions through this entry point, but may internally contain helper modules, planners, memory, diagnostics, learned parameters, or other decision logic.",
+      "page": 5,
+      "index": 15,
+      "width": 904,
+      "height": 239
+    }
+  ]
+}

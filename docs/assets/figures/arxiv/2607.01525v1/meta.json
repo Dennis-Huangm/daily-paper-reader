@@ -1,0 +1,142 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-001.webp",
+      "caption": "Figure 5.3: Cybersecurity model (With CN): Evaluation trajectories for the three Q-learning solvers.",
+      "page": 116,
+      "index": 1,
+      "width": 802,
+      "height": 628
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-002.webp",
+      "caption": "Figure 5.9: Discrete distribution planning (No CN): Evaluation rows for four initial distributions. Each row shows (from left to right): Initial state, Final state, Initial action, Terminal action, and Common Noise (zero).",
+      "page": 121,
+      "index": 2,
+      "width": 893,
+      "height": 572
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-003.webp",
+      "caption": "Figure 5.11: Discrete distribution planning: DDPG training progress (cost).",
+      "page": 122,
+      "index": 3,
+      "width": 863,
+      "height": 357
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-004.webp",
+      "caption": "Figure 5.10: Discrete distribution planning (With CN): Evaluation rows for four initial distributions in a stochastic environment.",
+      "page": 122,
+      "index": 4,
+      "width": 893,
+      "height": 572
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-005.webp",
+      "caption": "Figure 5.4: Cybersecurity model (With CN): Training progress for the three solvers.",
+      "page": 117,
+      "index": 5,
+      "width": 872,
+      "height": 253
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-006.webp",
+      "caption": "Figure 5.5: Cybersecurity model (With CN): Value function slices on the simplex for the three solvers compared with the benchmark solution (bottom row).",
+      "page": 117,
+      "index": 6,
+      "width": 895,
+      "height": 581
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-007.webp",
+      "caption": "Figure 5.6: Cybersecurity model: Evaluation trajectories for DDPG starting from four different initial distributions.",
+      "page": 118,
+      "index": 7,
+      "width": 626,
+      "height": 344
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-008.webp",
+      "caption": "Table 1.1: Main Differences between MARL and MFRL",
+      "page": 18,
+      "index": 8,
+      "width": 852,
+      "height": 514
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-009.webp",
+      "caption": "Figure 5.7: Cybersecurity model: DDPG value function slices on the simplex.",
+      "page": 119,
+      "index": 9,
+      "width": 892,
+      "height": 780
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-010.webp",
+      "caption": "Figure 5.8: Cybersecurity model: DDPG training progress (cost).",
+      "page": 119,
+      "index": 10,
+      "width": 863,
+      "height": 359
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-011.webp",
+      "caption": "Table 5.1: Parameters and tabular Q-learning hyperparameters for the cybersecurity model.",
+      "page": 114,
+      "index": 11,
+      "width": 582,
+      "height": 265
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-012.webp",
+      "caption": "Table 6.1: Model parameters and hyperparameters for the LQMFC RL experiment.",
+      "page": 163,
+      "index": 12,
+      "width": 548,
+      "height": 400
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-013.webp",
+      "caption": "Figure 5.2: Cybersecurity model (No CN): Training progress for the three solvers.",
+      "page": 115,
+      "index": 13,
+      "width": 872,
+      "height": 251
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-014.webp",
+      "caption": "Figure 5.1: Cybersecurity model (No CN): Evaluation trajectories for the three Q-learning solvers starting from four different initial distributions.",
+      "page": 115,
+      "index": 14,
+      "width": 801,
+      "height": 628
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-015.webp",
+      "caption": "Table 5.2: Parameters for the discrete distribution planning example.",
+      "page": 120,
+      "index": 15,
+      "width": 710,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-016.webp",
+      "caption": "Figure 6.2: Convergence of parameters. Left: Distance between learned parameters pK,Lq and true optimal ones. Middle: Evolution of K. Right: Evolution of L. The black dashed lines represent the optimal values.",
+      "page": 164,
+      "index": 16,
+      "width": 886,
+      "height": 310
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01525v1/fig-017.webp",
+      "caption": "Figure 6.1: Convergence of social costs. Left: Evolution of the social cost towards the theoretical optimum (black dashed line). Right: Logarithmic distance to the optimal cost.",
+      "page": 164,
+      "index": 17,
+      "width": 868,
+      "height": 464
+    }
+  ]
+}

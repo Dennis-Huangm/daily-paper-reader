@@ -1,0 +1,166 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-001.webp",
+      "caption": "Figure 2: (Left) Distributional Shaping (Sec. 4.2): As the intervention weight λ increases, the policy distribution gradually shifts its mean toward the safe anchor asafe, while its variance decreases quadratically ( Eq. 6). (Right) Learnable Sharpness (Sec. 4.4): The sharpness parameter p controls the intervention profile. A larger p creates a “sharper” boundary that delays intervention to prioritize performance, while a smaller p induces earlier and more gradual intervention.",
+      "page": 6,
+      "index": 1,
+      "width": 743,
+      "height": 262
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-002.webp",
+      "caption": "Figure 5: CartPole safety envelope visualization. Visualization of λ(∆̃(s)) over the x and θ dimensions for different learned values of p across CartPole tasks. The parameter p adapts to the level of goal conflict: after the agent has learned to remain safe, increasing p reduces λ at the same state, downweighting the safety policy to favor higher task performance within the safety envelope.",
+      "page": 11,
+      "index": 2,
+      "width": 709,
+      "height": 393
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-003.webp",
+      "caption": "Figure 6: AutoSafe-controlled trajectories for CartPole (Top) and Quadrotor (Bottom). The intervention weight λ rises as the system approaches safety boundaries, enabling precautionary control, and remains low elsewhere to preserve performance-driven behavior.",
+      "page": 11,
+      "index": 3,
+      "width": 658,
+      "height": 446
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-004.webp",
+      "caption": "Figure 9: Experimental setup illustration of quadrotor and quadruped robots",
+      "page": 26,
+      "index": 4,
+      "width": 977,
+      "height": 389
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-005.webp",
+      "caption": "Figure 12: The evolution of sharpness parameter p during policy learning for studied applications",
+      "page": 30,
+      "index": 5,
+      "width": 911,
+      "height": 219
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-006.webp",
+      "caption": "Figure 13: Ablation Study of sharpness parameter p: Learning-based vs. Schedule-based.",
+      "page": 30,
+      "index": 6,
+      "width": 913,
+      "height": 453
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-007.webp",
+      "caption": "Figure 11: Critic Loss and Actor Loss of AutoSafe and Simplex-Based Method",
+      "page": 30,
+      "index": 7,
+      "width": 907,
+      "height": 450
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-008.webp",
+      "caption": "Figure 10: Performance return curve and the accumulated safety violation for all algorithms in the considered case studies",
+      "page": 29,
+      "index": 8,
+      "width": 914,
+      "height": 454
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-009.webp",
+      "caption": "Figure 4: Comparison of learning dynamics and safety intervention behavior.",
+      "page": 10,
+      "index": 9,
+      "width": 977,
+      "height": 362
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-010.webp",
+      "caption": "Figure 1: Diagram of a conventional safety filter architecture and the proposed AutoSafe policy architecture.",
+      "page": 3,
+      "index": 10,
+      "width": 977,
+      "height": 314
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-011.webp",
+      "caption": "Table 4: Effect of ∆min on performance and safety across four continuous control tasks. Mean ± std over five random seeds.",
+      "page": 33,
+      "index": 11,
+      "width": 968,
+      "height": 293
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-012.webp",
+      "caption": "Table 5: Computation Time Comparison. Average wall-clock time (in milliseconds) per step for inference and optimization steps. Mean ± std computed over all logged episodes (one seed). Lower is better (↓). Most time-consuming method per column is underlined.",
+      "page": 33,
+      "index": 12,
+      "width": 968,
+      "height": 238
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-013.webp",
+      "caption": "Table 3: Task Specific Parameter Setting",
+      "page": 23,
+      "index": 13,
+      "width": 879,
+      "height": 221
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-014.webp",
+      "caption": "Table 2: Parameter setting for Soft Actor-Critic (SAC)",
+      "page": 23,
+      "index": 14,
+      "width": 468,
+      "height": 364
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-015.webp",
+      "caption": "Figure 3: Illustration of a Simplex-style safety mechanism with an inner safe set Ω∆min and switching to a certified safe policy at the safety boundary in a static 2D case.",
+      "page": 8,
+      "index": 15,
+      "width": 398,
+      "height": 310
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-016.webp",
+      "caption": "Figure 16: example evaluation trajectories with randomized obstacle positions. The adapted safe recoverable region enables safe clearance for goal reaching.",
+      "page": 32,
+      "index": 16,
+      "width": 883,
+      "height": 304
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-017.webp",
+      "caption": "Figure 7: Real-world experiments with AutoSafe. The agent is deployed on an embedded device, enabling safe interaction at a control frequency of 50 Hz.",
+      "page": 12,
+      "index": 17,
+      "width": 972,
+      "height": 311
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-018.webp",
+      "caption": "Figure 8: AutoSafe: The policy uses the state vector st, included in the observation, to assess risk ∆̃(st) and generate safe action asafe. In parallel, the learning-based component processes the full observation ot = (st, it) to produce high-performance but potentially unsafe actions aθ. The two action outputs are fused through a weighted summation, where the weights are determined by a learnable exponential activation function conditioned on the risk value.",
+      "page": 24,
+      "index": 18,
+      "width": 900,
+      "height": 511
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-019.webp",
+      "caption": "Figure 15: State trajectories over an evaluation episode. The dashed lines indicate the time-varying constraints on the position imposed by each intruder.",
+      "page": 31,
+      "index": 19,
+      "width": 883,
+      "height": 243
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31320v1/fig-020.webp",
+      "caption": "Figure 14: Ablation of the adaptation for λ in AdaLam",
+      "page": 31,
+      "index": 20,
+      "width": 908,
+      "height": 454
+    }
+  ]
+}

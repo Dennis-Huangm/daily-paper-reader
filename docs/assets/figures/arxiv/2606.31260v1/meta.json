@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-001.webp",
+      "caption": "Figure 1: A running example of SymPlan based on a real attach_a_camera_to_a_tripod guided sample. Open-world video evidence is parsed into grounded objects and initial predicates, verified into BDDL, rewritten as planner-facing dialogue, turned into executable action code, and checked by the symbolic engine. The same BDDL interface therefore builds data, verifies plans, and supplies training rewards.",
+      "page": 1,
+      "index": 1,
+      "width": 450,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-002.webp",
+      "caption": "Figure 3: SFT-initialized verifiable RL for compact planning. Artifacts from Figure 2 initialize D-SFT and provide symbolic engine signals for DAPO. The batch-accuracy gate applies the length penalty only when the current batch accuracy exceeds the running maximum minus tolerance, and the penalty is charged only to strict-pass samples, and otherwise training continues with symbolic correctness rewards. GroupAdapt uses the current group pass rate to assign an easy budget δbase or a hard budget 2δbase, so hard prompts first receive wider tolerance and automatically switch to the easy budget as their pass rate improves.",
+      "page": 6,
+      "index": 2,
+      "width": 944,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-003.webp",
+      "caption": "Table 1: One-sample symbolic evaluation on BEHAVIOR-1K under the Guided extended-BDDL prompt. SP% = Strict-Pass rate, EP% = Engine-Pass rate, GCR = average Goal Completion Ratio (%), and Err% = engine error rate among valid samples. DAPO-stage variants are initialized from D-SFT and averaged over three decoding seeds.",
+      "page": 7,
+      "index": 3,
+      "width": 852,
+      "height": 521
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-004.webp",
+      "caption": "Figure 8: Symbolic replay for buy_dog_food. The engine executes generated action code from the initial grocery-store state to the verified checkout state, using the same BDDL specification that was used to construct the planner input.",
+      "page": 14,
+      "index": 4,
+      "width": 444,
+      "height": 309
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-005.webp",
+      "caption": "Figure 7: Illustration of our data construction format. We parse the raw BDDL task, including its formal goal, then convert it into a model-facing prompt consisting of environment state, robot specification, and multi-turn natural-language dialogue. The target output follows the training format <think>. . .</think><answer><steps>. . .</steps><code>. . .</code></answer>.",
+      "page": 14,
+      "index": 5,
+      "width": 929,
+      "height": 410
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-006.webp",
+      "caption": "Figure 6: Side-by-side comparison of the video-derived BDDL with the official BEHAVIOR BDDL for the task hiding_Easter_eggs. The LLM judge is instructed to ignore synset/lemma differences (e.g. egg.n.02 vs easter_egg.n.01) and decoration objects, and only score core semantic alignment with the natural-language instruction.",
+      "page": 13,
+      "index": 6,
+      "width": 950,
+      "height": 610
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-007.webp",
+      "caption": "Figure 4: Compact symbolic-RL trajectories on in-domain embodied validation, averaged over three decoding seeds. Rows show B-1000 and B-100. A vertical divider separates (a) the main comparison from (b) the GroupAdapt threshold ablation. Each group reports Strict-Pass and output length, while GCR and error-rate curves are moved to Figure 9.",
+      "page": 8,
+      "index": 7,
+      "width": 923,
+      "height": 516
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-008.webp",
+      "caption": "Table 2: Ablation axes for correctness and compactness. Rows compare the no-length-adaptation DAPO baseline, Short-RL, and GroupAdapt thresholds. GA denotes GroupAdapt. We report in-domain embodied SP, secondary out-of-domain math accuracy, and final inference length, averaged over three decoding seeds.",
+      "page": 8,
+      "index": 8,
+      "width": 675,
+      "height": 192
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-009.webp",
+      "caption": "Figure 2: BDDL-centric data construction and symbolic verification. A task description and open-world video are parsed into draft BDDL, checked by an LLM verifier, and executed by a fast symbolic engine. The engine uses the action library, performs predicate-guided action expansion when gaps are detected, and returns verifier signals, error traces, and verified trajectories.",
+      "page": 4,
+      "index": 9,
+      "width": 950,
+      "height": 263
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-010.webp",
+      "caption": "Figure 9: Additional symbolic-RL trajectories, averaged over three decoding seeds. The layout matches Figure 4, with a vertical divider separating (a) the main comparison from (b) the GroupAdapt threshold ablation. Each group reports Goal Completion Ratio and engine error rate.",
+      "page": 17,
+      "index": 10,
+      "width": 923,
+      "height": 516
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-011.webp",
+      "caption": "Figure 10: Histogram of executable command count for GPT-5.4 on B-100 (top, N = 200) and B-1000 (bottom, N = 194). Dashed lines mark the median and dotted lines mark the average, and each panel also reports N , average, median, and P90.",
+      "page": 17,
+      "index": 11,
+      "width": 430,
+      "height": 537
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-012.webp",
+      "caption": "Figure 5: Task-guided video-to-BDDL construction on a camera episode. The task description provides a prior over target and related objects, while key frames provide visual evidence for grounding these objects and their initial relations. The BDDL draft is then checked for syntax, object coverage, initial-state consistency, and goal executability before being accepted.",
+      "page": 12,
+      "index": 12,
+      "width": 458,
+      "height": 512
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31260v1/fig-013.webp",
+      "caption": "Table 9: Core hyperparameters for SFT-initialized DAPO. All RL variants share this configuration and differ only in the length-reward term and the GroupAdapt tolerance schedule.",
+      "page": 16,
+      "index": 13,
+      "width": 950,
+      "height": 215
+    }
+  ]
+}

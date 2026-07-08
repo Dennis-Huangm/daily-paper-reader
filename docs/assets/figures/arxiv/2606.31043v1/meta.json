@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.31043v1/fig-001.webp",
+      "caption": "Figure 4: Learning curves for the main correction methods under shifted dynamics. IQM of success rate across seeds; shaded = 95% bootstrap CI. Reported values (Table 1) use the best held-out checkpoint per method, which may differ from the final-step value shown here.",
+      "page": 11,
+      "index": 1,
+      "width": 804,
+      "height": 195
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31043v1/fig-002.webp",
+      "caption": "Figure 5: Learning curves for the ablation architectures (all trained with ES) under shifted dynamics. IQM of success rate across seeds; shaded = 95% bootstrap CI. Reported values (Table 2) use the best held-out checkpoint per method.",
+      "page": 11,
+      "index": 2,
+      "width": 804,
+      "height": 195
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31043v1/fig-003.webp",
+      "caption": "Table 6: Task descriptions and success criteria. Simulation tasks use the Franka arm; the real-robot task uses an SO101 arm.",
+      "page": 13,
+      "index": 3,
+      "width": 827,
+      "height": 234
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31043v1/fig-004.webp",
+      "caption": "Figure 7: Learning curves under shifted dynamics for the additional adaptation baselines (FT-KL, FT-Last) alongside the 3 frozen-base corrections. IQM of success rate across seeds; shaded = 95% bootstrap CI; the dashed line marks the unadapted base policy under the shifted dynamics. Reported values (Table 7) use the best held-out checkpoint per method, which may differ from the final-step value shown here.",
+      "page": 17,
+      "index": 4,
+      "width": 804,
+      "height": 195
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31043v1/fig-005.webp",
+      "caption": "Table 4: Hyperparameters for simulation overlay training (PPO and ES).",
+      "page": 12,
+      "index": 5,
+      "width": 364,
+      "height": 541
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31043v1/fig-006.webp",
+      "caption": "Table 5: Hyperparameters for real-robot RLPD/SAC experiments.",
+      "page": 12,
+      "index": 6,
+      "width": 286,
+      "height": 444
+    }
+  ]
+}

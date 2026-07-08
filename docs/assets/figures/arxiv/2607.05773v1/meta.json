@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.05773v1/fig-001.webp",
+      "caption": "Figure 2: Autonomous customer support built using AgenticAI-Supervisor. A customer request is handled by an LLM agent operating inside a simulated support environment with read-only tools for account, billing, policy, and communication lookup, and actionable tools for resolution workflows. Each interaction is executed inside the sandbox, logged as an execution trace, and scored by a reward engine based on outcome verification, trajectory efficiency, hallucination penalties, and policy compliance. These signals drive iterative reinforcement learning to improve resolution quality and reliability over time.",
+      "page": 3,
+      "index": 1,
+      "width": 844,
+      "height": 461
+    }
+  ]
+}

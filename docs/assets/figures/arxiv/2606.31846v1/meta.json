@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.31846v1/fig-001.webp",
+      "caption": "Figure 4: Training curves on the PnPStoveToCounter task comparing standard GRPO, GRPO with Reward Penalty, and GRPO with Success-Aware Reward Decay. Left: success rate over training steps. Right: average completion steps over training steps, where lower values indicate shorter successful executions. Reward Penalty applies the standard meannormalized GRPO advantage after completion-aware reward calibration, causing slower successful rollouts to receive negative advantages in all-success groups. This strongly reduces completion steps but slows success-rate improvement. Success-Aware Reward Decay uses a non-negative ordering among successful rollouts, achieving faster success-rate improvement while still encouraging shorter executions. Shaded points represent raw values, and solid lines show smoothed trends.",
+      "page": 11,
+      "index": 1,
+      "width": 817,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31846v1/fig-002.webp",
+      "caption": "Figure 3: Training curves on the TurnOnStove task. Left: Success rate over training steps. Right: Policy loss over training steps. Our method (GRPO + Sel-JT, red) consistently achieves higher success rate and lower policy loss compared to the baseline (GRPO, blue), demonstrating the effectiveness of Selective VLM–Action Expert Joint Training.",
+      "page": 10,
+      "index": 2,
+      "width": 817,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31846v1/fig-003.webp",
+      "caption": "Figure 1: Category-level and averaged success rates on RoboCasa across all compared methods. PnP and Micro. denote Pick-and-Place and Microwave, respectively. The Avg. group reports the mean success rate over all 24 RoboCasa tasks. Baseline results are taken from the corresponding papers, while Z-1 SFT and Z-1 RL are evaluated by us. Z-1 RL achieves the best average performance among the compared published methods, with an average success rate of 80.6%, improving over X-WAM’s 79.2% by 1.4 percentage points.",
+      "page": 8,
+      "index": 3,
+      "width": 795,
+      "height": 394
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31846v1/fig-004.webp",
+      "caption": "Figure 2: Training performance comparison on the TurnOnSinkFaucet task across three GRPO variants: vanilla GRPO, GRPO with a flat shared prefix (SharePrefix), and GRPO with Tree-Structured Prefix Branching (Prefix Tree). Left: success rate over training steps. Right: policy loss over training steps. Both prefix-based variants improve over vanilla GRPO. Prefix Tree achieves the strongest final success rate and a faster loss decrease in this run, while flat SharePrefix provides a more stable alternative in practice.",
+      "page": 9,
+      "index": 4,
+      "width": 776,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31846v1/fig-005.webp",
+      "caption": "Table 1: Full task-wise success rates on 24 RoboCasa tasks. All numbers are success rates in percentages.",
+      "page": 16,
+      "index": 5,
+      "width": 818,
+      "height": 551
+    }
+  ]
+}

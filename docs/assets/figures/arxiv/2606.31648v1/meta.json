@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.31648v1/fig-001.webp",
+      "caption": "Figure 1. Training pipeline for LuckyStar 111B. A post-trained multilingual base model is adapted through hybrid SFT, RLVR for verifiable reasoning and tool use, and preference alignment for concise user-facing behavior.",
+      "page": 2,
+      "index": 1,
+      "width": 1017,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31648v1/fig-002.webp",
+      "caption": "Table 3. Reasoning and tool-use results. Mathematical tasks report Pass@1 accuracy.",
+      "page": 4,
+      "index": 2,
+      "width": 1008,
+      "height": 221
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31648v1/fig-003.webp",
+      "caption": "Table 4. General Korean and English benchmark performance. KMMLU and MMLU evaluate knowledge; ARC-C evaluates science reasoning; IFEval measures instruction following; MT-Bench is a conversation-quality judge benchmark (Son et al., 2024; Hendrycks et al., 2020; Clark et al., 2018; Zhou et al., 2023; Zheng et al., 2023).",
+      "page": 5,
+      "index": 3,
+      "width": 1006,
+      "height": 242
+    }
+  ]
+}

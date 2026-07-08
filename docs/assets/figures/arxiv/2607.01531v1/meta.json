@@ -1,0 +1,134 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-001.webp",
+      "caption": "Figure 2: Effect signatures. For one transition st → st+1 (shown as O → O′), each paired object’s changed-attribute set ∆i t is sent by the quotient map ρ to a single categorical signature eit ∈ E . The alphabet E is grown from the signatures observed, such as no change, x, x,y, pixels, gone, and born. Exact deltas such as x : 12 → 15 are discarded.",
+      "page": 6,
+      "index": 1,
+      "width": 976,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-002.webp",
+      "caption": "Table 2: Six games where baseline1 fails (GO) and OPINE-World clears the game at a wide margin. baseline1 exhausts its budget (GO) on every one, spending 4.2× more actions in aggregate than OPINE-World while clearing fewer levels. OPINE-World solves all six in 0.65× the human action budget, and it also wins a seventh baseline1 failure, dc22, at a higher cost.",
+      "page": 11,
+      "index": 2,
+      "width": 502,
+      "height": 276
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-003.webp",
+      "caption": "Table 3: Per-game results on the ARC-AGI-3 public evaluation set (25 games). Each system cell reports actions, levels cleared, and outcome. Outcomes are WIN (all levels cleared), GO (game over, budget exhausted). baseline1 and OPINE-World use no per-game training and play under the live on-policy budget. † Vision explores this evaluation set offline and freezes its weights before the scored run, so its action counts follow prior passes over these games and are not a no-training comparison. Rows shaded green mark six games that baseline1 fails and OPINE-World clears at a wide margin. A plus on a OPINE-World level count marks a run that had cleared that many levels and was still progressing at game over.",
+      "page": 38,
+      "index": 3,
+      "width": 980,
+      "height": 952
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-004.webp",
+      "caption": "Figure 4: Aggregate ontology error ηt over one run (ar25), combining type and row uncertainty through the noisy-OR ηit = 1− (1−U type",
+      "page": 7,
+      "index": 4,
+      "width": 976,
+      "height": 282
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-005.webp",
+      "caption": "Figure 3: Row concentration by context refinement. Pooling every local context of the player under one action gives a single mixed row j = (τ, a) whose effect distribution q̂j spreads over many signatures. Splitting the row by a before-state context feature u, here a hash of the object’s own pixels (lit versus unlit), separates the conflated effects: the unlit subrow becomes deterministic, while a subrow that stays mixed signals a context feature still missing.",
+      "page": 7,
+      "index": 5,
+      "width": 976,
+      "height": 211
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-006.webp",
+      "caption": "Figure 8: Action efficiency relative to the human reference on the 20 games OPINE-World wins, as the ratio of human actions to OPINE-World actions. Bars past the dashed parity line are games OPINE-World clears in fewer actions than the human reference, which holds for 16 of 20.",
+      "page": 10,
+      "index": 6,
+      "width": 979,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-007.webp",
+      "caption": "Figure 7: Actions to clear each game that both OPINE-World and baseline1 win, with the human reference in grey, ordered by human action count. On games already within reach of a strong single agent the three are close, and OPINE-World is at or below the human count on most of them.",
+      "page": 10,
+      "index": 7,
+      "width": 979,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-008.webp",
+      "caption": "Table 1: Aggregate performance on the ARC-AGI-3 public evaluation set (25 games). The mean levels-cleared fraction averages cleared over total across the 25 games. † Vision explores the evaluation games offline before the scored run, so its scores are not a no-training comparison. The Score column is the ARC-AGI-3 action-efficiency score over all 25 games (Figure 5).",
+      "page": 8,
+      "index": 8,
+      "width": 868,
+      "height": 204
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-009.webp",
+      "caption": "Figure 1: The OPINE-World loop. The goal-directed agent acts in the live game and records each transition in a shared buffer. The world-model agent rewrites an object-centric program from the buffer, and the program is admitted only when it reproduces every recorded transition exactly. After a level has been cleared, a planner searches the admitted model, and its plan is executed one step at a time, with any mismatch returning a counterexample to the buffer. The ontology error ηt steers where the agents look next, and a periodic critic challenges the fitted model.",
+      "page": 4,
+      "index": 9,
+      "width": 976,
+      "height": 262
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-010.webp",
+      "caption": "Table 4: Actions spent on each level, per game and system: the human reference, baseline1, and D3M. Columns L1 to L10 index the levels in order. A blank cell means the game has no such level, or, for baseline1, a level never reached after its budget was spent on an earlier one. D3M per-level counts are transitions recorded per level and may differ from the game total in Table 3 by one initialisation step. The D3M s5i5 run recorded only a game total.",
+      "page": 17,
+      "index": 10,
+      "width": 602,
+      "height": 257
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-011.webp",
+      "caption": "Figure 12: Levels cleared as a fraction of each game’s total, per system. OPINE-World clears the full set on 19 games.",
+      "page": 17,
+      "index": 11,
+      "width": 976,
+      "height": 206
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-012.webp",
+      "caption": "Figure 11: Per-game actions, baseline1 against OPINE-World, on log axes with the parity diagonal. Points below the diagonal are games OPINE-World clears in fewer actions. The six games baseline1 fails (orange) sit far below, since OPINE-World wins them at a fraction of the budget baseline1 spends before failing.",
+      "page": 17,
+      "index": 12,
+      "width": 979,
+      "height": 307
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-013.webp",
+      "caption": "Figure 6: Per-level action counts on three games baseline1 cannot clear. baseline1 (orange) spends hundreds to over a thousand actions on a single level and still fails it, while OPINE-World (blue) clears the same level in tens of actions. The human reference is grey.",
+      "page": 9,
+      "index": 13,
+      "width": 976,
+      "height": 327
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-014.webp",
+      "caption": "Figure 13: An ARC-3 state decomposed into object records. The grid naturally contains sprites, and each sprite becomes an object oit = (κit, τ i t ,v i t) with a matching key, a type, and an attribute valuation such as position and color. Objects that share a type share one transition rule fτ , here supplied by the game engine.",
+      "page": 20,
+      "index": 14,
+      "width": 976,
+      "height": 261
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-015.webp",
+      "caption": "Figure 9: Games won out of 25 by each system. WorldCoder and the neural latent world models clear no game. Vision pre-trains on the evaluation set.",
+      "page": 16,
+      "index": 15,
+      "width": 979,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01531v1/fig-016.webp",
+      "caption": "Figure 10: The six games baseline1 fails and OPINE-World wins. baseline1 (hatched) exhausts its budget on each, while OPINE-World wins in far fewer actions. The human reference is grey.",
+      "page": 16,
+      "index": 16,
+      "width": 979,
+      "height": 297
+    }
+  ]
+}

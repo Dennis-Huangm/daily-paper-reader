@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2606.31518v1/fig-001.webp",
+      "caption": "Table 1. Qualitative Criteria for Selecting Orchestration Options",
+      "page": 7,
+      "index": 1,
+      "width": 662,
+      "height": 245
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31518v1/fig-002.webp",
+      "caption": "Fig. 5. Process-framed Agentic Blood Donor Registration based on the Blood Directive (2002/98/EC) & Blood Guide6, May 21. 2026).",
+      "page": 13,
+      "index": 2,
+      "width": 650,
+      "height": 373
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31518v1/fig-003.webp",
+      "caption": "Table 2. Rules considered as the ground truth for the lighting scenario using default deny semantics. User-input rule 0 is only applicable in the LLM-based variants.",
+      "page": 8,
+      "index": 3,
+      "width": 725,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31518v1/fig-004.webp",
+      "caption": "Fig. 1. Classification of Options for Orchestration and Agentic Orchestration",
+      "page": 4,
+      "index": 4,
+      "width": 720,
+      "height": 429
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31518v1/fig-005.webp",
+      "caption": "Table 3. Metric comparison of OO1–OO6 (cf. Sect. 3). User Input is not considered; hence the deterministic OO5/6 reflect the ground truth.",
+      "page": 12,
+      "index": 5,
+      "width": 612,
+      "height": 210
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31518v1/fig-006.webp",
+      "caption": "Fig. 4. Orchestration of agents for lighting scenario implementation (OO3 and OO4)",
+      "page": 9,
+      "index": 6,
+      "width": 438,
+      "height": 494
+    },
+    {
+      "url": "assets/figures/arxiv/2606.31518v1/fig-007.webp",
+      "caption": "Fig. 2. FRAME processed by agent autobpmn.ai as OO2",
+      "page": 5,
+      "index": 7,
+      "width": 652,
+      "height": 302
+    }
+  ]
+}

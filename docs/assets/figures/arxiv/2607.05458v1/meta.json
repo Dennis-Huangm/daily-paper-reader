@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-001.webp",
+      "caption": "Figure 3: Outcome and process gains across eight settings. The left panel reports final-quality change, and the right panel reports process-maturity change. The adapters and coding show the largest outcome gains, while process gains are broader and are mainly driven by verification before submission.",
+      "page": 6,
+      "index": 1,
+      "width": 440,
+      "height": 367
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-002.webp",
+      "caption": "Figure 5: Buffer slack and final-quality change under two verifier configurations. Hollow markers show the original strict domain-specific verifier, including the nearly saturated deterministic coding rubric; filled markers show the calibrated structural verifier used across domains with EarlySubmit threshold 0.25. Recalibrating the coding rubric moves coding from zero to moderate estimated slack and substantially weakens the crossdomain relationship.",
+      "page": 10,
+      "index": 2,
+      "width": 423,
+      "height": 333
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-003.webp",
+      "caption": "Figure 7: Per-setting relationship between outcome and process gains. Public-benchmark adapter settings show both outcome and aggregate process gains, while controlled-domain settings show more reliable verification gains than final-quality gains.",
+      "page": 10,
+      "index": 3,
+      "width": 434,
+      "height": 356
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-004.webp",
+      "caption": "Figure 1: The proposed framework separates final task quality from harness process quality. Offline AW learns a state-conditioned controller over harness operations while keeping the LLM executor fixed. Process improvement can arise from recurring high-value control patterns in the offline buffer, whereas final-quality improvement additionally depends on whether the buffer contains stronger task-solving trajectories.",
+      "page": 3,
+      "index": 4,
+      "width": 779,
+      "height": 356
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-005.webp",
+      "caption": "Table 4: Ablation results for advantage weighting (AW), behavior cloning (BC), and Forced CHECK (FC). Each lift is the change in final task quality, measured in percentage points, relative to the method’s own Base evaluation. ∆∆AW−BC and ∆∆AW−FC denote the differences between the AW lift and the corresponding baseline lift; positive values indicate that AW performs better. Bold values mark positive AW advantages. AW outperforms both baselines in knowledge-work, coding, planning, τ -bench retail, and DB-Bench; coding is the only domain with a fully objective verifier.",
+      "page": 8,
+      "index": 5,
+      "width": 563,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-006.webp",
+      "caption": "Table 5: Controlled-domain results. Each policy is evaluated on 20 held-out tasks with three seeds and three rollouts per task (N = 180). G is the mean task-rubric score, HMS is the process-maturity score, and CBS is the CheckBeforeSubmit rate under AW. Bootstrap intervals show uncertainty for ∆G; the largest controlled-domain quality gain occurs in coding under the calibrated structural verifier.",
+      "page": 8,
+      "index": 6,
+      "width": 804,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-007.webp",
+      "caption": "Table 10: Sensitivity of process-maturity changes to the EarlySubmit threshold. ES Base denotes the EarlySubmit rate under the base harness. Larger thresholds classify more episodes as early submissions and can inflate the apparent improvement under AW.",
+      "page": 17,
+      "index": 7,
+      "width": 661,
+      "height": 283
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-008.webp",
+      "caption": "Table 7: Event-level process decomposition. Rates are reported as base → AW under the calibrated detector. EarlySubmit is a penalty, so increases indicate process degradation. The table shows that the aggregate HMS gain is mainly a verification-before-submission effect rather than a uniform improvement across all process events.",
+      "page": 9,
+      "index": 8,
+      "width": 729,
+      "height": 198
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-009.webp",
+      "caption": "Table 8: EarlySubmit threshold sensitivity. Entries are changes in HMS. Higher thresholds make the researchdomain result appear more positive by labeling more base episodes as EarlySubmit; the primary threshold avoids this saturation.",
+      "page": 9,
+      "index": 9,
+      "width": 429,
+      "height": 338
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05458v1/fig-010.webp",
+      "caption": "Table 6: Interpretation of controlled-domain behavior. Under the calibrated structural verifier, coding is the strongest final-quality result, while most domains show process improvement without comparable outcome movement. Research is the exception because increased EarlySubmit offsets its checking gain.",
+      "page": 9,
+      "index": 10,
+      "width": 950,
+      "height": 231
+    }
+  ]
+}
