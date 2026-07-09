@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.05939v1/fig-001.webp",
+      "caption": "Fig. 1: A multi-agent competitive reinforcement learning approach to train both a team of pursuers and an evader drone for agile pursuit-evasion using catching-nets. Both pursuers and evader learn low-level control policies that enable them to perform dynamic manoeuvres in a high-fidelity simulator.",
+      "page": 1,
+      "index": 1,
+      "width": 462,
+      "height": 462
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05939v1/fig-002.webp",
+      "caption": "Fig. 4: Two additional examples of the pursuers’ coordinated strategies: in (a) the pursuers coordinate their interception attempts, one pursuer speeds up to make a first attempt while the two others approach slower to wait for the opportunity of a second attempt if the first one fails. In (b) the pursuers exploit an encircling position to approach from all directions and capture the target.",
+      "page": 7,
+      "index": 2,
+      "width": 512,
+      "height": 305
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05939v1/fig-003.webp",
+      "caption": "Fig. 3: A successful capture: The three pursuers split up and push the evader towards the inner boundaries, blocking its escape routes and anticipating that it will avoid crossing them in order to capture it.",
+      "page": 7,
+      "index": 3,
+      "width": 1052,
+      "height": 587
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05939v1/fig-004.webp",
+      "caption": "Fig. 2: Overview of the training method from the pursuers’ perspective: In each epoch, one actor network per team is trained with MAPPO and its parameters are shared across all same-team agents for decentralized execution. The environment is vectorized to allow batched rollouts. Each environment episode is played against a different frozen opponent policy sampled from the opponent pool using a performance-weighted distribution. Training uses CTDE: the centralized critic observes the global state and opponent actions, while the actor uses only local observations and outputs thrust/body-rate commands tracked by the low-level controller. When the current policy exceeds a performance threshold against the full opponent pool, a snapshot is frozen and stored in the team’s growing policy pool, and training switches to the other team.",
+      "page": 3,
+      "index": 4,
+      "width": 1052,
+      "height": 570
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05939v1/fig-005.webp",
+      "caption": "Fig. 5: Two successive interception attempts: (a) the evader narrowly avoids capture by the three pursuers through a swift 3D manoeuvre, (b) after the evader slips by, the pursuers quickly adapt their strategy and one pursuer makes a rapid second attempt to successfully intercept the evader.",
+      "page": 8,
+      "index": 5,
+      "width": 506,
+      "height": 684
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05939v1/fig-006.webp",
+      "caption": "TABLE II: Performances of the pursuers and the evader.",
+      "page": 5,
+      "index": 6,
+      "width": 514,
+      "height": 1387
+    }
+  ]
+}

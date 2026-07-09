@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-001.webp",
+      "caption": "Figure 1: Comparison between conventional textcentric agent-based recommendation and MMEACR. MMEACR combines multimodal agent memory evolution with embedding-based cross-modal matching and fuses their rankings via Reciprocal Rank Fusion (RRF).",
+      "page": 1,
+      "index": 1,
+      "width": 458,
+      "height": 409
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-002.webp",
+      "caption": "Table 1: Performance comparison on three domains. Best results are in bold, second-best are underlined. Imp. denotes the relative improvement of our method over the strongest baseline. All results are averaged over five runs with different seeds.",
+      "page": 6,
+      "index": 2,
+      "width": 941,
+      "height": 304
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-003.webp",
+      "caption": "Figure 10: The structured prompt template for successful preference confirmation and self-introduction refinement without explicit attribute-level guidance.",
+      "page": 15,
+      "index": 3,
+      "width": 950,
+      "height": 1021
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-004.webp",
+      "caption": "Figure 4: Inference time comparison between AgentCF and MMEACR on the three datasets. The Y-axis denotes the inference time (in seconds), while the X-axis denotes different datasets. MMEACR achieves faster inference across both datasets.",
+      "page": 7,
+      "index": 4,
+      "width": 458,
+      "height": 394
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-005.webp",
+      "caption": "Figure 3: Case study of memory evolution and profile reflection at Round-5 across four semantic domains. Compared to AgentCF, our MMEACR demonstrates a superior capability to filter cross-modal noise and capture attributeguided user preferences (highlighted in red) such as “cohesive and relaxing mood”, “protection and aesthetic”, and “historical context”, securing more precise long-term interest alignment.",
+      "page": 7,
+      "index": 5,
+      "width": 950,
+      "height": 385
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-006.webp",
+      "caption": "Figure 9: The structured prompt template for attribute-level misconception correction and personalized selfintroduction updating.",
+      "page": 14,
+      "index": 6,
+      "width": 950,
+      "height": 1079
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-007.webp",
+      "caption": "Figure 8: The structured prompt template for successful preference confirmation and personalized self-introduction refinement.",
+      "page": 13,
+      "index": 7,
+      "width": 950,
+      "height": 1098
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-008.webp",
+      "caption": "Figure 5: Performance evolution on Fashion. MMEACR improves steadily across optimization steps and achieves the best results at test time.",
+      "page": 8,
+      "index": 8,
+      "width": 413,
+      "height": 323
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-009.webp",
+      "caption": "Figure 2: Overview of MMEACR. The reasoning track performs attribute-guided memory evolution with User and Item Memory Agents, while the matching track preserves fine-grained cross-modal signals through multimodal embedding memory. The final ranking is produced by fusing both tracks via RRF.",
+      "page": 4,
+      "index": 9,
+      "width": 950,
+      "height": 479
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-010.webp",
+      "caption": "Figure 6: The structured query wrapper template containing rules, formatting, and variables for correct attribute analysis and extraction.",
+      "page": 12,
+      "index": 10,
+      "width": 950,
+      "height": 591
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-011.webp",
+      "caption": "Figure 7: The structured query wrapper template containing rules, formatting, and variables for incorrect attribute analysis and extraction.",
+      "page": 12,
+      "index": 11,
+      "width": 950,
+      "height": 593
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07108v1/fig-012.webp",
+      "caption": "Figure 11: The structured prompt template for preference correction and self-introduction updating without explicit attribute-level guidance.",
+      "page": 16,
+      "index": 12,
+      "width": 950,
+      "height": 1042
+    }
+  ]
+}

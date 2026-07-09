@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.03177v1/fig-001.webp",
+      "caption": "Fig. 9. D vs C: Effect of causal inference at runtime. Both conditions use causal-trained policy weights, D additionally uses the causal model for risk-ranked recovery action selection. Similar distributions across most metrics indicate successful knowledge transfer during training, with D showing modest improvements in collision reduction.",
+      "page": 25,
+      "index": 1,
+      "width": 891,
+      "height": 196
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03177v1/fig-002.webp",
+      "caption": "Fig. 10. T-junction: all four conditions (strongest scenario). Per-episode boxplots show progressive improvement from A to D. Conditions C and D achieve dramatically higher reward, distance, and velocity while reducing stalled and off-road percentages by approximately 50% compared to A and B. Collision counts increase with recovery but are offset by forward-progress gains.",
+      "page": 26,
+      "index": 2,
+      "width": 713,
+      "height": 368
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03177v1/fig-003.webp",
+      "caption": "Fig. 6. Reward distributions across all four ablation conditions described in Table 1. Violin plots show individual episode rewards (dots), means (black diamonds), and distributional shape. Conditions C and D consistently shift the distribution upward relative to A and B, particularly in roundabout and T-junction scenarios.",
+      "page": 21,
+      "index": 3,
+      "width": 890,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03177v1/fig-004.webp",
+      "caption": "Fig. 1. Overview of the proposed causal-guided hybrid RL framework, structured as a Managing System operating over the CARLA vehicle environment (Managed System). The three modules follow the MAPE-K feedback loop: (1) Monitor : sensor data collection from the CARLA environment; (2) Analyse: causal model construction via a Bayesian network DAG; and (3) Plan/Execute: a causalinformed PPO policy (Plan) operating alongside a rule-based recovery module (Execute).",
+      "page": 7,
+      "index": 4,
+      "width": 865,
+      "height": 667
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03177v1/fig-005.webp",
+      "caption": "Fig. 7. Comparative performance across four ablation conditions. Each bar represents the mean value over 20 episodes, with error bars indicating standard deviation.",
+      "page": 22,
+      "index": 5,
+      "width": 712,
+      "height": 501
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03177v1/fig-006.webp",
+      "caption": "Fig. 3. Multi-Agent Causal Graph for Two-Car Interaction Scenarios. Node colours indicate category: action (blue), state (green), outcome (red), reward/recovery (orange), temporal (purple), and inter-vehicle spatial (grey). Solid arrows denote intra-vehicle edges; dashed red arrows denote cross-vehicle edges; grey arrows denote spatial-node edges.",
+      "page": 13,
+      "index": 6,
+      "width": 877,
+      "height": 625
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03177v1/fig-007.webp",
+      "caption": "Fig. 8. C vs B: Effect of causal training (key comparison). Both conditions use identical heuristic recovery modules, differences reflect policy quality. Boxplots show per-episode distributions across 20 episodes. The causal-trained policy (C, green) consistently outperforms the pretrained baseline (B, orange) in reward, distance, and velocity across all scenarios.",
+      "page": 24,
+      "index": 7,
+      "width": 891,
+      "height": 180
+    }
+  ]
+}

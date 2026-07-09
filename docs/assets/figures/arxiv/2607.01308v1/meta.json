@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-001.webp",
+      "caption": "Figure 1: The two evaluation regimes. The KV-cache flow (solid arrows), thinkers → Merge → Judger → answer, is identical across regimes; only the routing of the global query Q (dashed arrows) differs. In (a) query-known, Q is broadcast to both thinkers and the judger, so each thinker encodes its fragment ti conditioned on the query. In (b) query-blind (federated), Q reaches only the judger, and each thinker encodes its fragment offline without seeing the query. The same merge operator and the same 100 partitionedk = 2 problems are used in both regimes; the difference shifts the K-norm content signature each thinker produces (Section 5.2).",
+      "page": 6,
+      "index": 1,
+      "width": 496,
+      "height": 419
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-002.webp",
+      "caption": "Table 3: Headline matrix on partitioned k = 2, 100 problems each. Best BagMerge ordering per column in bold. The best BagMerge row records which fixed π achieves it; the ∆ row records the CanonicalMerge accuracy minus the best BagMerge accuracy in the same column.",
+      "page": 10,
+      "index": 2,
+      "width": 978,
+      "height": 606
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-003.webp",
+      "caption": "Table 5: Routing-layer sensitivity for CanonicalMerge on partitioned k = 2 (query-known, 40 latent steps, 100 problems).",
+      "page": 13,
+      "index": 3,
+      "width": 640,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-004.webp",
+      "caption": "Table 11: The k = 3 topology probe, on the two families that mark the poles of the effect (Qwen3-1.7B, greedy; across-draw mean ± sd over 3 independent problem draws, data seeds {42, 7, 100}, n = 50/family/draw; full five-family results in Section F). Both problems are near-perfectly solvable from full text (C0 ≈ 1.00), so every latent gap is composition, not difficulty. A flat 3-way merge (par3) and a pairwise merge tree (treemerge) both collapse; introducing model reprocessing at one seam (mix) or throughout (seq3) recovers it.",
+      "page": 19,
+      "index": 4,
+      "width": 982,
+      "height": 1023
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-005.webp",
+      "caption": "Table 4: Paired McNemar tests on the headline matrix, n = 100 per pair. Significant at α = 0.05 in bold. A multi-seed replication (3 draws, n = 300 pooled) with paired bootstrap CIs and Holm correction is in Section B.",
+      "page": 12,
+      "index": 5,
+      "width": 782,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-006.webp",
+      "caption": "Table 15: Full five-family k = 3 topology probe (across-draw mean ± sd, 3 draws, greedy, n = 50). treemerge never exceeds par3 on any of the five families (colocation is not composition): it matches par3 on the chains and on recipe, and on discount falls below it (0.11 vs. 0.23), so the pairwise merge tree can even lose relative to the flat merge. The two chain families collapse under par3 and recover under reprocessing; the symmetric families span a composition-limited pole (constraint, where no topology helps), through recipe (whose 3-way merge already mostly works), to a gradient (discount). relay’s seq3 < mix is an ordering artifact: its default chain places the non-commutative pipeline’s input last.",
+      "page": 27,
+      "index": 6,
+      "width": 983,
+      "height": 732
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-007.webp",
+      "caption": "Table 13: Per-problem paired bootstrap (10 000 resamples, n = 300 pooled across the three draws), exact McNemar p, and Holm-corrected decision over the seven-contrast family. CanonicalMerge ties the best ordering in each regime (CM−BGSW query-known and CM−BG query-blind both straddle zero) and beats the worse ordering (+0.063, Holm-significant); BagMerge’s order-sensitivity (BG− BGSW) is significant and reverses sign between regimes.",
+      "page": 24,
+      "index": 7,
+      "width": 677,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-008.webp",
+      "caption": "Table 12: Per-cell accuracy across three problem draws (Qwen3-1.7B, k = 2, greedy, n = 100 per draw; pooled 95% Wilson CI at n = 300). Per-seed values are ordered by data seed 42/7/100. CanonicalMerge and the best-of-two BagMerge ordering coincide in each regime (swap in query-known, default in query-blind), and the low across-draw s.d. shows the numbers are draw-stable except for query-blind CanonicalMerge, whose single-draw swing motivates the paired analysis below.",
+      "page": 24,
+      "index": 8,
+      "width": 740,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-009.webp",
+      "caption": "Figure 2: Four ways to combine three latent traces at k = 3, a topology schematic, not an algebraic identity (accuracies in Table 11). Solid nodes (⊎) are cache-only render merges (non-idempotent; not the idempotent set-union state join ⊔ of Section 4.4, which we reserve for LatentFragmentSet). Dashed edges are model-mediated reprocessing seams, where one thinker runs with another’s KV cache as a prefix. The cache-only flat (a) and tree (b) variants both fail and collapse to the same accuracy (the treemerge ≈ par3 result), while the variants that add reprocessing ((c), (d)) recover on chain-structured tasks. The topologies differ in more than edge type, they also change which thinker reprocesses which prefix and the amount of model computation, so we read the figure as locating where reprocessing enters, not as a one-variable causal claim.",
+      "page": 20,
+      "index": 9,
+      "width": 637,
+      "height": 367
+    },
+    {
+      "url": "assets/figures/arxiv/2607.01308v1/fig-010.webp",
+      "caption": "Table 1: Family schemas with one example shown per family; 20 problems per family vary the surface numerical values while preserving the schema.",
+      "page": 5,
+      "index": 10,
+      "width": 822,
+      "height": 209
+    }
+  ]
+}

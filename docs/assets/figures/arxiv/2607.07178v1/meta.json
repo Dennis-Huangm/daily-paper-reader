@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.07178v1/fig-001.webp",
+      "caption": "Table 1: Main results on five-task multi-task training. We report the average success rate over four evaluations. Our reproduced results for AgentRL differ slightly from those reported in the original paper; a detailed analysis of the discrepancy is provided in Appendix C. ALF denotes ALFWorld.",
+      "page": 7,
+      "index": 1,
+      "width": 827,
+      "height": 196
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07178v1/fig-002.webp",
+      "caption": "Figure 7: Task-wise entropy dynamics under different ablation settings.",
+      "page": 18,
+      "index": 2,
+      "width": 816,
+      "height": 265
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07178v1/fig-003.webp",
+      "caption": "Figure 1: Task-wise policy entropy dynamics during multi-task agentic training. (a) The AgentRL exhibits pace mismatch, characterized by asynchronous entropy collapse with frequent inter-task crossovers and late-stage entropy spikes. (b) EPPO organizes task entropies into stable, persistent bands with fewer crossovers and suppressed spikes. (c) Quantitative diagnostics of entropy instability: crossover count sums pairwise sign-flip events (lower is better); trend R2 is the average coefficient of determination from a linear fit of task entropy versus log t (higher is better); late spike amplitude is the maximum upward entropy jump in the last 30% of training (lower is better).",
+      "page": 4,
+      "index": 3,
+      "width": 816,
+      "height": 210
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07178v1/fig-004.webp",
+      "caption": "Figure 2: EPPO overview. Per-task entropy is tracked with EMA and converted to a normalized collapse ratio; a cohort-level pacer maps relative pace to task-wise dynamic clipping ϵi(t), while a trend constraint downscales updates when entropy rises to improve stability.",
+      "page": 5,
+      "index": 4,
+      "width": 822,
+      "height": 295
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.03451v1/fig-001.webp",
+      "caption": "Figure 4 Convergence curve comparison between SkillOpt (red curve with circles) and SkillOpt-Lite (blue curve with squares) across various tasks and model scales over 10 optimization steps. The y-axis denotes the best validation performance achieved so far.",
+      "page": 11,
+      "index": 1,
+      "width": 947,
+      "height": 435
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03451v1/fig-002.webp",
+      "caption": "Figure 1 The overall performance profile and optimization velocity of SkillOpt-Lite. (a) The radar plot illustrates the macro-level capability comparison averaged across all evaluated model scales, showing comprehensive performance gains over both the initial skills and the original SkillOpt. (b) The micro-level convergence curves on representative tracking segments demonstrate that our minimal viable pipeline delivers significantly accelerated policy refinement and higher validation ceilings (Best val_hard so far) within a tight 10-batch horizon.",
+      "page": 2,
+      "index": 2,
+      "width": 954,
+      "height": 479
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03451v1/fig-003.webp",
+      "caption": "Figure 2 Empirical evaluation of single-batch coding agent exploration versus multi-epoch skill optimization.",
+      "page": 7,
+      "index": 3,
+      "width": 516,
+      "height": 321
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03451v1/fig-004.webp",
+      "caption": "Table 2 Main experimental results across varying model scales. Subscripts denote the relative performance alignment compared with the initial baseline (Init skill). Bold text highlights the best performance within each model block. Light blue rows highlight the performance of our proposed SkillOpt-Lite. SkillOpt is executed for max(4 epochs, 10 batches), while SkillOpt-Lite is evaluated strictly over 10 batches.",
+      "page": 10,
+      "index": 4,
+      "width": 960,
+      "height": 473
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03451v1/fig-005.webp",
+      "caption": "Table 1 Mapping Between Zeroth-Order Optimization Operators and LLM/Agent Reflection Paradigms",
+      "page": 4,
+      "index": 5,
+      "width": 960,
+      "height": 914
+    }
+  ]
+}

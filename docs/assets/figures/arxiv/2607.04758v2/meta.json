@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.04758v2/fig-001.webp",
+      "caption": "Figure 1: AgenticPD uses a multi-agent system to optimize the physical design flow instead of traditional uninterpretable black-box decisions.",
+      "page": 1,
+      "index": 1,
+      "width": 510,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04758v2/fig-002.webp",
+      "caption": "Figure 4: Normalized PPA convergence curves.",
+      "page": 6,
+      "index": 2,
+      "width": 506,
+      "height": 328
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04758v2/fig-003.webp",
+      "caption": "Figure 6: Layout comparison for the JPEG design on ASAP7, shown at the placement, CTS, global routing, and post-routing stages. AgenticPD improves post-route WNS from −8.2ps to +50.6ps.",
+      "page": 7,
+      "index": 3,
+      "width": 509,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04758v2/fig-004.webp",
+      "caption": "Figure 2: AgenticPD framework overview: the Judge Agent observes the optimization history and makes branching decisions, instructing the Stage Agents to execute each physical design stage from the selected branch node.",
+      "page": 4,
+      "index": 4,
+      "width": 1052,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04758v2/fig-005.webp",
+      "caption": "Table 1: AgenticPD vs. Vanilla LLM on ASAP7. Bold =AgenticPD is the best.",
+      "page": 5,
+      "index": 5,
+      "width": 915,
+      "height": 253
+    }
+  ]
+}

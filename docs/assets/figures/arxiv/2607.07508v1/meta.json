@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.07508v1/fig-001.webp",
+      "caption": "Figure 1: The performance of SAO on reasoning and coding benchmarks. The four reasoning benchmarks are evaluated in a reasoning-with-Python-tool setting, where the baseline is the Qwen330B-A3B SFT model; SWE-Bench Verified evaluates coding with the Qwen3-30B-A3B baseline. SAO outperforms the corresponding baseline and GRPO across all five benchmarks.",
+      "page": 1,
+      "index": 1,
+      "width": 964,
+      "height": 732
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07508v1/fig-002.webp",
+      "caption": "Figure 3: Performance comparison between SAO and GRPO (w/ DIS) during training. It can be observed that SAO almost consistently outperforms the optimized GRPO during the training process on different benchmarks.",
+      "page": 6,
+      "index": 2,
+      "width": 818,
+      "height": 185
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07508v1/fig-003.webp",
+      "caption": "Figure 4: Training dynamics of asynchronous single-rollout RL. (a) Explained Variance for SAO and a single-critic-update baseline. (b) Critic gradient norm during value training under full-parameter optimization and frozen-attention optimization used in SAO. (c) Token-level clip ratio during training for SAO with the proposed DIS and the VAPO baseline.",
+      "page": 7,
+      "index": 3,
+      "width": 805,
+      "height": 225
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07508v1/fig-004.webp",
+      "caption": "Figure 2: Overview of SAO with single rollout design. The numbers denote the generation order of trajectories. For SAO, each trajectory becomes available for training immediately upon completion. In contrast, GRPO must wait until all trajectories in a group are generated before training can begin.",
+      "page": 3,
+      "index": 4,
+      "width": 571,
+      "height": 245
+    },
+    {
+      "url": "assets/figures/arxiv/2607.07508v1/fig-005.webp",
+      "caption": "Table 1: Experimental Results on math reasoning benchmarks(Accuracy %).",
+      "page": 5,
+      "index": 5,
+      "width": 796,
+      "height": 367
+    }
+  ]
+}
