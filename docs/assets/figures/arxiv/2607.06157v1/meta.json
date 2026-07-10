@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.06157v1/fig-001.webp",
+      "caption": "Table 2: Overall results across domains. We report normalized reward (mean±standard error) and valid ratio (%).",
+      "page": 6,
+      "index": 1,
+      "width": 946,
+      "height": 906
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06157v1/fig-002.webp",
+      "caption": "Table 5: Overall results across domains using normalized adjusted reward (NAR, mean±standard error) and valid ratio (%).",
+      "page": 15,
+      "index": 2,
+      "width": 933,
+      "height": 906
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06157v1/fig-003.webp",
+      "caption": "Figure 1: An illustrative example of deliberative collaboration under partial observability. In this menu design scenario, multiple AI agents (e.g., an AI butler and a cooking robot) observe different aspects of the environment, such as ingredient availability and guest preferences, and must exchange information through deliberation to reach a single joint decision. This structure can generalize to other cooperative joint decision problems.",
+      "page": 2,
+      "index": 3,
+      "width": 435,
+      "height": 445
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06157v1/fig-004.webp",
+      "caption": "Table 3: The performance of the oracle baseline in the task allocation domain. ∆O-Cent. and ∆O-Delib. denote the NR increase of the oracle baseline compared to the centralized baseline and standard deliberative collaboration setting, respectively.",
+      "page": 7,
+      "index": 4,
+      "width": 871,
+      "height": 283
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06157v1/fig-005.webp",
+      "caption": "Table 9: The prompt for the decision module with external tools in an example of the “skepticism trap”.",
+      "page": 18,
+      "index": 5,
+      "width": 473,
+      "height": 345
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06157v1/fig-006.webp",
+      "caption": "Table 8: The prompt for the centralized baseline in a failed example.",
+      "page": 17,
+      "index": 6,
+      "width": 461,
+      "height": 874
+    },
+    {
+      "url": "assets/figures/arxiv/2607.06157v1/fig-007.webp",
+      "caption": "Figure 2: Illustration of our agent framework for solving the deliberative joint decision-making tasks. Green blocks indicate inputs, blue blocks represent agent modules, and orange blocks show variables modified by the agent.",
+      "page": 5,
+      "index": 7,
+      "width": 393,
+      "height": 343
+    }
+  ]
+}

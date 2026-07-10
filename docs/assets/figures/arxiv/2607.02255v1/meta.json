@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.02255v1/fig-001.webp",
+      "caption": "Figure 3 Token audit of the bounded-memory contract on ten fixed-A0 runs (two per cell); dashed line is a transcriptappending counterfactual at 1 4 of naive O(c2) growth (median tokens/call ×c(c+1)/8, a moderate prompt-caching discount). The audit illustrates context-growth mechanics under each contract; at two runs per cell it is not a win-rate comparison.",
+      "page": 6,
+      "index": 1,
+      "width": 926,
+      "height": 297
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02255v1/fig-002.webp",
+      "caption": "Figure 6 Competitor comparison at A0 (The Silent), per run; horizontal bars are per-cell means. (a) Effect: run score (s = 100 if victory else floor + (52/3) · bosses), with win counts above each column. (b) Speed: wall-clock minutes per floor reached (96% of competitor wall-clock is provider-reported LLM latency; fixed inter-action delays slightly favor competitors, 0.5s vs. our 0.6s; our durations exclude postrun). (c) Cost: fresh (non-cached) LLM tokens per score point (log). Competitor usage is exact provider-reported tokens with cache hits removed (90% / 82% of their prompt tokens were cached); ours follows the paper’s Fig. 3 convention (∼5k strategic user-message tokens × llm_calls), excluding the cached system prefix, completions, retries, and fast-tier calls. full-frozen/baseline-strict are the Table 2 cells (N=10, frozen stores at SHA 1888a62); competitors N=5. Under the intentionally absurd upper bound pricing every recorded action as a full strategic call, our cells move to 55k / 58k tokens per point — the gap remains ≥ 7×.",
+      "page": 11,
+      "index": 2,
+      "width": 962,
+      "height": 288
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02255v1/fig-003.webp",
+      "caption": "Figure 1 Overview of our paper: a bounded, typed memory contract turns long-horizon LLM-agent memory into an ablatable evaluation surface. Summary performance labels in this schematic (e.g. relative scores and ladder reach) are illustrative; the exact numbers, denominators, and caveats—including that cross-agent comparisons are operational rather than matched ablations and that win-rate differences are directional at our sample size—are given in §6–7.",
+      "page": 2,
+      "index": 3,
+      "width": 986,
+      "height": 698
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02255v1/fig-004.webp",
+      "caption": "Figure 2 Typed retrieval as a bounded-memory contract: (a) per-decision composition, (b) the five typed layers, and (c) AgenticSTS scores vs AGI-Eval rows and the community human reference [31]. In-panel summary labels (e.g. “no trade-off”, token-efficiency and score-gap figures) are illustrative; cross-backbone and external comparisons are operational context, not matched ablations of the memory contract, and within-harness win-rate differences are directional at our sample size—see §6–7 for exact numbers and caveats.",
+      "page": 3,
+      "index": 4,
+      "width": 986,
+      "height": 402
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02255v1/fig-005.webp",
+      "caption": "Figure 8 Cost–effect frontier: run score vs. fresh LLM tokens per run (log). Hollow diamonds: our cells (tokens estimated, 5k/call convention); circles/squares: measured competitor usage. The empty band between the clusters spans more than an order of magnitude.",
+      "page": 13,
+      "index": 5,
+      "width": 955,
+      "height": 572
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02255v1/fig-006.webp",
+      "caption": "Figure 4 Fixed-A0 ablation surface under the bounded-memory contract: five cells share a common contract and adjacent bars are organized by a named ablation axis. Not every neighboring pair is a single-mechanism isolation—e.g. baseline-strict to prompt-only changes the prompt-package/strictness group rather than one isolated mechanism. Frozen stores at SHA 1888a62.",
+      "page": 8,
+      "index": 6,
+      "width": 986,
+      "height": 556
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02255v1/fig-007.webp",
+      "caption": "Figure 9 Decision states used in the prompt exhibits: combat planning (left) and shop planning (right).",
+      "page": 19,
+      "index": 7,
+      "width": 986,
+      "height": 266
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02255v1/fig-008.webp",
+      "caption": "Figure 7 The mechanism: per-call prompt size over a run. Thin lines are individual runs (measured full prompts, including cached tokens — caching changes billing, not what the model attends to); bold lines are per-competitor medians. The worst single STS2MCP run reaches ∼500k tokens per call by decision ∼1100. The dashed line is our bounded contract’s strategic user-message median (∼5k, estimate; constant cached system prefix excluded; x-extent not comparable — our runs make ∼100 strategic calls).",
+      "page": 12,
+      "index": 8,
+      "width": 955,
+      "height": 583
+    }
+  ]
+}

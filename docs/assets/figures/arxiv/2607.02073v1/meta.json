@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-001.webp",
+      "caption": "Figure 1: Motivating example illustrating the limitation of evidence-identification rewards. Although the baseline finds a relevant first hop, it anchors on a plausible distractor and stops before recovering the full evidence chain. In contrast, MAVEN encourages exploration, where the model revises its evidence state by dropping the misleading document, adding the missing evidence, and producing the correct answer.",
+      "page": 1,
+      "index": 1,
+      "width": 418,
+      "height": 341
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-002.webp",
+      "caption": "Table 1: Main results on LongBench v2, LongReason, and RULER. Bold numbers indicate the best method for each trained model. Green cells indicate the best result among all listed models.",
+      "page": 6,
+      "index": 2,
+      "width": 898,
+      "height": 430
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-003.webp",
+      "caption": "Figure 5: Impact of action rewards. We measure Add/Link/Drop Action Precision.",
+      "page": 15,
+      "index": 3,
+      "width": 885,
+      "height": 253
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-004.webp",
+      "caption": "Figure 6: Overall score on the subset of LongBench v2 from Qwen2.5-14B. Vary the ratio between the answer reward weight and the sum of process reward weights.",
+      "page": 15,
+      "index": 4,
+      "width": 437,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-005.webp",
+      "caption": "Figure 4: Impact of action rewards. We measure LongBench V2 overall score, evidence sufficiency, and distractor retention.",
+      "page": 7,
+      "index": 5,
+      "width": 885,
+      "height": 253
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-006.webp",
+      "caption": "Figure 3: Training dynamics of outcome-only RL, Outcome+Evidence ID, and MAVEN. We evaluate every 50 RL steps on a fixed subset of LongBench v2 examples and on the diagnostic set.",
+      "page": 7,
+      "index": 6,
+      "width": 926,
+      "height": 326
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-007.webp",
+      "caption": "Figure 2: The model edits an evidence memory through add, drop, and link actions before answering. Actions receive local process rewards based on their effect on the evidence state, and final kept evidence receives hindsight credit for its contribution to the final evidence set.",
+      "page": 3,
+      "index": 7,
+      "width": 879,
+      "height": 271
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-008.webp",
+      "caption": "Figure 8: Corresponding diagnostic metrics from Qwen2.5-14B. We vary the weight value. Larger add weight improves evidence sufficiency, larger drop weight reduces distractor retention, and moderate link weight improves link precision.",
+      "page": 16,
+      "index": 8,
+      "width": 885,
+      "height": 252
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-009.webp",
+      "caption": "Figure 7: Overall score on the subset of LongBench v2 from Qwen2.5-14B. We vary the add, drop, and link reward weights.",
+      "page": 16,
+      "index": 9,
+      "width": 879,
+      "height": 252
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02073v1/fig-010.webp",
+      "caption": "Figure 9: Overall score on the subset of LongBench v2 from Qwen2.5-14B. We vary α, which balances online CAIG and hindsight credit in the add reward.",
+      "page": 16,
+      "index": 10,
+      "width": 437,
+      "height": 300
+    }
+  ]
+}

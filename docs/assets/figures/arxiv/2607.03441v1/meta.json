@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.03441v1/fig-001.webp",
+      "caption": "Figure 9: Policy-level diagnostics. Action changes concentrate in low-margin decisions, and aTTT increases cross-seed action diversity across models.",
+      "page": 15,
+      "index": 1,
+      "width": 726,
+      "height": 261
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03441v1/fig-002.webp",
+      "caption": "Figure 10: Case study: put two soapbar in garbagecan (game 100, Qwen3.5-9B). Both agents explore identically through step 8. At step 9, the no-TTT agent puts the soapbar back down and enters a 41-step loop. The aTTT agent carries it to the garbagecan and finishes in 14 steps.",
+      "page": 15,
+      "index": 2,
+      "width": 829,
+      "height": 535
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03441v1/fig-003.webp",
+      "caption": "Figure 1: Static TTT and aTTT differ in when adaptation occurs. Static TTT adapts once to a fixed input and then freezes the update, leaving the later trajectory outside the training loop. aTTT instead updates during the episode: each agent-environment step provides training text, repeated content is filtered through token weighting, and the updated adapter is used in later turns.",
+      "page": 2,
+      "index": 3,
+      "width": 748,
+      "height": 208
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03441v1/fig-004.webp",
+      "caption": "Table 1: ALFWorld success rates (%), mean±SE over three seeds. Bold indicates the best filter within each signal-model block.",
+      "page": 7,
+      "index": 4,
+      "width": 594,
+      "height": 305
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03441v1/fig-005.webp",
+      "caption": "Figure 8: Concurrent serving pipeline for online TTT. Each episode maintains a private LoRA adapter, while a separate training engine computes updates and hot-swaps adapters into the vLLM inference engine without blocking other episodes.",
+      "page": 13,
+      "index": 5,
+      "width": 674,
+      "height": 438
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03441v1/fig-006.webp",
+      "caption": "Figure 6: Repetition and adapter drift on diagnostic subsets. Left: on failed episodes, unfiltered online TTT moves farther from the base model than aTTT. Right: in rescued pairs, no-TTT trajectories become increasingly repetitive, while aTTT trajectories remain less repetitive before completion.",
+      "page": 8,
+      "index": 6,
+      "width": 738,
+      "height": 270
+    },
+    {
+      "url": "assets/figures/arxiv/2607.03441v1/fig-007.webp",
+      "caption": "Figure 2: Overview of aTTT. Every K steps, the trajectory buffer provides update text from Self, Env, or Summary signals. Previous update texts are used to measure repetition and compute tokenlevel n-gram exposure. The repetition-aware loss downweights repeated spans, updates an episodespecific adapter, and the adapted policy is used in later turns.",
+      "page": 4,
+      "index": 7,
+      "width": 667,
+      "height": 353
+    }
+  ]
+}

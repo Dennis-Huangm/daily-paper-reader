@@ -6,121 +6,115 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-09
-- 运行时间：2026-07-09 20:29:29 UTC
+- 最新运行日期：2026-07-10
+- 运行时间：2026-07-10 20:14:03 UTC
 - 运行状态：成功
-- 本次总论文数：33
-- 精读区：22
+- 本次总论文数：31
+- 精读区：20
 - 速读区：11
 
 ### 今日简报（AI）
-今日深度解析 33 篇前沿成果，重点聚焦下一代强化学习系统如何驱动智能体实现“自我进化”。
-核心结论指出 RL 赋能的智能体已具备自主演进能力，同时在编程基建成本优化与低碳数据中心调度方面取得关键突破。
-建议优先研读满分论文，掌握智能体从工具属性向自主进化生命体跨越的技术路径。
-- 详情：[/202607/09/README](/202607/09/README)
+今日深度研读 31 篇论文，聚焦 LLM 智能体从轨迹感知优化到动态仿真环境的跨越式演进。
+重点关注 STAPO 算法对智能体策略的精准提升，以及模拟环境在解决强化学习可扩展性上的核心作用。
+建议开发者从静态评估转向动态仿真，并探索长文本推理中的证据状态奖励机制。
+- 详情：[/202607/10/README](/202607/10/README)
 
 ### 精读区论文标签
-1. [Next-Generation Agentic Reinforcement Learning Systems Enable Self-Evolving Agents](/202607/09/2607.01120v1-next-generation-agentic-reinforcement-learning-systems-enable-self-evolving-agents)  
+1. [STAPO: Selective Trajectory-Aware Policy Optimization for LLM Agent Training](/202607/10/2607.04963v1-stapo-selective-trajectory-aware-policy-optimization-for-llm-agent-training)  
    标签：评分：10.0/10、query:ag-rl
-   evidence：用于自我进化智能体的下一代智能强化学习系统
-2. [Next-Generation Agentic Reinforcement Learning Systems Enable Self-Evolving Agents](/202607/09/2607.01120v2-next-generation-agentic-reinforcement-learning-systems-enable-self-evolving-agents)  
+   evidence：用于在长程任务上训练LLM智能体的强化学习范式
+2. [Beyond Static Evaluation: Building Simulation Environments for Scalable Agentic Reinforcement Learning](/202607/10/2607.05773v1-beyond-static-evaluation-building-simulation-environments-for-scalable-agentic-reinforcement-learning)  
    标签：评分：10.0/10、query:ag-rl
-   evidence：用于自我进化智能体的下一代智能强化学习系统
-3. [Harness-Aware Self-Evolving: Co-Evolving Model Weights, Harness, and Task Solutions](/202607/09/2607.03935v1-harness-aware-self-evolving-co-evolving-model-weights-harness-and-task-solutions)  
+   evidence：用于可扩展智能体强化学习的模拟环境
+3. [Entropy Pacing Policy Optimization for Multi-Task Agentic Reinforcement Learning](/202607/10/2607.07178v1-entropy-pacing-policy-optimization-for-multi-task-agentic-reinforcement-learning)  
    标签：评分：10.0/10、query:ag-rl
-   evidence：代理强化学习框架HASE
-4. [Progress- and Reliability-Oriented Group Policy Optimization for Agentic Reinforcement Learning](/202607/09/2607.04242v1-progress--and-reliability-oriented-group-policy-optimization-for-agentic-reinforcement-learning)  
+   evidence：多任务智能体强化学习的前沿研究
+4. [Single-Rollout Asynchronous Optimization for Agentic Reinforcement Learning](/202607/10/2607.07508v1-single-rollout-asynchronous-optimization-for-agentic-reinforcement-learning)  
    标签：评分：10.0/10、query:ag-rl
-   evidence：代理强化学习的最先进技术
-5. [CompactionRL: Reinforcement Learning with Context Compaction for Long-Horizon Agents](/202607/09/2607.05378v1-compactionrl-reinforcement-learning-with-context-compaction-for-long-horizon-agents)  
-   标签：评分：10.0/10、query:ag-rl
-   evidence：利用上下文压缩训练长周期智能LLM的强化学习策略
-6. [Beyond Static Evaluation: Building Simulation Environments for Scalable Agentic Reinforcement Learning](/202607/09/2607.05773v1-beyond-static-evaluation-building-simulation-environments-for-scalable-agentic-reinforcement-learning)  
-   标签：评分：10.0/10、query:ag-rl
-   evidence：可扩展代理强化学习的模拟环境
-7. [Entropy Pacing Policy Optimization for Multi-Task Agentic Reinforcement Learning](/202607/09/2607.07178v1-entropy-pacing-policy-optimization-for-multi-task-agentic-reinforcement-learning)  
-   标签：评分：10.0/10、query:ag-rl
-   evidence：针对LLM任务的多任务代理强化学习
-8. [Single-Rollout Asynchronous Optimization for Agentic Reinforcement Learning](/202607/09/2607.07508v1-single-rollout-asynchronous-optimization-for-agentic-reinforcement-learning)  
-   标签：评分：10.0/10、query:ag-rl
-   evidence：长周期代理任务的异步强化学习优化
-9. [ASK in the Dark: Uncertainty-Gated LLM Assistance under Partial Observability](/202607/09/2607.02686v1-ask-in-the-dark-uncertainty-gated-llm-assistance-under-partial-observability)  
+   evidence：针对LLM长程智能体任务的异步强化学习优化
+5. [No Time Like the Present: Agentic Test-Time Training for LLM Agents](/202607/10/2607.03441v1-no-time-like-the-present-agentic-test-time-training-for-llm-agents)  
    标签：评分：9.5/10、query:ag-rl
-   evidence：在部分可观测性下将小语言模型引导集成到强化学习智能体中
-10. [Agent Reinforcement Learning via Pivotal-Aware Self-Feedback Retry](/202607/09/2607.03702v1-agent-reinforcement-learning-via-pivotal-aware-self-feedback-retry)  
+   evidence：大语言模型智能体的代理测试时训练
+6. [Harness-Aware Self-Evolving: Co-Evolving Model Weights, Harness, and Task Solutions](/202607/10/2607.03935v1-harness-aware-self-evolving-co-evolving-model-weights-harness-and-task-solutions)  
    标签：评分：9.5/10、query:ag-rl
+   evidence：用于自我进化模型的代理强化学习框架
+7. [Progress- and Reliability-Oriented Group Policy Optimization for Agentic Reinforcement Learning](/202607/10/2607.04242v1-progress--and-reliability-oriented-group-policy-optimization-for-agentic-reinforcement-learning)  
+   标签：评分：9.5/10、query:ag-rl
+   evidence：用于改进强化学习中大语言模型代理的组策略优化
+8. [CARL: Constraint-Aware Reinforcement Learning for Planning with LLMs](/202607/10/2607.04854v1-carl-constraint-aware-reinforcement-learning-for-planning-with-llms)  
+   标签：评分：9.5/10、query:ag-rl
+   evidence：增强LLM对约束内在关注的强化学习框架
+9. [CompactionRL: Reinforcement Learning with Context Compaction for Long-Horizon Agents](/202607/10/2607.05378v1-compactionrl-reinforcement-learning-with-context-compaction-for-long-horizon-agents)  
+   标签：评分：9.5/10、query:ag-rl
+   evidence：训练具有上下文压缩的长程代理LLM的强化学习策略
+10. [Learning to Control LLM Agent Harnesses with Offline Reinforcement Learning](/202607/10/2607.05458v1-learning-to-control-llm-agent-harnesses-with-offline-reinforcement-learning)  
+   标签：评分：9.5/10、query:ag-rl
+   evidence：使用离线强化学习训练LLM智能体外壳
+11. [Information Gain-based Rollout Policy Optimization: An Adaptive Tree-Structured Rollout Approach for Multi-Turn LLM Agents](/202607/10/2607.06223v1-information-gain-based-rollout-policy-optimization-an-adaptive-tree-structured-rollout-approach-for-multi-turn-llm-agents)  
+   标签：评分：9.5/10、query:ag-rl
+   evidence：利用强化学习范式改进长周期搜索任务中的LLM智能体
+12. [ASK in the Dark: Uncertainty-Gated LLM Assistance under Partial Observability](/202607/10/2607.02686v1-ask-in-the-dark-uncertainty-gated-llm-assistance-under-partial-observability)  
+   标签：评分：9.0/10、query:ag-rl
+   evidence：将小语言模型引导集成到强化学习智能体中
+13. [Agent Reinforcement Learning via Pivotal-Aware Self-Feedback Retry](/202607/10/2607.03702v1-agent-reinforcement-learning-via-pivotal-aware-self-feedback-retry)  
+   标签：评分：9.0/10、query:ag-rl
    evidence：LLM智能体经验利用的自我反馈重试框架
-11. [Regime-Conditional Stabilisation of LLM-Augmented Cooperative Multi-Agent Reinforcement Learning](/202607/09/2607.04470v1-regime-conditional-stabilisation-of-llm-augmented-cooperative-multi-agent-reinforcement-learning)  
-   标签：评分：9.5/10、query:ag-rl
-   evidence：LLM增强的协作多智能体强化学习与奖励塑造
-12. [CARL: Constraint-Aware Reinforcement Learning for Planning with LLMs](/202607/09/2607.04854v1-carl-constraint-aware-reinforcement-learning-for-planning-with-llms)  
-   标签：评分：9.5/10、query:ag-rl
-   evidence：大语言模型智能体与强化学习的集成
-13. [STAPO: Selective Trajectory-Aware Policy Optimization for LLM Agent Training](/202607/09/2607.04963v1-stapo-selective-trajectory-aware-policy-optimization-for-llm-agent-training)  
-   标签：评分：9.5/10、query:ag-rl
-   evidence：用于训练长程任务大语言模型智能体的强化学习
-14. [VLM-AR3L: Vision-Language Models for Absolute and Relative Rewards in Reinforcement Learning](/202607/09/2607.00483v1-vlm-ar3l-vision-language-models-for-absolute-and-relative-rewards-in-reinforcement-learning)  
+14. [LLM-as-a-Tutor: Policy-Aware Prompt Adaptation for Non-Verifiable RL](/202607/10/2607.04412v1-llm-as-a-tutor-policy-aware-prompt-adaptation-for-non-verifiable-rl)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：视觉语言模型与强化学习在奖励建模中的集成
-15. [VLM-AR3L: Vision-Language Models for Absolute and Relative Rewards in Reinforcement Learning](/202607/09/2607.00483v2-vlm-ar3l-vision-language-models-for-absolute-and-relative-rewards-in-reinforcement-learning)  
+   evidence：LLM作为导师在强化学习中进行策略感知提示词适配
+15. [Regime-Conditional Stabilisation of LLM-Augmented Cooperative Multi-Agent Reinforcement Learning](/202607/10/2607.04470v1-regime-conditional-stabilisation-of-llm-augmented-cooperative-multi-agent-reinforcement-learning)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：利用视觉语言模型为强化学习提供奖励
-16. [LLM-as-a-Tutor: Policy-Aware Prompt Adaptation for Non-Verifiable RL](/202607/09/2607.04412v1-llm-as-a-tutor-policy-aware-prompt-adaptation-for-non-verifiable-rl)  
+   evidence：LLM增强的协作式多智能体强化学习奖励信号
+16. [RSPO: Reward-Swap Policy Optimization for Multi-Turn LLM Agents](/202607/10/2607.04713v1-rspo-reward-swap-policy-optimization-for-multi-turn-llm-agents)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：将LLM作为导师/评审员集成到强化学习的奖励信号中
-17. [RSPO: Reward-Swap Policy Optimization for Multi-Turn LLM Agents](/202607/09/2607.04713v1-rspo-reward-swap-policy-optimization-for-multi-turn-llm-agents)  
+   evidence：用于训练多轮LLM智能体的强化学习与奖励优化
+17. [Multi-Turn On-Policy Distillation with Prefix Replay](/202607/10/2607.04763v1-multi-turn-on-policy-distillation-with-prefix-replay)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：使用强化学习训练大语言模型处理多轮交互任务
-18. [Learning to Control LLM Agent Harnesses with Offline Reinforcement Learning](/202607/09/2607.05458v1-learning-to-control-llm-agent-harnesses-with-offline-reinforcement-learning)  
+   evidence：针对多轮交互任务中LLM智能体的同策略蒸馏
+18. [TurnOPD: Making On-Policy Distillation Turn-Aware for Efficient Long-Horizon Agent Training](/202607/10/2607.05804v1-turnopd-making-on-policy-distillation-turn-aware-for-efficient-long-horizon-agent-training)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：利用离线强化学习控制LLM智能体执行框架
-19. [Intercepting an Agile Target with Net-Carrying Drones using Competitive Multi-Agent Reinforcement Learning](/202607/09/2607.05939v1-intercepting-an-agile-target-with-net-carrying-drones-using-competitive-multi-agent-reinforcement-learning)  
+   evidence：用于长程语言智能体训练的有策略蒸馏方法
+19. [CurateEvo: Data-Curation Evolving for Agentic Post-Training](/202607/10/2607.06140v1-curateevo-data-curation-evolving-for-agentic-post-training)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：用于无人机拦截的竞争性多智能体强化学习
-20. [CurateEvo: Data-Curation Evolving for Agentic Post-Training](/202607/09/2607.06140v1-curateevo-data-curation-evolving-for-agentic-post-training)  
+   evidence：使用强化学习数据的智能体后训练
+20. [DeepSearch-World: Self-Distillation for Deep Search Agents in a Verifiable Environment](/202607/10/2607.07820v1-deepsearch-world-self-distillation-for-deep-search-agents-in-a-verifiable-environment)  
    标签：评分：9.0/10、query:ag-rl
-   evidence：使用强化学习数据的智能体后训练框架
-21. [Information Gain-based Rollout Policy Optimization: An Adaptive Tree-Structured Rollout Approach for Multi-Turn LLM Agents](/202607/09/2607.06223v1-information-gain-based-rollout-policy-optimization-an-adaptive-tree-structured-rollout-approach-for-multi-turn-llm-agents)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：多轮LLM智能体的策略优化框架
-22. [Seeing and Reflecting: Multimodal Memory-Enhanced Agent Collaboration for Recommendation](/202607/09/2607.07108v1-seeing-and-reflecting-multimodal-memory-enhanced-agent-collaboration-for-recommendation)  
-   标签：评分：9.0/10、query:ag-rl
-   evidence：基于强化与反思的大模型智能体推荐系统
+   evidence：可验证强化学习环境中Web智能体的自蒸馏框架
 
 ### 速读区论文标签
-1. [The Rollout Infrastructure Tax in Coding-Agent Reinforcement Learning](/202607/09/2607.01415v1-the-rollout-infrastructure-tax-in-coding-agent-reinforcement-learning)  
+1. [Evidence-State Rewards for Long-Context Reasoning](/202607/10/2607.02073v1-evidence-state-rewards-for-long-context-reasoning)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：代码智能体强化学习系统的基础设施
-2. [Object-Centric Environment Modeling for Agentic Tasks](/202607/09/2607.02846v1-object-centric-environment-modeling-for-agentic-tasks)  
+   evidence：用于大语言模型长上下文推理的强化学习框架
+2. [Evaluating Large Language Models for Decision-Making in Agent-Based Urban Mobility Simulations](/202607/10/2607.02716v1-evaluating-large-language-models-for-decision-making-in-agent-based-urban-mobility-simulations)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：LLM智能体通过经验改进以完成代理任务
-3. [Hierarchical Multi-Agent Reinforcement Learning for Carbon-Aware AI Data Centers in Power Distribution Systems](/202607/09/2607.03324v1-hierarchical-multi-agent-reinforcement-learning-for-carbon-aware-ai-data-centers-in-power-distribution-systems)  
+   evidence：大语言模型作为多智能体模拟中的决策组件
+3. [Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment](/202607/10/2607.04728v1-turning-off-policy-tokens-on-policy-a-plug-in-approach-for-improving-llm-alignment)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：分层多智能体强化学习框架
-4. [Hierarchical Multi-Agent Reinforcement Learning for Carbon-Aware AI Data Centers in Power Distribution Systems](/202607/09/2607.03324v2-hierarchical-multi-agent-reinforcement-learning-for-carbon-aware-ai-data-centers-in-power-distribution-systems)  
+   evidence：用于LLM对齐的强化学习后训练与策略转换
+4. [LLM Agents for Deliberative Collaboration: A Study on Joint Decision Making Under Partial Observability](/202607/10/2607.06157v1-llm-agents-for-deliberative-collaboration-a-study-on-joint-decision-making-under-partial-observability)  
    标签：评分：8.5/10、query:ag-rl
-   evidence：分层碳感知多智能体强化学习框架
-5. [CRRL: A Causality-Based Reinforcement Learning Framework for Autonomous System Recovery](/202607/09/2607.03177v1-crrl-a-causality-based-reinforcement-learning-framework-for-autonomous-system-recovery)  
+   evidence：LLM智能体在共享奖励的联合决策任务中的应用
+5. [Full Bayesian Reinforcement Learning via LF-IBIS](/202607/10/2607.01741v1-full-bayesian-reinforcement-learning-via-lf-ibis)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：用于自主系统恢复的因果引导强化学习框架
-6. [SkillOpt-Lite: Better and Faster Agent Self-evolution via One Line of Vibe](/202607/09/2607.03451v1-skillopt-lite-better-and-faster-agent-self-evolution-via-one-line-of-vibe)  
+   evidence：用于序列决策的贝叶斯强化学习方法
+6. [AgenticSTS: A Bounded-Memory Testbed for Long-Horizon LLM Agents](/202607/10/2607.02255v1-agenticsts-a-bounded-memory-testbed-for-long-horizon-llm-agents)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：通过零阶优化使自主智能体技能优化正式化
-7. [A Few Teacher Steps Go a Long Way: Cost-Efficient On-Policy Data Augmentation for Agent Post-Training](/202607/09/2607.04574v1-a-few-teacher-steps-go-a-long-way-cost-efficient-on-policy-data-augmentation-for-agent-post-training)  
+   evidence：针对游戏长周期LLM智能体的有界记忆测试平台
+7. [Trading Confidence: Comprehensive Uncertainty Estimation in Algorithmic Trading](/202607/10/2607.02864v1-trading-confidence-comprehensive-uncertainty-estimation-in-algorithmic-trading)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：LLM智能体后期训练的同策略数据增强
-8. [AgenticPD: A Stage-Aware Agentic Framework for Physical Design QoR Optimization](/202607/09/2607.04758v2-agenticpd-a-stage-aware-agentic-framework-for-physical-design-qor-optimization)  
+   evidence：用于交易智能体的不确定性感知强化学习框架
+8. [ACE: Agentic Control for Embodied Manipulation via Zero-shot Workflow Reasoning](/202607/10/2607.04162v1-ace-agentic-control-for-embodied-manipulation-via-zero-shot-workflow-reasoning)  
    标签：评分：7.5/10、query:ag-rl
-   evidence：物理设计优化的阶段感知智能体框架
-9. [Cache Merging as a Convergent Replicated State for Multi-Agent Latent Reasoning](/202607/09/2607.01308v1-cache-merging-as-a-convergent-replicated-state-for-multi-agent-latent-reasoning)  
+   evidence：具身操纵的代理工作流推理
+9. [AgentFlow: Building Agent Dependency Graphs for Static Analysis of Agent Programs](/202607/10/2607.01640v1-agentflow-building-agent-dependency-graphs-for-static-analysis-of-agent-programs)  
    标签：评分：6.5/10、query:ag-rl
-   evidence：多智能体潜空间推理与KV缓存合并技术
-10. [Simulation Based Reward Function Validation for Multi-Agent On Orbit Inspection](/202607/09/2607.01367v1-simulation-based-reward-function-validation-for-multi-agent-on-orbit-inspection)  
+   evidence：用于分析智能体程序和依赖关系的静态分析框架
+10. [Hardware-Enforced Semantic Coordination for Safety-Critical Real-Time Autonomous Systems](/202607/10/2607.02376v1-hardware-enforced-semantic-coordination-for-safety-critical-real-time-autonomous-systems)  
    标签：评分：6.5/10、query:ag-rl
-   evidence：用于航天器控制的多智能体强化学习
-11. [Human-Centric Reflective Architecture for Human-AI Collaborative Decision-Making](/202607/09/2607.03025v1-human-centric-reflective-architecture-for-human-ai-collaborative-decision-making)  
+   evidence：智能体AI协作架构
+11. [Human-Centric Reflective Architecture for Human-AI Collaborative Decision-Making](/202607/10/2607.03025v1-human-centric-reflective-architecture-for-human-ai-collaborative-decision-making)  
    标签：评分：6.5/10、query:ag-rl
-   evidence：基于LLM的人机协同决策框架
+   evidence：用于对齐AI智能体的协作决策框架
 
 
 <div class="dpr-home-promo-card">

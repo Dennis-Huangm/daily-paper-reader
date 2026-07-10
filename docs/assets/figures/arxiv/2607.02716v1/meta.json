@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.02716v1/fig-001.webp",
+      "caption": "Fig. 2. Spatial representation at the beginning of a simulation in GAMA.",
+      "page": 6,
+      "index": 1,
+      "width": 652,
+      "height": 448
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02716v1/fig-002.webp",
+      "caption": "Fig. 5. Spatial representation during an extended blockage event in GAMA.",
+      "page": 11,
+      "index": 2,
+      "width": 652,
+      "height": 448
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02716v1/fig-003.webp",
+      "caption": "Fig. 4. Arrival rate and stuck time ratio by agent profile for 1000 agents under the localized blockage scenario.",
+      "page": 10,
+      "index": 3,
+      "width": 546,
+      "height": 392
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02716v1/fig-004.webp",
+      "caption": "Table 1. Comparative analysis of semantic memory impact on affected agents under a local blockage scenario.",
+      "page": 10,
+      "index": 4,
+      "width": 646,
+      "height": 243
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02716v1/fig-005.webp",
+      "caption": "Fig. 6. Arrival rate and stuck time ratio by agent profile for 1000 agents under the extended blockage scenario.",
+      "page": 13,
+      "index": 5,
+      "width": 581,
+      "height": 419
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02716v1/fig-006.webp",
+      "caption": "Table 3. Computational cost and robustness analysis of the evaluated approaches, reporting average simulation time and error rate across simulations.",
+      "page": 13,
+      "index": 6,
+      "width": 646,
+      "height": 236
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02716v1/fig-007.webp",
+      "caption": "Table 2. Comparative analysis of semantic memory impact on affected agents under an extended blockage scenario.",
+      "page": 12,
+      "index": 7,
+      "width": 646,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02716v1/fig-008.webp",
+      "caption": "Fig. 3. Spatial representation during a localized blockage event in GAMA.",
+      "page": 9,
+      "index": 8,
+      "width": 652,
+      "height": 448
+    },
+    {
+      "url": "assets/figures/arxiv/2607.02716v1/fig-009.webp",
+      "caption": "Fig. 1. Overview of the proposed architecture integrating an LLM-based decision layer into the simulation platform.",
+      "page": 5,
+      "index": 9,
+      "width": 550,
+      "height": 281
+    }
+  ]
+}
