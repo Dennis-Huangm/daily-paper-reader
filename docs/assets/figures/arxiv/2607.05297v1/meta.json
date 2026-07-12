@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.05297v1/fig-001.webp",
+      "caption": "Figure 1: Four regimes of agent skill improvement. No-Skill: no reusable skill memory. Static Skill: a handauthored s0 held fixed (padlocked). Single Level Evolve: the task skill evolves s0 → s1 → s2, but the driving meta-process stays padlocked. MetaSkill-Evolve (ours): a branch-level meta-skill m = (ψ, σ, α, π, ε) co-evolves on a slower outer ring via the same five-agent pipeline that rewrites s, with no extra model and no extra framework.",
+      "page": 2,
+      "index": 1,
+      "width": 833,
+      "height": 399
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05297v1/fig-002.webp",
+      "caption": "Figure 3: End-to-end held-out test accuracy on the three benchmarks. All conditions share the Gemma-4 31B backbone; only the skill-evolution strategy differs. Red annotations mark MetaSkill-Evolve’s gain over NoSkill; the No-Skill→Ours ordering improves on every benchmark, with the largest margins on the two QA tasks where the backbone has the most headroom.",
+      "page": 7,
+      "index": 2,
+      "width": 446,
+      "height": 349
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05297v1/fig-003.webp",
+      "caption": "Figure 5: Meta-update horizon sweep. Held-out test accuracy as the horizon H (fast iterations between consecutive meta-skill evolutions) widens from 2 to 8, with the meta-update count held fixed at three, so total iterations = 3H (shown in parentheses). The broken y-axis separates near-ceiling ALFWorld (top) from the two QA accuracies (bottom). The default H=2 (shaded band) is best on every benchmark; OfficeQA is by far the most sensitive to a stale meta-skill.",
+      "page": 8,
+      "index": 3,
+      "width": 433,
+      "height": 377
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05297v1/fig-004.webp",
+      "caption": "Figure 4: Component ablations on the two QA benchmarks. Blue polygon: accuracy with one meta-skill component removed; dashed rings: full MetaSkillEvolve and Static-Skill references. Dominant component differs by domain: α on OfficeQA, π on SealQA. ALFWorld in Table 3.",
+      "page": 8,
+      "index": 4,
+      "width": 467,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05297v1/fig-005.webp",
+      "caption": "Figure 2: System overview. The branch state b = (s,m, h) (left) feeds the five-agent pipeline (centre), whose output is appended to the SQLite node graph (right). Frontier selection (Eq. 4) draws the next parent from the graph.",
+      "page": 5,
+      "index": 5,
+      "width": 904,
+      "height": 356
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.04972v1/fig-001.webp",
+      "caption": "Fig. 1: Comparison of Traditional CTDE and Open Adaptive Teaming Paradigm. In conventional CTDE (top right), the test phase maintains a fixed team composition with known teammates in previously seen environments. In contrast, open adaptive teaming (bottom) presents significantly greater challenges: agents must coordinate in open teams with unseen teammates and dynamic scale in unseen environments during online interaction.",
+      "page": 1,
+      "index": 1,
+      "width": 524,
+      "height": 352
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04972v1/fig-002.webp",
+      "caption": "Fig. 6: Open team coordination on multi-drone (top row) and multi-quadruped (bottom row) platforms. Metrics: capture rate (↑), collision rate (↓), average episode length (↓), evaluated on seen (one-obstacle) and unseen (three-obstacle) environments. HOLA leads on capture rate and episode efficiency across all conditions, and generalizes favorably to unseen layouts where denser obstacle topology creates strategic cornering opportunities.",
+      "page": 11,
+      "index": 2,
+      "width": 1076,
+      "height": 708
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04972v1/fig-003.webp",
+      "caption": "Fig. 5: Comparison of task success rate (first column, higher is better), collision rate (second column, lower is better), and mean episode length (third column, lower is better) among four baseline methods, one ablation method HOLAR (marked as OurR), and our proposed HOLA in the 3-pursuer-2-evader scenario when playing with random heterogeneous teammates (where policies are derived from different algorithms). The means and standard deviations, indicated by the error bars, are calculated over three different random seeds, with each seed undergoing 50 repeated runs.",
+      "page": 10,
+      "index": 3,
+      "width": 1076,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04972v1/fig-004.webp",
+      "caption": "Fig. 4: Real-world deployment of multi-robot open adaptive teaming on two robotic platforms.",
+      "page": 8,
+      "index": 4,
+      "width": 529,
+      "height": 773
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04972v1/fig-005.webp",
+      "caption": "Fig. 3: Hypergraphic Open-ended Learning Algorithm: Detailed illustration of a single generation within the open-ended learning phase, including the grapher and oracle modules.",
+      "page": 5,
+      "index": 5,
+      "width": 1072,
+      "height": 244
+    }
+  ]
+}

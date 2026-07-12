@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.05541v1/fig-001.webp",
+      "caption": "Figure 1. The SRRL training framework",
+      "page": 1,
+      "index": 1,
+      "width": 492,
+      "height": 1000
+    },
+    {
+      "url": "assets/figures/arxiv/2607.05541v1/fig-002.webp",
+      "caption": "Figure 2. Learning efficiency on GSM8K for Qwen3-4B (left) and OLMo-3-7B (right). SRRL achieves higher validation reward than RLVR throughout training and finishes with stronger final performance.",
+      "page": 6,
+      "index": 2,
+      "width": 1017,
+      "height": 417
+    }
+  ]
+}

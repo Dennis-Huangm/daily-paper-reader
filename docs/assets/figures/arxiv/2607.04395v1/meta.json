@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2607.04395v1/fig-001.webp",
+      "caption": "Figure 2. Pass rate by difficulty level (150-task). Left: single-shot shows steep degradation from L1 to L3, with all trained models at 0% on L3. Right: NKIAgent enables meaningful L2/L3 performance. Opus 4.8 with the rank-aware prompt (purple) dominates all levels, particularly L3 (74% vs ≤16% for trained models).",
+      "page": 5,
+      "index": 1,
+      "width": 1006,
+      "height": 309
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04395v1/fig-002.webp",
+      "caption": "Figure 3. Ablation study (60-task subset). Opus 4.8 NKIAgent (63.3%) establishes the framework’s upper bound. SFT NKIAgent (25.0%) captures 40% of frontier performance. SFT v2 with bad data (8.3%) underperforms the base model (10.0%).",
+      "page": 5,
+      "index": 2,
+      "width": 1006,
+      "height": 328
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04395v1/fig-003.webp",
+      "caption": "Table 3. Ablation study comparing evaluation modes and model configurations. The 60-task subset enables additional comparisons. “—” indicates configurations not evaluated on the larger set due to compute constraints (each 150-task NKIAgent run requires ∼20 hours on Trn1). Bold: best trained model and best overall.",
+      "page": 4,
+      "index": 3,
+      "width": 479,
+      "height": 265
+    },
+    {
+      "url": "assets/figures/arxiv/2607.04395v1/fig-004.webp",
+      "caption": "Figure 1. NKI-AGENT system overview. Top: The agent generates NKI code, then iteratively compiles and verifies on Trn1 hardware (≤10 turns). Compile errors and verification failures feed back for correction. Bottom: Data pipeline produces 6,000 tasks; SFT on curated episodes followed by GRPO with binary reward.",
+      "page": 3,
+      "index": 4,
+      "width": 1017,
+      "height": 427
+    }
+  ]
+}
